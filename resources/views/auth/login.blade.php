@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}" class="mt-4">
+    <form method="POST" action="{{ route('login-submit') }}" class="mt-4">
         @csrf
 
         <!-- Email -->
@@ -26,13 +26,12 @@
             </label>
         </div>
 
+        @if (Route::has('password.request'))
+            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100" href="{{ route('password.request') }}">
+                {{ __('Forgot your password?') }}
+            </a>
+        @endif
 
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100" href="{{ route('forgotpassword') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-            
         <!-- Login Button -->
         <div class="flex items-center justify-between mt-4">
             <x-primary-button>
@@ -40,7 +39,7 @@
             </x-primary-button>
         </div>
     </form>
-    
+
     <!-- Register Link -->
     <div class="py-2 text-gray-600 dark:text-gray-400 mt-4">
         {{ __("Don't have an account?") }} <a href="{{ route('register') }}" class="underline">{{ __('Register') }}</a>

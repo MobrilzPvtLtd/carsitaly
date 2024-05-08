@@ -9,7 +9,6 @@ use App\Models\Flight;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-
 class FrontendController extends Controller
 {
     /**
@@ -79,96 +78,12 @@ class FrontendController extends Controller
     {
         return view('frontend.contact');
     }
-    public function signout()
-    {
-        return view('auth.login');
-    }
 
-    public function forgotpassword()
-    {
-
-    }
-
-    // public function register()
-    // {
-        public function register(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        // username
-        $username = intval(config('app.initial_username')) + $user->id;
-        $user->username = strval($username);
-        $user->save();
-
-        event(new UserRegistered($request, $user));
-
-        Auth::login($user);
-
-        return redirect(route('home'));
-    }
-
-
-
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        // dd($email, $password, $remember);
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1], $request->remember_me)) {
-            $request->session()->regenerate();
-
-            $user = auth()->user();
-
-            event(new UserLoginSuccess($request, $user));
-
-            return redirect()->intended(route('home', absolute: false));
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
-
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-
-        // return redirect()->intended(route('dashboard', absolute: false));
-    }
-
-
-
-
-
-
-
-    /**
-     * Privacy Policy Page.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
     public function privacy()
     {
         return view('frontend.privacy');
     }
 
-    /**
-     * Terms & Conditions Page.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
     public function terms()
     {
         return view('frontend.terms');

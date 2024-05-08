@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\NewPasswordController;
 
 use App\Http\Controllers\LanguageController;
 use App\Livewire\Privacy;
@@ -33,16 +35,16 @@ Route::get('air', [FrontendController::class, 'air'])->name('air');
 Route::get('cruise', [FrontendController::class, 'cruise'])->name('cruise');
 Route::get('tour', [FrontendController::class, 'tour'])->name('tour');
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
-Route::get('signout', [FrontendController::class, 'signout'])->name('signout');
-
 Route::post('flight',[FrontendController::class,'flight'])->name('flight');
 
+Route::get('login', [AuthenticatedSessionController::class, 'login'])->name('login');
+Route::post('login-submit', [AuthenticatedSessionController::class, 'loginSubmit'])->name('login-submit');
 
-Route::post('login', [FrontendController::class, 'login'])->name('login');
-Route::post('forgotpassword', [FrontendController::class, 'forgotpassword'])->name('forgotpassword');
 Route::get('register', [RegisteredUserController::class, 'register'])->name('register');
-Route::post('register-store', [RegisteredUserController::class, 'registerStore'])->name('registertore');
+Route::post('register-submit', [RegisteredUserController::class, 'registerSubmit'])->name('register-submit');
 
+Route::get('password.request', [NewPasswordController::class, 'create'])->name('password.request');
+// Route::post('password-email', [PasswordResetLinkController::class, 'passwordEmail'])->name('password.email');
 
 
 // Language Switch

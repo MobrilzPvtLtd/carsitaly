@@ -18,7 +18,7 @@
 			<li class="green" data-path="assets/css/color/green.css"></li>
 			<li class="light-green" data-path="assets/css/color/light-green.css"></li>
 			<li class="red" data-path="assets/css/dummy.css"></li>
-			<li class="blue" data-path="assets/css/color/blue.css"></li>  
+			<li class="blue" data-path="assets/css/color/blue.css"></li>
 			<li class="brown" data-path="assets/css/color/brown.css"></li>
 			<li class="purple" data-path="assets/css/color/purple.css"></li>
 			<li class="orange" data-path="assets/css/color/orange.css"></li>
@@ -49,15 +49,24 @@
 					</div>
 					<div class="col-md-6 col-xs-7 clear-padding user-logged">
 						@if (Auth::user())
-						<a href="#" class="transition-effect">
-							<img src="assets/images/user.jpg" alt="cruise">
-							Hello ,  
-							{{ Auth::user()->name }}
-						</a>
+                            <a href="{{ route('backend.dashboard') }}" class="transition-effect">
+                                <img class="avatar-img" src="{{ asset(auth()->user()->avatar) }}"
+                                    alt="{{ asset(auth()->user()->name) }}">
+                                Hello ,{{ Auth::user()->name }}
+                            </a>
+
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out"></i>&nbsp;@lang('Logout')
+                            </a>
+                            <form id="logout-form" style="display: none;" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="transition-effect">
+                                <i class="fa fa-sign-in"></i>Login
+                            </a>
 						@endif
-						<a href="signout" class="transition-effect">
-							<i class="fa fa-sign-out"></i>Sign Out
-						</a>
 					</div>
 				</div>
 			</div>
@@ -79,12 +88,12 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							
+
 							<!-- BEGIN: LOGO -->
 							<a class="navbar-brand logo" href="index-4.html">Car Italy and tours</a>
 						</div>
-						
-						<!-- BEGIN: NAVIGATION -->       
+
+						<!-- BEGIN: NAVIGATION -->
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown">
@@ -116,7 +125,7 @@
 											<h5>PAGES</h5>
 											<ul>
 												<li><a href="hotel.html">HOTEL SEARCH</a></li>
-												
+
 												<li><a href="hotel-list.html">HOTEL LIST</a></li>
 												<li><a href="hotel-grid.html">HOTEL GRID</a></li>
 												<li><a href="hotel-booking.html">HOTEL BOOKING</a></li>
@@ -132,7 +141,7 @@
 												<li><a href="#">WESTERN EUROPE</a></li>
 												<li><a href="#">SOUTH AMERICA</a></li>
 												<li><a href="#">LATIN AMERICA</a></li>
-											</ul>	
+											</ul>
 										</li>
 										<li class="col-md-3 col-sm-4 links">
 											<h5>TOP REGION</h5>
@@ -235,7 +244,7 @@
 										</li>
 									</ul>
 									<div class="clearfix"></div>
-								</li> 
+								</li>
 								<li class="dropdown mega">
 									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-suitcase"></i> TOURS <i class="fa fa-caret-down"></i></a>
 									<ul class="dropdown-menu mega-menu">
