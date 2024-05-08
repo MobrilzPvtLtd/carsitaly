@@ -29,8 +29,9 @@
         <div class="row mt-4">
             <div class="col">
 
-                {{ html()->form('POST', route('backend.car.store'))->class('form-horizontal')->open() }}
+                {{ html()->form('POST', route('backend.car.store'))->class('form-horizontal')->open(['enctype' => 'multipart/form-data']) }}
                 {{ csrf_field() }}
+
 
                 <div class="form-group row mb-3">
                     {{ html()->label(__('labels.backend.car.fields.title'))->class('col-sm-2 form-label')->for('title') }}
