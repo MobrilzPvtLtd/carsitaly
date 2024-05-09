@@ -61,11 +61,11 @@ $notifications_latest = optional($notifications)->take(5);
                             </a>
                         </li>
                     @endcan
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('log-viewer::logs.list') }}">
-                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Daily Log
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.tour.index') }}">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Tours
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
         @endcan

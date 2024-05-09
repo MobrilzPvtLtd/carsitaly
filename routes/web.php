@@ -157,6 +157,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
 
     $module_name = 'car';
     $controller_name = 'CarController';
-    // Route::get("{$module_name}/index_list", ['as' => "{$module_name}.index_list", 'uses' => "{$controller_name}@index_list"]);
+    Route::resource("{$module_name}", "{$controller_name}");
+
+    $module_name = 'tour';
+    $controller_name = 'TourController';
     Route::resource("{$module_name}", "{$controller_name}");
 });

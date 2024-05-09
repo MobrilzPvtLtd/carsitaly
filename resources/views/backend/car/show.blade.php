@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-    <x-backend.layouts.show :data="$user">
+    <x-backend.layouts.show :data="$car">
 
         <x-backend.section-header>
             <i class="{{ $module_icon }}"></i> {{ $$module_name_singular->name }} -
@@ -26,8 +26,7 @@
 
             <x-slot name="toolbar">
                 <x-backend.buttons.return-back />
-                <a class="btn btn-primary m-1" data-toggle="tooltip" href="{{ route('backend.users.index') }}"
-                    title="List"><i class="fas fa-list"></i> List</a>
+                <a class="btn btn-primary m-1" data-toggle="tooltip" href="{{ route('backend.car.index') }}" title="List"><i class="fas fa-list"></i> List</a>
                 <x-buttons.edit title="{{ __('Edit') }} {{ ucwords(Str::singular($module_name)) }}"
                     route='{!! route("backend.$module_name.edit", $$module_name_singular) !!}' />
             </x-slot>
@@ -38,25 +37,25 @@
                 <div class="table-responsive">
                     <table class="table-bordered table-hover table">
                         <tr>
-                            <th>{{ __('labels.backend.users.fields.avatar') }}</th>
-                            <td><img class="user-profile-image img-fluid img-thumbnail"
-                                    src="{{ asset($$module_name_singular->avatar) }}"
-                                    style="max-height:200px; max-width:200px;" /></td>
+                            <th>{{ __('labels.backend.car.fields.image') }}</th>
+                            <td>
+                                <img class="user-profile-image img-fluid img-thumbnail"
+                                    src="{{ asset('public/uploads/car/') . '/' . $car->image}}"
+                                    style="width: 100px;" />
+                            </td>
                         </tr>
 
                         @php
                             $fields_array = [
-                                ['name' => 'username', 'type' => 'text'],
-                                ['name' => 'name', 'type' => 'text'],
-                                ['name' => 'email', 'type' => 'text'],
-                                ['name' => 'mobile', 'type' => 'text'],
-                                ['name' => 'gender', 'type' => 'text'],
-                                ['name' => 'date_of_birth', 'type' => 'date'],
-                                ['name' => 'address', 'type' => 'text'],
-                                ['name' => 'bio', 'type' => 'text'],
-                                ['name' => 'last_ip', 'type' => 'text'],
-                                ['name' => 'login_count', 'type' => 'text'],
-                                ['name' => 'last_login', 'type' => 'datetime'],
+                                ['name' => 'title', 'type' => 'text'],
+                                ['name' => 'duration', 'type' => 'text'],
+                                ['name' => 'price', 'type' => 'text'],
+                                ['name' => 'vehicle', 'type' => 'text'],
+                                ['name' => 'top_speed', 'type' => 'text'],
+                                ['name' => 'transmission', 'type' => 'text'],
+                                ['name' => 'mileage', 'type' => 'text'],
+                                ['name' => 'fuel', 'type' => 'text'],
+                                ['name' => 'capacity', 'type' => 'text'],
                             ];
                         @endphp
 
@@ -66,137 +65,54 @@
                             @endphp
                             <tr>
                                 <th>{{ __(label_case($field_name)) }}</th>
-                                <td>{{ $user->$field_name }}</td>
+                                <td>{{ $car->$field_name }}</td>
                             </tr>
                         @endforeach
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <div class="form-group">
                                     <?php
-                                    $field_name = 'url_website';
-                                    $field_lable = label_case($field_name);
-                                    $field_placeholder = $field_lable;
-                                    $required = '';
+                                        $field_name = 'url_website';
+                                        $field_lable = label_case($field_name);
+                                        $field_placeholder = $field_lable;
+                                        $required = '';
                                     ?>
                                     {{ html()->label($field_lable, $field_name)->class('form-label') }}
-                                    {!! fielf_required($required) !!}
                                     {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
                                 </div>
                             </div>
                         </div>
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.password') }}</th>
-                            <td>
-                                <a class="btn btn-outline-primary btn-sm"
-                                    href="{{ route('backend.users.changePassword', $user->id) }}">Change password</a>
-                            </td>
-                        </tr>
 
                         <tr>
-                            <th>{{ __('labels.backend.users.fields.social') }}</th>
+                            <th>{{ __('labels.backend.car.fields.status') }}</th>
                             <td>
-                                <ul class="list-unstyled">
-                                    @foreach ($user->providers as $provider)
-                                        <li>
-                                            <i class="fab fa-{{ $provider->provider }}"></i>
-                                            {{ label_case($provider->provider) }}
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.status') }}</th>
-                            <td>{!! $user->status_label !!}</td>
-                        </tr>
-
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.confirmed') }}</th>
-                            <td>
-                                {!! $user->confirmed_label !!}
-                                @if ($user->email_verified_at == null)
-                                    <a class="btn btn-primary btn-sm mt-1" data-toggle="tooltip"
-                                        href="{{ route('backend.users.emailConfirmationResend', $user->id) }}"
-                                        title="Send Confirmation Email"><i class="fas fa-envelope"></i> Send Confirmation
-                                        Reminder</a>
+                                @if ($car->status == 1)
+                                    <span class="badge text-bg-success">Active</span>
+                                @else
+                                    <span class="badge text-bg-warning">Inactive</span>
                                 @endif
                             </td>
                         </tr>
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.roles') }}</th>
-                            <td>
-                                @if ($user->getRoleNames()->count() > 0)
-                                    <ul>
-                                        @foreach ($user->getRoleNames() as $role)
-                                            <li>{{ ucwords($role) }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.permissions') }}</th>
-                            <td>
-                                @if ($user->getAllPermissions()->count() > 0)
-                                    <ul>
-                                        @foreach ($user->getAllPermissions() as $permission)
-                                            <li>{{ $permission->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </td>
-                        </tr>
-
                         <tr>
                             <th>{{ __('labels.backend.users.fields.created_at') }}</th>
-                            <td>{{ $user->created_at }} by
-                                User:{{ $user->created_by }}<br><small>({{ $user->created_at->diffForHumans() }})</small>
+                            <td>{{ $car->created_at }} @yield('name')<small>
+                                ({{ $car->created_at->diffForHumans() }})</small>
                             </td>
                         </tr>
 
                         <tr>
                             <th>{{ __('labels.backend.users.fields.updated_at') }}</th>
-                            <td>{{ $user->updated_at }} by
-                                User:{{ $user->updated_by }}<br /><small>({{ $user->updated_at->diffForHumans() }})</small>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>{{ __('Deleted At') }}</th>
-                            <td>
-                                @if ($user->deleted_at != null)
-                                    {{ $user->deleted_at }} by
-                                    User:{{ $user->deleted_by }}<br /><small>({{ $user->deleted_at->diffForHumans() }})</small>
-                                @endif
+                            <td>{{ $car->updated_at }}<br />
+                                <small>({{ $car->updated_at->diffForHumans() }})</small>
                             </td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="py-4 text-end">
-                    @if ($user->status != 2)
-                        <a class="btn btn-danger mt-1" data-method="PATCH" data-token="{{ csrf_token() }}"
-                            data-toggle="tooltip" data-confirm="Are you sure?"
-                            href="{{ route('backend.users.block', $user) }}" title="{{ __('labels.backend.block') }}"><i
-                                class="fas fa-ban"></i> Block</a>
-                    @endif
-                    @if ($user->status == 2)
-                        <a class="btn btn-info mt-1" data-method="PATCH" data-token="{{ csrf_token() }}"
-                            data-toggle="tooltip" data-confirm="Are you sure?"
-                            href="{{ route('backend.users.unblock', $user) }}"
-                            title="{{ __('labels.backend.unblock') }}"><i class="fas fa-check"></i> Unblock</a>
-                    @endif
                     <a class="btn btn-danger mt-1" data-method="DELETE" data-token="{{ csrf_token() }}"
                         data-toggle="tooltip" data-confirm="Are you sure?"
-                        href="{{ route('backend.users.destroy', $user) }}" title="{{ __('labels.backend.delete') }}"><i
-                            class="fas fa-trash-alt"></i> Delete</a>
-                    @if ($user->email_verified_at == null)
-                        <a class="btn btn-primary mt-1" data-toggle="tooltip"
-                            href="{{ route('backend.users.emailConfirmationResend', $user->id) }}"
-                            title="Send Confirmation Email"><i class="fas fa-envelope"></i> Email Confirmation</a>
-                    @endif
+                        href="{{ route('backend.car.destroy', $car) }}" title="{{ __('labels.backend.delete') }}"><i class="fas fa-trash-alt"></i> Delete</a>
                 </div>
             </div>
         </div>

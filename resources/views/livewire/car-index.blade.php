@@ -22,7 +22,7 @@
                             <td>
                                 <strong>
                                     <a href="{{route('backend.car.show', $c->id)}}">
-                                        {{ $c->image }}
+                                        <img src="{{ asset('public/uploads/car/') . '/' . $c->image}}" alt="" width="100px">
                                     </a>
                                 </strong>
                             </td>
@@ -36,24 +36,18 @@
                             <td>{{ $c->duration }}</td>
                             <td>{{ $c->price }}</td>
                             <td>
-                                {!! $c->status_label !!}
+                                @if ($c->status == 1)
+                                    <span class="badge text-bg-success">Active</span>
+                                @else
+                                    <span class="badge text-bg-warning">Inactive</span>
+                                @endif
                             </td>
 
                             <td class="text-end">
-                                <a href="{{route('backend.users.show', $c)}}" class="btn btn-success btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.show')}}"><i class="fas fa-desktop fa-fw"></i></a>
+                                <a href="{{route('backend.car.show', $c)}}" class="btn btn-success btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.show')}}"><i class="fas fa-desktop fa-fw"></i></a>
                                 @can('edit_users')
-                                <a href="{{route('backend.users.edit', $c)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.edit')}}"><i class="fas fa-wrench fa-fw"></i></a>
-                                <a href="{{route('backend.users.changePassword', $c)}}" class="btn btn-info btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.changePassword')}}"><i class="fas fa-key fa-fw"></i></a>
-                                @if ($c->status != 2)
-                                <a href="{{route('backend.users.block', $c)}}" class="btn btn-danger btn-sm mt-1" data-method="PATCH" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.block')}}" data-confirm="Are you sure?"><i class="fas fa-ban fa-fw"></i></a>
-                                @endif
-                                @if ($c->status == 2)
-                                <a href="{{route('backend.users.unblock', $c)}}" class="btn btn-info btn-sm mt-1" data-method="PATCH" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.unblock')}}" data-confirm="Are you sure?"><i class="fas fa-check fa-fw"></i></a>
-                                @endif
-                                <a href="{{route('backend.users.destroy', $c)}}" class="btn btn-danger btn-sm mt-1" data-method="DELETE" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.delete')}}" data-confirm="Are you sure?"><i class="fas fa-trash-alt fa-fw"></i></a>
-                                @if ($c->email_verified_at == null)
-                                <a href="{{route('backend.users.emailConfirmationResend', $c->id)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="Send Confirmation Email"><i class="fas fa-envelope fa-fw"></i></a>
-                                @endif
+                                <a href="{{route('backend.car.edit', $c)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.edit')}}"><i class="fas fa-edit"></i></a>
+                                <a href="{{route('backend.car.destroy', $c)}}" class="btn btn-danger btn-sm mt-1" data-method="DELETE" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.delete')}}" data-confirm="Are you sure?"><i class="fas fa-trash-alt fa-fw"></i></a>
                                 @endcan
                             </td>
                         </tr>
