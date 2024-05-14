@@ -22,25 +22,10 @@
                 @can('add_'.$module_name)
                 <x-backend.buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}" />
                 @endcan
-
-                @can('restore_'.$module_name)
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-coreui-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-cog"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href=''>
-                                <i class="fas fa-eye-slash"></i> View trash
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                @endcan
             </x-slot>
         </x-backend.section-header>
 
-        <livewire:car-index />
+        <livewire:tour-index />
 
     </div>
     <div class="card-footer">

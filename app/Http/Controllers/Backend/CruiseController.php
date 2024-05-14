@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Authorizable;
 use App\Http\Controllers\Controller;
-use App\Models\Car;
+use App\Models\Cruise;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
 
-class CarController extends Controller
+class CruiseController extends Controller
 {
     use Authorizable;
 
@@ -26,19 +27,19 @@ class CarController extends Controller
     public function __construct()
     {
         // Page Title
-        $this->module_title = 'Car';
+        $this->module_title = 'Cruise';
 
         // module name
-        $this->module_name = 'car';
+        $this->module_name = 'cruise';
 
         // directory path of the module
-        $this->module_path = 'car';
+        $this->module_path = 'cruise';
 
         // module icon
-        $this->module_icon = 'fa-solid fa-car';
+        $this->module_icon = 'fa-solid fa-cruise';
 
         // module model name, path
-        $this->module_model = "App\Models\Car";
+        $this->module_model = "App\Models\Cruise";
     }
 
     /**
@@ -56,8 +57,6 @@ class CarController extends Controller
         $module_name_singular = Str::singular($module_name);
 
         $module_action = 'List';
-
-        $page_heading = ucfirst($module_title);
 
         $$module_name = $module_model::paginate();
 
@@ -95,46 +94,43 @@ class CarController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'image' => 'required',
-            'duration' => 'required|numeric',
             'price' => 'required|numeric',
-            'top_speed' => 'required|numeric',
-            'mileage' => 'required|numeric',
-            'capacity' => 'required|numeric',
         ]);
 
         try {
             if($request->id){
-                $car = Car::findOrFail($request->id);
+                $cruise = Cruise::findOrFail($request->id);
             }else{
-                $car = new Car();
+                $cruise = new Cruise();
             }
-            $car->title = $request->title;
+            $cruise->title = $request->title;
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
                 $filename = time().'.'.$extension;
-                $file->move(public_path('uploads/car/'), $filename);
-                $car->image = $filename;
+                $file->move(public_path('uploads/cruise/'), $filename);
+                $cruise->image = $filename;
             } else {
                 Flash::error('Invalid file uploaded.')->important();
                 return redirect()->back();
             }
 
-            $car->fill($request->except('image'));
+            $cruise->fill($request->except('image'));
 
-            $car->duration = $request->duration;
-            $car->price = $request->price;
-            $car->vehicle = $request->vehicle;
-            $car->top_speed = $request->top_speed;
-            $car->transmission = $request->transmission;
-            $car->mileage = $request->mileage;
-            $car->fuel = $request->fuel;
-            $car->capacity = $request->capacity;
-            $car->status = $request->status;
-            $car->save();
+            $cruise->location = $request->location;
+            $cruise->price = $request->price;
+            $cruise->rating = $request->rating;
+            $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+            $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
 
-            Flash::success('Car created successfully.')->important();
+            $cruise->start_date = $startDate;
+            $cruise->end_date = $endDate;
+
+            $cruise->status = $request->status;
+            $cruise->description = $request->description;
+            $cruise->save();
+
+            Flash::success('Cruise created successfully.')->important();
             return redirect("admin/{$module_name}");
         } catch (\Exception $e) {
             Flash::error($e->getMessage())->important();

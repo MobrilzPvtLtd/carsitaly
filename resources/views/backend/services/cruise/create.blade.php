@@ -31,61 +31,55 @@
 
             <div class="row mt-4">
                 <div class="col">
-                    <form method="POST" action="{{ route('backend.car.store') }}" method="POST"
+                    <form method="POST" action="{{ route('backend.cruise.store') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="form-group mb-2 col-4">
                                 <label for="title">Title</label>
                                 <input type="text" class="form-control" id="title" name="title"
-                                    placeholder="Title...">
+                                    placeholder="Title..." value="{{ old('title') }}">
                             </div>
 
                             <div class="form-group mb-2 col-4">
-                                <label for="duration">Duration</label>
-                                <input type="number" class="form-control" id="duration" name="duration"
-                                    placeholder="Duration...">
+                                <label for="rating">Rating</label>
+                                <input type="number" class="form-control" name="rating" placeholder="" value="{{ old('rating') }}">
                             </div>
 
                             <div class="form-group mb-2 col-4">
                                 <label for="price">Price</label>
-                                <input type="number" class="form-control" id="price" name="price" placeholder="">
-                            </div>
-                            <div class="form-group mb-2 col-4">
-                                <label for="vehicle">Vehicle</label>
-                                <input type="text" class="form-control" id="vehicle" name="vehicle" placeholder="">
+                                <input type="number" class="form-control" id="price" name="price" placeholder="" value="{{ old('price') }}">
                             </div>
 
-                            <div class="form-group mb-2 col-4">
-                                <label for="top_speed">Top Speed</label>
-                                <input type="number" class="form-control" id="top_speed" name="top_speed" placeholder="">
-                            </div>
-                            <div class="form-group mb-2 col-4">
+                            <div class="form-group mb-2 col-6">
                                 <label for="city">Images</label>
                                 <input type="file" class="form-control" name="image">
                             </div>
-                            <div class="form-group mb-2 col-4">
-                                <label for="transmission">Transmission</label>
-                                <input type="text" class="form-control" name="transmission" placeholder="">
+
+                            <div class="form-group mb-2 col-6">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" id="location" name="location"
+                                    placeholder="Location..." value="{{ old('location') }}">
                             </div>
                             <div class="form-group mb-2 col-4">
-                                <label for="mileage">Mileage</label>
-                                <input type="number" class="form-control" name="mileage" placeholder="">
+                                <label for="start_date">Start Date</label>
+                                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ old('start_date') }}" placeholder="YYYY-MM-DD">
                             </div>
                             <div class="form-group mb-2 col-4">
-                                <label for="fuel">Fuel</label>
-                                <input type="text" class="form-control" name="fuel" placeholder="">
+                                <label for="end_date">End Date</label>
+                                <input type="date" class="form-control" id="end_date" name="end_date" value="{{ old('end_date') }}" placeholder="YYYY-MM-DD">
                             </div>
-                            <div class="form-group mb-2 col-4">
-                                <label for="capacity">Capacity</label>
-                                <input type="number" class="form-control" name="capacity" placeholder="">
-                            </div>
+
                             <div class="form-group mb-2 col-4">
                                 <label for="status">Status</label>
                                 <select class="form-control" id="status" name="status">
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
+                                    <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Inactive</option>
                                 </select>
+                            </div>
+                            <div class="form-group mb-2 col-12">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="" class="form-control" rows="2"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">

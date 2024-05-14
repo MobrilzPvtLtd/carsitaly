@@ -180,6 +180,76 @@ return [
             ],
 
         ],
+        'tour' => [
+            'index' => [
+                'action' => 'List',
+                'title' => 'Tour',
+                'sub-title' => 'Tour Management',
+            ],
+            'show' => [
+                'action' => 'Show',
+                'title' => 'Tour',
+                'sub-title' => 'Tour Management',
+                'profile' => 'Profile',
+            ],
+            'edit' => [
+                'action' => 'Edit',
+                'title' => 'Tour',
+                'sub-title' => 'Tour Management',
+            ],
+            'create' => [
+                'action' => 'Create',
+                'title' => 'Tour',
+                'sub-title' => 'Tour Management',
+            ],
+            'fields' => [
+                'image' => 'Image',
+                'title' => 'Title',
+                'duration' => 'Duration',
+                'price' => 'Price',
+                'city' => 'City',
+                'country' => 'Country',
+                'status' => 'Status',
+                'created_at' => 'Created At',
+                'updated_at' => 'Updated At',
+            ],
+
+        ],
+        'cruise' => [
+            'index' => [
+                'action' => 'List',
+                'title' => 'Cruise',
+                'sub-title' => 'Cruise Management',
+            ],
+            'show' => [
+                'action' => 'Show',
+                'title' => 'Cruise',
+                'sub-title' => 'Cruise Management',
+                'profile' => 'Profile',
+            ],
+            'edit' => [
+                'action' => 'Edit',
+                'title' => 'Cruise',
+                'sub-title' => 'Cruise Management',
+            ],
+            'create' => [
+                'action' => 'Create',
+                'title' => 'Cruise',
+                'sub-title' => 'Cruise Management',
+            ],
+            'fields' => [
+                'image' => 'Image',
+                'title' => 'Title',
+                'location' => 'Location',
+                'price' => 'Price',
+                'rating' => 'Rating',
+                'date' => 'Date',
+                'status' => 'Status',
+                'created_at' => 'Created At',
+                'updated_at' => 'Updated At',
+            ],
+
+        ],
     ],
 
     'buttons' => [

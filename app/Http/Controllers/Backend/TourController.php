@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Authorizable;
 use App\Http\Controllers\Controller;
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\Car;
+use App\Models\Tour;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
 
@@ -60,16 +57,11 @@ class TourController extends Controller
 
         $module_action = 'List';
 
-        $page_heading = ucfirst($module_title);
-        $title = $page_heading.' '.ucfirst($module_action);
-
         $$module_name = $module_model::paginate();
 
-        Log::info("'{$title}' viewed by User:".auth()->user()->name.'(ID:'.auth()->user()->id.')');
-
         return view(
-            "backend.{$module_path}.index",
-            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'page_heading', 'title')
+            "backend.services.{$module_path}.index",
+            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular')
         );
     }
 
@@ -84,12 +76,9 @@ class TourController extends Controller
 
         $module_action = 'Create';
 
-        $roles = Role::get();
-        $permissions = Permission::select('name', 'id')->get();
-
         return view(
-            "backend.{$module_name}.create",
-            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'roles', 'permissions')
+            "backend.services.{$module_name}.create",
+            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular')
         );
     }
 
@@ -107,43 +96,36 @@ class TourController extends Controller
             'image' => 'required',
             'duration' => 'required|numeric',
             'price' => 'required|numeric',
-            'top_speed' => 'required|numeric',
-            'mileage' => 'required|numeric',
-            'capacity' => 'required|numeric',
         ]);
 
         try {
             if($request->id){
-                $car = Car::findOrFail($request->id);
+                $tour = Tour::findOrFail($request->id);
             }else{
-                $car = new Car();
+                $tour = new Tour();
             }
-            $car->title = $request->title;
+            $tour->title = $request->title;
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
                 $filename = time().'.'.$extension;
-                $file->move(public_path('uploads/car/'), $filename);
-                $car->image = $filename;
+                $file->move(public_path('uploads/tour/'), $filename);
+                $tour->image = $filename;
             } else {
                 Flash::error('Invalid file uploaded.')->important();
                 return redirect()->back();
             }
 
-            $car->fill($request->except('image'));
+            $tour->fill($request->except('image'));
 
-            $car->duration = $request->duration;
-            $car->price = $request->price;
-            $car->vehicle = $request->vehicle;
-            $car->top_speed = $request->top_speed;
-            $car->transmission = $request->transmission;
-            $car->mileage = $request->mileage;
-            $car->fuel = $request->fuel;
-            $car->capacity = $request->capacity;
-            $car->status = $request->status;
-            $car->save();
+            $tour->duration = $request->duration;
+            $tour->price = $request->price;
+            $tour->city = $request->city;
+            $tour->country = $request->country;
+            $tour->status = $request->status;
+            $tour->save();
 
-            Flash::success('Car created successfully.')->important();
+            Flash::success('Tour created successfully.')->important();
             return redirect("admin/{$module_name}");
         } catch (\Exception $e) {
             Flash::error($e->getMessage())->important();
@@ -172,7 +154,7 @@ class TourController extends Controller
         $$module_name_singular = $module_model::findOrFail($id);
 
         return view(
-            "backend.{$module_name}.show",
+            "backend.services.{$module_name}.show",
             compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', "{$module_name_singular}")
         );
     }
@@ -203,7 +185,7 @@ class TourController extends Controller
         $$module_name_singular = $module_model::findOrFail($id);
 
         return view(
-            "backend.{$module_name}.edit",
+            "backend.services.{$module_name}.edit",
             compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', "{$module_name_singular}")
         );
     }

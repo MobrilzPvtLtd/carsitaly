@@ -54,16 +54,19 @@ $notifications_latest = optional($notifications)->take(5);
                     <i class="nav-icon fa-solid fa-wrench"></i>&nbsp;@lang('Services')
                 </a>
                 <ul class="nav-group-items compact" style="height: auto;">
-                    @can('view_categories')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('backend.car.index') }}">
-                                <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Car
-                            </a>
-                        </li>
-                    @endcan
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.car.index') }}">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Car
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.tour.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Tours
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.cruise.index') }}">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Cruise
                         </a>
                     </li>
                 </ul>

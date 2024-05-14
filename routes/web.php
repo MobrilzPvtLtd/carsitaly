@@ -162,4 +162,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
     $module_name = 'tour';
     $controller_name = 'TourController';
     Route::resource("{$module_name}", "{$controller_name}");
+
+    $module_name = 'cruise';
+    $controller_name = 'CruiseController';
+    Route::resource("{$module_name}", "{$controller_name}");
 });
