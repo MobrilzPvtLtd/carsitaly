@@ -12,7 +12,8 @@
                             <th>{{ __('labels.backend.cruise.fields.location') }}</th>
                             <th>{{ __('labels.backend.cruise.fields.price') }}</th>
                             <th>{{ __('labels.backend.cruise.fields.rating') }}</th>
-                            <th>{{ __('labels.backend.cruise.fields.date') }}</th>
+                            <th>{{ __('labels.backend.cruise.fields.start_date') }}</th>
+                            <th>{{ __('labels.backend.cruise.fields.end_date') }}</th>
                             <th>{{ __('labels.backend.cruise.fields.status') }}</th>
 
                             <th class="text-end">{{ __('labels.backend.action') }}</th>
@@ -38,6 +39,8 @@
                             <td>{{ $cru->location }}</td>
                             <td>{{ $cru->price }}</td>
                             <td>5/{{ $cru->rating }}</td>
+                            <td>{{ $cru->start_date }}</td>
+                            <td>{{ $cru->end_date }}</td>
                             <td>
                                 @if ($cru->status == 1)
                                     <span class="badge text-bg-success">Active</span>

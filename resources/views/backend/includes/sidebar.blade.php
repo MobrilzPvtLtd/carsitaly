@@ -55,6 +55,11 @@ $notifications_latest = optional($notifications)->take(5);
                 </a>
                 <ul class="nav-group-items compact" style="height: auto;">
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.hotel.index') }}">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Hotel
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.car.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Car
                         </a>

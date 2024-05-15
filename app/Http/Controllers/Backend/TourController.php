@@ -101,8 +101,10 @@ class TourController extends Controller
         try {
             if($request->id){
                 $tour = Tour::findOrFail($request->id);
+                Flash::success('Tour updated successfully.')->important();
             }else{
                 $tour = new Tour();
+                Flash::success('Tour created successfully.')->important();
             }
             $tour->title = $request->title;
             if ($request->hasFile('image') && $request->file('image')->isValid()) {

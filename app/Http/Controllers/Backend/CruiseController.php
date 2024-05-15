@@ -100,8 +100,10 @@ class CruiseController extends Controller
         try {
             if($request->id){
                 $cruise = Cruise::findOrFail($request->id);
+                Flash::success('Cruise updated successfully.')->important();
             }else{
                 $cruise = new Cruise();
+                Flash::success('Cruise created successfully.')->important();
             }
             $cruise->title = $request->title;
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -130,7 +132,6 @@ class CruiseController extends Controller
             $cruise->description = $request->description;
             $cruise->save();
 
-            Flash::success('Cruise created successfully.')->important();
             return redirect("admin/{$module_name}");
         } catch (\Exception $e) {
             Flash::error($e->getMessage())->important();

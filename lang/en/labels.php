@@ -243,7 +243,45 @@ return [
                 'location' => 'Location',
                 'price' => 'Price',
                 'rating' => 'Rating',
-                'date' => 'Date',
+                'start_date' => 'Start Date',
+                'end_date' => 'End Date',
+                'status' => 'Status',
+                'created_at' => 'Created At',
+                'updated_at' => 'Updated At',
+            ],
+
+        ],
+
+        'hotel' => [
+            'index' => [
+                'action' => 'List',
+                'title' => 'Hotel',
+                'sub-title' => 'Hotel Management',
+            ],
+            'show' => [
+                'action' => 'Show',
+                'title' => 'Hotel',
+                'sub-title' => 'Hotel Management',
+                'profile' => 'Profile',
+            ],
+            'edit' => [
+                'action' => 'Edit',
+                'title' => 'Hotel',
+                'sub-title' => 'Hotel Management',
+            ],
+            'create' => [
+                'action' => 'Create',
+                'title' => 'Hotel',
+                'sub-title' => 'Hotel Management',
+            ],
+            'fields' => [
+                'image' => 'Image',
+                'title' => 'Title',
+                'traveller' => 'Traveller',
+                'price' => 'Price',
+                'theme' => 'Theme',
+                'start_date' => 'Start Date',
+                'end_date' => 'End Date',
                 'status' => 'Status',
                 'created_at' => 'Created At',
                 'updated_at' => 'Updated At',
