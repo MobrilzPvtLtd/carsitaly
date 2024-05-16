@@ -95,7 +95,7 @@ class CarController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
             'duration' => 'required|numeric',
             'price' => 'required|numeric',
             'top_speed' => 'required|numeric',
@@ -106,24 +106,26 @@ class CarController extends Controller
         try {
             if($request->id){
                 $car = Car::findOrFail($request->id);
-                Flash::success('Car updated successfully.')->important();
             }else{
                 $car = new Car();
-                Flash::success('Car created successfully.')->important();
             }
             $car->title = $request->title;
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file->move(public_path('uploads/car/'), $filename);
-                $car->image = $filename;
-            } else {
-                Flash::error('Invalid file uploaded.')->important();
-                return redirect()->back();
-            }
+                $filename = time() . '.' . $extension;
 
-            $car->fill($request->except('image'));
+                $file->storeAs('public/uploads/car', $filename);
+
+                if ($car->image) {
+                    $oldImagePath = storage_path('app/public/uploads/car/') . $car->image;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $car->image = $filename;
+            }
 
             $car->duration = $request->duration;
             $car->price = $request->price;
@@ -136,6 +138,7 @@ class CarController extends Controller
             $car->status = $request->status;
             $car->save();
 
+            Flash::success($request->id ? 'Car updated successfully.' : 'Car created successfully.')->important();
             return redirect("admin/{$module_name}");
         } catch (\Exception $e) {
             Flash::error($e->getMessage())->important();

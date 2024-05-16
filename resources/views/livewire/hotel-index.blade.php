@@ -25,7 +25,7 @@
                             <td>
                                 <strong>
                                     <a href="{{route('backend.hotel.show', $hot->id)}}">
-                                        <img src="{{ asset('public/uploads/hotel/') . '/' . $hot->image}}" alt="" width="100px">
+                                        <img src="{{ asset('public/storage/uploads/hotel/') . '/' . $hot->image}}" alt="" width="100px">
                                     </a>
                                 </strong>
                             </td>

@@ -77,102 +77,31 @@
                     <h4>SAVE MORE</h4>
                 </div>
                 <div class="owl-carousel" id="lastminute">
-                    <div class="col-grid">
-                        <div class="wrapper">
-                            <img src="assets/images/tour1.jpg" alt="cruise">
-                            <h5 class="location">AUDI</h5>
+                    @foreach ($cruises as $cruise)
+                        <div class="col-grid">
+                            <div class="wrapper">
+                                <img src="{{ asset('public/storage/uploads/cruise/') . '/' . $cruise->image }}" alt="cruise">
+                                <h5 class="location">{{ $cruise->location }}</h5>
+                            </div>
+                            <div class="body text-center">
+                                <h5>{{ $cruise->title }}</h5>
+                                <p>
+                                    @for ($i = 0; $i < $cruise->rating; $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
+                                </p>
+                                <p class="back-line">Starting From</p>
+                                <h3>${{ $cruise->price }}</h3>
+
+                                <p class="text-sm">
+                                    <?php echo date('d/M/Y', strtotime($cruise->start_date)) . ' - ' . date('d/M/Y', strtotime($cruise->end_date)); ?>
+                                </p>
+                            </div>
+                            <div class="bottom">
+                                <a href="#">VIEW DETAIL</a>
+                            </div>
                         </div>
-                        <div class="body text-center">
-                            <h5>AUDI Q6</h5>
-                            <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-                            <p class="back-line">Starting From</p>
-                            <h3>$199</h3>
-                            <p class="text-sm">Thu Aug 12 - Sun 14 Aug</p>
-                        </div>
-                        <div class="bottom">
-                            <a href="#">VIEW DETAIL</a>
-                        </div>
-                    </div>
-                    <div class="col-grid">
-                        <div class="wrapper">
-                            <img src="assets/images/tour1.jpg" alt="cruise">
-                            <h5 class="location">BMW</h5>
-                        </div>
-                        <div class="body text-center">
-                            <h5>BMW A4</h5>
-                            <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-                            <p class="back-line">Starting From</p>
-                            <h3>$299</h3>
-                            <p class="text-sm">Thu Aug 12 - Sun 14 Aug</p>
-                        </div>
-                        <div class="bottom">
-                            <a href="#">VIEW DETAIL</a>
-                        </div>
-                    </div>
-                    <div class="col-grid">
-                        <div class="wrapper">
-                            <img src="assets/images/tour1.jpg" alt="cruise">
-                            <h5 class="location">FORD</h5>
-                        </div>
-                        <div class="body text-center">
-                            <h5>FORD ENDEVOUR</h5>
-                            <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-                            <p class="back-line">Starting From</p>
-                            <h3>$399</h3>
-                            <p class="text-sm">Thu Aug 12 - Sun 14 Aug</p>
-                        </div>
-                        <div class="bottom">
-                            <a href="#">VIEW DETAIL</a>
-                        </div>
-                    </div>
-                    <div class="col-grid">
-                        <div class="wrapper">
-                            <img src="assets/images/tour1.jpg" alt="cruise">
-                            <h5 class="location">AUDI</h5>
-                        </div>
-                        <div class="body text-center">
-                            <h5>AUDI Q6 SEDAN</h5>
-                            <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-                            <p class="back-line">Starting From</p>
-                            <h3>$399</h3>
-                            <p class="text-sm">Thu Aug 12 - Sun 14 Aug</p>
-                        </div>
-                        <div class="bottom">
-                            <a href="#">VIEW DETAIL</a>
-                        </div>
-                    </div>
-                    <div class="col-grid">
-                        <div class="wrapper">
-                            <img src="assets/images/tour1.jpg" alt="cruise">
-                            <h5 class="location">AUDI</h5>
-                        </div>
-                        <div class="body text-center">
-                            <h5>AUDI A5</h5>
-                            <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-                            <p class="back-line">Starting From</p>
-                            <h3>$199</h3>
-                            <p class="text-sm">Thu Aug 12 - Sun 14 Aug</p>
-                        </div>
-                        <div class="bottom">
-                            <a href="#">VIEW DETAIL</a>
-                        </div>
-                    </div>
-                    <div class="col-grid">
-                        <div class="wrapper">
-                            <img src="assets/images/tour1.jpg" alt="cruise">
-                            <h5 class="location">BMW</h5>
-                        </div>
-                        <div class="body text-center">
-                            <h5>BMW SEDAN</h5>
-                            <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-                            <p class="back-line">Starting From</p>
-                            <h3>$299</h3>
-                            <p class="text-sm">Thu Aug 12 - Sun 14 Aug</p>
-                        </div>
-                        <div class="bottom">
-                            <a href="#">VIEW DETAIL</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -185,22 +114,24 @@
                     <h2>TOP DESTINATION</h2>
                     <h4>CHECK OUT CRUISES IN TOP DESTINATIONS</h4>
                 </div>
-                <div class="col-md-4 col-sm-6 tour-grid clear-padding">
-                    <img src="assets/images/tour1.jpg" alt="Cruise">
-                    <div class="tour-brief">
-                        <div class="pull-left">
-                            <h4><i class="fa fa-map-marker"></i>FRANCE</h4>
+                {{-- @foreach ($cars as $car)
+                    <div class="col-md-4 col-sm-6 tour-grid clear-padding">
+                        <img src="{{ asset('public/storage/uploads/car/') . '/' . $car->image }}" alt="Cruise">
+                        <div class="tour-brief">
+                            <div class="pull-left">
+                                <h4><i class="fa fa-map-marker"></i>FRANCE</h4>
+                            </div>
+                            <div class="pull-right">
+                                <h4>$49/Day</h4>
+                            </div>
                         </div>
-                        <div class="pull-right">
-                            <h4>$49/Day</h4>
+                        <div class="tour-detail text-center">
+                            <p><strong><i class="fa fa-car"></i>25 Cars</strong></p>
+                            <p><strong>Starting $49/Day</strong></p>
+                            <p><a href="#">DETAIL</a></p>
                         </div>
                     </div>
-                    <div class="tour-detail text-center">
-                        <p><strong><i class="fa fa-car"></i>25 Cars</strong></p>
-                        <p><strong>Starting $49/Day</strong></p>
-                        <p><a href="#">DETAIL</a></p>
-                    </div>
-                </div>
+                @endforeach --}}
                 <div class="col-md-4 col-sm-6 tour-grid clear-padding">
                     <img src="assets/images/tour1.jpg" alt="Cruise">
                     <div class="tour-brief">

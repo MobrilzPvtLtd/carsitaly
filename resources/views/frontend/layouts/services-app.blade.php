@@ -47,7 +47,7 @@
 
     <!-- Scripts -->
     @livewireScripts
-    @stack('after-scripts')
+    @yield('script')
     <script src="{{ asset('assets/js/respond.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <script src="{{ asset('assets/plugins/owl.carousel.min.js') }}"></script>

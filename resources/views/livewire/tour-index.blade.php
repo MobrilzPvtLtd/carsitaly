@@ -24,7 +24,7 @@
                             <td>
                                 <strong>
                                     <a href="{{route('backend.tour.show', $t->id)}}">
-                                        <img src="{{ asset('public/uploads/tour/') . '/' . $t->image}}" alt="" width="100px">
+                                        <img src="{{ asset('public/storage/uploads/tour/') . '/' . $t->image}}" alt="" width="100px">
                                     </a>
                                 </strong>
                             </td>

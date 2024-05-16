@@ -174,600 +174,75 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <!-- START: CAR GRID VIEW -->
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/audi001.webp" alt="cruise">
+                @foreach ($cars as $car)
+                    <div class="col-md-4 col-sm-6">
+                        <div class="holiday-grid-view">
+                            <div class="holiday-header-wrapper">
+                                <div class="holiday-header">
+                                    <div class="holiday-img">
+                                        <img src="{{ asset('public/storage/uploads/car/') . '/' . $car->image }}" alt="cruise">
+                                    </div>
+                                    <div class="holiday-price">
+                                        <h4>${{ $car->price }}</h4>
+                                        <h5>{{ $car->duration }} Day</h5>
+                                    </div>
+                                    <div class="holiday-title">
+                                        <h3>{{ $car->title }}</h3>
+                                        <h5><i class="fa fa-certificate"></i> {{ $car->vehicle }}</h5>
+                                    </div>
                                 </div>
-                                <div class="holiday-price">
-                                    <h4>$499</h4>
-                                    <h5>1 Day</h5>
+                            </div>
+                            <div class="holiday-details">
+                                <div class="col-md-5 col-sm-4 col-xs-4">
+                                    <h5>Top Speed</h5>
                                 </div>
-                                <div class="holiday-title">
-                                    <h3>AUDI R8</h3>
-                                    <h5><i class="fa fa-certificate"></i> AUDI</h5>
+                                <div class="col-md-7 col-sm-8 col-xs-8">
+                                    <p>{{ $car->top_speed }} KM/HOUR</p>
                                 </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-5 col-sm-4 col-xs-4">
+                                    <h5>Transmission</h5>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-8">
+                                    <p>{{ $car->transmission }}</p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-5 col-sm-4 col-xs-4">
+                                    <h5>Travelled</h5>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-8">
+                                    <p>{{ $car->mileage }} KM</p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-5 col-sm-4 col-xs-4">
+                                    <h5>Fuel</h5>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-8">
+                                    <p>{{ $car->fuel }}</p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-5 col-sm-4 col-xs-4">
+                                    <h5>Capacity</h5>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-8">
+                                    <p>{{ $car->capacity }} Person</p>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>200 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>21000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Electric Car</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
+                            <div class="holiday-footer text-center">
+                                <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
+                                    <a href="#">VIEW DETAILS</a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 social">
+                                    <i class="fa fa-heart-o"></i>
+                                    <i class="fa fa-share-alt"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/c_class_mercedes.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$199</h4>
-                                    <h5>1 Day</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>C Class Sedan</h3>
-                                    <h5><i class="fa fa-certificate"></i> Mercedes</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix-sm"></div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/audi001.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$99</h4>
-                                    <h5>1 Day</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>AUDI R8</h3>
-                                    <h5><i class="fa fa-certificate"></i> AUDI</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix-md"></div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/suzuki.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$88</h4>
-                                    <h5>1 Day</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>SUZUKI K10</h3>
-                                    <h5><i class="fa fa-certificate"></i> SUZUKI</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix-sm"></div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/audi001.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$499</h4>
-                                    <h5>1 Day</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>AUDI R8</h3>
-                                    <h5><i class="fa fa-certificate"></i> AUDI</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/c_class_mercedes.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$499</h4>
-                                    <h5>7 Days</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>BMW Q6</h3>
-                                    <h5><i class="fa fa-certificate"></i> BMW</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix-sm"></div>
-                <div class="clearfix-md"></div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/audi001.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$499</h4>
-                                    <h5>7 Days</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>AUDI R8</h3>
-                                    <h5><i class="fa fa-certificate"></i> AUDI</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/c_class_mercedes.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$499</h4>
-                                    <h5>7 Days</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>Mercedes Sedan</h3>
-                                    <h5><i class="fa fa-certificate"></i> Mercedes</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix-sm"></div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="holiday-grid-view">
-                        <div class="holiday-header-wrapper">
-                            <div class="holiday-header">
-                                <div class="holiday-img">
-                                    <img src="images-new/suzuki.webp" alt="cruise">
-                                </div>
-                                <div class="holiday-price">
-                                    <h4>$599</h4>
-                                    <h5>5 Days</h5>
-                                </div>
-                                <div class="holiday-title">
-                                    <h3>Honda Amaze</h3>
-                                    <h5><i class="fa fa-certificate"></i> HONDA</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="holiday-details">
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Top Speed</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>220 KM/HOUR</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Transmission</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Automatic</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Travelled</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>3000 KM</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Fuel</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>Patrol</p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-5 col-sm-4 col-xs-4">
-                                <h5>Capacity</h5>
-                            </div>
-                            <div class="col-md-7 col-sm-8 col-xs-8">
-                                <p>5 Person</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="holiday-footer text-center">
-                            <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                <i class="fa fa-heart-o"></i>
-                                <i class="fa fa-share-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
                 <div class="clearfix"></div>
-                <!-- END: CAR GRID VIEW -->
 
                 <!-- START: PAGINATION -->
                 <div class="bottom-pagination">

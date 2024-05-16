@@ -35,6 +35,7 @@ Route::get('air', [FrontendController::class, 'air'])->name('air');
 Route::get('cruise', [FrontendController::class, 'cruise'])->name('cruise');
 Route::get('tour', [FrontendController::class, 'tour'])->name('tour');
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('contact-submit', [FrontendController::class, 'contactSubmit'])->name('contact-submit');
 Route::post('flight',[FrontendController::class,'flight'])->name('flight');
 
 Route::get('login', [AuthenticatedSessionController::class, 'login'])->name('login');
@@ -84,6 +85,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
      */
     Route::get('/', 'BackendController@index')->name('home');
     Route::get('dashboard', 'BackendController@index')->name('dashboard');
+    Route::get('contact-message', 'BackendController@contactMessage')->name('contact-message');
 
     /*
      *

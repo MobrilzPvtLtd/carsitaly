@@ -22,7 +22,7 @@
                             <td>
                                 <strong>
                                     <a href="{{route('backend.car.show', $c->id)}}">
-                                        <img src="{{ asset('public/uploads/car/') . '/' . $c->image}}" alt="" width="100px">
+                                        <img src="{{ asset('public/storage/uploads/car/') . '/' . $c->image}}" alt="" width="100px">
                                     </a>
                                 </strong>
                             </td>

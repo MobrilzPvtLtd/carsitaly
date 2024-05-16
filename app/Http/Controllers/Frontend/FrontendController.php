@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Events\Auth\UserLoginSuccess;
+use App\Models\Car;
+use App\Models\Contact;
+use App\Models\Cruise;
 use App\Models\Flight;
+use App\Models\Hotel;
+use App\Models\Tour;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -48,11 +53,13 @@ class FrontendController extends Controller
     }
     public function car()
     {
-        return view('frontend.car');
+        $cars = Car::get();
+        return view('frontend.car',compact('cars'));
     }
     public function hotel()
     {
-        return view('frontend.hotel');
+        $hotels = Hotel::get();
+        return view('frontend.hotel',compact('hotels'));
     }
 
     public function villa()
@@ -62,7 +69,8 @@ class FrontendController extends Controller
 
     public function tour()
     {
-        return view('frontend.tour');
+        $tours = Tour::get();
+        return view('frontend.tour',compact('tours'));
     }
 
     public function air()
@@ -72,11 +80,29 @@ class FrontendController extends Controller
 
     public function cruise()
     {
-        return view('frontend.cruise');
+        $cars = Car::get();
+        $cruises = Cruise::get();
+        return view('frontend.cruise',compact('cruises','cars'));
     }
     public function contact()
     {
         return view('frontend.contact');
+    }
+
+    public function contactSubmit(Request $request){
+        try{
+            $contact = new Contact();
+            $contact->name = $request->name;
+            $contact->email = $request->email;
+            $contact->mobile = $request->mobile;
+            $contact->message = $request->message;
+            $contact->save();
+            session()->flash('success', 'Data saved successful');
+            return redirect()->back();
+        }catch(\Exception $e){
+            session()->flash('error', $e->getMessage());
+            return redirect()->back();
+        }
     }
 
     public function privacy()

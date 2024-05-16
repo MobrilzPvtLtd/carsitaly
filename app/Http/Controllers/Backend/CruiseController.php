@@ -100,24 +100,26 @@ class CruiseController extends Controller
         try {
             if($request->id){
                 $cruise = Cruise::findOrFail($request->id);
-                Flash::success('Cruise updated successfully.')->important();
             }else{
                 $cruise = new Cruise();
-                Flash::success('Cruise created successfully.')->important();
             }
             $cruise->title = $request->title;
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file->move(public_path('uploads/cruise/'), $filename);
-                $cruise->image = $filename;
-            } else {
-                Flash::error('Invalid file uploaded.')->important();
-                return redirect()->back();
-            }
+                $filename = time() . '.' . $extension;
 
-            $cruise->fill($request->except('image'));
+                $file->storeAs('public/uploads/cruise', $filename);
+
+                if ($cruise->image) {
+                    $oldImagePath = storage_path('app/public/uploads/cruise/') . $cruise->image;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $cruise->image = $filename;
+            }
 
             $cruise->location = $request->location;
             $cruise->price = $request->price;
@@ -132,6 +134,7 @@ class CruiseController extends Controller
             $cruise->description = $request->description;
             $cruise->save();
 
+            Flash::success($request->id ? 'Cruise updated successfully.' : 'Cruise created successfully.')->important();
             return redirect("admin/{$module_name}");
         } catch (\Exception $e) {
             Flash::error($e->getMessage())->important();

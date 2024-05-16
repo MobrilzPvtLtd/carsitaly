@@ -93,7 +93,7 @@ class TourController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
             'duration' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
@@ -101,24 +101,26 @@ class TourController extends Controller
         try {
             if($request->id){
                 $tour = Tour::findOrFail($request->id);
-                Flash::success('Tour updated successfully.')->important();
             }else{
                 $tour = new Tour();
-                Flash::success('Tour created successfully.')->important();
             }
             $tour->title = $request->title;
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file->move(public_path('uploads/tour/'), $filename);
-                $tour->image = $filename;
-            } else {
-                Flash::error('Invalid file uploaded.')->important();
-                return redirect()->back();
-            }
+                $filename = time() . '.' . $extension;
 
-            $tour->fill($request->except('image'));
+                $file->storeAs('public/uploads/tour', $filename);
+
+                if ($tour->image) {
+                    $oldImagePath = storage_path('app/public/uploads/tour/') . $tour->image;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $tour->image = $filename;
+            }
 
             $tour->duration = $request->duration;
             $tour->price = $request->price;
@@ -127,7 +129,7 @@ class TourController extends Controller
             $tour->status = $request->status;
             $tour->save();
 
-            Flash::success('Tour created successfully.')->important();
+            Flash::success($request->id ? 'Tour updated successfully.' : 'Tour created successfully.')->important();
             return redirect("admin/{$module_name}");
         } catch (\Exception $e) {
             Flash::error($e->getMessage())->important();

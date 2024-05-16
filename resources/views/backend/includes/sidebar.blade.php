@@ -86,6 +86,14 @@ $notifications_latest = optional($notifications)->take(5);
             </li>
         @endcan
 
+        @can('edit_settings')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('backend.contact-message') }}">
+                    <i class="nav-icon fa-solid fa-phone"></i>&nbsp;@lang('Contact')
+                </a>
+            </li>
+        @endcan
+
         @can('view_backups')
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('backend.backups.index') }}">

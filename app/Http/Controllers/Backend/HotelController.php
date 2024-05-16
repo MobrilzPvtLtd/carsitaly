@@ -100,24 +100,27 @@ class HotelController extends Controller
         try {
             if($request->id){
                 $hotel = Hotel::findOrFail($request->id);
-                Flash::success('Hotel updated successfully.')->important();
             }else{
                 $hotel = new Hotel();
-                Flash::success('Hotel created successfully.')->important();
             }
             $hotel->title = $request->title;
-            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file->move(public_path('uploads/hotel/'), $filename);
-                $hotel->image = $filename;
-            } else {
-                Flash::error('Invalid file uploaded.')->important();
-                return redirect()->back();
-            }
+                $filename = time() . '.' . $extension;
 
-            $hotel->fill($request->except('image'));
+                $file->storeAs('public/uploads/hotel', $filename);
+
+                if ($hotel->image) {
+                    $oldImagePath = storage_path('app/public/uploads/hotel/') . $hotel->image;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $hotel->image = $filename;
+            }
 
             $hotel->traveller = $request->traveller;
             $hotel->theme = $request->theme;
@@ -133,6 +136,7 @@ class HotelController extends Controller
             $hotel->status = $request->status;
             $hotel->save();
 
+            Flash::success($request->id ? 'Hotel updated successfully.' : 'Hotel created successfully.')->important();
             return redirect("admin/{$module_name}");
         } catch (\Exception $e) {
             Flash::error($e->getMessage())->important();
