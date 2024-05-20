@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use App\Events\Auth\UserLoginSuccess;
-use App\Models\Car;
 use App\Models\Contact;
 use App\Models\Cruise;
 use App\Models\Flight;
@@ -51,11 +49,7 @@ class FrontendController extends Controller
             return redirect()->back();
         }
     }
-    public function car()
-    {
-        $cars = Car::get();
-        return view('frontend.car',compact('cars'));
-    }
+
     public function hotel()
     {
         $hotels = Hotel::get();
@@ -80,9 +74,8 @@ class FrontendController extends Controller
 
     public function cruise()
     {
-        $cars = Car::get();
         $cruises = Cruise::get();
-        return view('frontend.cruise',compact('cruises','cars'));
+        return view('frontend.cruise',compact('cruises'));
     }
     public function contact()
     {

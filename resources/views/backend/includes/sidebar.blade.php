@@ -60,7 +60,7 @@ $notifications_latest = optional($notifications)->take(5);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('backend.car.index') }}">
+                        <a class="nav-link" href="{{ route('backend.cars.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Car
                         </a>
                     </li>

@@ -8,12 +8,16 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+
+            $table->string('title');
+            $table->string('slug')->nullable();
             $table->string('image')->nullable();
             $table->string('duration')->nullable();
             $table->decimal('price', 10, 2);
@@ -23,7 +27,12 @@ return new class extends Migration
             $table->integer('mileage');
             $table->string('fuel')->nullable();
             $table->integer('capacity');
-            $table->boolean('status')->default(0)->nullable();
+            $table->tinyInteger('status')->default(1);
+
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,8 +40,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('cars');
     }

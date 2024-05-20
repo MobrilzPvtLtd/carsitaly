@@ -312,7 +312,7 @@
                             <!-- START: CAR SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="taxi">
                                 <div class="col-md-8">
-                                    <form action="{{ route('car') }}" method="GET">
+                                    <form action="{{ route('frontend.cars.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Search Perfect Car</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Pick Up Location</label>

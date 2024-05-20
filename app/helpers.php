@@ -120,17 +120,18 @@ if (! function_exists('show_column_value')) {
         if ($column_type === 'json') {
             $return_text = json_encode($value);
         } elseif ($column_type !== 'json' && \Illuminate\Support\Str::endsWith(strtolower($value), ['png', 'jpg', 'jpeg', 'gif', 'svg'])) {
-            $img_path = asset($value);
+            $img_path = asset('public/storage/'.$value);
 
             $return_text = '<figure class="figure">
                                 <a href="'.$img_path.'" data-lightbox="image-set" data-title="Path: '.$value.'">
                                     <img src="'.$img_path.'" style="max-width:200px;" class="figure-img img-fluid rounded img-thumbnail" alt="">
                                 </a>
-                                <figcaption class="figure-caption">Path: '.$value.'</figcaption>
-                            </figure>';
+                                ';
         } else {
             $return_text = $value;
         }
+
+        // <figcaption class="figure-caption">Path: '.$value.'</figcaption></figure>
 
         return $return_text;
     }

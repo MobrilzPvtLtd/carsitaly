@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->currentLocale()) }}" dir="{{ language_direction() }}">
+<html class="load-full-screen" lang="{{ str_replace('_', '-', app()->currentLocale()) }}" dir="{{ language_direction() }}">
 
 <head>
     <meta charset="utf-8" />
@@ -37,13 +37,23 @@
 </head>
 
 <body class="load-full-screen">
-    @include('frontend.includes.services-header')
 
-    <div class="site-wrapper">
-        @yield('services-content')
+    <div id="loader" class="load-full-screen">
+        <div class="loading-animation">
+            <span><i class="fa fa-plane"></i></span>
+            <span><i class="fa fa-bed"></i></span>
+            <span><i class="fa fa-ship"></i></span>
+            <span><i class="fa fa-suitcase"></i></span>
+        </div>
     </div>
 
-    @include('frontend.includes.services-footer')
+    <div class="site-wrapper">
+        @include('frontend.includes.services-header')
+
+        @yield('services-content')
+
+        @include('frontend.includes.services-footer')
+    </div>
 
     <!-- Scripts -->
     @livewireScripts
