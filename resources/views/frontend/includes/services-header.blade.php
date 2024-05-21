@@ -49,8 +49,7 @@
                 <li><a href="{{ route('frontend.cars.index') }}"> TRANSFERS</a></li>
                 <li><a href="{{ route('frontend.hotels.index') }}"> HOTELS</a></li>
                 <li><a href="{{ route('villa') }}"> VILLAS</a></li>
-                <li><a href="{{ route('tour') }}"> TOURS</a></li>
-                {{-- <li><a href="{{ route('air') }}"> AIR FARE</a></li> --}}
+                <li><a href="{{ route('frontend.tours.index') }}"> TOURS</a></li>
                 <li><a href="{{ route('frontend.cruises.index') }}"> CRUISE</a></li>
                 <li><a href="{{ route('contact') }}"> CONTACT</a></li>
                 </li>

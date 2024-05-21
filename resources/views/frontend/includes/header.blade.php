@@ -77,14 +77,13 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                <li><a href="home"> HOME</a></li>
+                                <li><a href="{{ route('home') }}"> HOME</a></li>
                                 <li><a href="{{ route('frontend.cars.index') }}"> TRANSFERS</a></li>
                                 <li><a href="{{ route('frontend.hotels.index') }}"> HOTELS</a></li>
                                 <li><a href="villa"> VILLAS</a></li>
-                                <li><a href="tour"> TOURS</a></li>
-                                {{-- <li><a href="air"> AIR FARE</a></li> --}}
+                                <li><a href="{{ route('frontend.tours.index') }}"> TOURS</a></li>
                                 <li><a href="{{ route('frontend.cruises.index') }}"> CRUISE</a></li>
-                                <li><a href="contact"> CONTACT</a></li>
+                                <li><a href="{{ route('contact') }}"> CONTACT</a></li>
                                 </li>
                             </ul>
                         </div>

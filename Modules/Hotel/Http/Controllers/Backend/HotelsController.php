@@ -126,7 +126,7 @@ class HotelsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::select('id', 'image', 'title', 'price','city','mobile', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'hotel')->select('id', 'image', 'title', 'price','city','mobile', 'rating', 'status');
 
         $data = $$module_name;
 

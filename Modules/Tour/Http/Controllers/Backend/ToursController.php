@@ -1,8 +1,9 @@
 <?php
 
-namespace Modules\Cruise\Http\Controllers\Backend;
+namespace Modules\Tour\Http\Controllers\Backend;
 
 use App\Authorizable;
+// use App\Http\Controllers\Backend\BackendBaseController;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,9 +11,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
-// use App\Http\Controllers\Backend\BackendBaseController;
 
-class CruisesController extends Controller
+class ToursController extends Controller
 {
     use Authorizable;
 
@@ -29,13 +29,13 @@ class CruisesController extends Controller
     public function __construct()
     {
         // Page Title
-        $this->module_title = 'Cruises';
+        $this->module_title = 'Tours';
 
         // module name
-        $this->module_name = 'cruises';
+        $this->module_name = 'tours';
 
         // directory path of the module
-        $this->module_path = 'cruise::backend';
+        $this->module_path = 'tour::backend';
 
         // module icon
         $this->module_icon = 'fa-regular fa-sun';
@@ -43,7 +43,6 @@ class CruisesController extends Controller
         // module model name, path
         $this->module_model = "App\Models\Service";
     }
-
 
      /**
      * Display a listing of the resource.
@@ -127,7 +126,7 @@ class CruisesController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'cruise')->select('id', 'image', 'title', 'price','city','country', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'tour')->select('id', 'image', 'title', 'price','city','mobile', 'rating', 'status');
 
         $data = $$module_name;
 
@@ -139,7 +138,7 @@ class CruisesController extends Controller
             })
             ->editColumn('image', function ($data) {
                 if ($data->image) {
-                    return '<a href="' . route('backend.cruises.show', $data->id) . '">
+                    return '<a href="' . route('backend.tours.show', $data->id) . '">
                                 <img src="' . asset('public/storage/') . '/' . $data->image . '" alt="" width="100px">
                             </a>';
                 }
@@ -202,7 +201,7 @@ class CruisesController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('cruise', 'public');
+            $imagePath = $request->file('image')->store('tour', 'public');
         }
 
         $modelData = $request->all();
@@ -302,7 +301,7 @@ class CruisesController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('cruise', 'public');
+            $imagePath = $request->file('image')->store('tour', 'public');
 
             if ($oldImagePath) {
                 Storage::disk('public')->delete($oldImagePath);

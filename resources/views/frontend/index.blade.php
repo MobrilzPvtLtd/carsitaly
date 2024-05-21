@@ -230,7 +230,7 @@
                             <!-- START: BEGIN HOLIDAY -->
                             <div role="tabpanel" class="tab-pane" id="holiday">
                                 <div class="col-md-8">
-                                    <form action="{{ route('tour') }}" method="GET">
+                                    <form action="{{ route('frontend.tours.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Book Your Tour</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>From</label>

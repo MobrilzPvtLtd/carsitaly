@@ -1,0 +1,13 @@
+{
+    "name": "Tour",
+    "alias": "tour",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Tour\\Providers\\TourServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

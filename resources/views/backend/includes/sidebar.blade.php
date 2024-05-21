@@ -65,7 +65,7 @@ $notifications_latest = optional($notifications)->take(5);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('backend.tour.index') }}">
+                        <a class="nav-link" href="{{ route('backend.tours.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Tours
                         </a>
                     </li>

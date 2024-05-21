@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Models\Contact;
-use App\Models\Cruise;
 use App\Models\Flight;
-use App\Models\Hotel;
-use App\Models\Tour;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -53,17 +50,6 @@ class FrontendController extends Controller
     public function villa()
     {
         return view('frontend.villa');
-    }
-
-    public function tour()
-    {
-        $tours = Tour::get();
-        return view('frontend.tour',compact('tours'));
-    }
-
-    public function air()
-    {
-        return view('frontend.air');
     }
 
     public function contact()
