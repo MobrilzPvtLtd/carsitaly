@@ -1,0 +1,13 @@
+{
+    "name": "Cruise",
+    "alias": "cruise",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Cruise\\Providers\\CruiseServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

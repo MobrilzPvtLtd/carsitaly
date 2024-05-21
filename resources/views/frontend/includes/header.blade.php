@@ -83,7 +83,7 @@
                                 <li><a href="villa"> VILLAS</a></li>
                                 <li><a href="tour"> TOURS</a></li>
                                 {{-- <li><a href="air"> AIR FARE</a></li> --}}
-                                <li><a href="cruise"> CRUISE</a></li>
+                                <li><a href="{{ route('frontend.cruises.index') }}"> CRUISE</a></li>
                                 <li><a href="contact"> CONTACT</a></li>
                                 </li>
                             </ul>

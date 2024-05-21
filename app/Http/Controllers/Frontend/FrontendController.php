@@ -66,11 +66,6 @@ class FrontendController extends Controller
         return view('frontend.air');
     }
 
-    public function cruise()
-    {
-        $cruises = Cruise::get();
-        return view('frontend.cruise',compact('cruises'));
-    }
     public function contact()
     {
         return view('frontend.contact');

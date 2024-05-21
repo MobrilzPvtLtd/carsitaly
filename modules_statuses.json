@@ -3,5 +3,7 @@
     "Category": true,
     "Tag": true,
     "Car": true,
-    "Hotel": true
+    "Hotel": true,
+    "Cruise": true,
+    "Tour": true
 }

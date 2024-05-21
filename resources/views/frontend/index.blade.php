@@ -144,7 +144,7 @@
                             <!-- START: HOTEL SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="hotel">
                                 <div class="col-md-8">
-                                    <form action="{{route('hotel')}}" method="GET">
+                                    <form action="{{ route('frontend.hotels.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Book Hotel Rooms</div>
                                         <div class="col-md-12 col-sm-12 search-col-padding">
                                             <label>I Want To Go</label>
@@ -394,7 +394,7 @@
                             <!-- START: CRUISE SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="cruise">
                                 <div class="col-md-8">
-                                    <form action="{{ route('cruise') }}" method="GET">
+                                    <form action="{{ route('frontend.cruises.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Cruise Holidays</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>From</label>

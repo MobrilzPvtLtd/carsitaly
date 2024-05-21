@@ -28,11 +28,7 @@ require __DIR__.'/auth.php';
 
 // home route
 Route::get('home', [FrontendController::class, 'index'])->name('home');
-// Route::get('transfer', [FrontendController::class, 'car'])->name('car');
-// Route::get('hotel', [FrontendController::class, 'hotel'])->name('hotel');
 Route::get('villa', [FrontendController::class, 'villa'])->name('villa');
-// Route::get('air', [FrontendController::class, 'air'])->name('air');
-Route::get('cruise', [FrontendController::class, 'cruise'])->name('cruise');
 Route::get('tour', [FrontendController::class, 'tour'])->name('tour');
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('contact-submit', [FrontendController::class, 'contactSubmit'])->name('contact-submit');
@@ -158,9 +154,5 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
 
     $module_name = 'tour';
     $controller_name = 'TourController';
-    Route::resource("{$module_name}", "{$controller_name}");
-
-    $module_name = 'cruise';
-    $controller_name = 'CruiseController';
     Route::resource("{$module_name}", "{$controller_name}");
 });
