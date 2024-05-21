@@ -50,12 +50,6 @@ class FrontendController extends Controller
         }
     }
 
-    public function hotel()
-    {
-        $hotels = Hotel::get();
-        return view('frontend.hotel',compact('hotels'));
-    }
-
     public function villa()
     {
         return view('frontend.villa');

@@ -29,9 +29,9 @@ require __DIR__.'/auth.php';
 // home route
 Route::get('home', [FrontendController::class, 'index'])->name('home');
 // Route::get('transfer', [FrontendController::class, 'car'])->name('car');
-Route::get('hotel', [FrontendController::class, 'hotel'])->name('hotel');
+// Route::get('hotel', [FrontendController::class, 'hotel'])->name('hotel');
 Route::get('villa', [FrontendController::class, 'villa'])->name('villa');
-Route::get('air', [FrontendController::class, 'air'])->name('air');
+// Route::get('air', [FrontendController::class, 'air'])->name('air');
 Route::get('cruise', [FrontendController::class, 'cruise'])->name('cruise');
 Route::get('tour', [FrontendController::class, 'tour'])->name('tour');
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
@@ -155,10 +155,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
     Route::resource("{$module_name}", "{$controller_name}");
     Route::patch("{$module_name}/{id}/block", ['as' => "{$module_name}.block", 'uses' => "{$controller_name}@block", 'middleware' => ['can:block_users']]);
     Route::patch("{$module_name}/{id}/unblock", ['as' => "{$module_name}.unblock", 'uses' => "{$controller_name}@unblock", 'middleware' => ['can:block_users']]);
-
-    $module_name = 'hotel';
-    $controller_name = 'HotelController';
-    Route::resource("{$module_name}", "{$controller_name}");
 
     $module_name = 'tour';
     $controller_name = 'TourController';
