@@ -33,7 +33,7 @@ class CruisesController extends Controller
         $this->module_icon = 'fa-regular fa-sun';
 
         // module model name, path
-        $this->module_model = "Modules\Cruise\Models\Cruise";
+        $this->module_model = "App\Models\Service";
     }
 
     /**

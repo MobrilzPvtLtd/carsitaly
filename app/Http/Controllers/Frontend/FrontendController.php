@@ -47,11 +47,6 @@ class FrontendController extends Controller
         }
     }
 
-    public function villa()
-    {
-        return view('frontend.villa');
-    }
-
     public function contact()
     {
         return view('frontend.contact');

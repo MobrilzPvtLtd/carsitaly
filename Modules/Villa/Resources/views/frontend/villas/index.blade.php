@@ -1,8 +1,7 @@
 @extends('frontend.layouts.services-app')
 
-@section('title')
-    {{ app_name() }}
-@endsection
+@section('title') {{ __($module_title) }} @endsection
+
 @section('services-content')
 
 <div class="site-wrapper">

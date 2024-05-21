@@ -1,0 +1,13 @@
+{
+    "name": "Villa",
+    "alias": "villa",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Villa\\Providers\\VillaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

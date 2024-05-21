@@ -179,7 +179,7 @@
                             <div class="holiday-header-wrapper">
                                 <div class="holiday-header">
                                     <div class="holiday-img">
-                                        <img src="{{ asset('public/storage/uploads/car/') . '/' . $car->image }}" alt="cruise">
+                                        <img src="{{ asset('public/storage/') . '/' . $car->image }}" alt="cruise">
                                     </div>
                                     <div class="holiday-price">
                                         <h4>${{ $car->price }}</h4>

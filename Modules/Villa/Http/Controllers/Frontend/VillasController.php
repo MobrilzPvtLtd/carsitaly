@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Tour\Http\Controllers\Frontend;
+namespace Modules\Villa\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
-class ToursController extends Controller
+class VillasController extends Controller
 {
     public $module_title;
 
@@ -21,13 +21,13 @@ class ToursController extends Controller
     public function __construct()
     {
         // Page Title
-        $this->module_title = 'Tours';
+        $this->module_title = 'Villas';
 
         // module name
-        $this->module_name = 'tours';
+        $this->module_name = 'villas';
 
         // directory path of the module
-        $this->module_path = 'tour::frontend';
+        $this->module_path = 'villa::frontend';
 
         // module icon
         $this->module_icon = 'fa-regular fa-sun';

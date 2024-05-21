@@ -56,12 +56,12 @@ $notifications_latest = optional($notifications)->take(5);
                 <ul class="nav-group-items compact" style="height: auto;">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.hotels.index') }}">
-                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Hotel
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Hotels
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.cars.index') }}">
-                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Car
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Cars
                         </a>
                     </li>
                     <li class="nav-item">
@@ -71,7 +71,12 @@ $notifications_latest = optional($notifications)->take(5);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.cruises.index') }}">
-                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Cruise
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Cruises
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.villas.index') }}">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Villas
                         </a>
                     </li>
                 </ul>
