@@ -71,7 +71,7 @@
             <!-- START: FILTER AREA -->
             <div class="col-md-3 clear-padding">
                 <div class="filter-head text-center">
-                    <h4>25 Result Found Matching Your Search.</h4>
+                    <h4>{{ $cars->count() }} Result Found Matching Your Search.</h4>
                 </div>
                 <div class="filter-area">
                     <div class="price-filter filter">

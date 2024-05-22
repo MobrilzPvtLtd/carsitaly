@@ -200,15 +200,14 @@ class CruisesController extends Controller
 
         $module_action = 'Store';
 
+        $modelData = $request->all();
+
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('cruise', 'public');
+            $modelData = $request->except('image');
+            $modelData['image'] = $imagePath;
         }
-
-        $modelData = $request->all();
-
-        $modelData = $request->except('image');
-        $modelData['image'] = $imagePath;
 
         $$module_name_singular = $module_model::create($modelData);
 
@@ -300,6 +299,8 @@ class CruisesController extends Controller
 
         $oldImagePath = $$module_name_singular->image;
 
+        $modelData = $request->all();
+
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('cruise', 'public');
@@ -307,11 +308,9 @@ class CruisesController extends Controller
             if ($oldImagePath) {
                 Storage::disk('public')->delete($oldImagePath);
             }
+            $modelData = $request->except('image');
+            $modelData['image'] = $imagePath;
         }
-
-        $modelData = $request->except('image');
-        $modelData['image'] = $imagePath;
-
 
         $$module_name_singular->update($modelData);
 

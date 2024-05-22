@@ -67,7 +67,7 @@
             <!-- START: FILTER AREA -->
             <div class="col-md-3 clear-padding">
                 <div class="filter-head text-center">
-                    <h4>25 Result Found Matching Your Search.</h4>
+                    <h4>{{ $cruises->count() }} Result Found Matching Your Search.</h4>
                 </div>
                 <div class="filter-area">
                     <div class="price-filter filter">
@@ -125,11 +125,7 @@
                 </div>
             </div>
             <!-- END: FILTER AREA -->
-
-            <!-- START: INDIVIDUAL LISTING AREA -->
-            <!-- START: INDIVIDUAL LISTING AREA -->
             <div class="col-md-9 hotel-listing">
-
                 <!-- START: SORT AREA -->
                 <div class="sort-area col-sm-10">
                     <div class="col-md-3 col-sm-3 col-xs-6 sort">
@@ -163,408 +159,104 @@
                 </div>
                 <!-- END: SORT AREA -->
                 <div class="clearfix visible-xs-block"></div>
-                <!-- <div class="col-sm-2 view-switcher">
-                    <div class="pull-right">
-                        <a title="Grid View">
-                            <i class="fa fa-th-large"></i>
-                        </a>
-                        <a title="List View">
-                            <i class="fa fa-list"></i>
-                        </a>
-                    </div>
-                </div> -->
                 <div class="clearfix"></div>
                 <!-- START: HOTEL LIST VIEW -->
-                <div class="col-md-12 col-sm-12">
-                    <div class="cruise-list-view">
-                        <div class="col-md-4 col-sm-6 clear-padding">
-                            <img src="images-new/cruise1.webp" alt="cruise">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <h4>7 Night Royal Cruise</h4>
-                            <p><strong><i class="fa fa-map-marker"></i> Departs From: </strong>Miami</p>
-                            <p><strong><i class="fa fa-globe"></i> Itinerary: </strong>Florida, Bahamas, Virgin Islands</p>
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#date2015"><i class="fa fa-calendar"></i> 2015</a></li>
-                                <li><a data-toggle="tab" href="#date2016"><i class="fa fa-calendar"></i> 2016</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="date2015" class="tab-pane fade in active">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>01</td>
-                                            <td>15</td>
-                                            <td>28</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>05</td>
-                                            <td>17</td>
-                                            <td>22</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="date2016" class="tab-pane fade">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>12</td>
-                                            <td>22</td>
-                                            <td>27</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>03</td>
-                                            <td>17</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>07</td>
-                                            <td>19</td>
-                                            <td>25</td>
-                                        </tr>
-                                    </table>
+                @foreach ($cruises as $cruies)
+                    <div class="col-md-12 col-sm-12">
+                        <div class="cruise-list-view">
+                            <div class="col-md-4 col-sm-6 clear-padding">
+                                <img src="{{ asset('public/storage/') . '/' . $cruies->image }}" alt="cruise">
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <h4>{{ $cruies->title }}</h4>
+                                <p>
+                                    <strong><i class="fa fa-map-marker"></i> Departs From: </strong>
+                                    {{ $cruies->city }}
+                                </p>
+                                <p>
+                                    <strong><i class="fa fa-globe"></i> Itinerary: </strong>
+                                    {{ $cruies->country }}
+                                </p>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#date2015">
+                                            <i class="fa fa-calendar"></i> 2015
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#date2016">
+                                            <i class="fa fa-calendar"></i> 2016
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="date2015" class="tab-pane fade in active">
+                                        <table class="table">
+                                            <tr>
+                                                <td>Jul</td>
+                                                <td>10</td>
+                                                <td>20</td>
+                                                <td>25</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aug</td>
+                                                <td>01</td>
+                                                <td>15</td>
+                                                <td>28</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sep</td>
+                                                <td>05</td>
+                                                <td>17</td>
+                                                <td>22</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div id="date2016" class="tab-pane fade">
+                                        <table class="table">
+                                            <tr>
+                                                <td>Jul</td>
+                                                <td>12</td>
+                                                <td>22</td>
+                                                <td>27</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aug</td>
+                                                <td>03</td>
+                                                <td>17</td>
+                                                <td>30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sep</td>
+                                                <td>07</td>
+                                                <td>19</td>
+                                                <td>25</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="clearfix-sm"></div>
-                        <div class="col-md-2 booking-box clear-padding text-center">
-                            <div class="rating-box">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <h5>Based On 128 Reviews</h5>
-                            </div>
-                            <div class="price">
-                                <h3>$500</h3>
-                                <h5>$73/night</h5>
-                                <a href="#">VIEW DETAILS</a>
+                            <div class="clearfix-sm"></div>
+                            <div class="col-md-2 booking-box clear-padding text-center">
+                                <div class="rating-box">
+                                    @for ($i = 1; $i < 5; $i++)
+                                        @if($i <= $cruies->rating)
+                                            <i class="fa fa-star"></i>
+                                        @else
+                                            <i class="fa fa-star-o"></i>
+                                        @endif
+                                    @endfor
+                                    <h5>Based On 128 Reviews</h5>
+                                </div>
+                                <div class="price">
+                                    <h3>${{ $cruies->price }}</h3>
+                                    <h5>$73/night</h5>
+                                    <a href="#">VIEW DETAILS</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <div class="cruise-list-view">
-                        <div class="col-md-4 col-sm-6 clear-padding">
-                            <img src="images-new/cruise2.webp" alt="cruise">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <h4>7 Night Royal Cruise</h4>
-                            <p><strong><i class="fa fa-map-marker"></i> Departs From: </strong>Miami</p>
-                            <p><strong><i class="fa fa-globe"></i> Itinerary: </strong>Florida, Bahamas, Virgin Islands</p>
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#date2015_2"><i class="fa fa-calendar"></i> 2015</a></li>
-                                <li><a data-toggle="tab" href="#date2016_2"><i class="fa fa-calendar"></i> 2016</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="date2015_2" class="tab-pane fade in active">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>01</td>
-                                            <td>15</td>
-                                            <td>28</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>05</td>
-                                            <td>17</td>
-                                            <td>22</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="date2016_2" class="tab-pane fade">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>12</td>
-                                            <td>22</td>
-                                            <td>27</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>03</td>
-                                            <td>17</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>07</td>
-                                            <td>19</td>
-                                            <td>25</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix-sm"></div>
-                        <div class="col-md-2 booking-box clear-padding text-center">
-                            <div class="rating-box">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <h5>Based On 128 Reviews</h5>
-                            </div>
-                            <div class="price">
-                                <h3>$500</h3>
-                                <h5>$73/night</h5>
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <div class="cruise-list-view">
-                        <div class="col-md-4 col-sm-6 clear-padding">
-                            <img src="images-new/cruise1.webp" alt="cruise">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <h4>7 Night Royal Cruise</h4>
-                            <p><strong><i class="fa fa-map-marker"></i> Departs From: </strong>Miami</p>
-                            <p><strong><i class="fa fa-globe"></i> Itinerary: </strong>Florida, Bahamas, Virgin Islands</p>
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#date2015_3"><i class="fa fa-calendar"></i> 2015</a></li>
-                                <li><a data-toggle="tab" href="#date2016_3"><i class="fa fa-calendar"></i> 2016</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="date2015_3" class="tab-pane fade in active">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>01</td>
-                                            <td>15</td>
-                                            <td>28</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>05</td>
-                                            <td>17</td>
-                                            <td>22</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="date2016_3" class="tab-pane fade">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>12</td>
-                                            <td>22</td>
-                                            <td>27</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>03</td>
-                                            <td>17</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>07</td>
-                                            <td>19</td>
-                                            <td>25</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix-sm"></div>
-                        <div class="col-md-2 booking-box clear-padding text-center">
-                            <div class="rating-box">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <h5>Based On 128 Reviews</h5>
-                            </div>
-                            <div class="price">
-                                <h3>$500</h3>
-                                <h5>$73/night</h5>
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <div class="cruise-list-view">
-                        <div class="col-md-4 col-sm-6 clear-padding">
-                            <img src="images-new/cruise3.webp" alt="cruise">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <h4>7 Night Royal Cruise</h4>
-                            <p><strong><i class="fa fa-map-marker"></i> Departs From: </strong>Miami</p>
-                            <p><strong><i class="fa fa-globe"></i> Itinerary: </strong>Florida, Bahamas, Virgin Islands</p>
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#date2015_4"><i class="fa fa-calendar"></i> 2015</a></li>
-                                <li><a data-toggle="tab" href="#date2016_4"><i class="fa fa-calendar"></i> 2016</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="date2015_4" class="tab-pane fade in active">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>01</td>
-                                            <td>15</td>
-                                            <td>28</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>05</td>
-                                            <td>17</td>
-                                            <td>22</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="date2016_4" class="tab-pane fade">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>12</td>
-                                            <td>22</td>
-                                            <td>27</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>03</td>
-                                            <td>17</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>07</td>
-                                            <td>19</td>
-                                            <td>25</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix-sm"></div>
-                        <div class="col-md-2 booking-box clear-padding text-center">
-                            <div class="rating-box">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <h5>Based On 128 Reviews</h5>
-                            </div>
-                            <div class="price">
-                                <h3>$500</h3>
-                                <h5>$73/night</h5>
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12">
-                    <div class="cruise-list-view">
-                        <div class="col-md-4 col-sm-6 clear-padding">
-                            <img src="images-new/cruise2.webp" alt="cruise">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <h4>7 Night Royal Cruise</h4>
-                            <p><strong><i class="fa fa-map-marker"></i> Departs From: </strong>Miami</p>
-                            <p><strong><i class="fa fa-globe"></i> Itinerary: </strong>Florida, Bahamas, Virgin Islands</p>
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#date2015_5"><i class="fa fa-calendar"></i> 2015</a></li>
-                                <li><a data-toggle="tab" href="#date2016_5"><i class="fa fa-calendar"></i> 2016</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="date2015_5" class="tab-pane fade in active">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>01</td>
-                                            <td>15</td>
-                                            <td>28</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>05</td>
-                                            <td>17</td>
-                                            <td>22</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="date2016_5" class="tab-pane fade">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Jul</td>
-                                            <td>12</td>
-                                            <td>22</td>
-                                            <td>27</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aug</td>
-                                            <td>03</td>
-                                            <td>17</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sep</td>
-                                            <td>07</td>
-                                            <td>19</td>
-                                            <td>25</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix-sm"></div>
-                        <div class="col-md-2 booking-box clear-padding text-center">
-                            <div class="rating-box">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <h5>Based On 128 Reviews</h5>
-                            </div>
-                            <div class="price">
-                                <h3>$500</h3>
-                                <h5>$73/night</h5>
-                                <a href="#">VIEW DETAILS</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
                 <div class="clearfix"></div>
                 <!-- END: CRUISE LIST VIEW -->
 
@@ -589,5 +281,5 @@
         </div>
     </div>
     <!-- END: LISTING AREA -->
-    </div>
+</div>
 @endsection

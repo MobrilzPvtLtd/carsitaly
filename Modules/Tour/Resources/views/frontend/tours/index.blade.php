@@ -65,7 +65,7 @@
                 <!-- START: FILTER AREA -->
                 <div class="col-md-3 clear-padding">
                     <div class="filter-head text-center">
-                        <h4>25 Result Found Matching Your Search.</h4>
+                        <h4>{{ $tours->count() }} Result Found Matching Your Search.</h4>
                     </div>
                     <div class="filter-area">
                         <div class="price-filter filter">
@@ -171,259 +171,75 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <!-- START: HOTEL LIST VIEW -->
                     <div class="switchable col-md-12 clear-padding">
-                        <div  class="hotel-list-view">
-                            <div class="wrapper">
-                                <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    <img src="images-new/New-Project11.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-6 col-sm-6 hotel-info">
-                                    <div>
-                                        <div class="hotel-header">
-                                            <h5>SAFARI BLUE <span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i></span></h5>
-                                            <p><i class="fa fa-map-marker"></i>Italy <i class="fa fa-phone"></i>123456789</p>
-                                        </div>
-                                        <div class="hotel-facility">
-                                            <p><i class="fa fa-plane" title="Flight Included"></i><i class="fa fa-bed" title="Luxury Hotel"></i><i class="fa fa-taxi" title="Transportation"></i><i class="fa fa-beer" title="Bar"></i><i class="fa fa-cutlery" title="Restaurant"></i></p>
-                                        </div>
-                                        <div class="hotel-desc">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                        @foreach ($tours as $tour)
+                            <div  class="hotel-list-view">
+                                <div class="wrapper">
+                                    <div class="col-md-4 col-sm-6 switch-img clear-padding">
+                                        <img src="{{ asset('public/storage/') . '/' . $tour->image }}" alt="cruise">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 hotel-info">
+                                        <div>
+                                            <div class="hotel-header">
+                                                <h5>{{ $tour->title }}
+                                                    <span>
+                                                        @for ($i = 1; $i < 5; $i++)
+                                                            @if($i <= $tour->rating)
+                                                                <i class="fa fa-star colored"></i>
+                                                            @else
+                                                                <i class="fa fa-star-o colored"></i>
+                                                            @endif
+                                                        @endfor
+                                                    </span>
+                                                </h5>
+                                                <p>
+                                                    <i class="fa fa-map-marker"></i>{{ $tour->city }}
+                                                    <i class="fa fa-phone"></i>{{ $tour->mobile }}
+                                                </p>
+                                            </div>
+                                            <div class="hotel-facility">
+                                                <p>
+                                                    <i class="fa fa-plane" title="Flight Included"></i>
+                                                    <i class="fa fa-bed" title="Luxury Hotel"></i>
+                                                    <i class="fa fa-taxi" title="Transportation"></i>
+                                                    <i class="fa fa-beer" title="Bar"></i>
+                                                    <i class="fa fa-cutlery" title="Restaurant"></i>
+                                                </p>
+                                            </div>
+                                            <div class="hotel-desc">
+                                                <p>{{ $tour->description }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="clearfix visible-sm-block"></div>
-                                <div class="col-md-2 rating-price-box text-center clear-padding">
-                                    <div class="rating-box">
-                                        <div class="tripadvisor-rating">
-                                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
+                                    <div class="clearfix visible-sm-block"></div>
+                                    <div class="col-md-2 rating-price-box text-center clear-padding">
+                                        <div class="rating-box">
+                                            <div class="tripadvisor-rating">
+                                                <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
+                                            </div>
+                                            <div class="user-rating">
+                                                @for ($i = 1; $i < 5; $i++)
+                                                    @if($i <= $tour->rating)
+                                                        <i class="fa fa-star"></i>
+                                                    @else
+                                                        <i class="fa fa-star-o"></i>
+                                                    @endif
+                                                @endfor
+                                                <span>128 Guest Reviews.</span>
+                                            </div>
                                         </div>
-                                        <div class="user-rating">
-                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                            <span>128 Guest Reviews.</span>
-                                        </div>
-                                    </div>
-                                    <div class="room-book-box">
-                                        <div class="price">
-                                            <h5>$50/Person</h5>
-                                        </div>
-                                        <div class="book">
-                                            <a href="#">BOOK</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div  class="hotel-list-view">
-                            <div class="wrapper">
-                                <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    <img src="images-new/New-Project11.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-6 col-sm-6 hotel-info">
-                                    <div>
-                                        <div class="hotel-header">
-                                            <h5>SAFARI BLUE <span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i></span></h5>
-                                            <p><i class="fa fa-map-marker"></i>Italy<i class="fa fa-phone"></i>123456789</p>
-                                        </div>
-                                        <div class="hotel-facility">
-                                            <p><i class="fa fa-wifi" title="Free Wifi"></i><i class="fa fa-bed" title="Luxury Bedroom"></i><i class="fa fa-taxi" title="Transportation"></i><i class="fa fa-beer" title="Bar"></i><i class="fa fa-cutlery" title="Restaurant"></i></p>
-                                        </div>
-                                        <div class="hotel-desc">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix visible-sm-block"></div>
-                                <div class="col-md-2 rating-price-box text-center clear-padding">
-                                    <div class="rating-box">
-                                        <div class="tripadvisor-rating">
-                                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                                        </div>
-                                        <div class="user-rating">
-                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                            <span>128 Guest Reviews.</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="room-book-box">
-                                        <div class="price">
-                                            <h5>$100/Person</h5>
-                                        </div>
-                                        <div class="book">
-                                            <a href="#">BOOK</a>
+                                        <div class="room-book-box">
+                                            <div class="price">
+                                                <h5>${{ $tour->price }}/Person</h5>
+                                            </div>
+                                            <div class="book">
+                                                <a href="#">BOOK</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="clearfix visible-sm-block"></div>
-                        <div  class="hotel-list-view">
-                            <div class="wrapper">
-                                <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    <img src="images-new/New-Project11.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-6 col-sm-6 hotel-info">
-                                    <div>
-                                        <div class="hotel-header">
-                                            <h5>Amazing Italy<span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i></span></h5>
-                                            <p><i class="fa fa-map-marker"></i>Italy<i class="fa fa-phone"></i>123456789</p>
-                                        </div>
-                                        <div class="hotel-facility">
-                                            <p><i class="fa fa-wifi" title="Free Wifi"></i><i class="fa fa-bed" title="Luxury Bedroom"></i><i class="fa fa-taxi" title="Transportation"></i><i class="fa fa-beer" title="Bar"></i><i class="fa fa-cutlery" title="Restaurant"></i></p>
-                                        </div>
-                                        <div class="hotel-desc">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix visible-sm-block"></div>
-                                <div class="col-md-2 rating-price-box text-center clear-padding">
-                                    <div class="rating-box">
-                                        <div class="tripadvisor-rating">
-                                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                                        </div>
-                                        <div class="user-rating">
-                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                            <span>128 Guest Reviews.</span>
-                                        </div>
-                                    </div>
-                                    <div class="room-book-box">
-                                        <div class="price">
-                                            <h5>$50/Person</h5>
-                                        </div>
-                                        <div class="book">
-                                            <a href="#">BOOK</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix visible-md-block"></div>
-                        <div  class="hotel-list-view">
-                            <div class="wrapper">
-                                <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    <img src="images-new/New-Project11.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-6 col-sm-6 hotel-info">
-                                    <div>
-                                        <div class="hotel-header">
-                                            <h5>SAFARI BLUE <span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i></span></h5>
-                                            <p><i class="fa fa-map-marker"></i>Italy<i class="fa fa-phone"></i>123456789</p>
-                                        </div>
-                                        <div class="hotel-facility">
-                                            <p><i class="fa fa-wifi" title="Free Wifi"></i><i class="fa fa-bed" title="Luxury Bedroom"></i><i class="fa fa-taxi" title="Transportation"></i><i class="fa fa-beer" title="Bar"></i><i class="fa fa-cutlery" title="Restaurant"></i></p>
-                                        </div>
-                                        <div class="hotel-desc">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix visible-sm-block"></div>
-                                <div class="col-md-2 rating-price-box text-center clear-padding">
-                                    <div class="rating-box">
-                                        <div class="tripadvisor-rating">
-                                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                                        </div>
-                                        <div class="user-rating">
-                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                            <span>128 Guest Reviews.</span>
-                                        </div>
-                                    </div>
-                                    <div class="room-book-box">
-                                        <div class="price">
-                                            <h5>$50/Person</h5>
-                                        </div>
-                                        <div class="book">
-                                            <a href="#">BOOK</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix visible-sm-block"></div>
-                        <div  class="hotel-list-view">
-                            <div class="wrapper">
-                                <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    <img src="images-new/New-Project11.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-6 col-sm-6 hotel-info">
-                                    <div>
-                                        <div class="hotel-header">
-                                            <h5>SAFARI BLUE <span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i></span></h5>
-                                            <p><i class="fa fa-map-marker"></i>Italy <i class="fa fa-phone"></i>123456789</p>
-                                        </div>
-                                        <div class="hotel-facility">
-                                            <p><i class="fa fa-wifi" title="Free Wifi"></i><i class="fa fa-bed" title="Luxury Bedroom"></i><i class="fa fa-taxi" title="Transportation"></i><i class="fa fa-beer" title="Bar"></i><i class="fa fa-cutlery" title="Restaurant"></i></p>
-                                        </div>
-                                        <div class="hotel-desc">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix visible-sm-block"></div>
-                                <div class="col-md-2 rating-price-box text-center clear-padding">
-                                    <div class="rating-box">
-                                        <div class="tripadvisor-rating">
-                                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                                        </div>
-                                        <div class="user-rating">
-                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                            <span>128 Guest Reviews.</span>
-                                        </div>
-                                    </div>
-                                    <div class="room-book-box">
-                                        <div class="price">
-                                            <h5>$50/Person</h5>
-                                        </div>
-                                        <div class="book">
-                                            <a href="#">BOOK</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hotel-list-view">
-                            <div class="wrapper">
-                                <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    <img src="images-new/New-Project11.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-6 col-sm-6 hotel-info">
-                                    <div>
-                                        <div class="hotel-header">
-                                            <h5>SAFARI BLUE <span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i></span></h5>
-                                            <p><i class="fa fa-map-marker"></i>Italy <i class="fa fa-phone"></i>123456789</p>
-                                        </div>
-                                        <div class="hotel-facility">
-                                            <p><i class="fa fa-wifi" title="Free Wifi"></i><i class="fa fa-bed" title="Luxury Bedroom"></i><i class="fa fa-taxi" title="Transportation"></i><i class="fa fa-beer" title="Bar"></i><i class="fa fa-cutlery" title="Restaurant"></i></p>
-                                        </div>
-                                        <div class="hotel-desc">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix visible-sm-block"></div>
-                                <div class="col-md-2 rating-price-box text-center clear-padding">
-                                    <div class="rating-box">
-                                        <div class="tripadvisor-rating">
-                                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                                        </div>
-                                        <div class="user-rating">
-                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                            <span>128 Guest Reviews.</span>
-                                        </div>
-                                    </div>
-                                    <div class="room-book-box">
-                                        <div class="price">
-                                            <h5>$50 Avg/Night</h5>
-                                        </div>
-                                        <div class="book">
-                                            <a href="#">BOOK</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END: HOTEL LIST VIEW -->
+                        @endforeach
                     </div>
                     <div class="clearfix"></div>
                     <!-- START: PAGINATION -->

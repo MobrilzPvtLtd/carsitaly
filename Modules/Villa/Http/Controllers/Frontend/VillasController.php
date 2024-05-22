@@ -52,7 +52,8 @@ class VillasController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::latest()->paginate();
+        $$module_name = $module_model::where('service_type', 'villa')
+        ->where('status', 1)->latest()->paginate();
 
         return view(
             "$module_path.$module_name.index",
