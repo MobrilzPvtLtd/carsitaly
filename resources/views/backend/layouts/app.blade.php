@@ -25,6 +25,9 @@
 
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+Bengali+UI&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <style>
             body {
                 font-family: Ubuntu, "Noto Sans Bengali UI", Arial, Helvetica, sans-serif
@@ -45,10 +48,10 @@
         <!-- /Sidebar -->
 
         <div class="wrapper d-flex flex-column min-vh-100">
-          
+
           {{-- header --}}
           @include('backend.includes.header')
-          
+
           <div class="body flex-grow-1">
                 <div class="container-lg">
 
@@ -63,7 +66,7 @@
                     <!-- / Main content block -->
 
                 </div>
-            </div>            
+            </div>
 
             {{-- Footer block --}}
             <x-backend.includes.footer />
@@ -74,6 +77,8 @@
 
         @stack('after-scripts')
         <!-- / Scripts -->
+
+        @yield('script')
 
     </body>
 

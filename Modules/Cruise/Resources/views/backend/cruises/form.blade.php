@@ -60,30 +60,33 @@
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
+
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'start_date';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
+            $field_label = label_case($field_name);
+            $field_placeholder = $field_label;
+            $required = '';
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
+
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'end_date';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
+            $field_label = label_case($field_name);
+            $field_placeholder = $field_label;
+            $required = '';
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
+
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -116,3 +119,16 @@
 </div>
 
 <x-library.select2 />
+
+@section('script')
+<script>
+    flatpickr("#start_date", {
+        mode: "multiple",
+        dateFormat: "Y-m-d"
+    });
+    flatpickr("#end_date", {
+        mode: "multiple",
+        dateFormat: "Y-m-d"
+    });
+</script>
+@endsection

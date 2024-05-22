@@ -299,8 +299,6 @@ class CruisesController extends Controller
 
         $oldImagePath = $$module_name_singular->image;
 
-        $modelData = $request->all();
-
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('cruise', 'public');
@@ -311,6 +309,19 @@ class CruisesController extends Controller
             $modelData = $request->except('image');
             $modelData['image'] = $imagePath;
         }
+
+        // if ($request->start_date != null) {
+        //     $startDatesString = $request->input('start_date');
+        //     $startDatesArray = explode(', ', $startDatesString);
+        //     $modelData['start_date'] = json_encode($startDatesArray);
+        // }
+
+        // if ($request->end_date != null) {
+        //     $endDatesString = $request->input('end_date');
+        //     $endDatesArray = explode(', ', $endDatesString);
+        //     $modelData['end_date'] = json_encode($endDatesArray);
+        // }
+        $modelData = $request->all();
 
         $$module_name_singular->update($modelData);
 

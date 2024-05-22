@@ -161,42 +161,68 @@
                 <div class="clearfix visible-xs-block"></div>
                 <div class="clearfix"></div>
                 <!-- START: HOTEL LIST VIEW -->
-                @foreach ($cruises as $cruies)
+                @foreach ($cruises as $cruise)
                     <div class="col-md-12 col-sm-12">
                         <div class="cruise-list-view">
                             <div class="col-md-4 col-sm-6 clear-padding">
-                                <img src="{{ asset('public/storage/') . '/' . $cruies->image }}" alt="cruise">
+                                <img src="{{ asset('public/storage/') . '/' . $cruise->image }}" alt="cruise">
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                <h4>{{ $cruies->title }}</h4>
+                                <h4>{{ $cruise->title }}</h4>
                                 <p>
                                     <strong><i class="fa fa-map-marker"></i> Departs From: </strong>
-                                    {{ $cruies->city }}
+                                    {{ $cruise->city }}
                                 </p>
                                 <p>
                                     <strong><i class="fa fa-globe"></i> Itinerary: </strong>
-                                    {{ $cruies->country }}
+                                    {{ $cruise->country }}
                                 </p>
                                 <ul class="nav nav-tabs">
                                     <li class="active">
-                                        <a data-toggle="tab" href="#date2015">
-                                            <i class="fa fa-calendar"></i> 2015
+                                        <a data-toggle="tab" href="#dateNow">
+                                            <i class="fa fa-calendar"></i>
+                                            @php
+                                                $years = array_unique(array_map(function($date) {
+                                                    return \Carbon\Carbon::parse($date)->format('Y');
+                                                }, explode(', ', $cruise->start_date)));
+                                            @endphp
+                                            {{ implode(', ', $years) }}
                                         </a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#date2016">
-                                            <i class="fa fa-calendar"></i> 2016
+                                        <a data-toggle="tab" href="#dateNext">
+                                            <i class="fa fa-calendar"></i>
+                                            @php
+                                                $years = array_unique(array_map(function($date) {
+                                                    return \Carbon\Carbon::parse($date)->format('Y');
+                                                }, explode(', ', $cruise->end_date)));
+                                            @endphp
+                                            {{ implode(', ', $years) }}
                                         </a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div id="date2015" class="tab-pane fade in active">
+                                    <div id="dateNow" class="tab-pane fade in active">
                                         <table class="table">
-                                            <tr>
+                                            @foreach (collect(explode(', ', $cruise->start_date))->map(function($start_date) {
+                                                return \Carbon\Carbon::parse($start_date)->format('M');
+                                            })->unique() as $month)
+                                                <tr>
+                                                    <td>{{ $month }}</td>
+                                                    @foreach (collect(explode(', ', $cruise->start_date))->filter(function($date) use ($month) {
+                                                        return \Carbon\Carbon::parse($date)->format('M') === $month;
+                                                    })->map(function($date) {
+                                                        return \Carbon\Carbon::parse($date)->format('d');
+                                                    })->unique() as $date)
+                                                        <td>{{ $date }}</td>
+                                                    @endforeach
+                                                </tr>
+                                            @endforeach
+                                            {{-- <tr>
                                                 <td>Jul</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                                <td>25</td>
+                                                <td>12</td>
+                                                <td>22</td>
+                                                <td>27</td>
                                             </tr>
                                             <tr>
                                                 <td>Aug</td>
@@ -209,12 +235,26 @@
                                                 <td>05</td>
                                                 <td>17</td>
                                                 <td>22</td>
-                                            </tr>
+                                            </tr> --}}
                                         </table>
                                     </div>
-                                    <div id="date2016" class="tab-pane fade">
+                                    <div id="dateNext" class="tab-pane fade">
                                         <table class="table">
-                                            <tr>
+                                            @foreach (collect(explode(', ', $cruise->end_date))->map(function($start_date) {
+                                                return \Carbon\Carbon::parse($start_date)->format('M');
+                                            })->unique() as $month)
+                                                <tr>
+                                                    <td>{{ $month }}</td>
+                                                    @foreach (collect(explode(', ', $cruise->start_date))->filter(function($date) use ($month) {
+                                                        return \Carbon\Carbon::parse($date)->format('M') === $month;
+                                                    })->map(function($date) {
+                                                        return \Carbon\Carbon::parse($date)->format('d');
+                                                    })->unique() as $date)
+                                                        <td>{{ $date }}</td>
+                                                    @endforeach
+                                                </tr>
+                                            @endforeach
+                                            {{-- <tr>
                                                 <td>Jul</td>
                                                 <td>12</td>
                                                 <td>22</td>
@@ -231,7 +271,7 @@
                                                 <td>07</td>
                                                 <td>19</td>
                                                 <td>25</td>
-                                            </tr>
+                                            </tr> --}}
                                         </table>
                                     </div>
                                 </div>
@@ -240,7 +280,7 @@
                             <div class="col-md-2 booking-box clear-padding text-center">
                                 <div class="rating-box">
                                     @for ($i = 1; $i < 5; $i++)
-                                        @if($i <= $cruies->rating)
+                                        @if($i <= $cruise->rating)
                                             <i class="fa fa-star"></i>
                                         @else
                                             <i class="fa fa-star-o"></i>
@@ -249,7 +289,7 @@
                                     <h5>Based On 128 Reviews</h5>
                                 </div>
                                 <div class="price">
-                                    <h3>${{ $cruies->price }}</h3>
+                                    <h3>${{ $cruise->price }}</h3>
                                     <h5>$73/night</h5>
                                     <a href="#">VIEW DETAILS</a>
                                 </div>
