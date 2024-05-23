@@ -233,7 +233,7 @@
                                                 <h5>${{ $tour->price }}/Person</h5>
                                             </div>
                                             <div class="book">
-                                                <a href="#">BOOK</a>
+                                                <a href="{{ route('frontend.tours.show',$tour->slug) }}">BOOK</a>
                                             </div>
                                         </div>
                                     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \Modules\Hotel\Http\Controllers\Frontend\HotelsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 *
 * --------------------------------------------------------------------
 */
+
 Route::group(['namespace' => '\Modules\Hotel\Http\Controllers\Frontend', 'as' => 'frontend.', 'middleware' => 'web', 'prefix' => ''], function () {
 
     /*
@@ -30,7 +32,8 @@ Route::group(['namespace' => '\Modules\Hotel\Http\Controllers\Frontend', 'as' =>
     $module_name = 'hotels';
     $controller_name = 'HotelsController';
     Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
-    Route::get("$module_name/{id}/{slug?}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
+    Route::get("$module_name/{slug}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
+
 });
 
 /*

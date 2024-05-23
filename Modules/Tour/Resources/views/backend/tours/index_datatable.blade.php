@@ -58,6 +58,9 @@
                                 @lang("tour::text.title")
                             </th>
                             <th>
+                                @lang("tour::text.slug")
+                            </th>
+                            <th>
                                 @lang("tour::text.price")
                             </th>
                             <th>
@@ -125,6 +128,10 @@
             {
                 data: 'title',
                 name: 'title'
+            },
+            {
+                data: 'slug',
+                name: 'slug'
             },
             {
                 data: 'price',

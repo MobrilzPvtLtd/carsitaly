@@ -58,6 +58,9 @@
                                 @lang("villa::text.title")
                             </th>
                             <th>
+                                @lang("villa::text.slug")
+                            </th>
+                            <th>
                                 @lang("villa::text.price")
                             </th>
                             <th>
@@ -125,6 +128,10 @@
             {
                 data: 'title',
                 name: 'title'
+            },
+            {
+                data: 'slug',
+                name: 'slug'
             },
             {
                 data: 'price',

@@ -12,6 +12,18 @@
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
+    <div class="col-12 col-sm-4">
+        <div class="form-group">
+            <?php
+            $field_name = 'slug';
+            $field_lable = label_case($field_name);
+            $field_placeholder = $field_lable;
+            $required = '';
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+        </div>
+    </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -63,13 +75,43 @@
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'image';
+            $field_name = 'room_no';
             $field_lable = label_case($field_name);
             $field_placeholder = $field_lable;
-            $required = '';
+            $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->input('file', $field_name)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+        </div>
+    </div>
+    <div class="col-12 col-sm-4 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'facilities';
+            $field_lable = label_case($field_name);
+            $field_placeholder = "-- Select options --";
+            $select_options = [
+                'wifi'=>'Wifi',
+                'bed'=>'Bed',
+                'texi'=>'Taxi',
+                'beer'=>'Beer',
+                'cutlery'=>'Cutlery'
+            ];
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label') }}
+            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select2')->multiple()->attributes(["$required"]) }}
+        </div>
+    </div>
+    <div class="col-12 col-sm-4 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'images';
+            $field_image = 'image[]';
+            $field_label = label_case($field_name);
+            $field_placeholder = $field_label;
+            ?>
+            {{ html()->label($field_label, $field_name)->class('form-label') }}
+            {{ html()->file($field_image)->class('form-control')->multiple() }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">

@@ -127,7 +127,7 @@ class CruisesController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'cruise')->select('id', 'image', 'title', 'price','city','country', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'cruise')->select('id', 'image', 'title','slug', 'price','city','country', 'rating', 'status');
 
         $data = $$module_name;
 

@@ -93,18 +93,21 @@ class HotelsController extends Controller
             return response()->json([]);
         }
 
-        $query_data = $module_model::where('title', 'LIKE', "%{$term}%")
-                            ->orWhere('price', 'LIKE', "%{$term}%")
-                            ->limit(7)->get();
+        $query_data = $module_model::where('title', 'LIKE', "%{$term}%")->orWhere('slug', 'LIKE', "%{$term}%")->limit(7)->get();
 
         $$module_name = [];
 
         foreach ($query_data as $row) {
             $$module_name[] = [
                 'id' => $row->id,
-                'text' => $row->tile.' (Slug: '.$row->slug.')',
+                'text' => $row->title.' (Slug: '.$row->slug.')',
             ];
         }
+
+        // $query_data = $module_model::where('title', 'LIKE', "%{$term}%")
+        //                     ->orWhere('price', 'LIKE', "%{$term}%")
+        //                     ->limit(7)->get();
+
         return response()->json($$module_name);
     }
 
@@ -126,7 +129,7 @@ class HotelsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'hotel')->select('id', 'image', 'title', 'price','city','mobile', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'hotel')->select('id', 'image', 'title', 'slug', 'price','city','mobile', 'rating', 'status');
 
         $data = $$module_name;
 
@@ -199,13 +202,35 @@ class HotelsController extends Controller
 
         $module_action = 'Store';
 
-        $modelData = $request->all();
+        $validated_request = $request->validate([
+            'title' => 'required|max:191|unique:'.$module_model.',title',
+            'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
+        ]);
 
-        $imagePath = null;
+        // $modelData = $request->all();
+
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('hotel', 'public');
+        //     $modelData = $request->except('image');
+        //     $modelData['image'] = $imagePath;
+        // }
+        $modelData = $request->except('image');
+        $imagePaths = [];
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('hotel', 'public');
-            $modelData = $request->except('image');
-            $modelData['image'] = $imagePath;
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('hotel', 'public');
+                $imagePaths[] = $imagePath;
+            }
+        }
+
+        if (!empty($imagePaths)) {
+            $modelData['image'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->facilities)) {
+            $modelData['facilities'] = json_encode($request->facilities);
         }
 
         $$module_name_singular = $module_model::create($modelData);

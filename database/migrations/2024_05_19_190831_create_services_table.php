@@ -16,16 +16,18 @@ return new class extends Migration
             $table->string('service_type')->nullable();
             $table->string('image')->nullable();
             $table->string('title',255)->nullable();
-            $table->string('slug',255)->nullable();
+            $table->string('slug')->unique();
             $table->string('mobile',255)->nullable();
             $table->longText('description')->nullable();
             $table->string('rating')->nullable();
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->string('city',255)->nullable();
             $table->string('country',255)->nullable();
             $table->decimal('duration', 10, 2)->nullable();
+            $table->string('room_no',255)->nullable();
+            $table->string('facilities',255)->nullable();
             $table->boolean('status')->default(0)->nullable();
 
             $table->integer('created_by')->unsigned()->nullable();

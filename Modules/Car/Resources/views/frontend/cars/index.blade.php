@@ -230,7 +230,7 @@
                             </div>
                             <div class="holiday-footer text-center">
                                 <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                    <a href="#">VIEW DETAILS</a>
+                                    <a href="{{ route('frontend.cars.show',$car->slug) }}">VIEW DETAILS</a>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-4 social">
                                     <i class="fa fa-heart-o"></i>

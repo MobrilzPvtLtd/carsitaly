@@ -58,6 +58,9 @@
                                 @lang("car::text.title")
                             </th>
                             <th>
+                                @lang("car::text.slug")
+                            </th>
+                            <th>
                                 @lang("car::text.price")
                             </th>
                             <th>
@@ -119,6 +122,10 @@
             {
                 data: 'title',
                 name: 'title'
+            },
+            {
+                data: 'slug',
+                name: 'slug'
             },
             {
                 data: 'price',

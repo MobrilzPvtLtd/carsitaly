@@ -58,6 +58,9 @@
                                 @lang("hotel::text.title")
                             </th>
                             <th>
+                                @lang("hotel::text.slug")
+                            </th>
+                            <th>
                                 @lang("hotel::text.price")
                             </th>
                             <th>
@@ -125,6 +128,10 @@
             {
                 data: 'title',
                 name: 'title'
+            },
+            {
+                data: 'slug',
+                name: 'slug'
             },
             {
                 data: 'price',

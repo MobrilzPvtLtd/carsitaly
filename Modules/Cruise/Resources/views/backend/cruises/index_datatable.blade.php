@@ -58,6 +58,9 @@
                                 @lang("cruise::text.title")
                             </th>
                             <th>
+                                @lang("cruise::text.slug")
+                            </th>
+                            <th>
                                 @lang("cruise::text.price")
                             </th>
                             <th>
@@ -125,6 +128,10 @@
             {
                 data: 'title',
                 name: 'title'
+            },
+            {
+                data: 'slug',
+                name: 'slug'
             },
             {
                 data: 'price',

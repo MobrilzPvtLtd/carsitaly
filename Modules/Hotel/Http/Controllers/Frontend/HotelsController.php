@@ -4,6 +4,7 @@ namespace Modules\Hotel\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class HotelsController extends Controller
@@ -41,7 +42,7 @@ class HotelsController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -52,12 +53,26 @@ class HotelsController extends Controller
 
         $module_action = 'List';
 
+        $city = $request->input('city');
+        $check_in = $request->input('check_in');
+        $check_out = $request->input('check_out');
+
         $$module_name = $module_model::where('service_type', 'hotel')
-                        ->where('status', 1)->latest()->paginate();
+            ->where('status', 1);
+            if (!empty($city)) {
+                $$module_name->where(function ($query) use ($city,$check_in) {
+                    $query->where('city', 'like', "%$city%")
+                        ->orWhere('start_date', 'like', "%$check_in%");
+                });
+            }
+        $$module_name = $$module_name->latest()->paginate();
+
+        $uniqueRoomNumbers = $module_model::distinct()->pluck('room_no');
+        $uniqueLocation = $module_model::distinct()->pluck('city');
 
         return view(
             "$module_path.$module_name.index",
-            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular')
+            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular','uniqueRoomNumbers','uniqueLocation')
         );
     }
 
@@ -67,10 +82,9 @@ class HotelsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $id = decode_id($id);
-
+        // $slug = decode_id($slug);
         $module_title = $this->module_title;
         $module_name = $this->module_name;
         $module_path = $this->module_path;
@@ -80,11 +94,29 @@ class HotelsController extends Controller
 
         $module_action = 'Show';
 
-        $$module_name_singular = $module_model::findOrFail($id);
+        $$module_name_singular = $module_model::where('slug',$slug)->first();
 
         return view(
             "$module_path.$module_name.show",
             compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
         );
+    }
+
+    public function fetchData(Request $request){
+        $minPrice = $request->minPrice;
+        $maxPrice = $request->maxPrice;
+        $title = $request->title;
+
+        $module_model = $this->module_model;
+
+        $query = $module_model::where('service_type', 'hotel')
+                ->where('status', 1);
+        if($title){
+            $query = $query->where('title', 'like', "%$title%");
+        }else{
+            $query = $query->whereBetween('price', [$minPrice, $maxPrice]);
+        }
+        $query = $query->get();
+        return response()->json($query);
     }
 }

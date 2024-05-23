@@ -6,7 +6,7 @@
     <!-- START: MODIFY SEARCH -->
 	<div class="row modify-search modify-hotel">
 		<div class="container clear-padding">
-			<form >
+			<form action="{{ route('frontend.hotels.index') }}" method="GET">
 				<div class="col-md-4">
 					<div class="form-gp">
 						<label>Location</label>
@@ -29,7 +29,7 @@
 					<div class="form-gp">
 						<label>Check Out</label>
 						<div class="input-group margin-bottom-sm">
-							<input type="text" id="check_out" name="check_out" class="form-control" required placeholder="DD/MM/YYYY">
+							<input type="text" id="check_out" name="check_out" class="form-control" placeholder="DD/MM/YYYY">
 							<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 						</div>
 					</div>
@@ -38,12 +38,9 @@
 					<div class="form-gp">
 						<label>Rooms</label>
 						<select class="selectpicker">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
+                            @foreach ($uniqueRoomNumbers as $roomNumbers)
+                                <option>{{ $roomNumbers }}</option>
+                            @endforeach
 						</select>
 					</div>
 				</div>
@@ -70,14 +67,14 @@
 						<h5><i class="fa fa-usd"></i> Price</h5>
 						<p>
 							<label></label>
-							<input type="text" id="amount" readonly>
+							<input type="text" id="amount" name="price" value="120" readonly>
 						</p>
 						<div id="price-range"></div>
 					</div>
 					<div class="name-filter filter">
 						<h5><i class="fa fa-bed"></i> Hotel Name</h5>
 						<div class="input-group margin-bottom-sm">
-							<input type="text" name="destination_city" class="form-control" required placeholder="E.g. Italy">
+							<input type="text" id="search-bar" name="title" class="form-control" required placeholder="E.g. Italy">
 							<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 						</div>
 					</div>
@@ -95,12 +92,9 @@
 					<div class="location-filter filter">
 						<h5><i class="fa fa-map-marker"></i> Location</h5>
 						<ul>
-							<li><input type="checkbox"> Italy</li>
-							<li><input type="checkbox"> Italy</li>
-							<li><input type="checkbox"> Italy</li>
-							<li><input type="checkbox"> Italy</li>
-							<li><input type="checkbox"> Italy</li>
-							<li><input type="checkbox"> Italy</li>
+                            @foreach ($uniqueLocation as $location)
+                                <li><input type="checkbox"> {{ $location }}</li>
+                            @endforeach
 						</ul>
 					</div>
 					<div class="facilities-filter filter">
@@ -167,10 +161,18 @@
 				<div class="clearfix"></div>
 				<div class="switchable col-md-12 clear-padding">
                     @foreach ($hotels as $hotel)
-                        <div  class="hotel-list-view">
+                        <div  class="hotel-list-view" id="hotel-list">
                             <div class="wrapper">
                                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    <img src="{{ asset('public/storage/') . '/' . $hotel->image }}" alt="cruise">
+                                    @if($hotel->image)
+                                        @php
+                                            $images = json_decode($hotel->image);
+                                        @endphp
+
+                                        @if($images && count($images) > 0)
+                                            <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                        @endif
+                                    @endif
                                 </div>
                                 <div class="col-md-6 col-sm-6 hotel-info">
                                     <div>
@@ -196,11 +198,22 @@
                                             </p>
                                         </div>
                                         <div class="hotel-facility">
-                                            <p><i class="fa fa-wifi" title="Free Wifi"></i>
-                                                <i class="fa fa-bed" title="Luxury Bedroom"></i>
-                                                <i class="fa fa-taxi" title="Transportation"></i>
-                                                <i class="fa fa-beer" title="Bar"></i>
-                                                <i class="fa fa-cutlery" title="Restaurant"></i>
+                                            <p>
+                                                @if($hotel->facilities > 0)
+                                                    @foreach (json_decode($hotel->facilities) as $facility)
+                                                        @if($facility == "wifi")
+                                                            <i class="fa fa-wifi" title="Free Wifi"></i>
+                                                        @elseif ($facility == "bed")
+                                                            <i class="fa fa-bed" title="Luxury Bedroom"></i>
+                                                        @elseif ($facility == "taxi")
+                                                            <i class="fa fa-taxi" title="Transportation"></i>
+                                                        @elseif ($facility == "beer")
+                                                            <i class="fa fa-beer" title="Bar"></i>
+                                                        @elseif ($facility == "cutlery")
+                                                            <i class="fa fa-cutlery" title="Restaurant"></i>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             </p>
                                         </div>
                                         <div class="hotel-desc">
@@ -224,7 +237,7 @@
                                             <h5>${{ $hotel->price }} Avg/Night</h5>
                                         </div>
                                         <div class="book">
-                                            <a href="#">BOOK</a>
+                                            <a href="{{ route('frontend.hotels.show',$hotel->slug) }}">BOOK</a>
                                         </div>
                                     </div>
                                 </div>

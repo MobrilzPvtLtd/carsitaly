@@ -66,9 +66,9 @@ class CarsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $id = decode_id($id);
+        // $id = decode_id($id);
 
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -79,7 +79,8 @@ class CarsController extends Controller
 
         $module_action = 'Show';
 
-        $$module_name_singular = $module_model::findOrFail($id);
+        // $$module_name_singular = $module_model::findOrFail($slug);
+        $$module_name_singular = $module_model::where('slug',$slug)->first();
 
         return view(
             "$module_path.$module_name.show",

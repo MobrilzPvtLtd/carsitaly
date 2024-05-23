@@ -30,7 +30,7 @@ Route::group(['namespace' => '\Modules\Tour\Http\Controllers\Frontend', 'as' => 
     $module_name = 'tours';
     $controller_name = 'ToursController';
     Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
-    Route::get("$module_name/{id}/{slug?}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
+    Route::get("$module_name/{slug?}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
 });
 
 /*
