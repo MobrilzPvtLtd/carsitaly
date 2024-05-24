@@ -54,24 +54,28 @@ class HotelsController extends Controller
         $module_action = 'List';
 
         $city = $request->input('city');
-        $check_in = $request->input('check_in');
-        $check_out = $request->input('check_out');
+        $room_no = $request->input('room_no');
 
         $$module_name = $module_model::where('service_type', 'hotel')
             ->where('status', 1);
             if (!empty($city)) {
-                $$module_name->where(function ($query) use ($city,$check_in) {
-                    $query->where('city', 'like', "%$city%")
-                        ->orWhere('start_date', 'like', "%$check_in%");
+                $$module_name->where(function ($query) use ($city) {
+                    $query->where('city', 'like', "%$city%");
                 });
             }
-        $$module_name = $$module_name->latest()->paginate();
+            if (!empty($room_no)) {
+                $$module_name->where(function ($query) use ($room_no) {
+                    $query->where('room_no', 'like', "%$room_no%");
+                });
+            }
+        $$module_name = $$module_name->paginate();
 
         $uniqueRoomNumbers = $module_model::distinct()->pluck('room_no');
+        $uniqueLocation = $module_model::distinct()->pluck('city');
 
         return view(
             "$module_path.$module_name.index",
-            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular','uniqueRoomNumbers')
+            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular','uniqueRoomNumbers','uniqueLocation')
         );
     }
 
@@ -95,9 +99,15 @@ class HotelsController extends Controller
 
         $$module_name_singular = $module_model::where('slug',$slug)->first();
 
+        $latest_hotel = $module_model::where('service_type', 'hotel')
+        ->where('status', 1)->latest()->get();
+
+        $similar_hotel = $module_model::where('service_type', 'hotel')
+        ->where('status', 1)->where('similar', 1)->get();
+
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'latest_hotel','similar_hotel')
         );
     }
 

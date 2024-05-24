@@ -13,5 +13,12 @@
             placeholder: '-- Select an option --',
         });
     });
+
+    $(document).ready(function() {
+        $('.select3').select2({
+            // theme: 'bootstrap4',
+            placeholder: '-- Select an option --',
+        });
+    });
 </script>
 @endpush

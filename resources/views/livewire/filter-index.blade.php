@@ -160,7 +160,7 @@
                                     </p>
                                 </div>
                                 <div class="hotel-desc">
-                                    <p>{{ $hotel->description }}</p>
+                                    <p>{{ $hotel->meta_description }}</p>
                                 </div>
                             </div>
                         </div>
@@ -192,6 +192,7 @@
         <!-- START: PAGINATION -->
         <div class="bottom-pagination">
             <nav class="pull-right">
+                {{-- {{ $hotels->links() }} --}}
                 <ul class="pagination pagination-lg">
                     <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                     <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>

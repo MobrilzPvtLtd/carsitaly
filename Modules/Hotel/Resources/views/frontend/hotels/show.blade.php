@@ -16,7 +16,7 @@
                 @endif
             @endfor
         </h5>
-        <p><i class="fa fa-map-marker"></i> {{ $hotel->city }}, 176077</p>
+        <p><i class="fa fa-map-marker"></i> {{ $hotel->city }}, {{ $hotel->mobile }}</p>
     </div>
 </div>
 <div class="row hotel-detail">
@@ -28,17 +28,27 @@
                     <li data-target="#room-gallery" data-slide-to="1"></li>
                     <li data-target="#room-gallery" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="assets/images/slide.jpg" alt="Cruise">
-                    </div>
-                    <div class="item">
-                        <img src="assets/images/slide2.jpg" alt="Cruise">
-                    </div>
-                    <div class="item">
-                        <img src="assets/images/slide.jpg" alt="Cruise">
-                    </div>
+                {{-- <div class="item">
+                    <img src="assets/images/slide2.jpg" alt="Cruise">
                 </div>
+                <div class="item">
+                    <img src="assets/images/slide.jpg" alt="Cruise">
+                </div> --}}
+                <div class="carousel-inner" role="listbox">
+                    @if($hotel->image)
+                        @php
+                            $images = json_decode($hotel->image);
+                        @endphp
+                        @if ($images && count($images) > 0)
+                            @foreach ($images as $index => $image)
+                                <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('public/storage/' . $image) }}" alt="Hotel">
+                                </div>
+                            @endforeach
+                        @endif
+                    @endif
+                </div>
+
                 <a class="left carousel-control" href="#room-gallery" role="button" data-slide="prev">
                     <span class="fa fa-chevron-left" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -59,130 +69,79 @@
                 <div class="tab-content">
                     <div id="overview" class="tab-pane fade">
                         <h4 class="tab-heading">About Grand Lilly</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                        <p>{{ $hotel->description }}</p>
                     </div>
                     <div id="room-info" class="tab-pane fade in active">
                         <h4 class="tab-heading">Room Types</h4>
-                        <div class="room-info-wrapper">
-                            <div class="col-md-4 col-sm-6 clear-padding">
-                                <img src="assets/images/offer1.jpg" alt="cruise">
-                            </div>
-                            <div class="col-md-5 col-sm-6 room-desc">
-                                <h4>Deluxe Single Room</h4>
-                                <h5>Max Guest: 2 Adults</h5>
-                                <p>Includes 2 meals - Breakfast & Dinner</p>
-                                <p>
-                                    <i class="fa fa-wifi"></i>
-                                    <i class="fa fa-taxi"></i>
-                                    <i class="fa fa-cutlery"></i>
-                                    <i class="fa fa-beer"></i>
-                                    <i class="fa fa-coffee"></i>
-                                    <i class="fa fa-desktop"></i>
-                                </p>
-                            </div>
-                            <div class="clearfix visible-sm-block"></div>
-                            <div class="col-md-3 text-center booking-box">
-                                <div class="price">
-                                    <h3>$199/Night</h3>
+                        @foreach ($latest_hotel as $latest)
+                            <div class="room-info-wrapper">
+                                <div class="col-md-4 col-sm-6 clear-padding">
+                                    @php
+                                        $images = json_decode($latest->image);
+                                    @endphp
+                                    @if ($images && count($images) > 0)
+                                        <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                    @endif
                                 </div>
-                                <div class="book">
-                                    <a href="#">BOOK</a>
+                                <div class="col-md-5 col-sm-6 room-desc">
+                                    <h4>{{ $latest->title }}</h4>
+                                    <h5>Max Guest: {{ $latest->adults }} Adults</h5>
+                                    <p>Includes 2 meals -
+                                        @if($latest->meals > 0)
+                                            @foreach (json_decode($latest->meals) as $meals)
+                                                {{ ucfirst(strtolower($meals)) }},
+                                            @endforeach
+                                        @endif
+                                    </p>
+                                    <p>
+                                        @if($latest->facilities > 0)
+                                            @foreach (json_decode($latest->facilities) as $facility)
+                                                @if($facility == "wifi")
+                                                    <i class="fa fa-wifi" title="Free Wifi"></i>
+                                                @elseif ($facility == "bed")
+                                                    <i class="fa fa-bed" title="Luxury Bedroom"></i>
+                                                @elseif ($facility == "taxi")
+                                                    <i class="fa fa-taxi" title="Transportation"></i>
+                                                @elseif ($facility == "beer")
+                                                    <i class="fa fa-beer" title="Bar"></i>
+                                                @elseif ($facility == "cutlery")
+                                                    <i class="fa fa-cutlery" title="Restaurant"></i>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="room-info-wrapper">
-                            <div class="col-md-4 col-sm-6 clear-padding">
-                                <img src="assets/images/offer2.jpg" alt="cruise">
-                            </div>
-                            <div class="col-md-5 col-sm-6 room-desc">
-                                <h4>Deluxe Double Room</h4>
-                                <h5>Max Guest: 4 Adults</h5>
-                                <p>Includes 2 meals - Breakfast & Dinner</p>
-                                <p>
-                                    <i class="fa fa-wifi"></i>
-                                    <i class="fa fa-taxi"></i>
-                                    <i class="fa fa-cutlery"></i>
-                                    <i class="fa fa-beer"></i>
-                                    <i class="fa fa-coffee"></i>
-                                    <i class="fa fa-desktop"></i>
-                                </p>
-                            </div>
-                            <div class="clearfix visible-sm-block"></div>
-                            <div class="col-md-3 text-center booking-box">
-                                <div class="price">
-                                    <h3>$299/Night</h3>
-                                </div>
-                                <div class="book">
-                                    <a href="#">BOOK</a>
+                                <div class="clearfix visible-sm-block"></div>
+                                <div class="col-md-3 text-center booking-box">
+                                    <div class="price">
+                                        <h3>${{ $latest->price }}/Night</h3>
+                                    </div>
+                                    <div class="book">
+                                        <a href="#">BOOK</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="room-info-wrapper">
-                            <div class="col-md-4 col-sm-6 clear-padding">
-                                <img src="assets/images/offer3.jpg" alt="cruise">
-                            </div>
-                            <div class="col-md-5 col-sm-6 room-desc">
-                                <h4>Royal Suite</h4>
-                                <h5>Max Guest: 2 Adults</h5>
-                                <p>Includes 2 meals - Breakfast & Dinner</p>
-                                <p>
-                                    <i class="fa fa-wifi"></i>
-                                    <i class="fa fa-taxi"></i>
-                                    <i class="fa fa-cutlery"></i>
-                                    <i class="fa fa-beer"></i>
-                                    <i class="fa fa-coffee"></i>
-                                    <i class="fa fa-desktop"></i>
-                                </p>
-                            </div>
-                            <div class="clearfix visible-sm-block"></div>
-                            <div class="col-md-3 text-center booking-box">
-                                <div class="price">
-                                    <h3>$399/Night</h3>
-                                </div>
-                                <div class="book">
-                                    <a href="#">BOOK</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="room-info-wrapper">
-                            <div class="col-md-4 col-sm-6 clear-padding">
-                                <img src="assets/images/offer1.jpg" alt="cruise">
-                            </div>
-                            <div class="col-md-5 col-sm-6 room-desc">
-                                <h4>Royal Suite With Beach View</h4>
-                                <h5>Max Guest: 4 Adults</h5>
-                                <p>Includes 2 meals - Breakfast & Dinner</p>
-                                <p>
-                                    <i class="fa fa-wifi"></i>
-                                    <i class="fa fa-taxi"></i>
-                                    <i class="fa fa-cutlery"></i>
-                                    <i class="fa fa-beer"></i>
-                                    <i class="fa fa-coffee"></i>
-                                    <i class="fa fa-desktop"></i>
-                                </p>
-                            </div>
-                            <div class="clearfix visible-sm-block"></div>
-                            <div class="col-md-3 text-center booking-box">
-                                <div class="price">
-                                    <h3>$999/Night</h3>
-                                </div>
-                                <div class="book">
-                                    <a href="#">BOOK</a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div id="ammenties" class="tab-pane fade">
                         <h4 class="tab-heading">Ammenties Style 1</h4>
                         <div class="ammenties-1">
-                            <div class="col-md-4 col-sm-6">
-                                <p><i class="fa fa-wifi"></i>Free Wifi</p>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <p><i class="fa fa-glass"></i>Free Drinks</p>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
+                            @foreach (json_decode($latest->facilities) as $faci)
+                                <div class="col-md-4 col-sm-6">
+                                    @if($faci == "wifi")
+                                        <p><i class="fa fa-glass"></i> Free Drinks</p>
+                                    @elseif ($faci == "taxi")
+                                        <p><i class="fa fa-taxi"></i>Taxi Available</p>
+                                    @elseif ($faci == "bed")
+                                        <p><i class="fa fa-bed"></i>Luxury Bedroom</p>
+                                    @elseif ($faci == "beer")
+                                        <p><i class="fa fa-beer"></i>Bar Available</p>
+                                    @elseif ($faci == "cutlery")
+                                        <p><i class="fa fa-cutlery"></i>Free Meal</p>
+                                    @endif
+                                </div>
+                            @endforeach
+                            {{-- <div class="col-md-4 col-sm-6">
                                 <p><i class="fa fa-cutlery"></i>Free Meal</p>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -202,11 +161,26 @@
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <p><i class="fa fa-paw"></i>Pet Room</p>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="ammenties-3">
                             <h4 class="tab-heading">Ammenties Style 2</h4>
-                            <div class="col-md-4 col-xs-6">
+                            @foreach (json_decode($latest->facilities) as $facili)
+                                <div class="col-md-4 col-sm-6">
+                                    @if($facili == "wifi")
+                                        <p><i class="fa fa-wifi"></i> Free Wifi</p>
+                                    @elseif ($facili == "taxi")
+                                        <p><i class="fa fa-taxi"></i>Taxi Available</p>
+                                    @elseif ($facili == "bed")
+                                        <p><i class="fa fa-bed"></i>Luxury Bedroom</p>
+                                    @elseif ($facili == "beer")
+                                        <p><i class="fa fa-beer"></i>Bar Available</p>
+                                    @elseif ($facili == "cutlery")
+                                        <p><i class="fa fa-cutlery"></i>Free Meal</p>
+                                    @endif
+                                </div>
+                            @endforeach
+                            {{-- <div class="col-md-4 col-xs-6">
                                 <p><i class="fa fa-wifi"></i> Free Wifi</p>
                             </div>
                             <div class="col-md-4 col-xs-6">
@@ -223,9 +197,9 @@
                             </div>
                             <div class="col-md-4 col-xs-6">
                                 <p><i class="fa fa-beer"></i> Bar Available</p>
-                            </div>
+                            </div> --}}
                         </div>
-                        <div class="ammenties-4">
+                        {{-- <div class="ammenties-4">
                             <h4 class="tab-heading">Ammenties Style 3</h4>
                             <div class="col-md-4 col-xs-6">
                                 <p><i class="fa fa-wifi"></i> Free Wifi</p>
@@ -317,7 +291,7 @@
                                     <i class="fa fa-coffee"></i>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     {{-- <div id="review" class="tab-pane fade">
                         <div class="review-header">
@@ -476,9 +450,9 @@
                 <div class="contact sidebar-item">
                     <h4><i class="fa fa-phone"></i> Contact Hotel</h4>
                     <div class="sidebar-item-body">
-                        <h5><i class="fa fa-phone"></i> +91 1234567890</h5>
-                        <h5><i class="fa fa-envelope-o"></i> <a href="mailto:your@domainname.com">Send Email</a></h5>
-                        <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
+                        <h5><i class="fa fa-phone"></i> +91 {{ $hotel->mobile }}</h5>
+                        <h5><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $hotel->email }}">Send Email</a></h5>
+                        <h5><i class="fa fa-map-marker"></i> {{ $hotel->address }}, {{ $hotel->city }}, {{ $hotel->country }}, {{ $hotel->pin_code }}</h5>
                     </div>
                 </div>
                 {{-- <div class="review sidebar-item">
@@ -529,19 +503,26 @@
                 <div class="similar-hotel sidebar-item">
                     <h4><i class="fa fa-bed"></i> Similar Hotel</h4>
                     <div class="sidebar-item-body">
-                        <div class="similar-hotel-box">
-                            <a href="#">
-                                <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
-                                    <img src="assets/images/offer1.jpg" alt="Cruise">
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <h5>Royal Resort 3<span><i class="fa fa-star"></i></span></h5>
-                                    <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla</h5>
-                                    <span>$100/Night</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="similar-hotel-box">
+                        @foreach ($similar_hotel as $similar)
+                            <div class="similar-hotel-box">
+                                <a href="{{ route('frontend.hotels.show',$similar->slug) }}">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+                                        @php
+                                            $images = json_decode($similar->image);
+                                        @endphp
+                                        @if ($images && count($images) > 0)
+                                            <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <h5>{{ $similar->title }}<span><i class="fa fa-star"></i></span></h5>
+                                        <h5><i class="fa fa-map-marker"></i> {{ $similar->address }}, {{ $similar->city }}</h5>
+                                        <span>${{ $similar->price }}/Night</span>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                        {{-- <div class="similar-hotel-box">
                             <a href="#">
                                 <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
                                     <img src="assets/images/offer2.jpg" alt="Cruise">
@@ -564,7 +545,7 @@
                                     <span>$100/Night</span>
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

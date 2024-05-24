@@ -36,7 +36,8 @@
 				<div class="col-md-1 col-sm-6 col-xs-3">
 					<div class="form-gp">
 						<label>Rooms</label>
-						<select class="selectpicker">
+						<select class="selectpicker" name="room_no">
+                            <option>No</option>
                             @foreach ($uniqueRoomNumbers as $roomNumbers)
                                 <option>{{ $roomNumbers }}</option>
                             @endforeach

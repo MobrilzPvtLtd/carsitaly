@@ -243,6 +243,10 @@ class HotelsController extends Controller
             $modelData['facilities'] = json_encode($request->facilities);
         }
 
+        if (!empty($request->meals)) {
+            $modelData['meals'] = json_encode($request->meals);
+        }
+
         $$module_name_singular = $module_model::create($modelData);
 
         flash(icon()."New '".Str::singular($module_title)."' Added")->success()->important();
