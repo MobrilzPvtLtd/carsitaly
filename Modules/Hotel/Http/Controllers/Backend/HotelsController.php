@@ -141,11 +141,21 @@ class HotelsController extends Controller
             })
             ->editColumn('image', function ($data) {
                 if ($data->image) {
-                    return '<a href="' . route('backend.hotels.show', $data->id) . '">
-                                <img src="' . asset('public/storage/') . '/' . $data->image . '" alt="" width="100px">
-                            </a>';
+                    $images = json_decode($data->image);
+                    $html = '<a href="' . route('backend.hotels.show', $data->id) . '">';
+
+                    if ($images && count($images) > 0) {
+                        // foreach ($images as $image) {
+                            $html .= '<img src="' . asset('public/storage/' . $images[0]) . '" alt="cruise" width="100px">';
+                        // }
+                    }
+
+                    $html .= '</a>';
+
+                    return $html;
                 }
             })
+
             ->editColumn('status', function ($data) {
                 if ($data->status == 1){
                     return '<span class="badge text-bg-success">Active</span>';

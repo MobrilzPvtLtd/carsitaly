@@ -55,33 +55,27 @@
         @include('frontend.includes.services-footer')
     </div>
 
+    @php
+        $service = App\Models\Service::where('service_type', 'hotel')->get();
+        $minPrice = PHP_INT_MAX;
+        $maxPrice = 0;
+        foreach ($service as $key => $value) {
+            if ($value->price < $minPrice) {
+                $minPrice = $value->price;
+            }
+            if ($value->price > $maxPrice) {
+                $maxPrice = $value->price;
+            }
+            $id = $value->id;
+        }
+    @endphp
+
     <!-- Scripts -->
-    @livewireScripts
-    @yield('script')
-    <script src="{{ asset('assets/js/respond.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
-    <script src="{{ asset('assets/plugins/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/wow.min.js') }}"></script>
-    <script src="{{ asset('assets/js/js.js') }}"></script>
-    <script>
-        $(function() {
-            "use strict";
-            $( "#price-range" ).slider({
-              range: true,
-              min: 0,
-              max: 100,
-              values: [ 0, 50 ],
-              slide: function( event, ui ) {
-                $( "#amount" ).val( "$ " + ui.values[ 0 ] + " - $ " + ui.values[ 1 ] );
-              }
-            });
-            $( "#amount" ).val( "$ " + $( "#price-range" ).slider( "values", 0 ) +
-              " - $ " + $( "#price-range" ).slider( "values", 1 ) );
-          });
-    </script>
+    {{-- @livewireScripts --}}
+    @stack('after-scripts')
+    @yield('scripts')
+
+    @include('frontend.includes.script')
 </body>
 
 </html>

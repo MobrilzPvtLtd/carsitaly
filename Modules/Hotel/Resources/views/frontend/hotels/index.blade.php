@@ -3,7 +3,6 @@
 @section('title') {{ __($module_title) }} @endsection
 
 @section('services-content')
-    <!-- START: MODIFY SEARCH -->
 	<div class="row modify-search modify-hotel">
 		<div class="container clear-padding">
 			<form action="{{ route('frontend.hotels.index') }}" method="GET">
@@ -52,11 +51,10 @@
 			</form>
 		</div>
 	</div>
-<!-- END: MODIFY SEARCH -->
 
-<!-- START: LISTING AREA-->
 	<div class="row">
-		<div class="container">
+        <livewire:filter-index />
+		{{-- <div class="container">
 			<!-- START: FILTER AREA -->
 			<div class="col-md-3 clear-padding">
 				<div class="filter-head text-center">
@@ -264,7 +262,6 @@
 				<!-- END: PAGINATION -->
 			</div>
 			<!-- END: INDIVIDUAL LISTING AREA -->
-		</div>
+		</div> --}}
 	</div>
-<!-- END: LISTING AREA -->
 @endsection

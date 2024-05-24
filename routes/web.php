@@ -28,7 +28,6 @@ require __DIR__.'/auth.php';
 
 // home route
 Route::get('home', [FrontendController::class, 'index'])->name('home');
-// Route::get('villa', [FrontendController::class, 'villa'])->name('villa');
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('contact-submit', [FrontendController::class, 'contactSubmit'])->name('contact-submit');
 Route::post('flight',[FrontendController::class,'flight'])->name('flight');

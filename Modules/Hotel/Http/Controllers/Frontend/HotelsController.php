@@ -68,11 +68,10 @@ class HotelsController extends Controller
         $$module_name = $$module_name->latest()->paginate();
 
         $uniqueRoomNumbers = $module_model::distinct()->pluck('room_no');
-        $uniqueLocation = $module_model::distinct()->pluck('city');
 
         return view(
             "$module_path.$module_name.index",
-            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular','uniqueRoomNumbers','uniqueLocation')
+            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular','uniqueRoomNumbers')
         );
     }
 
@@ -105,17 +104,19 @@ class HotelsController extends Controller
     public function fetchData(Request $request){
         $minPrice = $request->minPrice;
         $maxPrice = $request->maxPrice;
-        $title = $request->title;
-
         $module_model = $this->module_model;
 
         $query = $module_model::where('service_type', 'hotel')
                 ->where('status', 1);
-        if($title){
-            $query = $query->where('title', 'like', "%$title%");
-        }else{
-            $query = $query->whereBetween('price', [$minPrice, $maxPrice]);
+
+        if ($request->sortBy == 'highest_price') {
+            $query = $query->orderBy('id', 'desc');
+        } elseif ($request->sortBy == 'lowest_price') {
+            $query = $query->orderBy('id', 'asc');
         }
+
+        // $query = $query->whereBetween('price', [$minPrice, $maxPrice]);
+
         $query = $query->get();
         return response()->json($query);
     }
