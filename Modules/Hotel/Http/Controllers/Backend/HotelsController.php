@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
 
 class HotelsController extends Controller
@@ -212,10 +213,10 @@ class HotelsController extends Controller
 
         $module_action = 'Store';
 
-        $validated_request = $request->validate([
-            'title' => 'required|max:191|unique:'.$module_model.',title',
-            'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
-        ]);
+        // $validated_request = $request->validate([
+        //     'title' => 'required|max:191|unique:'.$module_model.',title',
+        //     'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
+        // ]);
 
         // $modelData = $request->all();
 
@@ -332,6 +333,12 @@ class HotelsController extends Controller
         $module_name_singular = Str::singular($module_name);
 
         $module_action = 'Update';
+
+        $request->validate([
+            'slug' => ['max:191',
+                Rule::unique($module_model, 'slug')->ignore($id),
+            ],
+        ]);
 
         $$module_name_singular = $module_model::findOrFail($id);
 
