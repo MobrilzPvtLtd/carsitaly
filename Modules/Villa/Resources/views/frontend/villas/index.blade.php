@@ -58,7 +58,7 @@
 	</div>
 
     <div class="row">
-        <div class="container">
+        {{-- <div class="container">
             <div class="col-md-3 clear-padding">
                 <div class="filter-head text-center">
                     <h4>{{ $villas->count() }} Result Found Matching Your Search.</h4>
@@ -246,28 +246,9 @@
                 </div>
                 <!-- END: PAGINATION -->
             </div>
-        </div>
+        </div> --}}
+
+        <livewire:filter-index />
     </div>
 </div>
-@endsection
-@section('script')
-    <script>
-
-        /* Price Range Slider */
-
-        $(function() {
-            "use strict";
-            $( "#price-range" ).slider({
-            range: true,
-            min: 0,
-            max: 100,
-            values: [ 3, 50 ],
-            slide: function( event, ui ) {
-                $( "#amount" ).val( "$ " + ui.values[ 0 ] + " - $ " + ui.values[ 1 ] );
-            }
-            });
-            $( "#amount" ).val( "$ " + $( "#price-range" ).slider( "values", 0 ) +
-            " - $ " + $( "#price-range" ).slider( "values", 1 ) );
-        });
-    </script>
 @endsection

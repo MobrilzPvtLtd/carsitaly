@@ -52,7 +52,7 @@ class CruisesController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::where('service_type', 'cruise')
+        $$module_name = $module_model::where('service_type', 'cruises')
         ->where('status', 1)->latest()->paginate();
 
         return view(

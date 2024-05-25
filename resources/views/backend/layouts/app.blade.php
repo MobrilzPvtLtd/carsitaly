@@ -69,7 +69,7 @@
             </div>
 
             {{-- Footer block --}}
-            <x-backend.includes.footer />
+            {{-- <x-backend.includes.footer /> --}}
         </div>
 
         <!-- Scripts -->

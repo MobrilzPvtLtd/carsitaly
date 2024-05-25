@@ -126,7 +126,7 @@ class ToursController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'tour')->select('id', 'image', 'title','slug', 'price','city','mobile', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'tours')->select('id', 'image', 'title','slug', 'price','city','mobile', 'rating', 'status');
 
         $data = $$module_name;
 

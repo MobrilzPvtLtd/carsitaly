@@ -52,7 +52,7 @@ class VillasController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::where('service_type', 'villa')
+        $$module_name = $module_model::where('service_type', 'villas')
         ->where('status', 1)->latest()->paginate();
 
         return view(

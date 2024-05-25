@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\Contact;
 use App\Models\Service;
+use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,8 +11,10 @@ class FilterIndex extends Component
 {
     use WithPagination;
 
+    public $minPrice = 0;
+    public $maxPrice = 500;
     public $searchTerm;
-    public $filterLocation = '';
+    public $filterLocation = [];
     public $star5 = '';
     public $star4 = '';
     public $star3 = '';
@@ -24,41 +26,48 @@ class FilterIndex extends Component
     public $beer = '';
     public $cutlery = '';
     public $orderBy = '';
+    public $serviceType;
+    public $sortByPrice;
+    public $price;
 
     protected $paginationTheme = 'bootstrap';
 
+
+    public function mount()
+    {
+        $currentUrl = Request::url();
+
+        $segments = explode('/', $currentUrl);
+        $this->serviceType = end($segments);
+    }
+
     public function render()
     {
-        $title = '%'.$this->searchTerm.'%';
-
         // dd($this->filterLocation);
-        $service = Service::where('service_type', 'hotel')->get();
-        $minPrice = PHP_INT_MAX;
-        $maxPrice = 0;
-        foreach ($service as $key => $value) {
-            if ($value->price < $minPrice) {
-                $minPrice = $value->price;
-            }
-            if ($value->price > $maxPrice) {
-                $maxPrice = $value->price;
-            }
-        }
+        $title = '%'.$this->searchTerm.'%';
+        $serviceType = $this->serviceType;
+        $location = $this->filterLocation;
 
-        $hotels = Service::whereBetween('price', [$minPrice, $maxPrice])
-            ->where('service_type', 'hotel')
-            ->where('status', 1);
+        $services = Service::where('service_type', $serviceType)->where('status', 1);
+            // ->whereBetween('price', [$this->minPrice, $this->maxPrice])
 
         // if ($this->orderBy === 'price_asc') {
-        //     $hotels->orderBy('price', 'ASC');
+        //     $services->orderBy('price', 'ASC');
         // } elseif ($this->orderBy === 'price_desc') {
-        //     $hotels->orderBy('price', 'DESC');
+        //     $services->orderBy('price', 'DESC');
         // }
 
         if($title) {
-            $hotels->where('title', 'like', "%$title%");
+            $services->where('title', 'like', "%$title%");
         }
 
-        $hotels->when($this->star5 || $this->star4 || $this->star3 || $this->star2 || $this->star1 || $this->filterLocation, function ($query) {
+        $selectedLocations = array_keys(array_filter($location));
+
+        if (!empty($selectedLocations)) {
+            $services->whereIn('city', $selectedLocations);
+        }
+
+        $services->when($this->star5 || $this->star4 || $this->star3 || $this->star2 || $this->star1,function ($query) {
             $query->where(function ($subQuery) {
                 if ($this->star5) {
                     $subQuery->orWhere('rating', 5);
@@ -75,44 +84,34 @@ class FilterIndex extends Component
                 if ($this->star1) {
                     $subQuery->orWhere('rating', 1);
                 }
-                if ($this->filterLocation) {
-                    $subQuery->orWhere('city', $this->filterLocation);
+            });
+        });
+
+        $services->when($this->wifi || $this->bed || $this->taxi || $this->beer || $this->cutlery, function ($query) {
+            return $query->where(function ($subQuery) {
+                if ($this->wifi) {
+                    $subQuery->orWhere('facilities', 'like', '%wifi%');
+                }
+                if ($this->bed) {
+                    $subQuery->orWhere('facilities', 'like', '%bed%');
+                }
+                if ($this->taxi) {
+                    $subQuery->orWhere('facilities', 'like', '%taxi%');
+                }
+                if ($this->beer) {
+                    $subQuery->orWhere('facilities', 'like', '%beer%');
+                }
+                if ($this->cutlery) {
+                    $subQuery->orWhere('facilities', 'like', '%cutlery%');
                 }
             });
         });
 
-        // $hotels->when($this->wifi || $this->bed || $this->taxi || $this->beer || $this->cutlery, function ($query) {
-        //     $query->where(function ($subQuery) {
-        //         $selectedFacilities = [];
-
-        //         if ($this->wifi) {
-        //             $selectedFacilities[] = "wifi";
-        //         }
-        //         if ($this->bed) {
-        //             $selectedFacilities[] = "bed";
-        //         }
-        //         if ($this->taxi) {
-        //             $selectedFacilities[] = "taxi";
-        //         }
-        //         if ($this->beer) {
-        //             $selectedFacilities[] = "beer";
-        //         }
-        //         if ($this->cutlery) {
-        //             $selectedFacilities[] = "cutlery";
-        //         }
-
-        //         // Ensure that hotels have at least one of the selected facilities
-        //         foreach ($selectedFacilities as $facility) {
-        //             $subQuery->orWhere('facilities', $facility);
-        //         }
-        //     });
-        // });
-
-        $hotels = $hotels->latest()->paginate();
+        $services = $services->orderBy('id', 'desc')->paginate(6);
 
         $uniqueLocation = Service::distinct()->pluck('city');
 
-        return view('livewire.filter-index', compact('hotels','uniqueLocation'));
+        return view('livewire.filter-index', compact('services','uniqueLocation','serviceType'));
 
     }
 }

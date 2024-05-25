@@ -56,7 +56,7 @@ class HotelsController extends Controller
         $city = $request->input('city');
         $room_no = $request->input('room_no');
 
-        $$module_name = $module_model::where('service_type', 'hotel')
+        $$module_name = $module_model::where('service_type', 'hotels')
             ->where('status', 1);
             if (!empty($city)) {
                 $$module_name->where(function ($query) use ($city) {
@@ -99,10 +99,10 @@ class HotelsController extends Controller
 
         $$module_name_singular = $module_model::where('slug',$slug)->first();
 
-        $latest_hotel = $module_model::where('service_type', 'hotel')
+        $latest_hotel = $module_model::where('service_type', 'hotels')
         ->where('status', 1)->latest()->get();
 
-        $similar_hotel = $module_model::where('service_type', 'hotel')
+        $similar_hotel = $module_model::where('service_type', 'hotels')
         ->where('status', 1)->where('similar', 1)->get();
 
         return view(
@@ -116,7 +116,7 @@ class HotelsController extends Controller
         $maxPrice = $request->maxPrice;
         $module_model = $this->module_model;
 
-        $query = $module_model::where('service_type', 'hotel')
+        $query = $module_model::where('service_type', 'hotels')
                 ->where('status', 1);
 
         if ($request->sortBy == 'highest_price') {

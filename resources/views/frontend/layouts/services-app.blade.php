@@ -56,7 +56,7 @@
     </div>
 
     @php
-        $service = App\Models\Service::where('service_type', 'hotel')->get();
+        $service = App\Models\Service::where('service_type', 'hotels')->get();
         $minPrice = PHP_INT_MAX;
         $maxPrice = 0;
         foreach ($service as $key => $value) {

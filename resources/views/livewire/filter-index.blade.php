@@ -1,20 +1,19 @@
 <div class="container">
-    <!-- START: FILTER AREA -->
     <div class="col-md-3 clear-padding">
         <div class="filter-head text-center">
-            <h4>{{ $hotels->count() }} Result Found Matching Your Search.</h4>
+            <h4>{{ $services->count() }} Result Found Matching Your Search.</h4>
         </div>
         <div class="filter-area">
             <div class="price-filter filter">
                 <h5><i class="fa fa-usd"></i> Price</h5>
                 <p>
                     <label></label>
-                    <input type="text" id="amount" name="price" value="120" readonly>
+                    <input type="text" id="amount" name="price" value="120" wire:model.live="searchPrice">
                 </p>
-                <div id="price-range" wire:model.live="searchPrice"></div>
+                <div id="price-range"></div>
             </div>
             <div class="name-filter filter">
-                <h5><i class="fa fa-bed"></i> Hotel Name</h5>
+                <h5><i class="fa fa-bed"></i> {{ ucfirst(strtolower($serviceType)) }} Name</h5>
                 <div class="input-group margin-bottom-sm">
                     <input wire:model.live="searchTerm" type="text" id="search-bar" name="title" class="form-control" required placeholder="E.g. Italy">
                     <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
@@ -42,7 +41,7 @@
                 </ul>
             </div>
             <div class="facilities-filter filter">
-                <h5><i class="fa fa-list"></i> Hotel Facilities</h5>
+                <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }} Facilities</h5>
                 <ul>
                     <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
                     <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
@@ -51,17 +50,14 @@
                     <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
                 </ul>
             </div>
+
         </div>
     </div>
-    <!-- END: FILTER AREA -->
 
-    <!-- START: INDIVIDUAL LISTING AREA -->
     <div class="col-md-9 hotel-listing">
-
-        <!-- START: SORT AREA -->
         <div class="sort-area col-sm-10">
             <div class="col-md-3 col-sm-3 col-xs-6 sort">
-                <select class="selectpicker" id="sortBy" name="sortBy">
+                <select class="selectpicker" wire:model="price" wire:change="sortByPrice">
                     <option value="">Price</option>
                     <option value="lowest_price">High to Low</option>
                     <option value="highest_price">Low to High</option>
@@ -89,7 +85,6 @@
                 </select>
             </div>
         </div>
-        <!-- END: SORT AREA -->
         <div class="clearfix visible-xs-block"></div>
         <div class="col-sm-2 view-switcher">
             <div class="pull-right">
@@ -103,13 +98,13 @@
         </div>
         <div class="clearfix"></div>
         <div class="switchable col-md-12 clear-padding">
-            @foreach ($hotels as $hotel)
+            @foreach ($services as $ser)
                 <div  class="hotel-list-view" id="switchable">
                     <div class="wrapper">
                         <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                            @if($hotel->image)
+                            @if($ser->image)
                                 @php
-                                    $images = json_decode($hotel->image);
+                                    $images = json_decode($ser->image);
                                 @endphp
 
                                 @if($images && count($images) > 0)
@@ -120,10 +115,10 @@
                         <div class="col-md-6 col-sm-6 hotel-info">
                             <div>
                                 <div class="hotel-header">
-                                    <h5>{{ $hotel->title }}
+                                    <h5>{{ $ser->title }}
                                         <span>
                                             @php
-                                                $rating = $hotel->rating;
+                                                $rating = $ser->rating;
                                                 $maxRating = 5;
                                             @endphp
                                             @for ($i = 1; $i <= $maxRating; $i++)
@@ -136,14 +131,14 @@
                                         </span>
                                     </h5>
                                     <p>
-                                        <i class="fa fa-map-marker"></i>{{ $hotel->city }}
-                                        <i class="fa fa-phone"></i>(+91) {{ $hotel->mobile }}
+                                        <i class="fa fa-map-marker"></i>{{ $ser->city }}
+                                        <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
                                     </p>
                                 </div>
                                 <div class="hotel-facility">
                                     <p>
-                                        @if($hotel->facilities > 0)
-                                            @foreach (json_decode($hotel->facilities) as $facility)
+                                        @if($ser->facilities > 0)
+                                            @foreach (json_decode($ser->facilities) as $facility)
                                                 @if($facility == "wifi")
                                                     <i class="fa fa-wifi" title="Free Wifi"></i>
                                                 @elseif ($facility == "bed")
@@ -160,7 +155,7 @@
                                     </p>
                                 </div>
                                 <div class="hotel-desc">
-                                    <p>{{ $hotel->meta_description }}</p>
+                                    <p>{{ $ser->meta_description }}</p>
                                 </div>
                             </div>
                         </div>
@@ -177,10 +172,10 @@
                             </div>
                             <div class="room-book-box">
                                 <div class="price">
-                                    <h5>${{ $hotel->price }} Avg/Night</h5>
+                                    <h5>${{ $ser->price }} Avg/Night</h5>
                                 </div>
                                 <div class="book">
-                                    <a href="{{ route('frontend.hotels.show',$hotel->slug) }}">BOOK</a>
+                                    <a href="{{ route('frontend.' . $serviceType . '.show', $ser->slug) }}">BOOK</a>
                                 </div>
                             </div>
                         </div>
@@ -189,23 +184,8 @@
             @endforeach
         </div>
         <div class="clearfix"></div>
-        <!-- START: PAGINATION -->
         <div class="bottom-pagination">
-            <nav class="pull-right">
-                {{-- {{ $hotels->links() }} --}}
-                <ul class="pagination pagination-lg">
-                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">6 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&#187;</span></a></li>
-                </ul>
-            </nav>
+            {{ $services->links('livewire.pagination-livewire') }}
         </div>
-        <!-- END: PAGINATION -->
     </div>
-    <!-- END: INDIVIDUAL LISTING AREA -->
 </div>

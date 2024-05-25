@@ -1,4 +1,4 @@
-<input type="hidden" value="tour" name="service_type">
+<input type="hidden" value="tours" name="service_type">
 <div class="row">
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">

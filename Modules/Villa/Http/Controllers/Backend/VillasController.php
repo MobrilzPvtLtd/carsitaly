@@ -127,7 +127,7 @@ class VillasController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'villa')->select('id', 'image', 'title','slug', 'price','city','mobile', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'villas')->select('id', 'image', 'title','slug', 'price','city','mobile', 'rating', 'status');
 
         $data = $$module_name;
 
