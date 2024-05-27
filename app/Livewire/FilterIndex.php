@@ -30,6 +30,12 @@ class FilterIndex extends Component
     public $beer = '';
     public $cutlery = '';
 
+    public $flight = '';
+    public $car = '';
+    public $sightseeing = '';
+    public $meals = '';
+    public $drinks = '';
+
     public $serviceType;
     public $sortBy;
     public $sort_rating;
@@ -155,9 +161,29 @@ class FilterIndex extends Component
             });
         });
 
+        $services->when($this->flight || $this->car || $this->sightseeing || $this->meals || $this->drinks, function ($query) {
+            return $query->where(function ($subQuery) {
+                if ($this->flight) {
+                    $subQuery->orWhere('facilities', 'like', '%flight%');
+                }
+                if ($this->car) {
+                    $subQuery->orWhere('facilities', 'like', '%car%');
+                }
+                if ($this->sightseeing) {
+                    $subQuery->orWhere('facilities', 'like', '%sightseeing%');
+                }
+                if ($this->meals) {
+                    $subQuery->orWhere('facilities', 'like', '%meals%');
+                }
+                if ($this->drinks) {
+                    $subQuery->orWhere('facilities', 'like', '%drinks%');
+                }
+            });
+        });
+
         $services = $services->orderBy('id', 'desc')->paginate(6);
 
-        $uniqueLocation = Service::distinct()->pluck('city');
+        $uniqueLocation = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('city');
 
         return view('livewire.filter-index', compact('services','uniqueLocation','serviceType'));
     }

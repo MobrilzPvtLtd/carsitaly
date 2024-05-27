@@ -67,9 +67,9 @@ class VillasController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $id = decode_id($id);
+        // $id = decode_id($id);
 
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -80,11 +80,18 @@ class VillasController extends Controller
 
         $module_action = 'Show';
 
-        $$module_name_singular = $module_model::findOrFail($id);
+        // $$module_name_singular = $module_model::findOrFail($id);
+        $$module_name_singular = $module_model::where('slug',$slug)->first();
+
+        $latest_villa = $module_model::where('service_type', 'villas')
+        ->where('status', 1)->latest()->get();
+
+        $similar_villa = $module_model::where('service_type', 'villas')
+        ->where('status', 1)->where('similar', 1)->get();
 
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'latest_villa','similar_villa')
         );
     }
 }

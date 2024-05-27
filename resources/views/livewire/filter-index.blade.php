@@ -44,14 +44,25 @@
                 </ul>
             </div>
             <div class="facilities-filter filter">
-                <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }} Facilities</h5>
-                <ul>
-                    <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                    <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                    <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                    <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                    <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                </ul>
+                @if($serviceType == 'tours')
+                    <h5><i class="fa fa-list"></i> Inclusion</h5>
+                    <ul>
+                        <li><input type="checkbox" wire:model.live="flight"> <i class="fa fa-plane"></i> Flight</li>
+                        <li><input type="checkbox" wire:model.live="car"> <i class="fa fa-taxi"></i> Transportation</li>
+                        <li><input type="checkbox" wire:model.live="sightseeing"> <i class="fa fa-eye"></i> Sightseeing</li>
+                        <li><input type="checkbox" wire:model.live="meals"> <i class="fa fa-cutlery"></i> Meals</li>
+                        <li><input type="checkbox" wire:model.live="drinks"> <i class="fa fa-glass"></i> Drinks</li>
+                    </ul>
+                @else
+                    <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }} Facilities</h5>
+                    <ul>
+                        <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
+                        <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
+                        <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
+                        <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
+                        <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
+                    </ul>
+                @endif
             </div>
         </div>
     </div>
@@ -142,6 +153,19 @@
                                         <p>
                                             @if($ser->facilities > 0)
                                                 @foreach (json_decode($ser->facilities) as $facility)
+                                                @if($ser->service_type == 'tours')
+                                                    @if($facility == "flight")
+                                                        <i class="fa fa-plane" title="Free Flight"></i>
+                                                    @elseif ($facility == "car")
+                                                        <i class="fa fa-taxi" title="Transportation"></i>
+                                                    @elseif ($facility == "sightseeing")
+                                                        <i class="fa fa-eye" title="Sightseeing"></i>
+                                                    @elseif ($facility == "meals")
+                                                        <i class="fa fa-cutlery" title="Meals"></i>
+                                                    @elseif ($facility == "drinks")
+                                                        <i class="fa fa-glass" title="Drinks"></i>
+                                                    @endif
+                                                @else
                                                     @if($facility == "wifi")
                                                         <i class="fa fa-wifi" title="Free Wifi"></i>
                                                     @elseif ($facility == "bed")
@@ -153,6 +177,7 @@
                                                     @elseif ($facility == "cutlery")
                                                         <i class="fa fa-cutlery" title="Restaurant"></i>
                                                     @endif
+                                                @endif
                                                 @endforeach
                                             @endif
                                         </p>
@@ -186,7 +211,7 @@
                     </div>
                 @endforeach
             @else
-                <h2 class="text-center text-danger mt-5">Invalid Data</h2>
+                <h4 class="text-center" style="margin-top: 100px">No data available</h4>
             @endif
         </div>
         <div class="clearfix"></div>

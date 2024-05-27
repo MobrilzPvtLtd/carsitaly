@@ -49,7 +49,7 @@
 						<li><a data-toggle="tab" href="#overview"><i class="fa fa-suitcase"></i> <span>Detail</span></a></li>
 						<li><a data-toggle="tab" href="#inclusion"><i class="fa fa-check-square"></i> <span>Inclusion</span></a></li>
 						<li class="active"><a data-toggle="tab" href="#itinerary"><i class="fa fa-street-view"></i> <span>Itinerary</span></a></li>
-						<li><a data-toggle="tab" href="#add-info"><i class="fa fa-info-circle"></i> <span>Additional Info</span></a></li>
+						{{-- <li><a data-toggle="tab" href="#add-info"><i class="fa fa-info-circle"></i> <span>Additional Info</span></a></li> --}}
 					</ul>
 					<div class="tab-content">
 						<div id="overview" class="tab-pane fade">
@@ -70,7 +70,7 @@
 								<i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
 								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
 							</p>
-							<h4 class="tab-heading">Exclusion</h4>
+							{{-- <h4 class="tab-heading">Exclusion</h4>
 							<p class="inc">
 								<i class="fa fa-times-circle-o"></i> Travel insurance<br>
 								<i class="fa fa-times-circle-o"></i> Increase in airfare<br>
@@ -78,7 +78,7 @@
 								<i class="fa fa-times-circle-o"></i> Travel insurance<br>
 								<i class="fa fa-times-circle-o"></i> Increase in airfare<br>
 								<i class="fa fa-times-circle-o"></i> Airport fees<br>
-							</p>
+							</p> --}}
 						</div>
 						<div id="inclusion" class="tab-pane fade">
 							<h4 class="tab-heading">Inclusion</h4>
@@ -265,7 +265,7 @@
 								</div>
 							</div>
 						</div>
-						<div id="add-info" class="tab-pane fade">
+						{{-- <div id="add-info" class="tab-pane fade">
 							<h4 class="tab-heading">Inclusion</h4>
 							<p class="inc">
 								<i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
@@ -288,13 +288,13 @@
 								<i class="fa fa-times-circle-o"></i> Increase in airfare<br>
 								<i class="fa fa-times-circle-o"></i> Airport fees<br>
 							</p>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4 package-detail-sidebar">
 				<div class="col-md-12 sidebar-wrapper clear-padding">
-					<div class="package-summary sidebar-item">
+					{{-- <div class="package-summary sidebar-item">
 						<h4><i class="fa fa-bookmark"></i> Package Summary</h4>
 						<div class="package-summary-body">
 							<h5><i class="fa fa-heart"></i>Theme</h5>
@@ -313,7 +313,7 @@
 								<a href="#">BOOK NOW</a>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 					<div class="sidebar-booking-box">
 						<h3 class="text-center">MAKE A BOOKING</h3>
 						<div class="booking-box-body">
@@ -405,7 +405,7 @@
 							<a href="mailto:info@yourdomain.com"><i class="fa fa-envelope-o"></i> Email Us</a>
 						</div>
 					</div>
-					<div class="review sidebar-item">
+					{{-- <div class="review sidebar-item">
 						<h4><i class="fa fa-comments"></i> Package Reviews</h4>
 						<div class="sidebar-item-body text-center">
 							<div class="rating-box">
@@ -449,7 +449,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>

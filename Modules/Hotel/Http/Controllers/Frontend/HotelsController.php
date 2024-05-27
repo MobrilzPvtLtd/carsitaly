@@ -100,10 +100,10 @@ class HotelsController extends Controller
         $$module_name_singular = $module_model::where('slug',$slug)->first();
 
         $latest_hotel = $module_model::where('service_type', 'hotels')
-        ->where('status', 1)->latest()->get();
+        ->where('status', 1)->latest()->limit(5)->get();
 
         $similar_hotel = $module_model::where('service_type', 'hotels')
-        ->where('status', 1)->where('similar', 1)->get();
+        ->where('status', 1)->where('similar', 1)->limit(3)->get();
 
         return view(
             "$module_path.$module_name.show",

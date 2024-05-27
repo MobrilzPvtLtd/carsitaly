@@ -120,7 +120,7 @@
                     <div id="ammenties" class="tab-pane fade">
                         <h4 class="tab-heading">Ammenties Style 1</h4>
                         <div class="ammenties-1">
-                            @foreach (json_decode($latest->facilities) as $faci)
+                            @foreach (json_decode($hotel->facilities) as $faci)
                                 <div class="col-md-4 col-sm-6">
                                     @if($faci == "wifi")
                                         <p><i class="fa fa-glass"></i> Free Drinks</p>
@@ -441,6 +441,92 @@
                     <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
                     <iframe class="hotel-map" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJG1usnet4BTkRzQqb_Ys-JOg&amp;key=AIzaSyB6hgZM-ruUqTPVUjXGUR-vv7WRqc4MXjY"></iframe>
                 </div>
+
+                <div class="contact sidebar-item">
+                    <div class="sidebar-booking-box">
+						<h3 class="text-center">MAKE A BOOKING</h3>
+						<div class="booking-box-body">
+							<form >
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<label>Start</label>
+									<div class="input-group margin-bottom-sm">
+										<input type="text" id="check_in" name="check_in" class="form-control" placeholder="DD/MM/YYYY">
+										<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+									</div>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<label>Duration</label>
+									<select class="selectpicker" name="rooms">
+										<option>3 Days</option>
+										<option>5 Days</option>
+										<option>1 Week</option>
+										<option>10 Days</option>
+										<option>2 Week</option>
+										<option>15+ Days</option>
+									</select>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<label>Adult</label>
+									<select class="selectpicker" name="adult">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+									</select>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<label>Child</label>
+									<select class="selectpicker" name="child">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+									</select>
+								</div>
+								<div class="room-price">
+									<div class="col-md-8 col-sm-8 col-xs-8">
+										<label><input type="checkbox" name="single"><span>Deluxe Single Room</span></label>
+									</div>
+									<div class="col-md-4 col-sm-4 col-xs-4">
+										<h5>$99/Night</h5>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="room-price">
+									<div class="col-md-8 col-sm-8 col-xs-8">
+										<label><input type="checkbox" name="double"><span>Deluxe Double Room</span></label>
+									</div>
+									<div class="col-md-4 col-sm-4 col-xs-4">
+										<h5>$199/Night</h5>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="room-price">
+									<div class="col-md-8 col-sm-8 col-xs-8">
+										<label><input type="checkbox" name="royal"><span>Royal Suite</span></label>
+									</div>
+									<div class="col-md-4 col-sm-4 col-xs-4">
+										<h5>$299/Night</h5>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="grand-total text-center">
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<h4>Total $599</h4>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<button type="submit">BOOK</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+                </div>
+
                 <div class="contact sidebar-item">
                     <h4><i class="fa fa-phone"></i> Contact Hotel</h4>
                     <div class="sidebar-item-body">

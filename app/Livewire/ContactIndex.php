@@ -17,7 +17,7 @@ class ContactIndex extends Component
     public function render()
     {
         $searchTerm = '%'.$this->searchTerm.'%';
-        $contacts = Contact::where('name', 'like', $searchTerm)->orderBy('id', 'desc')->paginate();
+        $contacts = Contact::where('name', 'like', $searchTerm)->orderBy('id', 'desc')->paginate(12);
 
         return view('livewire.contact-index', compact('contacts'));
     }

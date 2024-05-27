@@ -61,7 +61,8 @@
 
     <!-- START: LISTING AREA-->
         <div class="row">
-            <div class="container">
+            <livewire:filter-index />
+            {{-- <div class="container">
                 <!-- START: FILTER AREA -->
                 <div class="col-md-3 clear-padding">
                     <div class="filter-head text-center">
@@ -259,7 +260,7 @@
                     </div>
                     <!-- END: PAGINATION -->
                 </div>
-            </div>
+            </div> --}}
         </div>
     <!-- END: LISTING AREA -->
 @endsection

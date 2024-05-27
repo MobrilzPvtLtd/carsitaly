@@ -1,35 +1,204 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.services-app')
 
-@section('title') {{$$module_name_singular->name}} - {{ __($module_title) }} @endsection
+@section('title') {{$$module_name_singular->title}} - {{ __($module_title) }} @endsection
 
-@section('content')
+@section('services-content')
 
-<section class="bg-gray-100 text-gray-600 py-10 sm:py-20">
-    <div class="container mx-auto flex px-5 items-center justify-center flex-col">
-        <div class="text-center lg:w-2/3 w-full">
-            <p class="mb-8 leading-relaxed">
-                <a href="{{route('frontend.'.$module_name.'.index')}}" class="outline outline-1 outline-gray-800 bg-gray-200 hover:bg-gray-100 text-gray-800 text-sm font-semibold mr-2 px-3 py-1 rounded dark:bg-gray-700 dark:text-gray-300">
-                    {{ __($module_title) }}
+<div class="row page-title">
+    <div class="container clear-padding text-center">
+        <h3>{{ $villa->title }}</h3>
+        <h5>
+            @for ($i = 1; $i < 5; $i++)
+                @if($i <= $villa->rating)
+                    <i class="fa fa-star"></i>
+                @else
+                    <i class="fa fa-star-o"></i>
+                @endif
+            @endfor
+        </h5>
+        <p><i class="fa fa-map-marker"></i> {{ $villa->city }}, {{ $villa->mobile }}</p>
+    </div>
+</div>
+<div class="row hotel-detail">
+    <div class="container">
+        <div class="main-content col-md-8">
+            <div id="room-gallery" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#room-gallery" data-slide-to="0" class="active"></li>
+                    <li data-target="#room-gallery" data-slide-to="1"></li>
+                    <li data-target="#room-gallery" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    @if($villa->image)
+                        @php
+                            $images = json_decode($villa->image);
+                        @endphp
+                        @if ($images && count($images) > 0)
+                            @foreach ($images as $index => $image)
+                                <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('public/storage/' . $image) }}" alt="Hotel">
+                                </div>
+                            @endforeach
+                        @endif
+                    @endif
+                </div>
+
+                <a class="left carousel-control" href="#room-gallery" role="button" data-slide="prev">
+                    <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
                 </a>
-            </p>
-            <h1 class="text-3xl sm:text-4xl mb-4 font-medium text-gray-800">
-                {{$$module_name_singular->name}}
-            </h1>
-            <p class="mb-8 leading-relaxed">
-                {{$$module_name_singular->description}}
-            </p>
-
-            @include('frontend.includes.messages')
+                <a class="right carousel-control" href="#room-gallery" role="button" data-slide="next">
+                    <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="room-complete-detail">
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#overview"><i class="fa fa-bolt"></i> <span>Overview</span></a></li>
+                    <li class="active"><a data-toggle="tab" href="#room-info"><i class="fa fa-info-circle"></i> <span>Rooms</span></a></li>
+                    <li><a data-toggle="tab" href="#ammenties"><i class="fa fa-bed"></i> <span>Ammenties</span></a></li>
+                    {{-- <li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li> --}}
+                    {{-- <li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li> --}}
+                </ul>
+                <div class="tab-content">
+                    <div id="overview" class="tab-pane fade">
+                        <h4 class="tab-heading">About Grand Lilly</h4>
+                        <p>{{ $villa->description }}</p>
+                    </div>
+                    <div id="room-info" class="tab-pane fade in active">
+                        <h4 class="tab-heading">Room Types</h4>
+                        @foreach ($latest_villa as $latest)
+                            <div class="room-info-wrapper">
+                                <div class="col-md-4 col-sm-6 clear-padding">
+                                    @php
+                                        $images = json_decode($latest->image);
+                                    @endphp
+                                    @if ($images && count($images) > 0)
+                                        <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                    @endif
+                                </div>
+                                <div class="col-md-5 col-sm-6 room-desc">
+                                    <h4>{{ $latest->title }}</h4>
+                                    <h5>Max Guest: {{ $latest->adults }} Adults</h5>
+                                    <p>Includes 2 meals -
+                                        @if($latest->meals > 0)
+                                            @foreach (json_decode($latest->meals) as $meals)
+                                                {{ ucfirst(strtolower($meals)) }},
+                                            @endforeach
+                                        @endif
+                                    </p>
+                                    <p>
+                                        @if($latest->facilities > 0)
+                                            @foreach (json_decode($latest->facilities) as $facility)
+                                                @if($facility == "wifi")
+                                                    <i class="fa fa-wifi" title="Free Wifi"></i>
+                                                @elseif ($facility == "bed")
+                                                    <i class="fa fa-bed" title="Luxury Bedroom"></i>
+                                                @elseif ($facility == "taxi")
+                                                    <i class="fa fa-taxi" title="Transportation"></i>
+                                                @elseif ($facility == "beer")
+                                                    <i class="fa fa-beer" title="Bar"></i>
+                                                @elseif ($facility == "cutlery")
+                                                    <i class="fa fa-cutlery" title="Restaurant"></i>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="clearfix visible-sm-block"></div>
+                                <div class="col-md-3 text-center booking-box">
+                                    <div class="price">
+                                        <h3>${{ $latest->price }}/Night</h3>
+                                    </div>
+                                    <div class="book">
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div id="ammenties" class="tab-pane fade">
+                        <h4 class="tab-heading">Ammenties Style 1</h4>
+                        <div class="ammenties-1">
+                            @foreach (json_decode($villa->facilities) as $faci)
+                                <div class="col-md-4 col-sm-6">
+                                    @if($faci == "wifi")
+                                        <p><i class="fa fa-glass"></i> Free Drinks</p>
+                                    @elseif ($faci == "taxi")
+                                        <p><i class="fa fa-taxi"></i>Taxi Available</p>
+                                    @elseif ($faci == "bed")
+                                        <p><i class="fa fa-bed"></i>Luxury Bedroom</p>
+                                    @elseif ($faci == "beer")
+                                        <p><i class="fa fa-beer"></i>Bar Available</p>
+                                    @elseif ($faci == "cutlery")
+                                        <p><i class="fa fa-cutlery"></i>Free Meal</p>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="ammenties-3">
+                            <h4 class="tab-heading">Ammenties Style 2</h4>
+                            @foreach (json_decode($latest->facilities) as $facili)
+                                <div class="col-md-4 col-sm-6">
+                                    @if($facili == "wifi")
+                                        <p><i class="fa fa-wifi"></i> Free Wifi</p>
+                                    @elseif ($facili == "taxi")
+                                        <p><i class="fa fa-taxi"></i>Taxi Available</p>
+                                    @elseif ($facili == "bed")
+                                        <p><i class="fa fa-bed"></i>Luxury Bedroom</p>
+                                    @elseif ($facili == "beer")
+                                        <p><i class="fa fa-beer"></i>Bar Available</p>
+                                    @elseif ($facili == "cutlery")
+                                        <p><i class="fa fa-cutlery"></i>Free Meal</p>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 hotel-detail-sidebar">
+            <div class="col-md-12 sidebar-wrapper clear-padding">
+                <div class="map sidebar-item">
+                    <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
+                    <iframe class="hotel-map" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJG1usnet4BTkRzQqb_Ys-JOg&amp;key=AIzaSyB6hgZM-ruUqTPVUjXGUR-vv7WRqc4MXjY"></iframe>
+                </div>
+                <div class="contact sidebar-item">
+                    <h4><i class="fa fa-phone"></i> Contact Hotel</h4>
+                    <div class="sidebar-item-body">
+                        <h5><i class="fa fa-phone"></i> +91 {{ $villa->mobile }}</h5>
+                        <h5><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $villa->email }}">Send Email</a></h5>
+                        <h5><i class="fa fa-map-marker"></i> {{ $villa->address }}, {{ $villa->city }}, {{ $villa->country }}, {{ $villa->pin_code }}</h5>
+                    </div>
+                </div>
+                <div class="similar-hotel sidebar-item">
+                    <h4><i class="fa fa-bed"></i> Similar Hotel</h4>
+                    <div class="sidebar-item-body">
+                        @foreach ($similar_villa as $similar)
+                            <div class="similar-hotel-box">
+                                <a href="{{ route('frontend.villas.show',$similar->slug) }}">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+                                        @php
+                                            $images = json_decode($similar->image);
+                                        @endphp
+                                        @if ($images && count($images) > 0)
+                                            <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <h5>{{ $similar->title }}<span><i class="fa fa-star"></i></span></h5>
+                                        <h5><i class="fa fa-map-marker"></i> {{ $similar->address }}, {{ $similar->city }}</h5>
+                                        <span>${{ $similar->price }}/Night</span>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</section>
-
-<section class="bg-white text-gray-600 p-6 sm:p-20">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-            Content area.
-        </div>
-    </div>
-</section>
+</div>
 
 @endsection
