@@ -70,7 +70,7 @@ class HotelsController extends Controller
             }
         $$module_name = $$module_name->paginate();
 
-        $uniqueRoomNumbers = $module_model::distinct()->pluck('room_no');
+        $uniqueRoomNumbers = $module_model::where('room_no', '!=', null)->distinct()->pluck('room_no');
         $uniqueLocation = $module_model::distinct()->pluck('city');
 
         return view(
@@ -112,8 +112,6 @@ class HotelsController extends Controller
     }
 
     public function fetchData(Request $request){
-        $minPrice = $request->minPrice;
-        $maxPrice = $request->maxPrice;
         $module_model = $this->module_model;
 
         $query = $module_model::where('service_type', 'hotels')
@@ -125,9 +123,8 @@ class HotelsController extends Controller
             $query = $query->orderBy('id', 'asc');
         }
 
-        // $query = $query->whereBetween('price', [$minPrice, $maxPrice]);
-
         $query = $query->get();
+
         return response()->json($query);
     }
 }

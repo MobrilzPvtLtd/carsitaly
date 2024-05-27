@@ -8,9 +8,12 @@
                 <h5><i class="fa fa-usd"></i> Price</h5>
                 <p>
                     <label></label>
-                    <input type="text" id="amount" name="price" value="120" wire:model.live="searchPrice">
+                    <input type="text" id="amount" name="price" value="120">
                 </p>
-                <div id="price-range"></div>
+                <div wire:ignore>
+                    <div id="price-range"></div>
+                    <button id="update-search-price-btn" wire:click="updateSearchPrice($event.target.value)" style="display: none;"></button>
+                </div>
             </div>
             <div class="name-filter filter">
                 <h5><i class="fa fa-bed"></i> {{ ucfirst(strtolower($serviceType)) }} Name</h5>
@@ -50,38 +53,37 @@
                     <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
                 </ul>
             </div>
-
         </div>
     </div>
 
     <div class="col-md-9 hotel-listing">
         <div class="sort-area col-sm-10">
             <div class="col-md-3 col-sm-3 col-xs-6 sort">
-                <select class="selectpicker" wire:model="price" wire:change="sortByPrice">
+                <select class="custom-select-button" wire:change="updateSortPrice($event.target.value)">
                     <option value="">Price</option>
-                    <option value="lowest_price">High to Low</option>
-                    <option value="highest_price">Low to High</option>
+                    <option value="lowest_price">Low to High</option>
+                    <option value="highest_price">High to Low</option>
                 </select>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 sort">
-                <select class="selectpicker">
-                    <option>Star Rating</option>
-                    <option> Low to High</option>
-                    <option> High to Low</option>
+                <select class="custom-select-button" wire:change="updateSortPrice($event.target.value)">
+                    <option value="">Star Rating</option>
+                    <option value="lowest_rating"> Low to High</option>
+                    <option value="highest_rating"> High to Low</option>
                 </select>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 sort">
-                <select class="selectpicker">
-                    <option>User Rating</option>
-                    <option> Low to High</option>
-                    <option> High to Low</option>
+                <select class="custom-select-button" wire:change="updateSortPrice($event.target.value)">
+                    <option value="">User Rating</option>
+                    <option value="lowest_user_rating"> Low to High</option>
+                    <option value="highest_user_rating"> High to Low</option>
                 </select>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 sort">
-                <select class="selectpicker">
-                    <option>Name</option>
-                    <option> Ascending</option>
-                    <option> Descending</option>
+                <select class="custom-select-button" wire:change="updateSortPrice($event.target.value)">
+                    <option value="">Name</option>
+                    <option value="ascending"> Ascending</option>
+                    <option value="descending"> Descending</option>
                 </select>
             </div>
         </div>
@@ -98,90 +100,94 @@
         </div>
         <div class="clearfix"></div>
         <div class="switchable col-md-12 clear-padding">
-            @foreach ($services as $ser)
-                <div  class="hotel-list-view" id="switchable">
-                    <div class="wrapper">
-                        <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                            @if($ser->image)
-                                @php
-                                    $images = json_decode($ser->image);
-                                @endphp
+            @if(count($services) > 0)
+                @foreach ($services as $ser)
+                    <div  class="hotel-list-view" id="switchable">
+                        <div class="wrapper">
+                            <div class="col-md-4 col-sm-6 switch-img clear-padding">
+                                @if($ser->image)
+                                    @php
+                                        $images = json_decode($ser->image);
+                                    @endphp
 
-                                @if($images && count($images) > 0)
-                                    <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                    @if($images && count($images) > 0)
+                                        <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                    @endif
                                 @endif
-                            @endif
-                        </div>
-                        <div class="col-md-6 col-sm-6 hotel-info">
-                            <div>
-                                <div class="hotel-header">
-                                    <h5>{{ $ser->title }}
-                                        <span>
-                                            @php
-                                                $rating = $ser->rating;
-                                                $maxRating = 5;
-                                            @endphp
-                                            @for ($i = 1; $i <= $maxRating; $i++)
-                                                @if ($i <= $rating)
-                                                    <i class="fa fa-star colored"></i>
-                                                @else
-                                                    <i class="fa fa-star-o colored"></i>
-                                                @endif
-                                            @endfor
-                                        </span>
-                                    </h5>
-                                    <p>
-                                        <i class="fa fa-map-marker"></i>{{ $ser->city }}
-                                        <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
-                                    </p>
-                                </div>
-                                <div class="hotel-facility">
-                                    <p>
-                                        @if($ser->facilities > 0)
-                                            @foreach (json_decode($ser->facilities) as $facility)
-                                                @if($facility == "wifi")
-                                                    <i class="fa fa-wifi" title="Free Wifi"></i>
-                                                @elseif ($facility == "bed")
-                                                    <i class="fa fa-bed" title="Luxury Bedroom"></i>
-                                                @elseif ($facility == "taxi")
-                                                    <i class="fa fa-taxi" title="Transportation"></i>
-                                                @elseif ($facility == "beer")
-                                                    <i class="fa fa-beer" title="Bar"></i>
-                                                @elseif ($facility == "cutlery")
-                                                    <i class="fa fa-cutlery" title="Restaurant"></i>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </p>
-                                </div>
-                                <div class="hotel-desc">
-                                    <p>{{ $ser->meta_description }}</p>
+                            </div>
+                            <div class="col-md-6 col-sm-6 hotel-info">
+                                <div>
+                                    <div class="hotel-header">
+                                        <h5>{{ $ser->title }}
+                                            <span>
+                                                @php
+                                                    $rating = $ser->rating;
+                                                    $maxRating = 5;
+                                                @endphp
+                                                @for ($i = 1; $i <= $maxRating; $i++)
+                                                    @if ($i <= $rating)
+                                                        <i class="fa fa-star colored"></i>
+                                                    @else
+                                                        <i class="fa fa-star-o colored"></i>
+                                                    @endif
+                                                @endfor
+                                            </span>
+                                        </h5>
+                                        <p>
+                                            <i class="fa fa-map-marker"></i>{{ $ser->city }}
+                                            <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
+                                        </p>
+                                    </div>
+                                    <div class="hotel-facility">
+                                        <p>
+                                            @if($ser->facilities > 0)
+                                                @foreach (json_decode($ser->facilities) as $facility)
+                                                    @if($facility == "wifi")
+                                                        <i class="fa fa-wifi" title="Free Wifi"></i>
+                                                    @elseif ($facility == "bed")
+                                                        <i class="fa fa-bed" title="Luxury Bedroom"></i>
+                                                    @elseif ($facility == "taxi")
+                                                        <i class="fa fa-taxi" title="Transportation"></i>
+                                                    @elseif ($facility == "beer")
+                                                        <i class="fa fa-beer" title="Bar"></i>
+                                                    @elseif ($facility == "cutlery")
+                                                        <i class="fa fa-cutlery" title="Restaurant"></i>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </p>
+                                    </div>
+                                    <div class="hotel-desc">
+                                        <p>{{ $ser->meta_description }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="clearfix visible-sm-block"></div>
-                        <div class="col-md-2 rating-price-box text-center clear-padding">
-                            <div class="rating-box">
-                                <div class="tripadvisor-rating">
-                                    <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
+                            <div class="clearfix visible-sm-block"></div>
+                            <div class="col-md-2 rating-price-box text-center clear-padding">
+                                <div class="rating-box">
+                                    <div class="tripadvisor-rating">
+                                        <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
+                                    </div>
+                                    <div class="user-rating">
+                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                        <span>128 Guest Reviews.</span>
+                                    </div>
                                 </div>
-                                <div class="user-rating">
-                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                    <span>128 Guest Reviews.</span>
-                                </div>
-                            </div>
-                            <div class="room-book-box">
-                                <div class="price">
-                                    <h5>${{ $ser->price }} Avg/Night</h5>
-                                </div>
-                                <div class="book">
-                                    <a href="{{ route('frontend.' . $serviceType . '.show', $ser->slug) }}">BOOK</a>
+                                <div class="room-book-box">
+                                    <div class="price">
+                                        <h5>${{ $ser->price }} Avg/Night</h5>
+                                    </div>
+                                    <div class="book">
+                                        <a href="{{ route('frontend.' . $serviceType . '.show', $ser->slug) }}">BOOK</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @else
+                <h2 class="text-center text-danger mt-5">Invalid Data</h2>
+            @endif
         </div>
         <div class="clearfix"></div>
         <div class="bottom-pagination">

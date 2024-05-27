@@ -56,7 +56,11 @@
     </div>
 
     @php
-        $service = App\Models\Service::where('service_type', 'hotels')->get();
+        $currentUrl = Request::url();
+        $segments = explode('/', $currentUrl);
+        $serviceType = end($segments);
+
+        $service = App\Models\Service::where('service_type', $serviceType)->get();
         $minPrice = PHP_INT_MAX;
         $maxPrice = 0;
         foreach ($service as $key => $value) {
@@ -66,14 +70,11 @@
             if ($value->price > $maxPrice) {
                 $maxPrice = $value->price;
             }
-            $id = $value->id;
         }
     @endphp
 
-    <!-- Scripts -->
-    {{-- @livewireScripts --}}
+    @livewireScripts
     @stack('after-scripts')
-    @yield('scripts')
 
     @include('frontend.includes.script')
 </body>

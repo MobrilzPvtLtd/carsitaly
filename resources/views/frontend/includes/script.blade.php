@@ -8,32 +8,6 @@
 <script src="{{ asset('assets/js/js.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
-        $("#sortBy").on('change', function() {
-            let sortBy = $("#sortBy").val();
-            // alert(sortBy);
-            $.ajax({
-                url: 'api/fetch-data',
-                type: 'GET',
-                data: {
-                    sortBy: sortBy
-                },
-                success: function(response) {
-                    console.log("response ka data" ,response);
-                    // $(".switchable").html(response);
-                    // response.data.forEach(function(item) {
-                    //     $("#hotel-list").append(item);
-                    // });
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        });
-    });
-</script>
-
-<script>
     // $(function() {
     //     "use strict";
 
@@ -54,8 +28,6 @@
     // });
 
     $(document).ready(function(){
-        // var livewireId = "{{ $id }}";
-        // console.log(livewireId);
         $("#price-range").slider({
             range: true,
             min: {{ $minPrice }},
@@ -63,15 +35,16 @@
             values: [ {{ $minPrice }}, {{ $maxPrice }} ],
             slide: function(event, ui) {
                 $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                // this.set('searchTerm', ui.values[1]);
+                $("#update-search-price-btn").val(ui.values[0] + "-" + ui.values[1]);
             },
-            // change: function(event, ui) {
-            //     this.set('searchTerm', ui.values[1]);
-            // }
+            change: function(event, ui) {
+                $("#update-search-price-btn").click();
+            }
         });
-        ( "#amount" ).val( "$ " + $( "#price-range" ).slider( "values", 0 ) +
-            " - $ " + $( "#price-range" ).slider( "values", 1 ) );
+        $("#amount").val("$ " + $( "#price-range" ).slider( "values", 0 ) +
+            " - $ " + $( "#price-range" ).slider( "values", 1 ));
     });
+
 
     // $(function() {
     //     "use strict";

@@ -346,15 +346,33 @@ class HotelsController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('hotel', 'public');
+
+        //     if ($oldImagePath) {
+        //         Storage::disk('public')->delete($oldImagePath);
+        //     }
+        //     $modelData = $request->except('image');
+        //     $modelData['image'] = $imagePath;
+        // }
+
+        $modelData = $request->except('image');
+        $imagePaths = [];
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('hotel', 'public');
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('hotel', 'public');
+                $imagePaths[] = $imagePath;
+            }
 
             if ($oldImagePath) {
                 Storage::disk('public')->delete($oldImagePath);
             }
-            $modelData = $request->except('image');
-            $modelData['image'] = $imagePath;
+        }
+
+        if (!empty($imagePaths)) {
+            $modelData['image'] = json_encode($imagePaths);
         }
 
 

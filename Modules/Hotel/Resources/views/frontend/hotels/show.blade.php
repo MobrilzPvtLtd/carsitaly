@@ -28,12 +28,6 @@
                     <li data-target="#room-gallery" data-slide-to="1"></li>
                     <li data-target="#room-gallery" data-slide-to="2"></li>
                 </ol>
-                {{-- <div class="item">
-                    <img src="assets/images/slide2.jpg" alt="Cruise">
-                </div>
-                <div class="item">
-                    <img src="assets/images/slide.jpg" alt="Cruise">
-                </div> --}}
                 <div class="carousel-inner" role="listbox">
                     @if($hotel->image)
                         @php
