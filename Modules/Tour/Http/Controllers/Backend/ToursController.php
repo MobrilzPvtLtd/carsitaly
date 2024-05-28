@@ -235,12 +235,12 @@ class ToursController extends Controller
             $modelData['image'] = json_encode($imagePaths);
         }
 
-        if (!empty($request->inclusion)) {
-            $modelData['facilities'] = json_encode($request->inclusion);
+        if (!empty($request->facilities)) {
+            $modelData['facilities'] = json_encode($request->facilities);
         }
 
-        if (!empty($request->meals)) {
-            $modelData['meals'] = json_encode($request->meals);
+        if (!empty($request->inclusion)) {
+            $modelData['inclusion'] = json_encode($request->inclusion);
         }
 
         $$module_name_singular = $module_model::create($modelData);
@@ -362,8 +362,8 @@ class ToursController extends Controller
             $modelData['image'] = json_encode($imagePaths);
         }
 
-        if (!empty($request->inclusion)) {
-            $modelData['facilities'] = json_encode($request->inclusion);
+        if (!empty($request->facilities)) {
+            $modelData['facilities'] = json_encode($request->facilities);
         }
 
         if (!empty($request->meals)) {

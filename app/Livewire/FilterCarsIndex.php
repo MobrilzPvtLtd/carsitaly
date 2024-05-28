@@ -168,12 +168,12 @@ class FilterCarsIndex extends Component
 
         $brands = Car::where('status', 1)->distinct()->pluck('brand');
         $car_type = Car::where('status', 1)->distinct()->pluck('car_type');
-        $car_features = Car::where('status', 1)->distinct()->pluck('car_features');
-        $car_features_array = json_decode($car_features, true);
-        foreach ($car_features_array as $feature) {
-            $carFeature = $feature;
-        }
+        // $car_features = Car::where('status', 1)->distinct()->pluck('car_features');
+        // $car_features_array = json_decode($car_features, true);
+        // foreach ($car_features_array as $feature) {
+        //     $carFeature = $feature;
+        // }
 
-        return view('livewire.filter-cars-index', compact('cars','brands','serviceType','carFeature','car_type'));
+        return view('livewire.filter-cars-index', compact('cars','brands','serviceType','car_type'));
     }
 }

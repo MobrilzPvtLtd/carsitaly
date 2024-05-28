@@ -29,11 +29,12 @@ return new class extends Migration
             $table->dateTime('end_date')->nullable();
             $table->string('city',255)->nullable();
             $table->string('country',255)->nullable();
-            $table->decimal('duration', 10, 2)->nullable();
+            $table->string('duration')->nullable();
             $table->string('room_no',255)->nullable();
             $table->string('adults',255)->nullable();
             $table->longText('meals')->nullable();
             $table->longText('facilities')->nullable();
+            $table->longText('Inclusion')->nullable();
             $table->boolean('status')->default(0)->nullable();
             $table->boolean('similar')->default(0)->nullable();
 

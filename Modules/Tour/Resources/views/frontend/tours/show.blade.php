@@ -6,9 +6,13 @@
 	<!-- START: PAGE TITLE -->
 	<div class="row page-title">
 		<div class="container clear-padding text-center">
-			<h3>WONDERFUL EUROPE</h3>
-			<h4>6 Nights/7 Days</h4>
-			<span>Paris (2)<i class="fa fa-long-arrow-right"></i>London (2)<i class="fa fa-long-arrow-right"></i>Amesterdam (2)</span>
+			<h3>{{ $tour->title }}</h3>
+			<h4>{{ $tour->duration }} Nights
+                {{-- /7 Days --}}
+            </h4>
+			<span>{{ $tour->city }}
+                {{-- (2)<i class="fa fa-long-arrow-right"></i>London (2)<i class="fa fa-long-arrow-right"></i>Amesterdam (2) --}}
+            </span>
 		</div>
 	</div>
 	<!-- END: PAGE TITLE -->
@@ -24,15 +28,27 @@
 						<li data-target="#gallery" data-slide-to="2"></li>
 					</ol>
 					<div class="carousel-inner" role="listbox">
-						<div class="item active">
+                        @if($tour->image)
+                        @php
+                            $images = json_decode($tour->image);
+                        @endphp
+                        @if ($images && count($images) > 0)
+                            @foreach ($images as $index => $image)
+                                <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('public/storage/' . $image) }}" alt="{{ $tour->title }}">
+                                </div>
+                            @endforeach
+                        @endif
+                    @endif
+						{{-- <div class="item active">
 							<img src="assets/images/slide.jpg" alt="Cruise">
-						</div>
-						<div class="item">
-							<img src="assets/images/slide2.jpg" alt="Cruise">
-						</div>
-						<div class="item">
-							<img src="assets/images/slide.jpg" alt="Cruise">
-						</div>
+                            </div>
+                            <div class="item">
+                                <img src="assets/images/slide2.jpg" alt="Cruise">
+                            </div>
+                            <div class="item">
+                                <img src="assets/images/slide.jpg" alt="Cruise">
+						</div> --}}
 					</div>
 					<a class="left carousel-control" href="#gallery" role="button" data-slide="prev">
 						<span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -55,11 +71,18 @@
 						<div id="overview" class="tab-pane fade">
 							<h4 class="tab-heading">Overview</h4>
 							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								{{ $tour->description }}
 							</p>
 							<h4 class="tab-heading">Inclusion</h4>
 							<p class="inc">
-								<i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
+                                @php
+                                    $tourincArray = json_decode($tourinc, true);
+                                @endphp
+
+                                @foreach ($tourincArray as $tinc)
+                                    <i class="fa fa-check-circle"></i> {{ $tinc }}<br>
+                                @endforeach
+								{{-- <i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
 								<i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
 								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
 								<i class="fa fa-check-circle"></i> Guided tour<br>
@@ -68,7 +91,7 @@
 								<i class="fa fa-check-circle"></i> Buffet breakfast<br>
 								<i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
 								<i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
-								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
+								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br> --}}
 							</p>
 							{{-- <h4 class="tab-heading">Exclusion</h4>
 							<p class="inc">
@@ -87,15 +110,33 @@
 									<p><span><i class="fa fa-bed"></i></span>Hotel</p>
 								</div>
 								<div class="inclusion-body">
-									<h4>Paris, 2 Nights</h4>
-									<div class="col-md-3 col-sm-3 clear-padding">
-										<img src="assets/images/offer1.jpg" alt="cruise">
-									</div>
-									<div class="col-md-9 col-sm-9">
-										<h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-									<div class="clearfix"></div>
+                                    @foreach ($related_tour as $related)
+                                    <div class="similar-hotel-box">
+                                        <h4>{{ $related->city }}, {{ $related->duration }} Nights</h4>
+                                        <div class="col-md-3 col-sm-3 clear-padding">
+                                            @php
+                                                $images = json_decode($related->image);
+                                            @endphp
+                                            @if ($images && count($images) > 0)
+                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                            @endif
+                                            {{-- <img src="assets/images/offer1.jpg" alt="cruise"> --}}
+                                        </div>
+                                        <div class="col-md-9 col-sm-9">
+                                            <h5>{{ $related->address }}, {{ $related->city }}
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $related->rating)
+                                                        <i class="fa fa-star colored"></i>
+                                                    @else
+                                                        <i class="fa fa-star-o colored"></i>
+                                                    @endif
+                                                @endfor
+                                            </h5>
+                                            <p>{{ $related->meta_description }}</p>
+                                        </div>
+                                    </div>
+                                    @endforeach
+									{{-- <div class="clearfix"></div>
 									<h4>London, 2 Nights</h4>
 									<div class="col-md-3 col-sm-3 clear-padding">
 										<img src="assets/images/offer2.jpg" alt="cruise">
@@ -112,11 +153,11 @@
 									<div class="col-md-9 col-sm-9">
 										<h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
 										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
+									</div> --}}
 									<div class="clearfix"></div>
 								</div>
 							</div>
-							<div class="inclusion-wrapper">
+							{{-- <div class="inclusion-wrapper">
 								<div class="inclusion-title">
 									<p><span><i class="fa fa-plane"></i></span>Transport</p>
 								</div>
@@ -152,8 +193,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="inclusion-wrapper">
+							</div> --}}
+							{{-- <div class="inclusion-wrapper">
 								<div class="inclusion-title">
 									<p><span><i class="fa fa-suitcase"></i></span>Other Inclusion</p>
 								</div>
@@ -167,7 +208,7 @@
 										<i class="fa fa-check-circle"></i> Airport transport<br>
 									</p>
 								</div>
-							</div>
+							</div> --}}
 						</div>
 						<div id="itinerary" class="tab-pane fade in active">
 							<h4 class="tab-heading">Package Itinerary</h4>
@@ -400,9 +441,9 @@
 						<h4><i class="fa fa-phone"></i> Need Assistance</h4>
 						<div class="assitance-body text-center">
 							<h5>Need Help? Call us or drop a message. Our agents will be in touch shortly.</h5>
-							<h2>+91 1234567890</h2>
+							<h2>+91 {{ $tour->mobile }}</h2>
 							<h3>Or</h3>
-							<a href="mailto:info@yourdomain.com"><i class="fa fa-envelope-o"></i> Email Us</a>
+							<a href="mailto:{{ $tour->email }}"><i class="fa fa-envelope-o"></i> Email Us</a>
 						</div>
 					</div>
 					{{-- <div class="review sidebar-item">

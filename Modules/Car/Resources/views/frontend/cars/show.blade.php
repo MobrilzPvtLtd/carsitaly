@@ -100,10 +100,17 @@
 							</div>
 							<div class="clearfix"></div>
 							<h4 class="tab-heading">Brief Description of Car</h4>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+							<p>{{ $car->description }}</p>
 							<h4 class="tab-heading">Car Features</h4>
 							<ul class="check-list">
-								<li class="col-md-5 col-sm-5">GPS Navigation</li>
+                                @php
+                                    $carFeaturesArray = json_decode($carFeature, true);
+                                @endphp
+
+                                @foreach ($carFeaturesArray as $feature)
+                                    <li class="col-md-5 col-sm-5">{{ $feature }}</li>
+                                @endforeach
+								{{-- <li class="col-md-5 col-sm-5">GPS Navigation</li>
 								<li class="col-md-5 col-sm-5">Automatic Transmission</li>
 								<li class="col-md-5 col-sm-5">FM Radio</li>
 								<li class="col-md-5 col-sm-5">4 Doors & Panorama View</li>
@@ -114,7 +121,7 @@
 								<li class="col-md-5 col-sm-5">Hi FI Sound System</li>
 								<li class="col-md-5 col-sm-5">GPS Navigation</li>
 								<li class="col-md-5 col-sm-5">Automatic Transmission</li>
-								<li class="col-md-5 col-sm-5">FM Radio</li>
+								<li class="col-md-5 col-sm-5">FM Radio</li> --}}
 							</ul>
 						</div>
 						{{-- <div id="review" class="tab-pane fade">
@@ -271,12 +278,12 @@
 					<div class="contact sidebar-item">
 						<h4><i class="fa fa-phone"></i> Contact Agent</h4>
 						<div class="sidebar-item-body">
-							<h5><i class="fa fa-phone"></i> +91 1234567890</h5>
-							<h5><i class="fa fa-envelope-o"></i> <a href="mailto:your@domainname.com">Send Email</a></h5>
-							<h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
+							<h5><i class="fa fa-phone"></i> +91 {{ $car->mobile }}</h5>
+							<h5><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $car->email }}">Send Email</a></h5>
+							<h5><i class="fa fa-map-marker"></i> {{ $car->address }}, {{ $car->city }}, {{ $car->country }}, {{ $car->pin_code }}</h5>
 						</div>
 					</div>
-					<div class="review sidebar-item">
+					{{-- <div class="review sidebar-item">
 						<h4><i class="fa fa-edit"></i> Car Reviews</h4>
 						<div class="sidebar-item-body text-center">
 							<div class="rating-box">
@@ -320,11 +327,30 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 					<div class="similar-hotel sidebar-item">
 						<h4><i class="fa fa-taxi"></i> Similar Cars</h4>
 						<div class="sidebar-item-body">
-							<div class="similar-hotel-box">
+                            @foreach ($similar_cars as $similar)
+                            <div class="similar-hotel-box">
+                                <a href="{{ route('frontend.hotels.show',$similar->slug) }}">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+                                        @php
+                                            $images = json_decode($similar->image);
+                                        @endphp
+                                        @if ($images && count($images) > 0)
+                                            <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <h5>{{ $similar->title }}<span><i class="fa fa-star"></i></span></h5>
+                                        <h5><i class="fa fa-certificate"></i> {{ $similar->brand }}</h5>
+										<span>${{ $similar->price }}/Day</span>
+                                    </div>
+                                </a>
+                            </div>
+                            @endforeach
+							{{-- <div class="similar-hotel-box">
 								<a href="#">
 									<div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
 										<img src="assets/images/tour1.jpg" alt="Cruise">
@@ -335,8 +361,8 @@
 										<span>$100/Day</span>
 									</div>
 								</a>
-							</div>
-							<div class="similar-hotel-box">
+							</div> --}}
+							{{-- <div class="similar-hotel-box">
 								<a href="#">
 									<div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
 										<img src="assets/images/tour1.jpg" alt="Cruise">
@@ -359,7 +385,7 @@
 										<span>$90/Day</span>
 									</div>
 								</a>
-							</div>
+							</div> --}}
 						</div>
 					</div>
 				</div>

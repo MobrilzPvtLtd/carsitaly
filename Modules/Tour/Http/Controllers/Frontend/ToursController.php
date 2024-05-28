@@ -83,9 +83,17 @@ class ToursController extends Controller
         // $$module_name_singular = $module_model::findOrFail($id);
         $$module_name_singular = $module_model::where('slug',$slug)->first();
 
+        $related_tour = $module_model::where('status', 1)->where('service_type', 'tours')->latest()->limit(4)->get();
+
+        $inclusion = $module_model::where('status', 1)->distinct()->pluck('inclusion');
+        $inclusion_array = json_decode($inclusion, true);
+        foreach ($inclusion_array as $inc) {
+            $tourinc = $inc;
+        }
+
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'tourinc','related_tour')
         );
     }
 }

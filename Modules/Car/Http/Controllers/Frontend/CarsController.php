@@ -82,9 +82,17 @@ class CarsController extends Controller
         // $$module_name_singular = $module_model::findOrFail($slug);
         $$module_name_singular = $module_model::where('slug',$slug)->first();
 
+        $similar_cars = $module_model::where('status', 1)->latest()->limit(6)->get();
+
+        $car_features = $module_model::where('status', 1)->distinct()->pluck('inclusion');
+        $car_features_array = json_decode($car_features, true);
+        foreach ($car_features_array as $feature) {
+            $carFeature = $feature;
+        }
+
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'carFeature','similar_cars')
         );
     }
 }
