@@ -84,7 +84,7 @@ class CarsController extends Controller
 
         $similar_cars = $module_model::where('status', 1)->latest()->limit(6)->get();
 
-        $car_features = $module_model::where('status', 1)->distinct()->pluck('inclusion');
+        $car_features = $module_model::where('status', 1)->distinct()->pluck('car_features');
         $car_features_array = json_decode($car_features, true);
         foreach ($car_features_array as $feature) {
             $carFeature = $feature;
