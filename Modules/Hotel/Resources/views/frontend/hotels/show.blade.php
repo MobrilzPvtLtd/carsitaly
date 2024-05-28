@@ -16,7 +16,7 @@
                 @endif
             @endfor
         </h5>
-        <p><i class="fa fa-map-marker"></i> {{ $hotel->city }}, {{ $hotel->mobile }}</p>
+        <p><i class="fa fa-map-marker"></i> {{ $hotel->city }}, {{ $hotel->pin_code }}</p>
     </div>
 </div>
 <div class="row hotel-detail">

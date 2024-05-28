@@ -4,7 +4,7 @@
 
 @section('services-content')
     <!-- START: MODIFY SEARCH -->
-        <div class="row modify-search modify-holiday">
+        {{-- <div class="row modify-search modify-holiday">
             <div class="container">
                 <form >
                     <div class="col-md-3 col-sm-6">
@@ -56,13 +56,16 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> --}}
     <!-- END: MODIFY SEARCH -->
 
+
+    <livewire:filter-index />
+
+
     <!-- START: LISTING AREA-->
-        <div class="row">
-            <livewire:filter-index />
-            {{-- <div class="container">
+        {{-- <div class="row">
+            <div class="container">
                 <!-- START: FILTER AREA -->
                 <div class="col-md-3 clear-padding">
                     <div class="filter-head text-center">
@@ -260,7 +263,7 @@
                     </div>
                     <!-- END: PAGINATION -->
                 </div>
-            </div> --}}
-        </div>
+            </div>
+        </div> --}}
     <!-- END: LISTING AREA -->
 @endsection

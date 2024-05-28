@@ -64,7 +64,7 @@
                                 @lang("car::text.price")
                             </th>
                             <th>
-                                @lang("car::text.duration")
+                                @lang("car::text.brand")
                             </th>
                             <th>
                                 @lang("car::text.status")
@@ -132,8 +132,8 @@
                 name: 'price'
             },
             {
-                data: 'duration',
-                name: 'duration'
+                data: 'brand',
+                name: 'brand'
             },
             {
                 data: 'status',

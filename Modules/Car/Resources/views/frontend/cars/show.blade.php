@@ -3,31 +3,21 @@
 @section('title') {{$$module_name_singular->title}} - {{ __($module_title) }} @endsection
 
 @section('services-content')
-
-	<!-- START: PAGE TITLE -->
-	<div class="row page-title page-title3">
-		<div class="container clear-padding text-center">
-			<h3>MERCEDES C CLASS</h3>
-			<h4>
-				<i class="fa fa-certificate"></i>
-				MERCEDES
-			</h4>
-			<p><i class="fa fa-map-marker"></i> Mall Road, Shimla</p>
-		</div>
+	<div class="row page-title">
+        <div class="container clear-padding text-center">
+            <h3>{{ $car->title }}</h3>
+            <h5>
+                @for ($i = 1; $i < 5; $i++)
+                    @if($i <= $car->rating)
+                        <i class="fa fa-star"></i>
+                    @else
+                        <i class="fa fa-star-o"></i>
+                    @endif
+                @endfor
+            </h5>
+            <p><i class="fa fa-map-marker"></i> {{ $car->city }}, {{ $car->pin_code }}</p>
+        </div>
 	</div>
-    <div class="container clear-padding text-center">
-        <h3>{{ $car->title }}</h3>
-        <h5>
-            @for ($i = 1; $i < 5; $i++)
-                @if($i <= $car->rating)
-                    <i class="fa fa-star"></i>
-                @else
-                    <i class="fa fa-star-o"></i>
-                @endif
-            @endfor
-        </h5>
-        <p><i class="fa fa-map-marker"></i> {{ $car->city }}, 176077</p>
-    </div>
 	<!-- END: PAGE TITLE -->
 
 	<!-- START: ROOM GALLERY -->
@@ -40,12 +30,24 @@
 						<li data-target="#room-gallery" data-slide-to="1"></li>
 					</ol>
 					<div class="carousel-inner" role="listbox">
-						<div class="item active">
+						{{-- <div class="item active">
 							<img src="assets/images/slide2.jpg" alt="Cruise">
 						</div>
 						<div class="item">
 							<img src="assets/images/slide.jpg" alt="Cruise">
-						</div>
+						</div> --}}
+                        @if($car->image)
+                        @php
+                            $images = json_decode($car->image);
+                        @endphp
+                        @if ($images && count($images) > 0)
+                            @foreach ($images as $index => $image)
+                                <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('public/storage/' . $image) }}" alt="car">
+                                </div>
+                            @endforeach
+                        @endif
+                    @endif
 					</div>
 					<a class="left carousel-control" href="#room-gallery" role="button" data-slide="prev">
 						<span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -59,18 +61,18 @@
 				<div class="room-complete-detail">
 					<ul class="nav nav-tabs">
 						<li class="active"><a data-toggle="tab" href="#overview"><i class="fa fa-bolt"></i> <span>Overview</span></a></li>
-						<li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li>
-						<li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li>
+						{{-- <li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li> --}}
+						{{-- <li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li> --}}
 					</ul>
 					<div class="tab-content">
 						<div id="overview" class="tab-pane active in fade">
 							<h4 class="tab-heading">OVERVIEW</h4>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-tint"></i>Diesel</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-dashboard"></i>Auto</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-users"></i>4 People</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-taxi"></i>4 Doors</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-suitcase"></i>100 KG</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-eye"></i>Navigation</div>
+							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-tint"></i>{{ $car->engine_type }}</div>
+							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-dashboard"></i>{{ $car->transmission }}</div>
+							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-users"></i>{{ $car->seating_capacity }} People</div>
+							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-taxi"></i>{{ $car->top_speed }} Doors</div>
+							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-suitcase"></i>{{ $car->mileage }} KG</div>
+							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-calendar"></i>{{ $car->warranty }} Year</div>
 							<div class="clearfix"></div>
 							<div class="rent-box">
 								<div class="add-ons col-md-6 col-sm-6">
@@ -115,7 +117,7 @@
 								<li class="col-md-5 col-sm-5">FM Radio</li>
 							</ul>
 						</div>
-						<div id="review" class="tab-pane fade">
+						{{-- <div id="review" class="tab-pane fade">
 							<h4 class="tab-heading">CAR REVIEWS</h4>
 							<div class="review-header">
 								<div class="col-md-6 col-sm6 text-center">
@@ -260,7 +262,7 @@
 									<button type="submit" class="btn btn-default submit-review">Submit</button>
 								</div>
 							</form>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 			</div>

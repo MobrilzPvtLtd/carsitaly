@@ -17,16 +17,29 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
-            $table->string('slug')->nullable();
-            $table->string('image')->nullable();
-            $table->string('duration')->nullable();
+            $table->string('slug')->unique();
+            $table->string('email')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('pin_code')->nullable();
+            $table->string('brand')->nullable();
+            $table->longText('image')->nullable();
             $table->decimal('price', 10, 2);
-            $table->string('vehicle')->nullable();
-            $table->integer('top_speed');
+            $table->string('warranty')->nullable();
+            $table->string('mileage')->nullable();
+            $table->string('engine_type')->nullable();
+            $table->string('car_type')->nullable();
+            $table->string('pickUp_date')->nullable();
+            $table->string('return_date')->nullable();
+            $table->string('seating_capacity')->nullable();
+            $table->string('top_speed')->nullable();
+            $table->string('rating')->nullable();
             $table->string('transmission')->nullable();
-            $table->integer('mileage');
-            $table->string('fuel')->nullable();
-            $table->integer('capacity');
+            $table->longText('meta_description')->nullable();
+            $table->longText('description')->nullable();
+            $table->longText('car_features')->nullable();
             $table->tinyInteger('status')->default(1);
 
             $table->integer('created_by')->unsigned()->nullable();

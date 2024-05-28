@@ -41,19 +41,14 @@ class FilterIndex extends Component
     public $sort_rating;
     public $selectedSort;
 
+    public $formLocation;
+    public $fRoom_no;
+    public $city;
+    public $check_in;
+    public $check_out;
+    public $room_no;
+
     protected $paginationTheme = 'bootstrap';
-    // protected $listeners = ['filterApplied'];
-
-    // public function filterApplied($location){
-    //     dd(123);
-    //     $services = Service::where('service_type', $this->serviceType)->where('status', 1)->query();
-
-    //     if($location) {
-    //         $services->where('city', 'like', "%$location%");
-    //     }
-
-    //     $services = $services->orderBy('id', 'desc')->paginate(6);
-    // }
 
     public function mount()
     {
@@ -61,6 +56,12 @@ class FilterIndex extends Component
 
         $segments = explode('/', $currentUrl);
         $this->serviceType = end($segments);
+    }
+
+    public function applyFilter()
+    {
+        $this->formLocation = $this->city;
+        $this->fRoom_no = $this->room_no;
     }
 
     public function updateSearchPrice($val)
@@ -79,6 +80,7 @@ class FilterIndex extends Component
 
     public function render()
     {
+        // dd($this->fRoom_no);
         $title = '%'.$this->searchTerm.'%';
         $serviceType = $this->serviceType;
         $location = $this->filterLocation;
@@ -114,6 +116,14 @@ class FilterIndex extends Component
         if($title) {
             $services->where('title', 'like', "%$title%");
         }
+
+        $services->when($this->formLocation, function ($query) {
+            $query->where('city', 'like', "%$this->formLocation%");
+
+            if ($this->fRoom_no) {
+                $query->where('room_no', $this->fRoom_no);
+            }
+        });
 
         $selectedLocations = array_keys(array_filter($location));
 
@@ -183,8 +193,12 @@ class FilterIndex extends Component
 
         $services = $services->orderBy('id', 'desc')->paginate(6);
 
+        // dd($services);
         $uniqueLocation = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('city');
 
-        return view('livewire.filter-index', compact('services','uniqueLocation','serviceType'));
+        $uniqueRoomNumbers = Service::where('service_type', $serviceType)
+                ->where('status', 1)->where('room_no', '!=', null)->distinct()->pluck('room_no');
+
+        return view('livewire.filter-index', compact('services','uniqueLocation','serviceType','uniqueRoomNumbers'));
     }
 }

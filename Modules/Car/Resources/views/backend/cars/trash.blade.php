@@ -42,7 +42,7 @@
                                 Price
                             </th>
                             <th>
-                                Duration
+                                Brand
                             </th>
                             <th>
                                 Status
@@ -74,7 +74,7 @@
                             </td>
                             <td>
                                 <strong>
-                                    {{ $module_name_singular->duration }}
+                                    {{ $module_name_singular->brand }}
                                 </strong>
                             </td>
                             <td>

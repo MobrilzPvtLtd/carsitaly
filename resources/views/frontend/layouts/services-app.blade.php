@@ -60,15 +60,29 @@
         $segments = explode('/', $currentUrl);
         $serviceType = end($segments);
 
-        $service = App\Models\Service::where('service_type', $serviceType)->get();
-        $minPrice = PHP_INT_MAX;
-        $maxPrice = 0;
-        foreach ($service as $key => $value) {
-            if ($value->price < $minPrice) {
-                $minPrice = $value->price;
+        if ($serviceType == 'cars') {
+            $cars = Modules\Car\Models\Car::get();
+            $minPrice = PHP_INT_MAX;
+            $maxPrice = 0;
+            foreach ($cars as $key => $value) {
+                if ($value->price < $minPrice) {
+                    $minPrice = $value->price;
+                }
+                if ($value->price > $maxPrice) {
+                    $maxPrice = $value->price;
+                }
             }
-            if ($value->price > $maxPrice) {
-                $maxPrice = $value->price;
+        }else {
+            $service = App\Models\Service::where('service_type', $serviceType)->get();
+            $minPrice = PHP_INT_MAX;
+            $maxPrice = 0;
+            foreach ($service as $key => $value) {
+                if ($value->price < $minPrice) {
+                    $minPrice = $value->price;
+                }
+                if ($value->price > $maxPrice) {
+                    $maxPrice = $value->price;
+                }
             }
         }
     @endphp

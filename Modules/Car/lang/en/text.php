@@ -5,7 +5,7 @@ return [
     'image' => 'Image',
     'title' => 'Title',
     'slug' => 'Slug',
-    'duration' => 'Duration',
+    'brand' => 'Brand',
     'price' => 'Price',
     'description' => 'Description',
     'status' => 'Status',

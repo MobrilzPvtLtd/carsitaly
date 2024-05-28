@@ -914,6 +914,19 @@ h5 {
 .custom-select-button option:hover{
     color: #00ADEF;
 }
+.custom-select-room{
+    background: #ffffff;
+    border: 1px solid #BEC4C8;
+    border-radius: 0;
+    height: 40px;
+    width: 70px;
+    cursor: pointer;
+}
+.custom-select-room option {
+	background: #07253F;
+	border-radius: 0;
+    color: #ffffff;
+}
 .selectpicker{
     background: transparent none repeat scroll 0 0;
     border: 1px solid #BEC4C8;

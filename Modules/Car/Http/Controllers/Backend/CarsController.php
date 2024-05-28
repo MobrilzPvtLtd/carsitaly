@@ -127,7 +127,7 @@ class CarsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::select('id', 'image', 'title','slug', 'price', 'duration', 'status');
+        $$module_name = $module_model::select('id', 'image', 'title','slug', 'price', 'brand', 'status');
 
         $data = $$module_name;
 
@@ -139,9 +139,18 @@ class CarsController extends Controller
             })
             ->editColumn('image', function ($data) {
                 if ($data->image) {
-                    return '<a href="' . route('backend.cars.show', $data->id) . '">
-                                <img src="' . asset('public/storage/') . '/' . $data->image . '" alt="" width="100px">
-                            </a>';
+                    $images = json_decode($data->image);
+                    $html = '<a href="' . route('backend.cars.show', $data->id) . '">';
+
+                    if ($images && count($images) > 0) {
+                        // foreach ($images as $image) {
+                            $html .= '<img src="' . asset('public/storage/' . $images[0]) . '" alt="cruise" width="100px">';
+                        // }
+                    }
+
+                    $html .= '</a>';
+
+                    return $html;
                 }
             })
             ->editColumn('status', function ($data) {
@@ -202,12 +211,30 @@ class CarsController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
+        $modelData = $request->except('image');
+        $imagePaths = [];
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('car', 'public');
-            $modelData = $request->except('image');
-            $modelData['image'] = $imagePath;
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('cars', 'public');
+                $imagePaths[] = $imagePath;
+            }
         }
+
+        if (!empty($imagePaths)) {
+            $modelData['image'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->car_features)) {
+            $modelData['car_features'] = json_encode($request->car_features);
+        }
+
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('car', 'public');
+        //     $modelData = $request->except('image');
+        //     $modelData['image'] = $imagePath;
+        // }
 
         $$module_name_singular = $module_model::create($modelData);
 
@@ -301,15 +328,35 @@ class CarsController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('car', 'public');
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('car', 'public');
 
+        //     if ($oldImagePath) {
+        //         Storage::disk('public')->delete($oldImagePath);
+        //     }
+        //     $modelData = $request->except('image');
+        //     $modelData['image'] = $imagePath;
+        // }
+        $modelData = $request->except('image');
+        $imagePaths = [];
+
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('cars', 'public');
+                $imagePaths[] = $imagePath;
+            }
             if ($oldImagePath) {
                 Storage::disk('public')->delete($oldImagePath);
             }
-            $modelData = $request->except('image');
-            $modelData['image'] = $imagePath;
+        }
+
+        if (!empty($imagePaths)) {
+            $modelData['image'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->car_features)) {
+            $modelData['car_features'] = json_encode($request->car_features);
         }
 
         $$module_name_singular->update($modelData);

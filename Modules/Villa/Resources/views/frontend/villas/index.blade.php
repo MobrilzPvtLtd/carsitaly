@@ -5,7 +5,7 @@
 @section('services-content')
 
 <div class="site-wrapper">
-	<div class="row modify-search modify-hotel">
+	{{-- <div class="row modify-search modify-hotel">
 		<div class="container clear-padding">
 			<form >
 				<div class="col-md-4">
@@ -55,10 +55,10 @@
 				</div>
 			</form>
 		</div>
-	</div>
+	</div> --}}
 
-    <div class="row">
-        {{-- <div class="container">
+    {{-- <div class="row">
+        <div class="container">
             <div class="col-md-3 clear-padding">
                 <div class="filter-head text-center">
                     <h4>{{ $villas->count() }} Result Found Matching Your Search.</h4>
@@ -246,9 +246,8 @@
                 </div>
                 <!-- END: PAGINATION -->
             </div>
-        </div> --}}
-
-        <livewire:filter-index />
-    </div>
+        </div>
+    </div> --}}
+    <livewire:filter-index />
 </div>
 @endsection
