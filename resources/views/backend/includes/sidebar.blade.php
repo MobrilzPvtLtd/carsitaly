@@ -7,8 +7,8 @@ $notifications_latest = optional($notifications)->take(5);
 <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
     <div class="sidebar-header border-bottom">
         <div class="sidebar-brand d-sm-flex justify-content-center">
-            <a href="/">
-                <img class="sidebar-brand-full" src="{{ asset('img/logo.png') }}" alt="{{ app_name() }}"
+            <a href="{{ route('home') }}">
+                <img class="sidebar-brand-full" src="{{ asset('img/logo-admin.png') }}" alt="{{ app_name() }}"
                     height="46">
             </a>
             <img class="sidebar-brand-narrow" src="{{ asset('img/logo-square.jpg') }}" alt="{{ app_name() }}"

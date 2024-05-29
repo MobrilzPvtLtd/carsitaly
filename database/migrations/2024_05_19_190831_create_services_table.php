@@ -25,8 +25,8 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('rating')->nullable();
             $table->decimal('price', 10, 2)->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
+            $table->longText('start_date')->nullable();
+            $table->longText('end_date')->nullable();
             $table->string('city',255)->nullable();
             $table->string('country',255)->nullable();
             $table->string('duration')->nullable();
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('adults',255)->nullable();
             $table->longText('meals')->nullable();
             $table->longText('facilities')->nullable();
-            $table->longText('Inclusion')->nullable();
+            $table->longText('inclusion')->nullable();
             $table->boolean('status')->default(0)->nullable();
             $table->boolean('similar')->default(0)->nullable();
 

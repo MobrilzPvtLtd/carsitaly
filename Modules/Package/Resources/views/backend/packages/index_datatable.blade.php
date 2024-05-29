@@ -20,8 +20,6 @@
             </x-slot>
             <x-slot name="toolbar">
                 @can('add_'.$module_name)
-                <a href="{{ route('backend.packages.index') }}" class="btn btn-success m-1"><i class="fas fa-save fa-fw"></i>&nbsp; Package</a>
-
                 <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}" />
                 @endcan
 
@@ -54,31 +52,22 @@
                                 #
                             </th>
                             <th>
-                                @lang("tour::text.image")
+                                @lang("package::text.image")
                             </th>
                             <th>
-                                @lang("tour::text.title")
+                                @lang("package::text.tour_name")
                             </th>
                             <th>
-                                @lang("tour::text.slug")
+                                @lang("package::text.validity")
                             </th>
                             <th>
-                                @lang("tour::text.price")
+                                @lang("package::text.city")
                             </th>
                             <th>
-                                @lang("tour::text.city")
-                            </th>
-                            <th>
-                                @lang("tour::text.mobile")
-                            </th>
-                            <th>
-                                @lang("tour::text.rating")
-                            </th>
-                            <th>
-                                @lang("tour::text.status")
+                                @lang("package::text.status")
                             </th>
                             <th class="text-end">
-                                @lang("tour::text.action")
+                                @lang("package::text.action")
                             </th>
                         </tr>
                     </thead>
@@ -128,28 +117,16 @@
                 name: 'image'
             },
             {
-                data: 'title',
-                name: 'title'
+                data: 'service_id',
+                name: 'service_id'
             },
             {
-                data: 'slug',
-                name: 'slug'
-            },
-            {
-                data: 'price',
-                name: 'price'
+                data: 'validity',
+                name: 'validity'
             },
             {
                 data: 'city',
                 name: 'city'
-            },
-            {
-                data: 'mobile',
-                name: 'mobile'
-            },
-            {
-                data: 'rating',
-                name: 'rating'
             },
             {
                 data: 'status',

@@ -70,7 +70,10 @@
                             </button>
 
                             <!-- BEGIN: LOGO -->
-                            <a class="navbar-brand logo" href="index-4.html">Car Italy and tours</a>
+                            <a href="{{ route('home') }}">
+                                <img class="sidebar-brand-full" src="{{ asset('img/logo-admin.png') }}" alt="{{ app_name() }}" width="100px">
+                                {{-- Car Italy and tours --}}
+                            </a>
                         </div>
 
                         <!-- BEGIN: NAVIGATION -->

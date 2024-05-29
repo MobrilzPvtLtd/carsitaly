@@ -83,18 +83,18 @@
                                     <i class="fa fa-check-circle"></i> {{ $tinc }}<br>
                                 @endforeach
 								{{-- <i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
-								<i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
-								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
-								<i class="fa fa-check-circle"></i> Guided tour<br>
-								<i class="fa fa-check-circle"></i> Sighseeing<br>
-								<i class="fa fa-check-circle"></i> Airport transport<br>
-								<i class="fa fa-check-circle"></i> Buffet breakfast<br>
-								<i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
-								<i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
+                                    <i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
+                                    <i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
+                                    <i class="fa fa-check-circle"></i> Guided tour<br>
+                                    <i class="fa fa-check-circle"></i> Sighseeing<br>
+                                    <i class="fa fa-check-circle"></i> Airport transport<br>
+                                    <i class="fa fa-check-circle"></i> Buffet breakfast<br>
+                                    <i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
+                                    <i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
 								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br> --}}
 							</p>
 							{{-- <h4 class="tab-heading">Exclusion</h4>
-							<p class="inc">
+							    <p class="inc">
 								<i class="fa fa-times-circle-o"></i> Travel insurance<br>
 								<i class="fa fa-times-circle-o"></i> Increase in airfare<br>
 								<i class="fa fa-times-circle-o"></i> Airport fees<br>
@@ -137,20 +137,20 @@
                                     </div>
                                     @endforeach
 									{{-- <div class="clearfix"></div>
-									<h4>London, 2 Nights</h4>
-									<div class="col-md-3 col-sm-3 clear-padding">
-										<img src="assets/images/offer2.jpg" alt="cruise">
-									</div>
-									<div class="col-md-9 col-sm-9">
-										<h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-									<div class="clearfix"></div>
-									<h4>Amsterdam, 2 Nights</h4>
-									<div class="col-md-3 col-sm-3 clear-padding">
-										<img src="assets/images/offer3.jpg" alt="cruise">
-									</div>
-									<div class="col-md-9 col-sm-9">
+                                        <h4>London, 2 Nights</h4>
+                                        <div class="col-md-3 col-sm-3 clear-padding">
+                                            <img src="assets/images/offer2.jpg" alt="cruise">
+                                        </div>
+                                        <div class="col-md-9 col-sm-9">
+                                            <h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <h4>Amsterdam, 2 Nights</h4>
+                                        <div class="col-md-3 col-sm-3 clear-padding">
+                                            <img src="assets/images/offer3.jpg" alt="cruise">
+                                        </div>
+                                        <div class="col-md-9 col-sm-9">
 										<h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
 										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 									</div> --}}
@@ -212,38 +212,50 @@
 						</div>
 						<div id="itinerary" class="tab-pane fade in active">
 							<h4 class="tab-heading">Package Itinerary</h4>
-							<div class="daily-schedule">
-								<div class="title">
-									<p><span>Day 1</span>Paris</p>
-								</div>
-								<div class="daily-schedule-body">
-									<div class="col-md-4 col-sm-4">
-										<img src="assets/images/tour1.jpg" alt="cruise">
-									</div>
-									<div class="col-md-8 col-sm-8">
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-									</div>
-									<div class="clearfix"></div>
-									<div class="col-md-12 activity">
-										<h4>Included</h4>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Taxi transfer from airport</p>
-										</div>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Welcome drinks at hotel</p>
-										</div>
-										<div class="clearfix"></div>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Buffet dinner</p>
-										</div>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Guided city tour</p>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<div class="daily-schedule">
+                            @php
+                                $packages = App\Models\Package::where('service_id', $tour->id)->get();
+                            @endphp
+                            @foreach ($packages as $package)
+                                <div class="daily-schedule">
+                                    <div class="title">
+                                        <p><span>Day {{ $package->validity }}</span>{{ $package->city }}</p>
+                                    </div>
+                                    <div class="daily-schedule-body">
+                                        <div class="col-md-4 col-sm-4">
+                                            <img src="{{ asset('public/storage/') . '/' . $package->image }}" alt="" width="100px">
+                                            {{-- <img src="assets/images/tour1.jpg" alt="cruise"> --}}
+                                        </div>
+                                        <div class="col-md-8 col-sm-8">
+                                            <p>{{ $package->description }}</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 activity">
+                                            <h4>Included</h4>
+                                            @php
+                                                $includedArray = json_decode($package->inclusion);
+                                            @endphp
+
+                                            @foreach ($includedArray as $included)
+                                                <div class="col-md-6 col-sm-6">
+                                                    <p><i class="fa fa-check-square"></i> {{ $included }}</p>
+                                                </div>
+                                            @endforeach
+                                            {{-- <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> Welcome drinks at hotel</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> Buffet dinner</p>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> Guided city tour</p>
+                                            </div> --}}
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+							{{-- <div class="daily-schedule">
 								<div class="title">
 									<p><span>Day 2</span>Paris City Tour</p>
 								</div>
@@ -273,8 +285,8 @@
 										<div class="clearfix"></div>
 									</div>
 								</div>
-							</div>
-							<div class="daily-schedule">
+                                </div>
+                                <div class="daily-schedule">
 								<div class="title">
 									<p><span>Day 3</span>Amsterdam</p>
 								</div>
@@ -304,7 +316,7 @@
 										<div class="clearfix"></div>
 									</div>
 								</div>
-							</div>
+							</div> --}}
 						</div>
 						{{-- <div id="add-info" class="tab-pane fade">
 							<h4 class="tab-heading">Inclusion</h4>

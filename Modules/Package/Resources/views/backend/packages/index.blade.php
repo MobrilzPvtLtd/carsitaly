@@ -20,8 +20,6 @@
             </x-slot>
             <x-slot name="toolbar">
                 @can('add_'.$module_name)
-                <a href="{{ route('backend.packages.index') }}" class="btn btn-success m-1"><i class="fas fa-save fa-fw"></i>&nbsp; Package</a>
-
                 <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}" />
                 @endcan
 
@@ -54,34 +52,48 @@
                                 #
                             </th>
                             <th>
-                                @lang("tour::text.image")
+                                @lang("package::text.name")
                             </th>
                             <th>
-                                @lang("tour::text.title")
+                                @lang("package::text.slug")
                             </th>
                             <th>
-                                @lang("tour::text.slug")
+                                @lang("package::text.updated_at")
                             </th>
                             <th>
-                                @lang("tour::text.price")
-                            </th>
-                            <th>
-                                @lang("tour::text.city")
-                            </th>
-                            <th>
-                                @lang("tour::text.mobile")
-                            </th>
-                            <th>
-                                @lang("tour::text.rating")
-                            </th>
-                            <th>
-                                @lang("tour::text.status")
+                                @lang("package::text.created_by")
                             </th>
                             <th class="text-end">
-                                @lang("tour::text.action")
+                                @lang("package::text.action")
                             </th>
                         </tr>
                     </thead>
+
+                    <tbody>
+                        @foreach($$module_name as $module_name_singular)
+                        <tr>
+                            <td>
+                                {{ $module_name_singular->id }}
+                            </td>
+                            <td>
+                                <a href="{{ url("admin/$module_name", $module_name_singular->id) }}">{{ $module_name_singular->name }}</a>
+                            </td>
+                            <td>
+                                {{ $module_name_singular->slug }}
+                            </td>
+                            <td>
+                                {{ $module_name_singular->updated_at->diffForHumans() }}
+                            </td>
+                            <td>
+                                {{ $module_name_singular->created_by }}
+                            </td>
+                            <td class="text-end">
+                                <a href='{!!route("backend.$module_name.edit", $module_name_singular)!!}' class='btn btn-sm btn-primary mt-1' data-toggle="tooltip" title="Edit {{ ucwords(Str::singular($module_name)) }}"><i class="fas fa-wrench"></i></a>
+                                <a href='{!!route("backend.$module_name.show", $module_name_singular)!!}' class='btn btn-sm btn-success mt-1' data-toggle="tooltip" title="Show {{ ucwords(Str::singular($module_name)) }}"><i class="fas fa-tv"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -90,78 +102,15 @@
         <div class="row">
             <div class="col-7">
                 <div class="float-left">
-
+                    Total {{ $$module_name->total() }} {{ ucwords($module_name) }}
                 </div>
             </div>
             <div class="col-5">
                 <div class="float-end">
-
+                    {!! $$module_name->render() !!}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
-
-@push ('after-styles')
-<!-- DataTables Core and Extensions -->
-<link rel="stylesheet" href="{{ asset('vendor/datatable/datatables.min.css') }}">
-@endpush
-
-@push ('after-scripts')
-<!-- DataTables Core and Extensions -->
-<script type="module" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
-
-<script type="module">
-    $('#datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        responsive: true,
-        ajax: '{{ route("backend.$module_name.index_data") }}',
-        columns: [{
-                data: 'id',
-                name: 'id'
-            },
-            {
-                data: 'image',
-                name: 'image'
-            },
-            {
-                data: 'title',
-                name: 'title'
-            },
-            {
-                data: 'slug',
-                name: 'slug'
-            },
-            {
-                data: 'price',
-                name: 'price'
-            },
-            {
-                data: 'city',
-                name: 'city'
-            },
-            {
-                data: 'mobile',
-                name: 'mobile'
-            },
-            {
-                data: 'rating',
-                name: 'rating'
-            },
-            {
-                data: 'status',
-                name: 'status'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false
-            }
-        ]
-    });
-</script>
-@endpush

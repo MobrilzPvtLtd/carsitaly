@@ -6,5 +6,6 @@
     "Hotel": true,
     "Cruise": true,
     "Tour": true,
-    "Villa": true
+    "Villa": true,
+    "Package": true
 }
