@@ -139,9 +139,18 @@ class CruisesController extends Controller
             })
             ->editColumn('image', function ($data) {
                 if ($data->image) {
-                    return '<a href="' . route('backend.cruises.show', $data->id) . '">
-                                <img src="' . asset('public/storage/') . '/' . $data->image . '" alt="" width="100px">
-                            </a>';
+                    $images = json_decode($data->image);
+                    $html = '<a href="' . route('backend.cruises.show', $data->id) . '">';
+
+                    if ($images && count($images) > 0) {
+                        // foreach ($images as $image) {
+                            $html .= '<img src="' . asset('public/storage/' . $images[0]) . '" alt="cruise" width="100px">';
+                        // }
+                    }
+
+                    $html .= '</a>';
+
+                    return $html;
                 }
             })
             ->editColumn('status', function ($data) {
@@ -202,11 +211,32 @@ class CruisesController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('cruise', 'public');
+        //     $modelData = $request->except('image');
+        //     $modelData['image'] = $imagePath;
+        // }
+        $modelData = $request->except('image');
+        $imagePaths = [];
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('cruise', 'public');
-            $modelData = $request->except('image');
-            $modelData['image'] = $imagePath;
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('cruise', 'public');
+                $imagePaths[] = $imagePath;
+            }
+        }
+
+        if (!empty($imagePaths)) {
+            $modelData['image'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->facilities)) {
+            $modelData['facilities'] = json_encode($request->facilities);
+        }
+
+        if (!empty($request->inclusion)) {
+            $modelData['inclusion'] = json_encode($request->inclusion);
         }
 
         $$module_name_singular = $module_model::create($modelData);
@@ -299,16 +329,16 @@ class CruisesController extends Controller
 
         $oldImagePath = $$module_name_singular->image;
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('cruise', 'public');
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('cruise', 'public');
 
-            if ($oldImagePath) {
-                Storage::disk('public')->delete($oldImagePath);
-            }
-            $modelData = $request->except('image');
-            $modelData['image'] = $imagePath;
-        }
+        //     if ($oldImagePath) {
+        //         Storage::disk('public')->delete($oldImagePath);
+        //     }
+        //     $modelData = $request->except('image');
+        //     $modelData['image'] = $imagePath;
+        // }
 
         // if ($request->start_date != null) {
         //     $startDatesString = $request->input('start_date');
@@ -321,7 +351,33 @@ class CruisesController extends Controller
         //     $endDatesArray = explode(', ', $endDatesString);
         //     $modelData['end_date'] = json_encode($endDatesArray);
         // }
+
         $modelData = $request->all();
+
+        $modelData = $request->except('image');
+        $imagePaths = [];
+
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('cruise', 'public');
+                $imagePaths[] = $imagePath;
+            }
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
+
+        if (!empty($imagePaths)) {
+            $modelData['image'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->facilities)) {
+            $modelData['facilities'] = json_encode($request->facilities);
+        }
+
+        if (!empty($request->inclusion)) {
+            $modelData['inclusion'] = json_encode($request->inclusion);
+        }
 
         $$module_name_singular->update($modelData);
 
