@@ -18,15 +18,9 @@ class FilterCruisesIndex extends Component
     public $searchTerm;
     public $filterLocation = [];
 
-    public $wifi = '';
-    public $bed = '';
-    public $taxi = '';
-    public $beer = '';
-    public $cutlery = '';
-
-    public $flight = '';
-    public $car = '';
-    public $sightseeing = '';
+    public $cruise = '';
+    public $transportation = '';
+    public $sighseeing = '';
     public $meals = '';
     public $drinks = '';
 
@@ -106,13 +100,13 @@ class FilterCruisesIndex extends Component
             $cruises->orderBy('id', 'DESC');
         }
 
-        // $cruises->when($this->formLocation, function ($query) {
-        //     $query->where('city', 'like', "%$this->formLocation%");
+        $cruises->when($this->formLocation, function ($query) {
+            $query->where('city', 'like', "%$this->formLocation%");
 
-        //     if ($this->fRoom_no) {
-        //         $query->where('room_no', $this->fRoom_no);
-        //     }
-        // });
+            if ($this->fRoom_no) {
+                $query->where('room_no', $this->fRoom_no);
+            }
+        });
 
         $selectedLocations = array_keys(array_filter($location));
 
@@ -120,37 +114,17 @@ class FilterCruisesIndex extends Component
             $cruises->whereIn('city', $selectedLocations);
         }
 
-        $cruises->when($this->wifi || $this->bed || $this->taxi || $this->beer || $this->cutlery, function ($query) {
+        $cruises->when($this->cruise || $this->transportation || $this->sighseeing || $this->meals || $this->drinks
+        , function ($query) {
             return $query->where(function ($subQuery) {
-                if ($this->wifi) {
-                    $subQuery->orWhere('facilities', 'like', '%wifi%');
+                if ($this->cruise) {
+                    $subQuery->orWhere('inclusion', 'like', '%cruise%');
                 }
-                if ($this->bed) {
-                    $subQuery->orWhere('facilities', 'like', '%bed%');
+                if ($this->transportation) {
+                    $subQuery->orWhere('inclusion', 'like', '%transportation%');
                 }
-                if ($this->taxi) {
-                    $subQuery->orWhere('facilities', 'like', '%taxi%');
-                }
-                if ($this->beer) {
-                    $subQuery->orWhere('facilities', 'like', '%beer%');
-                }
-                if ($this->cutlery) {
-                    $subQuery->orWhere('facilities', 'like', '%cutlery%');
-                }
-            });
-        });
-
-        // dd($this->flight);
-        $cruises->when($this->flight || $this->car || $this->sightseeing || $this->meals || $this->drinks, function ($query) {
-            return $query->where(function ($subQuery) {
-                if ($this->flight) {
-                    $subQuery->orWhere('inclusion', 'like', "%$this->flight%");
-                }
-                if ($this->car) {
-                    $subQuery->orWhere('inclusion', 'like', '%car%');
-                }
-                if ($this->sightseeing) {
-                    $subQuery->orWhere('inclusion', 'like', '%sightseeing%');
+                if ($this->sighseeing) {
+                    $subQuery->orWhere('inclusion', 'like', '%sighseeing%');
                 }
                 if ($this->meals) {
                     $subQuery->orWhere('inclusion', 'like', '%meals%');
@@ -163,7 +137,6 @@ class FilterCruisesIndex extends Component
 
         $cruises = $cruises->orderBy('id', 'desc')->paginate(6);
 
-        // dd($cruises);
         $uniqueLocation = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('city');
 
         $uniqueRoomNumbers = Service::where('service_type', $serviceType)

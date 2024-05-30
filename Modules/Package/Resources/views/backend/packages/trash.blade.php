@@ -1,4 +1,4 @@
-@extends ('backend.layouts.app')
+{{-- @extends ('backend.layouts.app')
 
 @section('title') {{ __($module_action) }} {{ __($module_title) }} @endsection
 
@@ -6,21 +6,21 @@
 <x-backend.breadcrumbs>
     <x-backend.breadcrumb-item type="active" icon='{{ $module_icon }}'>{{ __($module_title) }}</x-backend.breadcrumb-item>
 </x-backend.breadcrumbs>
-@endsection
+@endsection --}}
 
-@section('content')
+@php
+    $tours = App\Models\Package::orderBy('deleted_at', 'desc')->paginate();
+    // dd($tour);
+@endphp
+{{-- @section('content') --}}
 <div class="card">
     <div class="card-body">
 
         <x-backend.section-header>
-            <i class="{{ $module_icon }}"></i> {{ __($module_title) }} <small class="text-muted">{{ __($module_action) }}</small>
-
-            <x-slot name="subtitle">
-                @lang(":module_name Management Dashboard", ['module_name'=>Str::title($module_name)])
-            </x-slot>
             <x-slot name="toolbar">
-                <x-backend.buttons.return-back />
-                <a href='{{ route("backend.$module_name.index") }}' class="btn btn-secondary" data-toggle="tooltip" title="{{ ucwords($module_name) }} List"><i class="fas fa-list"></i> List</a>
+                @can('add_'.$module_name)
+                    <a href="" class='btn btn-success' title="Add Package">Add</a>
+                @endcan
             </x-slot>
         </x-backend.section-header>
 
@@ -54,32 +54,33 @@
                     </thead>
 
                     <tbody>
-                        @foreach($$module_name as $module_name_singular)
+                        @foreach($tours as $tour)
                         <tr>
                             <td>
-                                {{ $module_name_singular->id }}
+                                {{ $tour->id }}
                             </td>
                             <td>
-                                <img src="{{ asset('public/storage/') . '/' . $module_name_singular->image }}" alt="" width="100px">
+                                <img src="{{ asset('public/storage/') . '/' . $tour->image }}" alt="" width="100px">
                             </td>
                             <td>
-                                {{ $module_name_singular->service_id }}
+                                {{ $tour->service_id }}
                             </td>
                             <td>
-                                {{ $module_name_singular->validity }}
+                                {{ $tour->validity }}
                             </td>
                             <td>
-                                {{ $module_name_singular->city }}
+                                {{ $tour->city }}
                             </td>
                             <td>
-                                @if ($module_name_singular->status == 1)
+                                @if ($tour->status == 1)
                                     <span class="badge text-bg-success">Active</span>
                                 @else
                                     <span class="badge text-bg-warning">Inactive</span>
                                 @endif
                             </td>
                             <td class="text-end">
-                                <a href="{{route("backend.$module_name.restore", $module_name_singular)}}" class="btn btn-warning btn-sm" data-method="PATCH" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.restore')}}"><i class='fas fa-undo'></i> {{__('labels.backend.restore')}}</a>
+                                <a href="" class='btn btn-sm btn-primary mt-1' data-toggle="tooltip" title="Edit"><i class="fas fa-wrench"></i></a>
+                                <a href="" class='btn btn-sm btn-success mt-1' data-toggle="tooltip" title="Show"><i class="fas fa-tv"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -103,7 +104,7 @@
         </div>
     </div>
 </div>
-@endsection
+{{-- @endsection --}}
 
 @section ('after-scripts-end')
 

@@ -7,9 +7,9 @@
 	<!-- START: PAGE TITLE -->
 	<div class="row page-title">
 		<div class="container clear-padding text-center">
-			<h3>WONDERFUL EUROPE</h3>
+			<h3>{{ $cruise->title }}</h3>
 			<h4>6 Nights/7 Days</h4>
-			<span>Paris (2)<i class="fa fa-long-arrow-right"></i>London (2)<i class="fa fa-long-arrow-right"></i>Amesterdam (2)</span>
+			<span>{{ $cruise->city }} (2)<i class="fa fa-long-arrow-right"></i>London (2)<i class="fa fa-long-arrow-right"></i>Amesterdam (2)</span>
 		</div>
 	</div>
 	<!-- END: PAGE TITLE -->
@@ -24,12 +24,24 @@
 						<li data-target="#gallery" data-slide-to="1"></li>
 					</ol>
 					<div class="carousel-inner" role="listbox">
-						<div class="item active">
+                        @if($cruise->image)
+                            @php
+                                $images = json_decode($cruise->image);
+                            @endphp
+                            @if ($images && count($images) > 0)
+                                @foreach ($images as $index => $image)
+                                    <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('public/storage/' . $image) }}" alt="{{ $cruise->title }}">
+                                    </div>
+                                @endforeach
+                            @endif
+                        @endif
+						{{-- <div class="item active">
 							<img src="assets/images/slide.jpg" alt="Cruise">
 						</div>
 						<div class="item">
 							<img src="assets/images/slide2.jpg" alt="Cruise">
-						</div>
+						</div> --}}
 					</div>
 					<a class="left carousel-control" href="#gallery" role="button" data-slide="prev">
 						<span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -52,51 +64,57 @@
 						<div id="ship-info" class="tab-pane fade in active">
 							<h4 class="tab-heading">Overview</h4>
 							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								{{ $cruise->description }}
 							</p>
 							<h4 class="tab-heading">Facilities</h4>
 							<div class="ammenties-4">
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-beer"></i> Bar</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
+                                @php
+                                    $faciArray = json_decode($faci, true);
+                                @endphp
+
+                                @foreach ($faciArray as $facility)
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-beer"></i> {{ $facility }}</p>
+                                    </div>
+                                @endforeach
+								{{-- <div class="col-md-4 col-sm-2">
 									<p><i class="fa fa-cutlery"></i> Restaurant</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-glass"></i> Cafe</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-film"></i> Theatre</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-paw"></i> Pet Room</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-glass"></i> Cafe</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-film"></i> Theatre</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-paw"></i> Pet Room</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-desktop"></i> LED in Room</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-beer"></i> Bar</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-cutlery"></i> Restaurant</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-glass"></i> Cafe</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-film"></i> Theatre</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <p><i class="fa fa-paw"></i> Pet Room</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
 									<p><i class="fa fa-desktop"></i> LED in Room</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-beer"></i> Bar</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-cutlery"></i> Restaurant</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-glass"></i> Cafe</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-film"></i> Theatre</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-paw"></i> Pet Room</p>
-								</div>
-								<div class="col-md-4 col-sm-2">
-									<p><i class="fa fa-desktop"></i> LED in Room</p>
-								</div>
+								</div> --}}
 							</div>
-							<h4 class="tab-heading">Lorem Lpsum</h4>
+							{{-- <h4 class="tab-heading">Lorem Lpsum</h4>
 							<p>
 								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
+							</p> --}}
 						</div>
 						<div id="itinerary" class="tab-pane fade">
 							<h4 class="tab-heading">Package Itinerary</h4>

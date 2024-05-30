@@ -1,12 +1,12 @@
 <div class="row">
     <div class="modify-search modify-cruise">
         <div class="container">
-            <form >
+            <form wire:submit.prevent="applyFilter">
                 <div class="col-md-3 col-sm-6">
                     <div class="form-gp">
                         <label>Starting From</label>
                         <div class="input-group margin-bottom-sm">
-                            <input type="text" name="departure_city" class="form-control" required placeholder="E.g. London">
+                            <input type="text" wire:model="city" name="departure_city" class="form-control" required placeholder="E.g. London">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                         </div>
                     </div>
@@ -23,7 +23,6 @@
                 <div class="col-md-2 col-sm-6 col-xs-6">
                     <div class="form-gp">
                         <label>Month Of Travel</label>
-
                         <select class="selectpicker">
                             <option>Any</option>
                             <option>July</option>
@@ -109,9 +108,9 @@
                 <div class="facilities-filter filter">
                     <h5><i class="fa fa-list"></i> Inclusion</h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="flight"> <i class="fa fa-ship"></i> Cruise</li>
-                        <li><input type="checkbox" wire:model.live="car"> <i class="fa fa-taxi"></i> Transportation</li>
-                        <li><input type="checkbox" wire:model.live="sightseeing"> <i class="fa fa-eye"></i> Sightseeing</li>
+                        <li><input type="checkbox" wire:model.live="cruise"> <i class="fa fa-ship"></i> Cruise</li>
+                        <li><input type="checkbox" wire:model.live="transportation"> <i class="fa fa-taxi"></i> Transportation</li>
+                        <li><input type="checkbox" wire:model.live="sighseeing"> <i class="fa fa-eye"></i> Sightseeing</li>
                         <li><input type="checkbox" wire:model.live="meals"> <i class="fa fa-cutlery"></i> Meals</li>
                         <li><input type="checkbox" wire:model.live="drinks"> <i class="fa fa-glass"></i> Drinks</li>
                     </ul>

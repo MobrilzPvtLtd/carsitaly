@@ -83,9 +83,15 @@ class CruisesController extends Controller
         // $$module_name_singular = $module_model::findOrFail($id);
         $$module_name_singular = $module_model::where('slug',$slug)->first();
 
+        $facilities = $module_model::where('status', 1)->distinct()->pluck('facilities');
+        $facilities_array = json_decode($facilities, true);
+        foreach ($facilities_array as $facility) {
+            $faci = $facility;
+        }
+
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'faci')
         );
     }
 }

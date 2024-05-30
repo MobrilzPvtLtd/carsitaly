@@ -29,17 +29,17 @@
 					</ol>
 					<div class="carousel-inner" role="listbox">
                         @if($tour->image)
-                        @php
-                            $images = json_decode($tour->image);
-                        @endphp
-                        @if ($images && count($images) > 0)
-                            @foreach ($images as $index => $image)
-                                <div class="item {{ $index == 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('public/storage/' . $image) }}" alt="{{ $tour->title }}">
-                                </div>
-                            @endforeach
+                            @php
+                                $images = json_decode($tour->image);
+                            @endphp
+                            @if ($images && count($images) > 0)
+                                @foreach ($images as $index => $image)
+                                    <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('public/storage/' . $image) }}" alt="{{ $tour->title }}">
+                                    </div>
+                                @endforeach
+                            @endif
                         @endif
-                    @endif
 						{{-- <div class="item active">
 							<img src="assets/images/slide.jpg" alt="Cruise">
                             </div>

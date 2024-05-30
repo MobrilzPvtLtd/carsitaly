@@ -5,6 +5,7 @@ namespace Modules\Tour\Http\Controllers\Backend;
 use App\Authorizable;
 // use App\Http\Controllers\Backend\BackendBaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -332,19 +333,10 @@ class ToursController extends Controller
         $$module_name_singular = $module_model::findOrFail($id);
 
         $oldImagePath = $$module_name_singular->image;
+        // $oldPackage_image = $$module_name_singular->image;
 
         $modelData = $request->all();
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('tour', 'public');
-
-        //     if ($oldImagePath) {
-        //         Storage::disk('public')->delete($oldImagePath);
-        //     }
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
         $modelData = $request->except('image');
         $imagePaths = [];
 
@@ -372,11 +364,32 @@ class ToursController extends Controller
 
         $$module_name_singular->update($modelData);
 
+        $package = new Package();
+        $package->service_id = $request->service_id;
+        $package->city = $request->package_city;
+        $package->validity = $request->validity;
+
+        $package_image = null;
+        if ($request->hasFile('package_image')) {
+            $package_image = $request->file('package_image')->store('package', 'public');
+            $package->image = $package_image;
+        }
+
+        if (!empty($request->inclusion)) {
+            $package->inclusion = json_encode($request->inclusion);
+        }
+
+        $package->description = $request->package_description;
+        $package->status = $request->package_status;
+        $package->save();
+
+
         flash(icon().' '.Str::singular($module_title)."' Updated Successfully")->success()->important();
 
         logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
 
-        return redirect()->route("backend.{$module_name}.show", $$module_name_singular->id);
+        // return redirect()->route("backend.{$module_name}.show", $$module_name_singular->id);
+        return redirect()->back();
     }
 
     /**
@@ -468,6 +481,11 @@ class ToursController extends Controller
         logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
 
         return redirect("admin/{$module_name}");
+    }
+
+    public function packages($id){
+        $data = Package::where('id',$id)->first();
+        return response()->json($data);
     }
 
 }

@@ -20,7 +20,7 @@
             </x-slot>
             <x-slot name="toolbar">
                 @can('add_'.$module_name)
-                <a href="{{ route('backend.packages.index') }}" class="btn btn-success m-1"><i class="fas fa-save fa-fw"></i>&nbsp; Package</a>
+                {{-- <a href="{{ route('backend.packages.index') }}" class="btn btn-success m-1"><i class="fas fa-save fa-fw"></i>&nbsp; Package</a> --}}
 
                 <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}" />
                 @endcan
