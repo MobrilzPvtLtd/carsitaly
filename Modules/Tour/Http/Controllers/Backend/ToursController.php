@@ -364,7 +364,11 @@ class ToursController extends Controller
 
         $$module_name_singular->update($modelData);
 
-        $package = new Package();
+        if($request->package_id){
+            $package = Package::where('id', $request->package_id)->first();
+        }else{
+            $package = new Package();
+        }
         $package->service_id = $request->service_id;
         $package->city = $request->package_city;
         $package->validity = $request->validity;
@@ -381,7 +385,9 @@ class ToursController extends Controller
 
         $package->description = $request->package_description;
         $package->status = $request->package_status;
-        $package->save();
+        if($request->package_city || $request->validity || $request->inclusion){
+            $package->save();
+        }
 
 
         flash(icon().' '.Str::singular($module_title)."' Updated Successfully")->success()->important();
@@ -485,6 +491,13 @@ class ToursController extends Controller
 
     public function packages($id){
         $data = Package::where('id',$id)->first();
+        return response()->json($data);
+    }
+
+    public function deletePackages(Request $request){
+        // dd($request);
+        $data = Package::where('id',$request->id)->first();
+        $data->delete();
         return response()->json($data);
     }
 

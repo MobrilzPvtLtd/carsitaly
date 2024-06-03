@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use Auth;
 use App\Models\Contact;
 use App\Models\Flight;
@@ -76,5 +77,26 @@ class FrontendController extends Controller
     public function terms()
     {
         return view('frontend.terms');
+    }
+
+    public function booking(Request $request){
+        try{
+            $booking = new Booking();
+            $booking->user_id = auth()->user()->id;
+            $booking->service_id = $request->service_id;
+            $booking->booking_type = $request->booking_type;
+            $booking->start_date = $request->start_date;
+            $booking->end_date = $request->end_date;
+            $booking->adult = $request->adult;
+            $booking->child = $request->child;
+            $booking->room_type = $request->room_type;
+            $booking->status = 1;
+            $booking->save();
+            session()->flash('success', ucfirst(strtolower($request->booking_type)) . ' ' . 'booking successful');
+            return redirect()->back();
+        }catch(\Exception $e){
+            session()->flash('error', $e->getMessage());
+            return redirect()->back();
+        }
     }
 }

@@ -118,38 +118,52 @@
 						</div>
 						<div id="itinerary" class="tab-pane fade">
 							<h4 class="tab-heading">Package Itinerary</h4>
-							<div class="daily-schedule">
-								<div class="title">
-									<p><span>Day 1</span>Paris</p>
-								</div>
-								<div class="daily-schedule-body">
-									<div class="col-md-4 col-sm-4">
-										<img src="assets/images/tour1.jpg" alt="cruise">
-									</div>
-									<div class="col-md-8 col-sm-8">
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-									</div>
-									<div class="clearfix"></div>
-									<div class="col-md-12 activity">
-										<h4>Included</h4>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Free meal</p>
-										</div>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Movie show</p>
-										</div>
-										<div class="clearfix"></div>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Rock concert</p>
-										</div>
-										<div class="col-md-6 col-sm-6">
-											<p><i class="fa fa-check-square"></i> Night show</p>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<div class="daily-schedule">
+                            @php
+                                $packages = App\Models\Package::where('service_id', $cruise->id)->get();
+                            @endphp
+                            @foreach ($packages as $package)
+                                <div class="daily-schedule">
+                                    <div class="title">
+                                        <p><span>Day {{ $package->validity }}</span>{{ $package->city }}</p>
+                                    </div>
+                                    <div class="daily-schedule-body">
+                                        <div class="col-md-4 col-sm-4">
+                                            <img src="{{ asset('public/storage/') . '/' . $package->image }}" alt="cruise">
+                                        </div>
+                                        <div class="col-md-8 col-sm-8">
+                                            <p>{{ $package->description }}</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 activity">
+                                            <h4>Included</h4>
+                                            @php
+                                                $includedArray = json_decode($package->inclusion);
+                                            @endphp
+
+                                            @foreach ($includedArray as $included)
+                                            <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> {{ $included }}</p>
+                                            </div>
+                                            @endforeach
+                                            {{-- <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> Free meal</p>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> Movie show</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> Rock concert</p>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <p><i class="fa fa-check-square"></i> Night show</p>
+                                            </div> --}}
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+							{{-- <div class="daily-schedule">
 								<div class="title">
 									<p><span>Day 2</span>At Sea</p>
 								</div>
@@ -210,7 +224,7 @@
 										<div class="clearfix"></div>
 									</div>
 								</div>
-							</div>
+							</div> --}}
 						</div>
 						<div id="cabin" class="tab-pane fade">
 							<h4 class="tab-heading">Cabin Types</h4>
@@ -344,12 +358,12 @@
 						<h4><i class="fa fa-phone"></i> Need Assistance</h4>
 						<div class="assitance-body text-center">
 							<h5>Need Help? Call us or drop a message. Our agents will be in touch shortly.</h5>
-							<h2>+91 1234567890</h2>
+							<h2>+91 {{ $cruise->mobile }}</h2>
 							<h3>Or</h3>
-							<a href="mailto:info@yourdomain.com"><i class="fa fa-envelope-o"></i> Email Us</a>
+							<a href="mailto:{{ $cruise->email }}"><i class="fa fa-envelope-o"></i> Email Us</a>
 						</div>
 					</div>
-					<div class="review sidebar-item">
+					{{-- <div class="review sidebar-item">
 						<h4><i class="fa fa-comments"></i> Package Reviews</h4>
 						<div class="sidebar-item-body text-center">
 							<div class="rating-box">
@@ -393,7 +407,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>

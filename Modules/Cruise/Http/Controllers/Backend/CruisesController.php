@@ -4,6 +4,7 @@ namespace Modules\Cruise\Http\Controllers\Backend;
 
 use App\Authorizable;
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -316,6 +317,7 @@ class CruisesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $module_title = $this->module_title;
         $module_name = $this->module_name;
         $module_path = $this->module_path;
@@ -380,6 +382,34 @@ class CruisesController extends Controller
         }
 
         $$module_name_singular->update($modelData);
+
+
+        if($request->package_id){
+            $package = Package::where('id', $request->package_id)->first();
+        }else{
+            $package = new Package();
+        }
+        $package->service_id = $request->service_id;
+        $package->city = $request->package_city;
+        $package->validity = $request->validity;
+
+        $package_image = null;
+        if ($request->hasFile('package_image')) {
+            $package_image = $request->file('package_image')->store('package', 'public');
+            $package->image = $package_image;
+        }
+
+        if (!empty($request->inclusion)) {
+            $package->inclusion = json_encode($request->inclusion);
+        }
+
+        $package->description = $request->package_description;
+        $package->status = $request->package_status;
+        if($request->package_city || $request->validity || $request->inclusion){
+            $package->save();
+        }
+
+
 
         flash(icon().' '.Str::singular($module_title)."' Updated Successfully")->success()->important();
 

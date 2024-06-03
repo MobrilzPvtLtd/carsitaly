@@ -32,6 +32,8 @@ Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('contact-submit', [FrontendController::class, 'contactSubmit'])->name('contact-submit');
 Route::post('flight',[FrontendController::class,'flight'])->name('flight');
 
+Route::post('booking', [FrontendController::class, 'booking'])->name('booking');
+
 Route::get('login', [AuthenticatedSessionController::class, 'login'])->name('login');
 Route::post('login-submit', [AuthenticatedSessionController::class, 'loginSubmit'])->name('login-submit');
 

@@ -30,6 +30,25 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dummy.css') }}" id="select-style">
 	<link href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
+    <style>
+        .notification {
+            background-color: #31733c;
+            color: white;
+            padding: 5px 12px 5px 15px;
+            margin: 25px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .close-button {
+            background: transparent;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+            margin-left: 70px;
+        }
+    </style>
 	<!-- FONTS -->
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
@@ -50,6 +69,9 @@
     <div class="site-wrapper">
         @include('frontend.includes.services-header')
 
+        <div class="col-md-4">
+            <div id="notification-area" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
+        </div>
         @yield('services-content')
 
         @include('frontend.includes.services-footer')

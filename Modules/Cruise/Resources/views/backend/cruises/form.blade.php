@@ -239,7 +239,7 @@
 
 <x-library.select2 />
 
-@section('script')
+{{-- @section('script')
 <script>
     flatpickr("#start_date", {
         mode: "multiple",
@@ -252,4 +252,4 @@
         minDate: "today"
     });
 </script>
-@endsection
+@endsection --}}

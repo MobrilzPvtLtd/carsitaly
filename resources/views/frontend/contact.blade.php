@@ -39,7 +39,7 @@
 				<iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7004.508557808304!2d77.3867335!3d28.6221402!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185cd1dfd0044e5d%3A0xabac6fbb0ef99df!2sZOHOBO!5e0!3m2!1sen!2sin!4v1707890666826!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 			</div>
 			<div class="col-md-6 col-sm-6 contact-form">
-                @include('flash::alert-message')
+                {{-- @include('flash::alert-message') --}}
 				<div class="col-md-12">
 					<h2>DROP A MESSAGE</h2>
 					<h5>Drop Us a Message</h5>

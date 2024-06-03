@@ -370,15 +370,25 @@
 					<div class="sidebar-booking-box">
 						<h3 class="text-center">MAKE A BOOKING</h3>
 						<div class="booking-box-body">
-							<form >
+							<form action="{{ route('booking') }}" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{ $tour->id }}" name="service_id">
+                                <input type="hidden" value="tour" name="booking_type">
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<label>Start</label>
 									<div class="input-group margin-bottom-sm">
-										<input type="text" id="check_in" name="check_in" class="form-control" placeholder="DD/MM/YYYY">
+										<input type="text" id="check_in" name="start_date" class="form-control" placeholder="DD/MM/YYYY">
 										<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 									</div>
 								</div>
-								<div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+									<label>End</label>
+									<div class="input-group margin-bottom-sm">
+										<input type="text" id="check_out" name="end_date" class="form-control" placeholder="DD/MM/YYYY">
+										<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+									</div>
+								</div>
+								{{-- <div class="col-md-12 col-sm-12 col-xs-12">
 									<label>Duration</label>
 									<select class="selectpicker" name="rooms">
 										<option>3 Days</option>
@@ -388,7 +398,7 @@
 										<option>2 Week</option>
 										<option>15+ Days</option>
 									</select>
-								</div>
+								</div> --}}
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<label>Adult</label>
 									<select class="selectpicker" name="adult">
@@ -413,7 +423,7 @@
 								</div>
 								<div class="room-price">
 									<div class="col-md-8 col-sm-8 col-xs-8">
-										<label><input type="checkbox" name="single"><span>Deluxe Single Room</span></label>
+										<label><input type="checkbox" name="room_type" value="single" id="single" onchange="toggleCheckbox(this)"><span>Deluxe Single Room</span></label>
 									</div>
 									<div class="col-md-4 col-sm-4 col-xs-4">
 										<h5>$99/Night</h5>
@@ -422,7 +432,7 @@
 								<div class="clearfix"></div>
 								<div class="room-price">
 									<div class="col-md-8 col-sm-8 col-xs-8">
-										<label><input type="checkbox" name="double"><span>Deluxe Double Room</span></label>
+										<label><input type="checkbox" name="room_type" value="double" id="double" onchange="toggleCheckbox(this)"><span>Deluxe Double Room</span></label>
 									</div>
 									<div class="col-md-4 col-sm-4 col-xs-4">
 										<h5>$199/Night</h5>
@@ -431,7 +441,7 @@
 								<div class="clearfix"></div>
 								<div class="room-price">
 									<div class="col-md-8 col-sm-8 col-xs-8">
-										<label><input type="checkbox" name="royal"><span>Royal Suite</span></label>
+										<label><input type="checkbox" name="room_type" value="royal"  id="royal" onchange="toggleCheckbox(this)"><span>Royal Suite</span></label>
 									</div>
 									<div class="col-md-4 col-sm-4 col-xs-4">
 										<h5>$299/Night</h5>

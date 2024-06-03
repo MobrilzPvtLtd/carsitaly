@@ -82,3 +82,38 @@
     //         " - $ " + $( "#price-range" ).slider( "values", 1 ) );
     // });
 </script>
+
+<script>
+    function toggleCheckbox(checkbox) {
+        var checkboxes = document.getElementsByName(checkbox.name);
+        checkboxes.forEach(function(item) {
+            if (item !== checkbox) item.checked = false;
+        });
+    }
+</script>
+@if(session('success'))
+    <script>
+        var notificationArea = document.getElementById('notification-area');
+        var notificationMessage = document.createElement('div');
+        notificationMessage.classList.add('notification');
+
+        var messageText = document.createElement('span');
+        messageText.textContent = '{{ session('success') }}';
+        notificationMessage.appendChild(messageText);
+
+        var closeButton = document.createElement('button');
+        closeButton.textContent = '×';
+        closeButton.classList.add('close-button');
+        closeButton.onclick = function() {
+            notificationArea.removeChild(notificationMessage);
+        };
+        notificationMessage.appendChild(closeButton);
+
+        notificationArea.appendChild(notificationMessage);
+
+        setTimeout(function(){
+            notificationArea.removeChild(notificationMessage);
+        }, 10000); // 10 seconds
+    </script>
+
+@endif
