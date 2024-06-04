@@ -7,8 +7,11 @@ use App\Models\Booking;
 use Auth;
 use App\Models\Contact;
 use App\Models\Flight;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Modules\Post\Models\Post;
 
 class FrontendController extends Controller
 {
@@ -19,7 +22,8 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $posts = Post::where('status', 1)->get();
+        return view('frontend.index',compact('posts'));
     }
 
     public function flight(Request $request){
@@ -60,6 +64,8 @@ class FrontendController extends Controller
             $contact->email = $request->email;
             $contact->mobile = $request->mobile;
             $contact->message = $request->message;
+            $contact->message_title = $request->message_title;
+            $contact->source = $request->source;
             $contact->save();
             session()->flash('success', 'Data saved successful');
             return redirect()->back();
@@ -81,8 +87,18 @@ class FrontendController extends Controller
 
     public function booking(Request $request){
         try{
+            if(!auth()->user()){
+                $user = new User();
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->mobile = $request->mobile;
+                $user->password = Hash::make("12345678");
+                $user->status = 1;
+                $user->save();
+            }
+
             $booking = new Booking();
-            $booking->user_id = auth()->user()->id;
+            $booking->user_id = auth()->user() ? auth()->user()->id : $user->id;
             $booking->service_id = $request->service_id;
             $booking->booking_type = $request->booking_type;
             $booking->start_date = $request->start_date;

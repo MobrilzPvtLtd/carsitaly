@@ -48,37 +48,47 @@ $notifications_latest = optional($notifications)->take(5);
             </li>
         @endcan
 
-        @can('view_logs')
+        @can('view_services')
             <li class="nav-group" aria-expanded="true">
                 <a class="nav-link nav-group-toggle" href="#">
                     <i class="nav-icon fa-solid fa-wrench"></i>&nbsp;@lang('Services')
                 </a>
                 <ul class="nav-group-items compact" style="height: auto;">
+                    @can('view_hotels')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.hotels.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Hotels
                         </a>
                     </li>
+                    @endcan
+                    @can('view_cars')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.cars.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Cars
                         </a>
                     </li>
+                    @endcan
+                    @can('view_tours')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.tours.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Tours
                         </a>
                     </li>
+                    @endcan
+                    @can('view_cruises')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.cruises.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Cruises
                         </a>
                     </li>
+                    @endcan
+                    @can('view_villas')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('backend.villas.index') }}">
                             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Villas
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </li>
         @endcan

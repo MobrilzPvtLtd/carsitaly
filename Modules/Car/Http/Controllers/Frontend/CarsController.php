@@ -52,8 +52,20 @@ class CarsController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::where('status', 1)->latest()->paginate();
+        $city = request()->city;
+        $brand = request()->input('brand');
 
+        $module_instance = $module_model::where('status', 1);
+
+        if ($city || $brand) {
+            $module_instance->where(function ($query) use ($city,$brand) {
+                $query->where('city', 'like', "%$city%");
+                $query->where('brand', 'like', "%$brand%");
+            });
+        }
+
+        $$module_name = $module_instance->latest()->paginate();
+        // dd($$module_name);
         return view(
             "$module_path.$module_name.index",
             compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular')

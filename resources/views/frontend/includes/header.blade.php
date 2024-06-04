@@ -27,13 +27,12 @@
                         </form>
                     </div>
                     <div class="col-md-6 col-xs-7 clear-padding user-logged">
-                        @if (Auth::user())
-                            <a href="{{ route('backend.dashboard') }}" class="transition-effect">
-                                <img class="avatar-img" src="{{ asset(auth()->user()->avatar) }}"
-                                    alt="{{ asset(auth()->user()->name) }}">
-                                Hello ,{{ Auth::user()->name }}
-                            </a>
-
+                        @if (Auth::check())
+                                <a href="#" class="transition-effect">
+                                    <img class="avatar-img" src="{{ asset(auth()->user()->avatar) }}"
+                                        alt="{{ asset(auth()->user()->name) }}">
+                                    Hello ,{{ Auth::user()->name }}
+                                </a>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fa fa-sign-out"></i>&nbsp;@lang('Logout')

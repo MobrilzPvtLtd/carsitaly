@@ -201,13 +201,14 @@ class RolesController extends Controller
 
         $$module_name_singular = $module_model::findOrFail($id);
 
-        $request->validate($request, [
-            'name' => 'required|max:20|unique:roles,name,'.$id,
+        $request->validate([
+            'name' => 'required|unique:roles,name,'.$id,
             'permissions' => 'required',
         ]);
 
         $input = $request->except(['permissions']);
         $permissions = $request['permissions'];
+
         $$module_name_singular->fill($input)->save();
 
         $p_all = Permission::all(); //Get all permissions

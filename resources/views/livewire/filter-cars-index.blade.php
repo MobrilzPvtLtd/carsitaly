@@ -49,6 +49,7 @@
                         <label>Brand</label>
                         <select class="custom-select-room" wire:model="brand">
                             <option value="">select</option>
+
                             @foreach ($brands as $brand)
                                 <option value="{{ $brand }}">{{ $brand }}</option>
                             @endforeach

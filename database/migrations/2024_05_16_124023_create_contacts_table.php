@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('message_title')->nullable();
             $table->text('message')->nullable();
+            $table->string('source')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

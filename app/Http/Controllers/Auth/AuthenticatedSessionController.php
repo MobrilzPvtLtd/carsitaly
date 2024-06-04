@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Events\Auth\UserLoginSuccess;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,8 @@ class AuthenticatedSessionController extends Controller
             'password' => ['required'],
         ]);
 
+        $role = Role::where('name','user')->first();
+
         $email = $request->email;
         $password = $request->password;
         $remember = $request->remember_me;
@@ -41,7 +44,11 @@ class AuthenticatedSessionController extends Controller
 
             event(new UserLoginSuccess($request, $user));
 
-            return redirect()->intended(route('home', absolute: false));
+            if($role){
+                return redirect()->intended(route('home', absolute: false));
+            }else{
+                return redirect()->intended(route('backend.dashboard', absolute: false));
+            }
         }
 
         return back()->withErrors([

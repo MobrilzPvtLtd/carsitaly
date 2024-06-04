@@ -45,25 +45,21 @@ class CategoriesController extends BackendBaseController
 
         $module_action = 'Store';
 
-        $validated_request = $request->validate([
-            'name' => 'required|max:191|unique:'.$module_model.',name',
-            'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
-            'group_name' => 'nullable|max:191',
-            'description' => 'nullable|max:191',
-            'meta_title' => 'nullable|max:191',
-            'meta_description' => 'nullable',
-            'meta_keyword' => 'nullable',
-            'order' => 'nullable|integer',
-            'status' => 'nullable|max:191',
-        ]);
+        // $validated_request = $request->validate([
+        //     'name' => 'required|max:191|unique:'.$module_model.',name',
+        //     'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
+        // ]);
 
-        $$module_name_singular = $module_model::create($request->except('image'));
+        $modelData = $request->all();
 
-        if ($request->image) {
-            $media = $$module_name_singular->addMedia($request->file('image'))->toMediaCollection($module_name);
-            $$module_name_singular->image = $media->getUrl();
-            $$module_name_singular->save();
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('category', 'public');
+            $modelData = $request->except('image');
+            $modelData['image'] = $imagePath;
         }
+
+        $$module_name_singular = $module_model::create($modelData);
 
         flash("New '".Str::singular($module_title)."' Added")->success()->important();
 

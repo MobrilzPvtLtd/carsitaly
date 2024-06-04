@@ -29,16 +29,38 @@
 	<!-- LIGHT -->
 	<link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
 	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	
-	<!-- FONTS -->
-	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
 
+	<!-- FONTS -->
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
+    <style>
+        .notification {
+            background-color: #31733c;
+            color: white;
+            padding: 5px 12px 5px 15px;
+            margin: 25px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .close-button {
+            background: transparent;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+            margin-left: 70px;
+        }
+    </style>
     </head>
 
     <body>
 
         @include('frontend.includes.header')
+
+        <div class="col-md-4">
+            <div id="notification-area" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
+        </div>
 
         <main class="bg-white dark:bg-gray-800">
             @yield('content')
@@ -49,6 +71,33 @@
         <!-- Scripts -->
         @livewireScripts
         @stack('after-scripts')
+
+        @if(session('success'))
+            <script>
+                var notificationArea = document.getElementById('notification-area');
+                var notificationMessage = document.createElement('div');
+                notificationMessage.classList.add('notification');
+
+                var messageText = document.createElement('span');
+                messageText.textContent = '{{ session('success') }}';
+                notificationMessage.appendChild(messageText);
+
+                var closeButton = document.createElement('button');
+                closeButton.textContent = '×';
+                closeButton.classList.add('close-button');
+                closeButton.onclick = function() {
+                    notificationArea.removeChild(notificationMessage);
+                };
+                notificationMessage.appendChild(closeButton);
+
+                notificationArea.appendChild(notificationMessage);
+
+                setTimeout(function(){
+                    notificationArea.removeChild(notificationMessage);
+                }, 10000); // 10 seconds
+            </script>
+
+        @endif
     </body>
 
 </html>

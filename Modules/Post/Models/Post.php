@@ -11,6 +11,8 @@ use Modules\Category\Models\Category;
 use Modules\Post\Models\Presenters\PostPresenter;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Sluggable\SlugOptions;
+use Spatie\Sluggable\HasSlug;
 
 class Post extends BaseModel
 {
@@ -19,8 +21,16 @@ class Post extends BaseModel
     use Notifiable;
     use PostPresenter;
     use SoftDeletes;
+    use HasSlug;
 
     protected $table = 'posts';
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

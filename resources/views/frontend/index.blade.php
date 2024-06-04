@@ -50,7 +50,7 @@
                     <div class="col-md-10 col-sm-10 vertical-tab-pannel">
                         <!-- BEGIN: TAB PANELS -->
                         <div class="tab-content">
-                            @include('flash::alert-message')
+                            {{-- @include('flash::alert-message') --}}
                             <!-- BEGIN: FLIGHT SEARCH -->
                             <div role="tabpanel" class="tab-pane active" id="flight">
                                 <div class="col-md-8 clear-padding">
@@ -317,8 +317,7 @@
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Pick Up Location</label>
                                             <div class="input-group">
-                                                <input type="text" name="departure-city" class="form-control" required
-                                                    placeholder="E.g. New York">
+                                                <input type="text" name="city" class="form-control" required placeholder="E.g. New York">
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
@@ -355,20 +354,17 @@
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Car Brnad(Optional)</label><br>
                                             <select class="selectpicker" name="brand">
-                                                <option>BMW</option>
-                                                <option>Audi</option>
-                                                <option>Mercedes</option>
-                                                <option>Suzuki</option>
-                                                <option>Honda</option>
-                                                <option>Hyundai</option>
-                                                <option>Toyota</option>
+                                                @foreach (Modules\Car\Models\Car::where('status', 1)->distinct()->pluck('brand') as $brand)
+                                                    <option value="{{ $brand }}">{{ $brand }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Car Type(Optional)</label><br>
                                             <select class="selectpicker" name="car_type">
-                                                <option>Limo</option>
-                                                <option>Sedan</option>
+                                                @foreach (Modules\Car\Models\Car::where('status', 1)->distinct()->pluck('car_type'); as $ctype)
+                                                    <option>{{ $ctype }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="clearfix"></div>
@@ -634,29 +630,30 @@
                     <h4>NEWS</h4>
                 </div>
                 <div class="owl-carousel" id="post-list">
-                    <div class="room-grid-view wow slideInUp" data-wow-delay="0.1s">
-                        <img src="assets/images/offer1.jpg" alt="cruise">
-                        <div class="room-info">
-                            <div class="post-title">
-                                <h5>POST TITLE GOES HERE</h5>
-                                <p><i class="fa fa-calendar"></i> Jul 15, 2015</p>
-                            </div>
-                            <div class="post-desc">
-                                <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </div>
-                            <div class="room-book">
-                                <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
-                                    <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5>
+                    @foreach ($posts as $post)
+                        <div class="room-grid-view wow slideInUp" data-wow-delay="0.1s">
+                            <img src="{{ asset('public/storage/' . $post->image) }}" alt="{{ $post->name }}">
+                            <div class="room-info">
+                                <div class="post-title">
+                                    <h5>{{ $post->name }}</h5>
+                                    <p><i class="fa fa-calendar"></i> {{ $post->created_at->format('Y M d') }}</p>
                                 </div>
-                                <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
-                                    <a href="#" class="text-center">MORE</a>
+                                <div class="post-desc">
+                                    <p>{{ $post->meta_title }}</p>
                                 </div>
+                                <div class="room-book">
+                                    <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
+                                        {{-- <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5> --}}
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
+                                        <a href="{{ route('frontend.posts.show',$post->slug) }}" class="text-center">MORE</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
-                    </div>
-                    <div class="room-grid-view wow slideInUp" data-wow-delay="0.2s">
+                    @endforeach
+                    {{-- <div class="room-grid-view wow slideInUp" data-wow-delay="0.2s">
                         <img src="assets/images/offer2.jpg" alt="cruise">
                         <div class="room-info">
                             <div class="post-title">
@@ -765,7 +762,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -932,7 +929,9 @@
                         <h2>DROP A MESSAGE</h2>
                         <h5>Drop Us a Message</h5>
                     </div>
-                    <form>
+                    <form action="{{ route('contact-submit') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="source" value="homeForm">
                         <div class="col-md-6 col-sm-6">
                             <input type="text" name="name" required class="form-control" placeholder="Your Name">
                         </div>
@@ -941,12 +940,12 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-md-12">
-                            <input type="text" name="message-title" required class="form-control"
+                            <input type="text" name="message_title" required class="form-control"
                                 placeholder="Message Title">
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-md-12">
-                            <textarea class="form-control" rows="5" id="comment" placeholder="Your Message"></textarea>
+                            <textarea class="form-control" rows="5" id="comment" name="message" placeholder="Your Message"></textarea>
                         </div>
                         <div class="clearfix"></div>
                         <div class="text-center">

@@ -56,10 +56,16 @@
                                         #
                                     </th>
                                     <th>
+                                        @lang('post::text.image')
+                                    </th>
+                                    <th>
                                         @lang('post::text.name')
                                     </th>
                                     <th>
-                                        @lang('post::text.updated_at')
+                                        @lang('post::text.category_name')
+                                    </th>
+                                    <th>
+                                        @lang('post::text.status')
                                     </th>
                                     <th class="text-end">
                                         @lang('post::text.action')
@@ -110,12 +116,20 @@
                     name: 'id'
                 },
                 {
+                    data: 'image',
+                    name: 'image'
+                },
+                {
                     data: 'name',
                     name: 'name'
                 },
                 {
-                    data: 'updated_at',
-                    name: 'updated_at'
+                    data: 'category_name',
+                    name: 'category_name'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
                 },
                 {
                     data: 'action',

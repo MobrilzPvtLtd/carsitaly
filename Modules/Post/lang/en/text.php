@@ -3,7 +3,8 @@
 return [
 
     'name' => 'Name',
-    'slug' => 'Slug',
+    'image' => 'Image',
+    'category_name' => 'Category Name',
     'description' => 'Description',
     'status' => 'Status',
     'created_by' => 'Created By',

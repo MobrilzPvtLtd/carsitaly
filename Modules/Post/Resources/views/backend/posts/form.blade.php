@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="col-12 col-sm-3 mb-3">
+    {{-- <div class="col-12 col-sm-3 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'slug';
@@ -25,7 +25,7 @@
             {!! field_required($required) !!}
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
-    </div>
+    </div> --}}
 
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
@@ -70,30 +70,38 @@
             {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-12 mb-3">
+    <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'image';
-            $field_lable = __("post::$module_name.$field_name");
-            $field_placeholder = $field_lable;
-            $required = 'required';
+            $field_label = label_case($field_name);
+            $field_placeholder = $field_label;
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label')->for($field_name) }}
-            {!! field_required($required) !!}
-            <div class="input-group mb-3">
-                {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", 'aria-label' => 'Image', 'aria-describedby' => 'button-image']) }}
-                <button class="btn btn-outline-info" id="{{ $field_name }}" data-input="{{ $field_name }}"
-                    type="button"><i class="fas fa-folder-open"></i>&nbsp;@lang('Browse')</button>
-            </div>
-
+            {{ html()->label($field_label, $field_name)->class('form-label') }}
+            {{ html()->file($field_name)->class('form-control') }}
         </div>
     </div>
-</div>
+    {{-- <div class="row">
+        <div class="col-12 mb-3">
+            <div class="form-group">
+                <?php
+                $field_name = 'image';
+                $field_lable = __("post::$module_name.$field_name");
+                $field_placeholder = $field_lable;
+                $required = 'required';
+                ?>
+                {{ html()->label($field_lable, $field_name)->class('form-label')->for($field_name) }}
+                {!! field_required($required) !!}
+                <div class="input-group mb-3">
+                    {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", 'aria-label' => 'Image', 'aria-describedby' => 'button-image']) }}
+                    <button class="btn btn-outline-info" id="{{ $field_name }}" data-input="{{ $field_name }}"
+                        type="button"><i class="fas fa-folder-open"></i>&nbsp;@lang('Browse')</button>
+                </div>
 
-<div class="row">
-    <div class="col-12 col-sm-4 mb-3">
+            </div>
+        </div>
+    </div> --}}
+    {{-- <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'category_id';
@@ -106,8 +114,26 @@
             {!! field_required($required) !!}
             {{ html()->select($field_name, isset($$module_name_singular) ? optional($$module_name_singular->$field_relation)->pluck('name', 'id') : '')->placeholder($field_placeholder)->class('form-control select2-category')->attributes(["$required"]) }}
         </div>
+    </div> --}}
+    <div class="col-12 col-sm-6 mb-3">
+        <div class="form-group">
+            <?php
+            $lable_name = 'category';
+            $field_name = 'category_id';
+            $field_lable = label_case($lable_name);
+            $field_placeholder = "-- Select an option --";
+            $required = "required";
+            $select_options = [];
+            $categories = Modules\Category\Models\Category::where('status', 1)->get();
+            foreach ($categories as $value) {
+                $select_options[$value->id] = $value->name;
+            }
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
+        </div>
     </div>
-    <div class="col-12 col-sm-4 mb-3">
+    {{-- <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'type';
@@ -124,8 +150,8 @@
             {!! field_required($required) !!}
             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-select')->attributes(["$required"]) }}
         </div>
-    </div>
-    <div class="col-12 col-sm-4 mb-3">
+    </div> --}}
+    {{-- <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'is_featured';
@@ -141,10 +167,8 @@
             {!! field_required($required) !!}
             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-select')->attributes(["$required"]) }}
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 mb-3">
+    </div> --}}
+    {{-- <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'tags_list[]';
@@ -163,7 +187,7 @@
                         : '',
                 )->class('form-control select2-tags')->attributes(["$required"]) }}
         </div>
-    </div>
+    </div> --}}
 </div>
 <div class="row">
     <div class="col-12 col-sm-6 mb-3">
@@ -184,7 +208,7 @@
             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-select')->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-6 mb-3">
+    {{-- <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'published_at';
@@ -196,10 +220,8 @@
             {!! field_required($required) !!}
             {{ html()->datetime($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-sm-5 mb-3">
+    </div> --}}
+    <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'meta_title';
@@ -212,7 +234,7 @@
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-5 mb-3">
+    <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'meta_keywords';
@@ -225,21 +247,6 @@
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-2 mb-3">
-        <div class="form-group">
-            <?php
-            $field_name = 'order';
-            $field_lable = __("post::$module_name.$field_name");
-            $field_placeholder = $field_lable;
-            $required = '';
-            ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label')->for($field_name) }}
-            {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-        </div>
-    </div>
-</div>
-<div class="row">
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
@@ -268,6 +275,21 @@
     </div>
 </div>
 <div class="row">
+    {{-- <div class="col-12 col-sm-2 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'order';
+            $field_lable = __("post::$module_name.$field_name");
+            $field_placeholder = $field_lable;
+            $required = '';
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label')->for($field_name) }}
+            {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+        </div>
+    </div> --}}
+</div>
+{{-- <div class="row">
     <div class="col-12 mb-3">
         <div class="form-group">
             <?php
@@ -281,12 +303,12 @@
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Select2 Library -->
 <x-library.select2 />
 
-@push('after-styles')
+{{-- @push('after-styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css" rel="stylesheet">
     <style>
         .note-editor.note-frame :after {
@@ -404,4 +426,4 @@
             });
         });
     </script>
-@endpush
+@endpush --}}
