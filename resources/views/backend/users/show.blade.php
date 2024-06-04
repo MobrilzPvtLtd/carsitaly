@@ -79,8 +79,7 @@
                                     $required = '';
                                     ?>
                                     {{ html()->label($field_lable, $field_name)->class('form-label') }}
-                                    {!! fielf_required($required) !!}
-                                    {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                                    {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control') }}
                                 </div>
                             </div>
                         </div>

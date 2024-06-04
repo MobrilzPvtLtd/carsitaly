@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\Contact;
 
 class BackendController extends Controller
@@ -21,5 +22,11 @@ class BackendController extends Controller
     {
         $contacts = Contact::get();
         return view('backend.contact', compact('contacts'));
+    }
+
+    public function bookings()
+    {
+        $bookings = Booking::get();
+        return view('backend.bookings', compact('bookings'));
     }
 }

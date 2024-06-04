@@ -93,6 +93,14 @@ $notifications_latest = optional($notifications)->take(5);
             </li>
         @endcan
 
+        @can('view_services')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('backend.bookings') }}">
+                    <i class="nav-icon fab fa-first-order"></i>&nbsp;@lang('Bookings')
+                </a>
+            </li>
+        @endcan
+
         @can('edit_settings')
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('backend.settings') }}">
