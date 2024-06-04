@@ -7,6 +7,7 @@ use App\Models\Booking;
 use Auth;
 use App\Models\Contact;
 use App\Models\Flight;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -95,6 +96,8 @@ class FrontendController extends Controller
                 $user->password = Hash::make("12345678");
                 $user->status = 1;
                 $user->save();
+
+                Auth::login($user);
             }
 
             $booking = new Booking();

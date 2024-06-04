@@ -57,9 +57,9 @@
                             <th>
                                 @lang("cruise::text.title")
                             </th>
-                            <th>
+                            {{-- <th>
                                 @lang("cruise::text.slug")
-                            </th>
+                            </th> --}}
                             <th>
                                 @lang("cruise::text.price")
                             </th>
@@ -129,10 +129,10 @@
                 data: 'title',
                 name: 'title'
             },
-            {
-                data: 'slug',
-                name: 'slug'
-            },
+            // {
+            //     data: 'slug',
+            //     name: 'slug'
+            // },
             {
                 data: 'price',
                 name: 'price'

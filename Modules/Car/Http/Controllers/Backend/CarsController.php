@@ -127,7 +127,7 @@ class CarsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::select('id', 'image', 'title','slug', 'price', 'brand', 'status');
+        $$module_name = $module_model::select('id', 'image', 'title', 'price', 'brand', 'status');
 
         $data = $$module_name;
 

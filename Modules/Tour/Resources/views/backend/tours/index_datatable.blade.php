@@ -59,9 +59,9 @@
                             <th>
                                 @lang("tour::text.title")
                             </th>
-                            <th>
+                            {{-- <th>
                                 @lang("tour::text.slug")
-                            </th>
+                            </th> --}}
                             <th>
                                 @lang("tour::text.price")
                             </th>
@@ -131,10 +131,10 @@
                 data: 'title',
                 name: 'title'
             },
-            {
-                data: 'slug',
-                name: 'slug'
-            },
+            // {
+            //     data: 'slug',
+            //     name: 'slug'
+            // },
             {
                 data: 'price',
                 name: 'price'

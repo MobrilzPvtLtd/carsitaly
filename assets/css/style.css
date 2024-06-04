@@ -3921,7 +3921,7 @@ h5 {
 	padding: 15px 20px;
 }
 .package-detail-sidebar .sidebar-item h4 {
-	background: #e6e6e6;
+	/* background: #e6e6e6; */
 	margin: 0;
 	line-height: 1.6;
 	text-transform: uppercase;

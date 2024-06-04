@@ -286,14 +286,14 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Start</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_in" name="start_date" class="form-control" placeholder="DD/MM/YYYY">
+                                            <input type="text" id="check_in" name="start_date" class="form-control" placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>End</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_out" name="end_date" class="form-control" placeholder="DD/MM/YYYY">
+                                            <input type="text" id="check_out" name="end_date" class="form-control" placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
                                     </div>

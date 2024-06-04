@@ -57,9 +57,9 @@
                             <th>
                                 @lang("car::text.title")
                             </th>
-                            <th>
+                            {{-- <th>
                                 @lang("car::text.slug")
-                            </th>
+                            </th> --}}
                             <th>
                                 @lang("car::text.price")
                             </th>
@@ -123,10 +123,10 @@
                 data: 'title',
                 name: 'title'
             },
-            {
-                data: 'slug',
-                name: 'slug'
-            },
+            // {
+            //     data: 'slug',
+            //     name: 'slug'
+            // },
             {
                 data: 'price',
                 name: 'price'

@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-6 col-xs-7 clear-padding user-logged">
                     @if (Auth::user())
-                        <a href="{{ route('backend.dashboard') }}" class="transition-effect">
+                        <a href="#" class="transition-effect">
                             <img class="avatar-img" src="{{ asset(auth()->user()->avatar) }}"
                                 alt="{{ asset(auth()->user()->name) }}">
                             Hello ,{{ Auth::user()->name }}
