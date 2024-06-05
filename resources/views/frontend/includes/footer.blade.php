@@ -147,7 +147,7 @@ jQuery(function($){
         slide_captions          :   1,		//Slide caption (Pull from "title" in slides array)
         slides 					:  	[		//Slideshow Images
                                             {image : './images-new/zanzi.jpg', title : 'Slide 1'},
-                                            {image : './images-new/best_beaches_in_Italy_island.jpg', title : 'Slide 2'},
+                                            // {image : './images-new/best_beaches_in_Italy_island.jpg', title : 'Slide 2'},
                                             // {image : 'assets/images/slide.jpg', title : 'Slide 3'}
                                     ]
 

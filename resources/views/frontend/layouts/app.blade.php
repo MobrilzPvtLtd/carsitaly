@@ -6,7 +6,7 @@
         <link href="{{ asset('img/favicon.png') }}" rel="apple-touch-icon" sizes="76x76">
         <link type="image/png" href="{{ asset('img/favicon.png') }}" rel="icon">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>@yield('title') | {{ config('app.name') }}</title>
+        <title>{{ config('app.name') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="{{ setting('meta_description') }}">
         <meta name="keyword" content="{{ setting('meta_keyword') }}">
@@ -34,8 +34,16 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
     <style>
-        .notification {
+        .notification-success {
             background-color: #31733c;
+            color: white;
+            padding: 5px 12px 5px 15px;
+            margin: 25px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .notification-error {
+            background-color: #f9676b;
             color: white;
             padding: 5px 12px 5px 15px;
             margin: 25px;
@@ -72,14 +80,52 @@
         @livewireScripts
         @stack('after-scripts')
 
-        @if(session('success'))
+        @if(session('success') || session('error'))
             <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var notificationArea = document.getElementById('notification-area');
+                    var notificationMessage = document.createElement('div');
+                    if('{{ session('success') }}') {
+                        notificationMessage.classList.add('notification-success');
+
+                        var messageText = document.createElement('span');
+                        messageText.textContent = '{{ session('success') }}';
+                    } else {
+                        notificationMessage.classList.add('notification-error');
+
+                        var messageText = document.createElement('span');
+                        messageText.textContent = '{{ session('error') }}';
+                    }
+                    notificationMessage.appendChild(messageText);
+
+                    var closeButton = document.createElement('button');
+                    closeButton.textContent = '×';
+                    closeButton.classList.add('close-button');
+                    closeButton.onclick = function() {
+                        notificationArea.removeChild(notificationMessage);
+                    };
+                    notificationMessage.appendChild(closeButton);
+
+                    notificationArea.appendChild(notificationMessage);
+
+                    setTimeout(function(){
+                        notificationArea.removeChild(notificationMessage);
+                    }, 10000); // 10 seconds
+                });
+            </script>
+        @endif
+
+            {{-- <script>
                 var notificationArea = document.getElementById('notification-area');
                 var notificationMessage = document.createElement('div');
                 notificationMessage.classList.add('notification');
 
                 var messageText = document.createElement('span');
-                messageText.textContent = '{{ session('success') }}';
+                if(session('success')){
+                    messageText.textContent = '{{ session('success') }}';
+                }else{
+                    messageText.textContent = '{{ session('error') }}';
+                }
                 notificationMessage.appendChild(messageText);
 
                 var closeButton = document.createElement('button');
@@ -95,9 +141,16 @@
                 setTimeout(function(){
                     notificationArea.removeChild(notificationMessage);
                 }, 10000); // 10 seconds
-            </script>
+            </script> --}}
 
-        @endif
+        <script>
+            function toggleCheckbox(checkbox) {
+                var checkboxes = document.getElementsByName(checkbox.name);
+                checkboxes.forEach(function(item) {
+                    if (item !== checkbox) item.checked = false;
+                });
+            }
+        </script>
     </body>
 
 </html>

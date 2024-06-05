@@ -28,10 +28,28 @@ class FrontendController extends Controller
     }
 
     public function flight(Request $request){
+        if(!$request->trip_type){
+            session()->flash('error', 'The trip type field is required.');
+            return redirect()->back();
+        }
         try{
+            $users = User::where('email',$request->email)->first();
+            if($users){
+                $user = User::where('email',$request->email)->first();
+            }elseif(!auth()->user()){
+                $user = new User();
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->mobile = $request->mobile;
+                $user->password = Hash::make("12345678");
+                $user->status = 1;
+                $user->save();
+                Auth::login($user);
+            }
+
             $flight = new Flight();
-            $flight->one_way = $request->one_way;
-            $flight->round_trip = $request->round_trip;
+            $flight->user_id = auth()->user() ? auth()->user()->id : $user->id;
+            $flight->trip_type = $request->trip_type;
             $flight->leaving_from = $request->leaving_from;
             $flight->leaving_to = $request->leaving_to;
 
@@ -88,7 +106,10 @@ class FrontendController extends Controller
 
     public function booking(Request $request){
         try{
-            if(!auth()->user()){
+            $users = User::where('email',$request->email)->first();
+            if($users){
+                $user = User::where('email',$request->email)->first();
+            }elseif(!auth()->user()){
                 $user = new User();
                 $user->name = $request->name;
                 $user->email = $request->email;
@@ -96,7 +117,6 @@ class FrontendController extends Controller
                 $user->password = Hash::make("12345678");
                 $user->status = 1;
                 $user->save();
-
                 Auth::login($user);
             }
 

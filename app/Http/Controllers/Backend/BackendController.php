@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Contact;
+use App\Models\Flight;
 
 class BackendController extends Controller
 {
@@ -28,5 +29,11 @@ class BackendController extends Controller
     {
         $bookings = Booking::get();
         return view('backend.bookings', compact('bookings'));
+    }
+
+    public function flightEnquiry()
+    {
+        $flight = Flight::get();
+        return view('backend.flight', compact('flight'));
     }
 }

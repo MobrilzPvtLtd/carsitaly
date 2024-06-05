@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
-            $table->boolean('one_way')->default(0)->nullable();
-            $table->boolean('round_trip')->default(0)->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('trip_type')->nullable();
             $table->string('leaving_from')->nullable();
             $table->string('leaving_to')->nullable();
             $table->date('departure_date')->nullable();

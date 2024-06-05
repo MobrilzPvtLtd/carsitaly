@@ -53,16 +53,16 @@
                             {{-- @include('flash::alert-message') --}}
                             <!-- BEGIN: FLIGHT SEARCH -->
                             <div role="tabpanel" class="tab-pane active" id="flight">
-                                <div class="col-md-8 clear-padding">
+                                <div class="col-md-12 clear-padding">
                                     <form action="{{route('flight')}}" method="POST">
                                         @csrf
                                         <div class="col-md-12 product-search-title">Book Flight Tickets</div>
                                         <div class="col-md-12 search-col-padding">
                                             <label class="radio-inline">
-                                                <input type="radio" name="one_way" id="inlineRadio1" value="1"> One Way
+                                                <input type="checkbox" name="trip_type" id="inlineRadio1" value="One Way" onchange="toggleCheckbox(this)"> One Way
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="round_trip" id="inlineRadio2" value="1"> Round Trip
+                                                <input type="checkbox" name="trip_type" id="inlineRadio2" value="Round Trip" onchange="toggleCheckbox(this)"> Round Trip
                                             </label>
                                         </div>
                                         <div class="clearfix"></div>
@@ -113,14 +113,28 @@
                                                 <option>Economy</option>
                                             </select>
                                         </div>
+                                        @if(!Auth::check())
+                                            <div class="col-md-4 col-sm-4 search-col-padding">
+                                                <label>Name</label>
+                                                <input type="text" id="check_in" name="name" class="form-control" placeholder="Enter Your Name">
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 search-col-padding">
+                                                <label>Email</label>
+                                                <input type="text" id="check_in" name="email" class="form-control" placeholder="Enter Your Email">
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 search-col-padding">
+                                                <label>Mobile</label>
+                                                <input type="number" id="check_in" name="mobile" class="form-control" placeholder="Enter Your Mobile">
+                                            </div>
+                                        @endif
                                         <div class="clearfix"></div>
                                         <div class="col-md-12 search-col-padding">
-                                            <button type="submit" class="search-button btn transition-effect">Search Flights</button>
+                                            <button type="submit" class="search-button btn transition-effect">Submit Flights</button>
                                         </div>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
-                                <div class="offer-box col-md-4">
+                                {{-- <div class="offer-box col-md-4">
                                     <div class="owl-carousel" id="flightoffer">
                                         <div class="item">
                                             <img src="images-new/flight-ticket-availability.jpg" alt="cruise">
@@ -136,14 +150,14 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="clearfix"></div>
                             </div>
                             <!-- END: FLIGHT SEARCH -->
 
                             <!-- START: HOTEL SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="hotel">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <form action="{{ route('frontend.hotels.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Book Hotel Rooms</div>
                                         <div class="col-md-12 col-sm-12 search-col-padding">
@@ -215,21 +229,21 @@
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
-                                <div class="offer-box col-md-4">
+                                {{-- <div class="offer-box col-md-4">
                                     <div class="item">
                                         <img src="images-new/DSC_0835.jpg" alt="cruise">
                                         <h4>Hotels In Italy</h4>
                                         <h5>Starting From $399/Night</h5>
                                         <a href="#">KNOW MORE</a>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="clearfix"></div>
                             </div>
                             <!-- END: HOTEL SEARCH -->
 
                             <!-- START: BEGIN HOLIDAY -->
                             <div role="tabpanel" class="tab-pane" id="holiday">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <form action="{{ route('frontend.tours.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Book Your Tour</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
@@ -297,21 +311,21 @@
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
-                                <div class="offer-box col-md-4">
+                                {{-- <div class="offer-box col-md-4">
                                     <div class="item">
                                         <img src="images-new/New-Project11.jpg" alt="cruise">
                                         <h4>SAFARI BLUE</h4>
                                         <h5>Starting From $399/Person</h5>
                                         <a href="#">KNOW MORE</a>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="clearfix"></div>
                             </div>
                             <!-- END: HOLIDAYS -->
 
                             <!-- START: CAR SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="taxi">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <form action="{{ route('frontend.cars.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Search Perfect Car</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
@@ -375,21 +389,21 @@
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
-                                <div class="offer-box col-md-4">
+                                {{-- <div class="offer-box col-md-4">
                                     <div class="item">
                                         <img src="images-new/img2311.jpg" alt="cruise">
                                         <h4>BMW</h4>
                                         <h5>Starting From $399/Day</h5>
                                         <a href="#">KNOW MORE</a>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="clearfix"></div>
                             </div>
                             <!-- END: CAR SEARCH -->
 
                             <!-- START: CRUISE SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="cruise">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <form action="{{ route('frontend.cruises.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Cruise Holidays</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
@@ -457,7 +471,7 @@
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
-                                <div class="offer-box col-md-4">
+                                {{-- <div class="offer-box col-md-4">
                                     <div class="item">
                                         <img src="images-new/desktop-wallpaper-wonder-of-the-seas-cruise-ship-phone.jpg"
                                             alt="cruise">
@@ -465,7 +479,7 @@
                                         <h5>Starting From $399/Person</h5>
                                         <a href="#">KNOW MORE</a>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="clearfix"></div>
                             </div>
                             <!-- END: CRUISE SEARCH -->
@@ -622,7 +636,7 @@
     <!-- END: TOP DESTINATION SECTION -->
 
     <!-- BEGIN: RECENT BLOG POST -->
-    <section id="recent-blog">
+    {{-- <section id="recent-blog">
         <div class="row top-offer">
             <div class="container">
                 <div class="section-title text-center">
@@ -643,7 +657,6 @@
                                 </div>
                                 <div class="room-book">
                                     <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
-                                        {{-- <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5> --}}
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
                                         <a href="{{ route('frontend.posts.show',$post->slug) }}" class="text-center">MORE</a>
@@ -653,120 +666,10 @@
                             </div>
                         </div>
                     @endforeach
-                    {{-- <div class="room-grid-view wow slideInUp" data-wow-delay="0.2s">
-                        <img src="assets/images/offer2.jpg" alt="cruise">
-                        <div class="room-info">
-                            <div class="post-title">
-                                <h5>POST TITLE GOES HERE</h5>
-                                <p><i class="fa fa-calendar"></i> Jul 15, 2015</p>
-                            </div>
-                            <div class="post-desc">
-                                <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </div>
-                            <div class="room-book">
-                                <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
-                                    <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
-                                    <a href="#" class="text-center">MORE</a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="room-grid-view wow slideInUp" data-wow-delay="0.3s">
-                        <img src="assets/images/offer3.jpg" alt="cruise">
-                        <div class="room-info">
-                            <div class="post-title">
-                                <h5>POST TITLE GOES HERE</h5>
-                                <p><i class="fa fa-calendar"></i> Jul 15, 2015</p>
-                            </div>
-                            <div class="post-desc">
-                                <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </div>
-                            <div class="room-book">
-                                <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
-                                    <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
-                                    <a href="#" class="text-center">MORE</a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="room-grid-view wow slideInUp" data-wow-delay="0.4s">
-                        <img src="assets/images/offer4.jpg" alt="cruise">
-                        <div class="room-info">
-                            <div class="post-title">
-                                <h5>POST TITLE GOES HERE</h5>
-                                <p><i class="fa fa-calendar"></i> Jul 15, 2015</p>
-                            </div>
-                            <div class="post-desc">
-                                <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </div>
-                            <div class="room-book">
-                                <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
-                                    <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
-                                    <a href="#" class="text-center">MORE</a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="room-grid-view wow slideInUp" data-wow-delay="0.5s">
-                        <img src="assets/images/offer3.jpg" alt="cruise">
-                        <div class="room-info">
-                            <div class="post-title">
-                                <h5>POST TITLE GOES HERE</h5>
-                                <p><i class="fa fa-calendar"></i> Jul 15, 2015</p>
-                            </div>
-                            <div class="post-desc">
-                                <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </div>
-                            <div class="room-book">
-                                <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
-                                    <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
-                                    <a href="#" class="text-center">MORE</a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="room-grid-view wow slideInUp" data-wow-delay="0.6s">
-                        <img src="assets/images/offer2.jpg" alt="cruise">
-                        <div class="room-info">
-                            <div class="post-title">
-                                <h5>POST TITLE GOES HERE</h5>
-                                <p><i class="fa fa-calendar"></i> Jul 15, 2015</p>
-                            </div>
-                            <div class="post-desc">
-                                <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </div>
-                            <div class="room-book">
-                                <div class="col-md-8 col-sm-6 col-xs-6 clear-padding post-alt">
-                                    <h5><i class="fa fa-comments"></i> 2 <i class="fa fa-share-alt"></i> 20 </h5>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-xs-6 clear-padding">
-                                    <a href="#" class="text-center">MORE</a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- START: PRODUCT SECTION-->
     <section class="hotel-product home-product">

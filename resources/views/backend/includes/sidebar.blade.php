@@ -33,7 +33,7 @@ $notifications_latest = optional($notifications)->take(5);
             </a>
         </li>
 
-        @can('view_posts')
+        {{-- @can('view_posts')
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('backend.posts.index') }}">
                     <i class="nav-icon fa-regular fa-file-lines"></i>&nbsp;@lang('Posts')
@@ -46,7 +46,7 @@ $notifications_latest = optional($notifications)->take(5);
                     <i class="nav-icon fa-solid fa-diagram-project"></i>&nbsp;@lang('Categories')
                 </a>
             </li>
-        @endcan
+        @endcan --}}
 
         @can('view_services')
             <li class="nav-group" aria-expanded="true">
@@ -97,6 +97,14 @@ $notifications_latest = optional($notifications)->take(5);
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('backend.bookings') }}">
                     <i class="nav-icon fab fa-first-order"></i>&nbsp;@lang('Bookings')
+                </a>
+            </li>
+        @endcan
+
+        @can('view_services')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('backend.flight-enquiry') }}">
+                    <i class="nav-icon fa fa-plane"></i>&nbsp;@lang('Flight Enquiry')
                 </a>
             </li>
         @endcan
