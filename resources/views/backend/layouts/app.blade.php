@@ -28,6 +28,7 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        @yield('style')
         <style>
             body {
                 font-family: Ubuntu, "Noto Sans Bengali UI", Arial, Helvetica, sans-serif
