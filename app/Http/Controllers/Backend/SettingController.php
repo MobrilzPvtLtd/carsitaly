@@ -68,7 +68,8 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $rules = Setting::getValidationRules();
-        $data = $request->validate($request, $rules);
+        // $data = $request->validate($request, $rules);
+        $data = $request->validate($rules);
 
         $validSettings = array_keys($rules);
 
@@ -77,7 +78,8 @@ class SettingController extends Controller
                 Setting::add($key, $val, Setting::getDataType($key));
             }
         }
+        flash(icon()."Settings has been saved.")->success()->important();
 
-        return redirect()->back()->with('status', 'Settings has been saved.');
+        return redirect()->back();
     }
 }

@@ -13,8 +13,8 @@ class FilterCarsIndex extends Component
 {
     use WithPagination;
 
-    public $minPrice;
-    public $maxPrice;
+    public $minPrice = '';
+    public $maxPrice = '';
 
     public $filterBrands = [];
     public $filterCarFeatures = [];
@@ -68,8 +68,8 @@ class FilterCarsIndex extends Component
     public function updateSearchPrice($val)
     {
         $parts = explode("-", $val);
-        $this->minPrice = $parts[0];
-        $this->maxPrice = $parts[1];
+        $this->minPrice = $parts[0] ?? '';
+        $this->maxPrice = $parts[1] ?? '';
     }
 
     public function updateSortPrice($val)

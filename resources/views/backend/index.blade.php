@@ -42,7 +42,9 @@
                             <i class="fa fa-plane ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-info">{{ $flight }}</h3>
-                        <p class="text-muted mb-0">Total Flights Enquiry</p>
+                        <a href="{{ route('backend.flight-enquiry') }}">
+                            <p class="text-muted mb-0">Total Flights Enquiry</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -53,7 +55,9 @@
                             <i class="fa fa-bed ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-danger">{{ $hotels }}</h3>
-                        <p class="text-muted mb-0">Total Hotels</p>
+                        <a href="{{ route('backend.hotels.index') }}">
+                            <p class="text-muted mb-0">Total Hotels</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -64,7 +68,9 @@
                             <i class="fa fa-suitcase ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-success">{{ $tours }}</h3>
-                        <p class="text-muted mb-0">Total Tours</p>
+                        <a href="{{ route('backend.tours.index') }}">
+                            <p class="text-muted mb-0">Total Tours</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -75,7 +81,9 @@
                             <i class="fa fa-cab ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-warning">{{ $cars }}</h3>
-                        <p class="text-muted mb-0">Total Cars</p>
+                        <a href="{{ route('backend.cars.index') }}">
+                            <p class="text-muted mb-0">Total Cars</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -89,7 +97,9 @@
                             <i class="fa fa-ship ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-info">{{ $cruises }}</h3>
-                        <p class="text-muted mb-0">Total Cruise</p>
+                        <a href="{{ route('backend.cruises.index') }}">
+                            <p class="text-muted mb-0">Total Cruise</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -100,7 +110,9 @@
                             <i class="fa fa-home ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-danger">{{ $villas }}</h3>
-                        <p class="text-muted mb-0">Total Villas</p>
+                        <a href="{{ route('backend.villas.index') }}">
+                            <p class="text-muted mb-0">Total Villas</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -111,7 +123,9 @@
                             <i class="fa fa-users ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-danger">{{ $users }}</h3>
-                        <p class="text-muted mb-0">Total Users</p>
+                        <a href="{{ route('backend.users.index') }}">
+                            <p class="text-muted mb-0">Total Users</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -122,7 +136,9 @@
                             <i class="fab fa-first-order ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-success">{{ $booking }}</h3>
-                        <p class="text-muted mb-0">Total Bookings</p>
+                        <a href="{{ route('backend.bookings') }}">
+                            <p class="text-muted mb-0">Total Bookings</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -133,7 +149,9 @@
                             <i class="fa fa-phone ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-warning">{{ $contact }}</h3>
-                        <p class="text-muted mb-0">Total Contact Enquiry</p>
+                        <a href="{{ route('backend.contact-message') }}">
+                            <p class="text-muted mb-0">Total Contact Enquiry</p>
+                        </a>
                     </div>
                 </div>
             </div>

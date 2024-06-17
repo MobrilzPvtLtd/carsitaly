@@ -6,6 +6,7 @@ use App\Events\Auth\UserLoginSuccess;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class AuthenticatedSessionController extends Controller
             'password' => ['required'],
         ]);
 
-        $role = Role::where('name','user')->first();
+        $userRole = User::where('email', $request->email)->first();
 
         $email = $request->email;
         $password = $request->password;
@@ -44,7 +45,8 @@ class AuthenticatedSessionController extends Controller
 
             event(new UserLoginSuccess($request, $user));
 
-            if($role){
+
+            if($userRole->hasRole('user')){
                 return redirect()->intended(route('home', absolute: false));
             }else{
                 return redirect()->intended(route('backend.dashboard', absolute: false));

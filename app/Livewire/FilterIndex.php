@@ -12,8 +12,8 @@ class FilterIndex extends Component
 {
     use WithPagination;
 
-    public $minPrice;
-    public $maxPrice;
+    public $minPrice = '';
+    public $maxPrice = '';
 
     public $searchTerm;
     public $filterLocation = [];
@@ -67,8 +67,8 @@ class FilterIndex extends Component
     public function updateSearchPrice($val)
     {
         $parts = explode("-", $val);
-        $this->minPrice = $parts[0];
-        $this->maxPrice = $parts[1];
+        $this->minPrice = $parts[0] ?? '';
+        $this->maxPrice = $parts[1] ?? '';
     }
 
     public function updateSortPrice($val)

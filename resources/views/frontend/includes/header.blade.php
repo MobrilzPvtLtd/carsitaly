@@ -28,9 +28,9 @@
                     </div>
                     <div class="col-md-6 col-xs-7 clear-padding user-logged">
                         @if (Auth::check())
-                            <a href="#" class="transition-effect">
-                                <img class="avatar-img" src="{{ asset(auth()->user()->avatar) }}"
-                                    alt="{{ asset(auth()->user()->name) }}">
+                            <a @if(Auth::user()->hasRole('user')) href="#" @else href="{{ route('backend.dashboard') }}" @endif class="transition-effect">
+                                <img class="avatar-img" src="{{ asset(Auth::user()->avatar) }}"
+                                    alt="{{ asset(Auth::user()->name) }}">
                                 Hello ,{{ Auth::user()->name }}
                             </a>
                             <a href="{{ route('logout') }}"
