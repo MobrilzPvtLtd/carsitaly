@@ -23,8 +23,8 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('status', 1)->get();
-        return view('frontend.index',compact('posts'));
+        // $posts = Post::where('status', 1)->get();
+        return view('frontend.index');
     }
 
     public function flight(Request $request){

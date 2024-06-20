@@ -70,7 +70,7 @@
 
                             <!-- BEGIN: LOGO -->
                             <a href="{{ route('home') }}">
-                                <img class="sidebar-brand-full" src="{{ asset('img/logo-admin.png') }}" alt="{{ app_name() }}" width="100px">
+                                <img class="sidebar-brand-full" src="{{ asset('img/logo.png') }}" alt="{{ app_name() }}" width="50%">
                                 {{-- Car Italy and tours --}}
                             </a>
                         </div>
