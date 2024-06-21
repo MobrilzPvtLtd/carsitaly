@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 use App\Http\Controllers\LanguageController;
 use App\Livewire\Privacy;
@@ -40,9 +41,8 @@ Route::post('login-submit', [AuthenticatedSessionController::class, 'loginSubmit
 Route::get('register', [RegisteredUserController::class, 'register'])->name('register');
 Route::post('register-submit', [RegisteredUserController::class, 'registerSubmit'])->name('register-submit');
 
-Route::get('password.request', [NewPasswordController::class, 'create'])->name('password.request');
-// Route::post('password-email', [PasswordResetLinkController::class, 'passwordEmail'])->name('password.email');
-
+Route::get('password.reset', [NewPasswordController::class, 'create'])->name('password.request');
+Route::post('password.store', [NewPasswordController::class, 'store'])->name('password.store');
 
 // Language Switch
 Route::get('language/{language}', [LanguageController::class, 'switch'])->name('language.switch');

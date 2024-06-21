@@ -19,58 +19,66 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="assets/css/animate.min.css" rel="stylesheet">
-	<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
-	<link href="assets/css/owl.carousel.css" rel="stylesheet">
-	<link href="assets/css/owl-carousel-theme.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
-	<link href="assets/css/style.css" rel="stylesheet" media="screen">
-	<link href="assets/css/new.css" rel="stylesheet" media="screen">
-	<!-- LIGHT -->
-	<link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
-	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
+        <link href="assets/css/owl.carousel.css" rel="stylesheet">
+        <link href="assets/css/owl-carousel-theme.css" rel="stylesheet">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
+        <link href="assets/css/style.css" rel="stylesheet" media="screen">
+        <link href="assets/css/new.css" rel="stylesheet" media="screen">
+        <!-- LIGHT -->
+        <link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
+        <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-	<!-- FONTS -->
+        <!-- FONTS -->
 
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
-    <style>
-        .notification-success {
-            background-color: #31733c;
-            color: white;
-            padding: 5px 12px 5px 15px;
-            margin: 25px;
-            border-radius: 5px;
-            position: relative;
-        }
-        .notification-error {
-            background-color: #f9676b;
-            color: white;
-            padding: 5px 12px 5px 15px;
-            margin: 25px;
-            border-radius: 5px;
-            position: relative;
-        }
-        .close-button {
-            background: transparent;
-            border: none;
-            color: inherit;
-            cursor: pointer;
-            font-size: 20px;
-            padding: 5px;
-            margin-left: 70px;
-        }
-    </style>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
+        <style>
+            .notification-success {
+                background-color: #31733c;
+                color: white;
+                padding: 5px 12px 5px 15px;
+                margin: 25px;
+                border-radius: 5px;
+                position: relative;
+            }
+            .notification-error {
+                background-color: #f9676b;
+                color: white;
+                padding: 5px 12px 5px 15px;
+                margin: 25px;
+                border-radius: 5px;
+                position: relative;
+            }
+            .close-button {
+                background: transparent;
+                border: none;
+                color: inherit;
+                cursor: pointer;
+                font-size: 20px;
+                padding: 5px;
+                margin-left: 70px;
+            }
+        </style>
     </head>
 
     <body>
-
         @include('frontend.includes.header')
 
         <div class="col-md-4">
             <div id="notification-area" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
         </div>
 
+
         <main class="bg-white dark:bg-gray-800">
+            <div id="loader" class="load-full-screen">
+                <div class="loading-animation">
+                    <span><i class="fa fa-plane"></i></span>
+                    <span><i class="fa fa-bed"></i></span>
+                    <span><i class="fa fa-ship"></i></span>
+                    <span><i class="fa fa-suitcase"></i></span>
+                </div>
+            </div>
             @yield('content')
         </main>
 
