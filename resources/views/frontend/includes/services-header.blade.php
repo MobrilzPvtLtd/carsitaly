@@ -7,12 +7,12 @@
             </div>
             <div class="col-md-5 col-sm-6 clear-padding search-box">
                 <div class="col-md-6 col-xs-5 clear-padding">
-                    <form>
+                    {{-- <form>
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" required placeholder="Search">
                             <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
                 <div class="col-md-6 col-xs-7 clear-padding user-logged">
                     @if (Auth::user())

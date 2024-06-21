@@ -29,21 +29,21 @@ class FilterCarsIndex extends Component
     public $musicSystem = '';
     public $carAC = '';
 
-    public $serviceType;
-    public $sortBy;
-    public $sort_rating;
-    public $selectedSort;
+    public $serviceType = '';
+    public $sortBy = '';
+    public $sort_rating = '';
+    public $selectedSort = '';
 
-    public $formLocation;
-    public $from_brand;
-    public $formCarType;
-    public $formReturn;
-    public $formPickUp;
-    public $brand;
-    public $city;
-    public $carType;
-    public $check_in;
-    public $check_out;
+    public $formLocation = '';
+    public $from_brand = '';
+    public $formCarType = '';
+    public $formReturn = '';
+    public $formPickUp = '';
+    public $brand = '';
+    public $city = '';
+    public $carType = '';
+    public $check_in = '';
+    public $check_out = '';
 
     protected $paginationTheme = 'bootstrap';
 
