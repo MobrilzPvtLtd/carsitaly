@@ -33,6 +33,18 @@
             body {
                 font-family: Ubuntu, "Noto Sans Bengali UI", Arial, Helvetica, sans-serif
             }
+
+            p.notify001 {
+                color: #fff;
+                background-color: #e62525;
+                width: 1.5vw;
+                height: 3vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 41px;
+                font-size: 12px;
+            }
         </style>
 
         @stack('after-styles')
@@ -80,6 +92,27 @@
         <!-- / Scripts -->
 
         @yield('script')
+
+        <script>
+            $('.is_view').click(function() {
+                var target = $(this).data('target');
+                console.log(target);
+                $.ajax({
+                    url: '/admin/is_view',
+                    type: 'post',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        target: target
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('An error occurred: ' + error);
+                    }
+                });
+            });
+        </script>
 
     </body>
 

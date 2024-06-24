@@ -84,6 +84,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
     Route::get('contact-message', 'BackendController@contactMessage')->name('contact-message');
     Route::get('bookings', 'BackendController@bookings')->name('bookings');
     Route::get('flight-enquiry', 'BackendController@flightEnquiry')->name('flight-enquiry');
+    Route::post('is_view', 'BackendController@is_view');
 
     /*
      *

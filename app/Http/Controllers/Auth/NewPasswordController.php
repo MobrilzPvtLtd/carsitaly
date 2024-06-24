@@ -40,7 +40,8 @@ class NewPasswordController extends Controller
         User::where('email', $request->email)->update(['password' => Hash::make($request['password'])]);
 
         DB::table('password_reset_tokens')->where('email', $request->email)->delete();
-        return redirect()->route('login')->with('success', 'Password updated succssfully.');
+        session()->flash('success', 'Password updated succssfully.');
+        return redirect()->route('login');
 
         // $status = Password::reset(
         //     $request->only('email', 'password', 'password_confirmation', 'token'),

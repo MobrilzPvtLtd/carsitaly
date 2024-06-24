@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Contact;
+use Illuminate\Http\Request;
 use App\Models\Flight;
 use App\Models\Service;
 use App\Models\User;
@@ -47,5 +48,27 @@ class BackendController extends Controller
     {
         $flight = Flight::get();
         return view('backend.flight', compact('flight'));
+    }
+
+    // dd($target);
+    public function is_view(Request $request){
+        $target = $request->input('target');
+        $total = 0;
+        switch ($target) {
+            case 'bookings':
+                Booking::where('seen', 0)->update(['seen' => 1]);
+                break;
+            case 'flight':
+                Flight::where('seen', 0)->update(['seen' => 1]);
+                break;
+            case 'contact':
+                Contact::where('seen', 0)->update(['seen' => 1]);
+                break;
+            default:
+                $total = 0;
+                break;
+        }
+
+        return response()->json(['status' => 'success', 'total' => $total]);
     }
 }

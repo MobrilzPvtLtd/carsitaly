@@ -2,6 +2,10 @@
 $notifications = optional(auth()->user())->unreadNotifications;
 $notifications_count = optional($notifications)->count();
 $notifications_latest = optional($notifications)->take(5);
+$total_contact = App\Models\Contact::where('seen', 0)->count();
+$total_flight = App\Models\Flight::where('seen', 0)->count();
+$total_bookings = App\Models\Booking::where('seen', 0)->count();
+$total_enquiries = $total_flight + $total_contact + $total_bookings;
 ?>
 
 <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
@@ -24,14 +28,14 @@ $notifications_latest = optional($notifications)->take(5);
                 <i class="nav-icon fa-solid fa-cubes"></i>&nbsp;@lang('Dashboard')
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('backend.notifications.index') }}">
                 <i class="nav-icon fa-regular fa-bell"></i>&nbsp;@lang('Notifications')
                 @if ($notifications_count)
                     &nbsp;<span class="badge badge-sm bg-info ms-auto">{{ $notifications_count }}</span>
                 @endif
             </a>
-        </li>
+        </li> --}}
 
         {{-- @can('view_posts')
             <li class="nav-item">
@@ -94,18 +98,50 @@ $notifications_latest = optional($notifications)->take(5);
         @endcan
 
         @can('view_services')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('backend.bookings') }}">
-                    <i class="nav-icon fab fa-first-order"></i>&nbsp;@lang('Bookings')
+            <li class="nav-group" aria-expanded="true">
+                <a class="nav-link nav-group-toggle" href="#">
+                    <i class="nav-icon fa fa-question-circle"></i>&nbsp;Enquiries
+                    @if($total_contact || $total_flight || $total_bookings)
+                        <p class="notify001">
+                            {{ $total_enquiries }}
+                        </p>
+                    @endif
                 </a>
-            </li>
-        @endcan
-
-        @can('view_services')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('backend.flight-enquiry') }}">
-                    <i class="nav-icon fa fa-plane"></i>&nbsp;@lang('Flight Enquiry')
-                </a>
+                <ul class="nav-group-items compact" style="height: auto;">
+                    <li class="nav-item">
+                        <a class="nav-link is_view" href="{{ route('backend.bookings') }}" data-target="bookings">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> <span>Bookings</span>
+                            @if($total_bookings)
+                                <p class="notify001">
+                                    {{ $total_bookings }}
+                                </p>
+                            @endif
+                            {{-- <i class="nav-icon fab fa-first-order"></i>&nbsp;@lang('Bookings') --}}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link is_view" href="{{ route('backend.flight-enquiry') }}" data-target="flight">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> <span>Flight Enquiry</span>
+                            @if($total_flight)
+                                <p class="notify001">
+                                    {{ $total_flight }}
+                                </p>
+                            @endif
+                            {{-- <i class="nav-icon fa fa-plane"></i>&nbsp;@lang('Flight Enquiry') --}}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link is_view" href="{{ route('backend.contact-message') }}" data-target="contact">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> <span>Contact</span>
+                            @if($total_contact)
+                                <p class="notify001">
+                                    {{ $total_contact }}
+                                </p>
+                            @endif
+                            {{-- <i class="nav-icon fa-solid fa-phone"></i>&nbsp;@lang('Contact') --}}
+                        </a>
+                    </li>
+                </ul>
             </li>
         @endcan
 
@@ -113,14 +149,6 @@ $notifications_latest = optional($notifications)->take(5);
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('backend.settings') }}">
                     <i class="nav-icon fa-solid fa-gears"></i>&nbsp;@lang('Settings')
-                </a>
-            </li>
-        @endcan
-
-        @can('edit_settings')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('backend.contact-message') }}">
-                    <i class="nav-icon fa-solid fa-phone"></i>&nbsp;@lang('Contact')
                 </a>
             </li>
         @endcan

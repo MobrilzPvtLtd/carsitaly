@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('message_title')->nullable();
             $table->text('message')->nullable();
             $table->string('source')->nullable();
+            $table->boolean('seen')->default(0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

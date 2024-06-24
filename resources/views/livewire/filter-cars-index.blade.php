@@ -176,24 +176,28 @@
                                         @endphp
 
                                         @if($images && count($images) > 0)
+                                        <a href="{{ route('frontend.cars.show', $car->slug) }}">
                                             <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                        </a>
                                         @endif
                                     @endif
                                 </div>
                                 <div class="col-md-6 col-sm-6 hotel-info">
                                     <div>
                                         <div class="hotel-header">
-                                            <h5>{{ $car->title }}
-                                                <span>
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        @if ($i <= $car->rating)
-                                                            <i class="fa fa-star colored"></i>
-                                                        @else
-                                                            <i class="fa fa-star-o colored"></i>
-                                                        @endif
-                                                    @endfor
-                                                </span>
-                                            </h5>
+                                            <a href="{{ route('frontend.cars.show', $car->slug) }}">
+                                                <h5>{{ $car->title }}
+                                                    <span>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $car->rating)
+                                                                <i class="fa fa-star colored"></i>
+                                                            @else
+                                                                <i class="fa fa-star-o colored"></i>
+                                                            @endif
+                                                        @endfor
+                                                    </span>
+                                                </h5>
+                                            </a>
                                             <p>{{ $car->brand }} <span>({{ $car->car_type }})</span></p>
                                         </div>
                                         <div class="hotel-desc">

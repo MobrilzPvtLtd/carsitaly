@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('adult_count')->nullable();
             $table->string('child_count')->nullable();
             $table->string('class')->nullable();
+            $table->boolean('seen')->default(0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

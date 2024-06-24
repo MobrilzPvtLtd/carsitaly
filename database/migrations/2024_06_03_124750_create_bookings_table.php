@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('child',255)->nullable();
             $table->string('room_type',255)->nullable();
             $table->boolean('status')->default(0)->nullable();
-
+            $table->boolean('seen')->default(0)->nullable();
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
