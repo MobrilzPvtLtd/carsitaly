@@ -176,9 +176,10 @@
             $field_lable = label_case($field_name);
             $field_placeholder = "-- Select an option --";
             $select_options = [
-                'breakfast'=>'Breakfast',
-                'lunch'=>'Lunch',
-                'dinner'=>'Dinner'
+                'Wi-Fi'=>'Wi-Fi',
+                'pool'=>'Pool',
+                'gym'=>'gym'
+                'spa'=>'Spa'
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
@@ -188,13 +189,12 @@
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'room_no';
-            $field_room_lable = 'room_type';
-            $field_lable = label_case($field_room_lable);
+            $field_name = 'room_type';
+            $field_lable = label_case($field_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_room_lable)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
@@ -203,13 +203,11 @@
             <?php
             $field_name = 'facilities';
             $field_lable = label_case($field_name);
-            // $field_placeholder = "-- Select options --";
             $select_options = [
-                'wifi'=>'Wifi',
-                'bed'=>'Bed',
-                'texi'=>'Taxi',
-                'beer'=>'Beer',
-                'cutlery'=>'Cutlery'
+                'conference'=>'conference',
+                'rooms'=>'rooms',
+                'parking'=>'parking',
+                'restaurant'=>'restaurant',
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
