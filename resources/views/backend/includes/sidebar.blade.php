@@ -67,8 +67,8 @@ $total_enquiries = $total_flight + $total_contact + $total_bookings;
                     @endcan
                     @can('view_cars')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('backend.cars.index') }}">
-                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Cars
+                        <a class="nav-link" href="{{ route('backend.transfers.index') }}">
+                            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Transfers
                         </a>
                     </li>
                     @endcan

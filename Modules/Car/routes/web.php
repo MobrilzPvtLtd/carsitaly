@@ -27,7 +27,7 @@ Route::group(['namespace' => '\Modules\Car\Http\Controllers\Frontend', 'as' => '
      *
      * ---------------------------------------------------------------------
      */
-    $module_name = 'cars';
+    $module_name = 'transfer';
     $controller_name = 'CarsController';
     Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
     Route::get("$module_name/{slug?}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
@@ -54,7 +54,7 @@ Route::group(['namespace' => '\Modules\Car\Http\Controllers\Backend', 'as' => 'b
      *
      * ---------------------------------------------------------------------
      */
-    $module_name = 'cars';
+    $module_name = 'transfers';
     $controller_name = 'CarsController';
     Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
     Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);

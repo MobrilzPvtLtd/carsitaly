@@ -30,10 +30,10 @@ class CarsController extends Controller
     public function __construct()
     {
         // Page Title
-        $this->module_title = 'Cars';
+        $this->module_title = 'Transfers';
 
         // module name
-        $this->module_name = 'cars';
+        $this->module_name = 'transfers';
 
         // directory path of the module
         $this->module_path = 'car::backend';
@@ -140,7 +140,7 @@ class CarsController extends Controller
             ->editColumn('image', function ($data) {
                 if ($data->image) {
                     $images = json_decode($data->image);
-                    $html = '<a href="' . route('backend.cars.show', $data->id) . '">';
+                    $html = '<a href="' . route('backend.transfers.show', $data->id) . '">';
 
                     if ($images && count($images) > 0) {
                         // foreach ($images as $image) {

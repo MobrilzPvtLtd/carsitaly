@@ -81,7 +81,7 @@
                             <i class="fa fa-cab ml-3" style="font-size: 20px"></i>
                         </div>
                         <h3 class="font-size-20 mt-0 pt-1 text-warning">{{ $cars }}</h3>
-                        <a href="{{ route('backend.cars.index') }}">
+                        <a href="{{ route('backend.transfer.index') }}">
                             <p class="text-muted mb-0">Total Cars</p>
                         </a>
                     </div>
