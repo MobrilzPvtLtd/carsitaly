@@ -1,6 +1,6 @@
 <section id="footer">
 	<footer>
-		<div class="row main-footer-sub">
+		{{-- <div class="row main-footer-sub">
 			<div class="container clear-padding">
 				<div class="col-md-7 col-sm-7">
 					<form >
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 		<div class="main-footer row">
 			<div class="container clear-padding">
 				<div class="col-md-3 col-sm-6 about-box">
@@ -69,10 +69,10 @@
 				<div class="col-md-12 text-center we-accept">
 					<h4>We Accept</h4>
 					<ul>
-						<li><img src="images-new/mastercard.png" alt="cruise"></li>
-						<li><img src="images-new/visa.png" alt="cruise"></li>
-						<li><img src="images-new/american-express.png" alt="cruise"></li>
-						<li><img src="images-new/mastercard.png" alt="cruise"></li>
+						<li><img src="{{ asset('images-new/mastercard.png') }}" alt="cruise"></li>
+						<li><img src="{{ asset('images-new/visa.png') }}" alt="cruise"></li>
+						<li><img src="{{ asset('images-new/american-express.png') }}" alt="cruise"></li>
+						<li><img src="{{ asset('images-new/mastercard.png') }}" alt="cruise"></li>
 					</ul>
 				</div>
 			</div>
@@ -81,6 +81,17 @@
 			<div class="container clear-padding">
 				<div class="col-md-6 col-sm-6">
 					<p>© 2024 All Rights Reserved. Designed &amp; Developed By <a href="https://mobrilz.com/">Mobrilz</a></p>
+				</div>
+                <div class="col-md-5 col-sm-5">
+					<div class="social-media pull-right">
+						<ul>
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+						</ul>
+					</div>
 				</div>
 				<div class="go-up">
 					<a href="#"><i class="fa fa-arrow-up"></i></a>

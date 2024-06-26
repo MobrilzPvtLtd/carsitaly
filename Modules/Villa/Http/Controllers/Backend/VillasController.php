@@ -127,7 +127,7 @@ class VillasController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'villas')->select('id', 'image', 'title', 'price','city','mobile', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'villas')->select('id', 'images', 'title','price','number_of_bedrooms','number_of_bathrooms', 'maximum_occupancy');
 
         $data = $$module_name;
 
@@ -137,15 +137,15 @@ class VillasController extends Controller
 
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
-            ->editColumn('image', function ($data) {
+            ->editColumn('images', function ($data) {
                 // if ($data->image) {
                 //     return '<a href="' . route('backend.villas.show', $data->id) . '">
                 //                 <img src="' . asset('public/storage/') . '/' . $data->image . '" alt="" width="100px">
                 //             </a>';
                 // }
-                if ($data->image) {
-                    $images = json_decode($data->image);
-                    $html = '<a href="' . route('backend.hotels.show', $data->id) . '">';
+                if ($data->images) {
+                    $images = json_decode($data->images);
+                    $html = '<a href="' . route('backend.villas.show', $data->id) . '">';
 
                     if ($images && count($images) > 0) {
                         // foreach ($images as $image) {
@@ -158,15 +158,15 @@ class VillasController extends Controller
                     return $html;
                 }
             })
-            ->editColumn('status', function ($data) {
-                if ($data->status == 1){
-                    return '<span class="badge text-bg-success">Active</span>';
-                }else{
-                    return '<span class="badge text-bg-warning">Inactive</span>';
-                }
+            // ->editColumn('status', function ($data) {
+            //     if ($data->status == 1){
+            //         return '<span class="badge text-bg-success">Active</span>';
+            //     }else{
+            //         return '<span class="badge text-bg-warning">Inactive</span>';
+            //     }
 
-            })
-            ->rawColumns(['image','status', 'action'])
+            // })
+            ->rawColumns(['images', 'action'])
             ->orderColumns(['id'], '-:column $1')
             ->make(true);
     }
@@ -214,34 +214,25 @@ class VillasController extends Controller
 
         $module_action = 'Store';
 
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('villas', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
+        $modelData = $request->except('images');
         $imagePaths = [];
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $imagePath = $file->store('villa', 'public');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $imagePath = $file->store('villas', 'public');
                 $imagePaths[] = $imagePath;
             }
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
+            $modelData['images'] = json_encode($imagePaths);
         }
-
-        if (!empty($request->facilities)) {
-            $modelData['facilities'] = json_encode($request->facilities);
-        }
-
-        if (!empty($request->meals)) {
-            $modelData['meals'] = json_encode($request->meals);
-        }
-
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('villa', 'public');
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
 
         $$module_name_singular = $module_model::create($modelData);
 
@@ -335,35 +326,28 @@ class VillasController extends Controller
 
         $modelData = $request->all();
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('villa', 'public');
-
-        //     if ($oldImagePath) {
-        //         Storage::disk('public')->delete($oldImagePath);
-        //     }
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
-
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('villas', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
+        $modelData = $request->except('images');
         $imagePaths = [];
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $imagePath = $file->store('villa', 'public');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $imagePath = $file->store('villas', 'public');
                 $imagePaths[] = $imagePath;
             }
-
             if ($oldImagePath) {
                 Storage::disk('public')->delete($oldImagePath);
             }
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
+            $modelData['images'] = json_encode($imagePaths);
         }
-
 
         $$module_name_singular->update($modelData);
 

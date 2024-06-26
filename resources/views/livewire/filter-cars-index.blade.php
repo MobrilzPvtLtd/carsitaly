@@ -34,13 +34,9 @@
                         <label>Car Type</label>
                         <select class="custom-select-room" wire:model="carType">
                             <option value="">select</option>
-                            @foreach ($car_type as $ctype)
+                            {{-- @foreach ($car_type as $ctype)
                                 <option>{{ $ctype }}</option>
-                            @endforeach
-                            {{-- <option>Sedan</option>
-                            <option>Limo</option>
-                            <option>Coupe</option>
-                            <option>Hatch</option> --}}
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>
@@ -50,9 +46,9 @@
                         <select class="custom-select-room" wire:model="brand">
                             <option value="">select</option>
 
-                            @foreach ($brands as $brand)
+                            {{-- @foreach ($brands as $brand)
                                 <option value="{{ $brand }}">{{ $brand }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>
@@ -93,11 +89,11 @@
                 <div class="location-filter filter">
                     <h5><i class="fa fa-certificate"></i> Car Brand</h5>
                     <ul>
-                        @foreach ($brands as $brand)
+                        {{-- @foreach ($brands as $brand)
                             <li>
                                 <input type="checkbox" wire:model.live="filterBrands.{{ $brand }}" value="{{ $brand }}">{{ $brand }}
                             </li>
-                        @endforeach
+                        @endforeach --}}
                     </ul>
                 </div>
                 <div class="facilities-filter filter">
@@ -170,38 +166,34 @@
                         <div  class="hotel-list-view">
                             <div class="wrapper">
                                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    @if($car->image)
+                                    @if($car->images)
                                         @php
-                                            $images = json_decode($car->image);
+                                            $images = json_decode($car->images);
                                         @endphp
 
                                         @if($images && count($images) > 0)
-                                        <a href="{{ route('frontend.cars.show', $car->slug) }}">
-                                            <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
-                                        </a>
+                                            <img src="{{ asset('public/storage/' . $images[0]) }}" alt="transfer">
                                         @endif
                                     @endif
                                 </div>
                                 <div class="col-md-6 col-sm-6 hotel-info">
                                     <div>
                                         <div class="hotel-header">
-                                            <a href="{{ route('frontend.cars.show', $car->slug) }}">
-                                                <h5>{{ $car->title }}
-                                                    <span>
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($i <= $car->rating)
-                                                                <i class="fa fa-star colored"></i>
-                                                            @else
-                                                                <i class="fa fa-star-o colored"></i>
-                                                            @endif
-                                                        @endfor
-                                                    </span>
-                                                </h5>
-                                            </a>
-                                            <p>{{ $car->brand }} <span>({{ $car->car_type }})</span></p>
+                                            <h5>{{ $car->title }}
+                                                <span>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $car->rating)
+                                                            <i class="fa fa-star colored"></i>
+                                                        @else
+                                                            <i class="fa fa-star-o colored"></i>
+                                                        @endif
+                                                    @endfor
+                                                </span>
+                                            </h5>
+                                            {{-- <p>{{ $car->brand }} <span>({{ $car->car_type }})</span></p> --}}
                                         </div>
                                         <div class="hotel-desc">
-                                            <p>{{ $car->meta_description }}</p>
+                                            <p>{{ $car->description }}</p>
                                         </div>
                                         <div class="car-detail">
                                             <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
@@ -242,7 +234,7 @@
                                             <h5>${{ $car->price }}/Person</h5>
                                         </div>
                                         <div class="book">
-                                            <a href="{{ route('frontend.cars.show', $car->slug) }}">BOOK</a>
+                                            <a href="{{ route('frontend.transfers.show', $car->slug) }}">BOOK</a>
                                         </div>
                                     </div>
                                 </div>

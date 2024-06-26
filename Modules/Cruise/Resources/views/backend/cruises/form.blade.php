@@ -67,36 +67,39 @@
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'departure_port';
-            $field_lable = label_case($field_name);
+            $field_name = 'departure';
+            $field_lable_name = 'departure_port';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'destination_ports';
-            $field_lable = label_case($field_name);
+            $field_name = 'destination';
+            $field_lable_name = 'destination_ports';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'return_port';
-            $field_lable = label_case($field_name);
+            $field_name = 'return';
+            $field_lable_name = 'return_port';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "required";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
@@ -109,7 +112,7 @@
             $required = "required";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
@@ -143,13 +146,14 @@
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'package_options';
-            $field_lable = label_case($field_name);
+            $field_name = 'package';
+            $field_lable_name = 'package_options';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
 
@@ -157,38 +161,35 @@
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'inclusion';
+            $field_name = 'cabin_type';
             $field_lable = label_case($field_name);
             $field_placeholder = "-- Select an option --";
             $select_options = [
-                'cruise'=>'Cruise',
-                'transportation'=>'Transportation',
-                'sightseeing'=>'Sightseeing',
-                'meals'=>'Meals',
-                'sighseeing'=>'Sighseeing',
-                'drinks'=>'Drinks',
+                'interior'=>'interior',
+                'oceanview'=>'oceanview',
+                'balcony'=>'balcony',
+                'suite'=>'suite',
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple()->attributes(["$required"]) }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'cabin_images';
-            $field_image = 'cabin_images[]';
             $field_label = label_case($field_name);
             $field_placeholder = $field_label;
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }}
-            {{ html()->file($field_image)->class('form-control')->multiple() }}
+            {{ html()->file($field_name)->class('form-control')}}
         </div>
     </div>
     <div class="col-12 col-sm-8 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'meta_description';
+            $field_name = 'description_details';
             $field_lable_name = 'description';
             $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
@@ -203,67 +204,62 @@
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'included_services';
-            $field_lable = label_case($field_name);
-            // $field_placeholder = "-- Select options --";
+            $field_name = 'included';
+            $field_lable_name = 'included_services';
+            $field_lable = label_case($field_lable_name);
             $select_options = [
-                'bar'=>'Bar',
-                'restaurant'=>'Restaurant',
-                'theatre'=>'Theatre',
-                'pet_room'=>'Pet Room',
-                'LED_in_room'=>'LED in Room',
+                'meals'=>'meals',
+                'entertainment'=>'entertainment',
+                'excursions'=>'excursions',
             ];
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple()->attributes(["$required"]) }}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'optional_services';
-            $field_lable = label_case($field_name);
+            $field_name = 'optional';
+            $field_lable_name = 'optional_services';
+            $field_lable = label_case($field_lable_name);
             // $field_placeholder = "-- Select options --";
             $select_options = [
-                'bar'=>'Bar',
-                'restaurant'=>'Restaurant',
-                'theatre'=>'Theatre',
-                'pet_room'=>'Pet Room',
-                'LED_in_room'=>'LED in Room',
+                'spa treatments'=>'spa treatments',
+                'specialty dining'=>'specialty dining',
             ];
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple()->attributes(["$required"]) }}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'entertainment_options';
-            $field_lable = label_case($field_name);
-            // $field_placeholder = "-- Select options --";
+            $field_name = 'entertainment';
+            $field_lable_name = 'entertainment_options';
+            $field_lable = label_case($field_lable_name);
             $select_options = [
-                'bar'=>'Bar',
-                'restaurant'=>'Restaurant',
-                'theatre'=>'Theatre',
-                'pet_room'=>'Pet Room',
-                'LED_in_room'=>'LED in Room',
+                'shows'=>'shows',
+                'movies'=>'movies',
+                'live music'=>'live music',
             ];
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple()->attributes(["$required"]) }}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'dining_options';
-            $field_lable = label_case($field_name);
+            $field_name = 'dining';
+            $field_lable_name = 'dining_options';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", "max" => 5]) }}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
 
@@ -271,36 +267,39 @@
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'safety_information';
-            $field_lable = label_case($field_name);
+            $field_name = 'safety';
+            $field_lable_name = 'safety_information';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'age_restrictions';
-            $field_lable = label_case($field_name);
+            $field_name = 'age';
+            $field_lable_name = 'age_restrictions';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'health_requirements';
-            $field_lable = label_case($field_name);
+            $field_name = 'health';
+            $field_lable_name = 'health_requirements';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
@@ -329,26 +328,12 @@
         </div>
     </div>
 
-    <h4>Reviews and Ratings</h4>
-    <div class="col-12 col-sm-4 mb-3">
-        <div class="form-group">
-            <?php
-            $field_name = 'rating';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
-            ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", "max" => 5]) }}
-        </div>
-    </div>
-
     <h4>Media Management</h4>
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'images';
-            $field_image = 'image[]';
+            $field_image = 'images[]';
             $field_label = label_case($field_name);
             $field_placeholder = $field_label;
             ?>
@@ -359,13 +344,12 @@
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'images';
-            $field_image = 'image[]';
+            $field_name = 'videos';
             $field_label = label_case($field_name);
             $field_placeholder = $field_label;
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }}
-            {{ html()->file($field_image)->class('form-control')->multiple() }}
+            {{ html()->file($field_name)->class('form-control') }}
         </div>
     </div>
 
@@ -392,6 +376,35 @@
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+        </div>
+    </div>
+
+    <h4>Reviews and Ratings</h4>
+    <div class="col-12 col-sm-4 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'rating';
+            $field_lable = label_case($field_name);
+            $field_placeholder = $field_lable;
+            $required = "";
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", "max" => 5]) }}
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-2 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'featured';
+            $field_lable = label_case($field_name);
+            $field_placeholder = $field_lable;
+            $required = "";
+            ?>
+            <div class="checkbox" style="margin-top: 35px;">
+                {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+                <input name="{{ $field_name }}" value="1" type="checkbox" @if(old($field_name, setting($field_name))) checked="checked" @endif style="width: 30px;">
+            </div>
         </div>
     </div>
 

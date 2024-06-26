@@ -62,9 +62,20 @@
 				<!-- END: HOLIDAY GALLRY -->
 				<div class="package-complete-detail">
 					<ul class="nav nav-tabs">
-						<li><a data-toggle="tab" href="#overview"><i class="fa fa-suitcase"></i> <span>Detail</span></a></li>
-						<li><a data-toggle="tab" href="#inclusion"><i class="fa fa-check-square"></i> <span>Inclusion</span></a></li>
-						<li class="active"><a data-toggle="tab" href="#itinerary"><i class="fa fa-street-view"></i> <span>Itinerary</span></a></li>
+						<li><a data-toggle="tab" href="#Tour_Information
+"><i class="fa fa-suitcase"></i> <span>Tour Information
+</span></a></li>
+						<li><a data-toggle="tab" href="#Location_Details"><i class="fa fa-check-square"></i> <span>Location Details</span></a></li>
+						<li class="active"><a data-toggle="tab" href="#Pricing_and_Availability"><i class="fa fa-street-view"></i> <span>Pricing and Availability</span></a></li>
+						<li class="active"><a data-toggle="tab" href="#Itinerary
+"><i class="fa fa-street-view"></i> <span>Itinerary
+</span></a></li>
+						<li class="active"><a data-toggle="tab" href="#Reviews and Ratings
+"><i class="fa fa-street-view"></i> <span>Reviews and Ratings
+</span></a></li>
+						<li class="active"><a data-toggle="tab" href="#Media
+"><i class="fa fa-street-view"></i> <span>Media
+</span></a></li>
 						{{-- <li><a data-toggle="tab" href="#add-info"><i class="fa fa-info-circle"></i> <span>Additional Info</span></a></li> --}}
 					</ul>
 					<div class="tab-content">
@@ -75,13 +86,13 @@
 							</p>
 							<h4 class="tab-heading">Inclusion</h4>
 							<p class="inc">
-                                @php
+                                {{-- @php
                                     $tourincArray = json_decode($tourinc, true);
-                                @endphp
+                                @endphp --}}
 
-                                @foreach ($tourincArray as $tinc)
+                                {{-- @foreach ($tourincArray as $tinc)
                                     <i class="fa fa-check-circle"></i> {{ $tinc }}<br>
-                                @endforeach
+                                @endforeach --}}
 								{{-- <i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
                                     <i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
                                     <i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
@@ -103,9 +114,12 @@
 								<i class="fa fa-times-circle-o"></i> Airport fees<br>
 							</p> --}}
 						</div>
-						<div id="inclusion" class="tab-pane fade">
-							<h4 class="tab-heading">Inclusion</h4>
-							<div class="inclusion-wrapper">
+						<div id="Tour_Information" class="tab-pane fade">
+							<h4 class="tab-heading">Tour Name: Name of the tour.
+                            </h4>
+                            <p><b>Description:</b> Detailed description of the tour, including highlights and itinerary.
+                            </p>
+							{{-- <div class="inclusion-wrapper">
 								<div class="inclusion-title">
 									<p><span><i class="fa fa-bed"></i></span>Hotel</p>
 								</div>
@@ -121,7 +135,7 @@
                                                 <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
                                             @endif
                                             {{-- <img src="assets/images/offer1.jpg" alt="cruise"> --}}
-                                        </div>
+                                        {{-- </div>
                                         <div class="col-md-9 col-sm-9">
                                             <h5>{{ $related->address }}, {{ $related->city }}
                                                 @for ($i = 1; $i <= 5; $i++)
@@ -132,10 +146,10 @@
                                                     @endif
                                                 @endfor
                                             </h5>
-                                            <p>{{ $related->meta_description }}</p>
+                                            <p>{{ $related->description }}</p>
                                         </div>
                                     </div>
-                                    @endforeach
+                                    @endforeach --}}
 									{{-- <div class="clearfix"></div>
                                         <h4>London, 2 Nights</h4>
                                         <div class="col-md-3 col-sm-3 clear-padding">
@@ -154,9 +168,9 @@
 										<h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
 										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 									</div> --}}
-									<div class="clearfix"></div>
+									{{-- <div class="clearfix"></div>
 								</div>
-							</div>
+							</div> --}}
 							{{-- <div class="inclusion-wrapper">
 								<div class="inclusion-title">
 									<p><span><i class="fa fa-plane"></i></span>Transport</p>
@@ -209,6 +223,43 @@
 									</p>
 								</div>
 							</div> --}}
+						</div>
+                        <div id="Location_Details" class="tab-pane fade">
+							<h4 class="tab-heading"> Starting Point: Location where the tour begins.
+                            </h4>
+                            <h4 class="tab-heading"> Ending Point: Location where the tour ends (if different from the starting point).
+                            </h4>
+                            <p><b>Destinations Covered:</b>  List of all major destinations or landmarks included in the tour.
+                            </p>
+                            <p><b>Duration:</b>  Total duration of the tour (e.g., 3 hours, 2 days).
+                            </p>
+                            <p><b> Start Time:</b> Scheduled start time of the tour.
+                            </p>
+                            <p><b>  End Time:</b> Scheduled end time of the tour.
+                            </p>
+
+						</div>
+                        <div id="Pricing_and_Availability" class="tab-pane fade">
+							<h4 class="tab-heading">  Base Price: Starting price per person.
+
+                            </h4>
+
+						</div>
+                        <div id="Itinerary" class="tab-pane fade">
+							<h4 class="tab-heading">  Day-by-Day Itinerary: Detailed schedule of activities for each day of the tour
+
+                            </h4>
+
+                            <p><b> Activity Details</b> Description of each activity, including duration and any special requirements</p>
+                            <p><b> Free Time:</b> on any free time or optional activities.</p>
+
+						</div>
+                        <div id="Media" class="tab-pane fade">
+							<h4 class="tab-heading">Villa Images:</h4>
+                        <img src="{{ asset('img/default_banner.jpg') }}">
+                        <h4> Video Tours:</h4>
+                        <img src="{{ asset('img/default_banner.jpg') }}">
+
 						</div>
 						<div id="itinerary" class="tab-pane fade in active">
 							<h4 class="tab-heading">Package Itinerary</h4>

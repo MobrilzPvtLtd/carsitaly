@@ -52,28 +52,22 @@
                                 #
                             </th>
                             <th>
-                                @lang("villa::text.image")
+                                Images
                             </th>
                             <th>
-                                @lang("villa::text.title")
+                                Villa Name
                             </th>
-                            {{-- <th>
-                                @lang("villa::text.slug")
-                            </th> --}}
                             <th>
                                 @lang("villa::text.price")
                             </th>
                             <th>
-                                @lang("villa::text.city")
+                                Number of Bedrooms
                             </th>
                             <th>
-                                @lang("villa::text.mobile")
+                                Number of Bathrooms
                             </th>
                             <th>
-                                @lang("villa::text.rating")
-                            </th>
-                            <th>
-                                @lang("villa::text.status")
+                                Maximum Occupancy
                             </th>
                             <th class="text-end">
                                 @lang("villa::text.action")
@@ -122,8 +116,8 @@
                 name: 'id'
             },
             {
-                data: 'image',
-                name: 'image'
+                data: 'images',
+                name: 'images'
             },
             {
                 data: 'title',
@@ -138,20 +132,16 @@
                 name: 'price'
             },
             {
-                data: 'city',
-                name: 'city'
+                data: 'number_of_bedrooms',
+                name: 'number_of_bedrooms'
             },
             {
-                data: 'mobile',
-                name: 'mobile'
+                data: 'number_of_bathrooms',
+                name: 'number_of_bathrooms'
             },
             {
-                data: 'rating',
-                name: 'rating'
-            },
-            {
-                data: 'status',
-                name: 'status'
+                data: 'maximum_occupancy',
+                name: 'maximum_occupancy'
             },
             {
                 data: 'action',

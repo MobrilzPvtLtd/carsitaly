@@ -1,3 +1,4 @@
+<input type="hidden" value="transfers" name="service_type">
 <div class="row">
     <h4>Transfer Information</h4>
     <div class="col-12 col-sm-4 mb-3">
@@ -58,11 +59,14 @@
             <?php
             $field_name = 'vehicle_type';
             $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
+            $select_options = [
+                'sedan'=>'sedan',
+                'SUV'=>'SUV',
+                'van'=>'van',
+            ];
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_lable, $field_name)->class('form-label') }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select3') }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
@@ -74,7 +78,7 @@
             $required = "required";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
@@ -86,7 +90,7 @@
             $required = "required";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
@@ -96,20 +100,13 @@
             $field_lable = label_case($field_name);
             // $field_placeholder = "-- Select options --";
             $select_options = [
-                'carAC'=>'Car AC',
-                'GPSNavigation'=>'GPS Navigation',
-                'sateliteNavigation'=>'Satelite Navigation',
-                'musicSystem'=>'Music System',
-                'powerLock'=>'Power Lock',
-                'FMRadio'=>'FM Radio',
-                'HiFISoundSystem'=>'Hi FI Sound System',
-                'Mileage'=>'Mileage 12KM/Liter',
-                '4Doors&PanoramaView'=>'4 Doors & Panorama View',
-                'automaticTransmission'=>'Automatic Transmission',
+                'air conditioning'=>'air conditioning',
+                'Wi-Fi'=>'Wi-Fi',
+                'child seats'=>'child seats',
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple()->attributes(["$required"]) }}
+            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
     </div>
 
@@ -133,7 +130,7 @@
         <div class="form-group">
             <?php
             $field_name = 'images';
-            $field_image = 'image[]';
+            $field_image = 'images[]';
             $field_label = label_case($field_name);
             $field_placeholder = $field_label;
             ?>
@@ -164,6 +161,21 @@
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", "max" => 5]) }}
+        </div>
+    </div>
+    <div class="col-12 col-sm-2 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'featured';
+            $field_featured = 'featured';
+            $field_lable = label_case($field_featured);
+            $field_placeholder = $field_lable;
+            $required = "";
+            ?>
+            <div class="checkbox" style="margin-top: 35px;">
+                {{ html()->label($field_lable, $field_featured)->class('form-label') }} {!! field_required($required) !!}
+                <input name="{{ $field_featured }}" value="1" type="checkbox" @if(old($field_name, setting($field_name))) checked="checked" @endif style="width: 30px;">
+            </div>
         </div>
     </div>
 

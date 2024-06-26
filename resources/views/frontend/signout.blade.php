@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="load-full-screen">
 <head>
-	
+
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="LimpidThemes">
-	
+
 	<title>Cruise - Responsive Travel Agency Template</title>
-	
+
     <!-- STYLES -->
 	<link href="assets/css/animate.min.css" rel="stylesheet">
 	<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
@@ -21,9 +21,9 @@
 	<!-- LIGHT -->
 	<link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
 	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	
+
 	<!-- FONTS -->
-	
+
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
 
 </head>
@@ -48,7 +48,7 @@
 			<li class="green" data-path="assets/css/color/green.css"></li>
 			<li class="light-green" data-path="assets/css/color/light-green.css"></li>
 			<li class="red" data-path="assets/css/dummy.css"></li>
-			<li class="blue" data-path="assets/css/color/blue.css"></li>  
+			<li class="blue" data-path="assets/css/color/blue.css"></li>
 			<li class="brown" data-path="assets/css/color/brown.css"></li>
 			<li class="purple" data-path="assets/css/color/purple.css"></li>
 			<li class="orange" data-path="assets/css/color/orange.css"></li>
@@ -80,7 +80,7 @@
 					<div class="col-md-6 col-xs-7 clear-padding user-logged">
 						<a href="#" class="transition-effect">
 							<img src="assets/images/user.jpg" alt="cruise">
-							Hello , 
+							Hello ,
 							  {{-- {{ Auth::user()->name }} --}}
 						</a>
 						<a href="signout" class="transition-effect">
@@ -107,12 +107,12 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							
+
 							<!-- BEGIN: LOGO -->
 							<a class="navbar-brand logo" href="index.html">CRUISE</a>
 						</div>
-						
-						<!-- BEGIN: NAVIGATION -->       
+
+						<!-- BEGIN: NAVIGATION -->
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown">
@@ -144,7 +144,7 @@
 											<h5>PAGES</h5>
 											<ul>
 												<li><a href="hotel.html">HOTEL SEARCH</a></li>
-												
+
 												<li><a href="hotel-list.html">HOTEL LIST</a></li>
 												<li><a href="hotel-grid.html">HOTEL GRID</a></li>
 												<li><a href="hotel-booking.html">HOTEL BOOKING</a></li>
@@ -160,7 +160,7 @@
 												<li><a href="#">WESTERN EUROPE</a></li>
 												<li><a href="#">SOUTH AMERICA</a></li>
 												<li><a href="#">LATIN AMERICA</a></li>
-											</ul>	
+											</ul>
 										</li>
 										<li class="col-md-3 col-sm-4 links">
 											<h5>TOP REGION</h5>
@@ -263,7 +263,7 @@
 										</li>
 									</ul>
 									<div class="clearfix"></div>
-								</li> 
+								</li>
 								<li class="dropdown mega">
 									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-suitcase"></i> TOURS <i class="fa fa-caret-down"></i></a>
 									<ul class="dropdown-menu mega-menu">
@@ -454,7 +454,7 @@
 		</div>
 	</div>
 	<!-- END: PAGE TITLE -->
-	
+
 	<!-- START: LOGIN/REGISTER -->
 	<div class="row login-row">
 		<div class="container clear-padding">
@@ -470,10 +470,10 @@
 			</div>
 			<div class="col-sm-5 login-form">
 				<h4>Login</h4>
-				
+
                 <form action="{{ route('login') }}" method="POST">
                      @csrf
-			
+
 					<label>Username/Email</label>
 					<div class="input-group">
 						<input name="name" type="email" class="form-control" placeholder="Username/Email" required>
@@ -483,7 +483,7 @@
 					<div class="input-group">
 						<input name="password" type="password" class="form-control" placeholder="Password" required>
 						<span class="input-group-addon"><i class="fa fa-eye fa-fw"></i></span>
-					</div>					
+					</div>
 					<button type="submit">LOGIN <i class=""></i></button>
 				</form>
 			</div>
@@ -499,12 +499,12 @@
 					<div class="input-group">
 						<input name="password" type="password" class="form-control" placeholder="Password" required>
 						<span class="input-group-addon"><i class="fa fa-eye fa-fw"></i></span>
-					</div>	
+					</div>
 					<label>Confirm Password</label>
 					<div class="input-group">
 						<input name="confirm-password" type="password" class="form-control" placeholder="Retype Password">
 						<span class="input-group-addon"><i class="fa fa-eye fa-fw"></i></span>
-					</div>	
+					</div>
 					<input name="tc" type="checkbox"> I agree To Terms & Conditions
 					<button type="submit"><a href="login">REGISTER ME <i class="fa fa-edit"></i></button>
 				</form>

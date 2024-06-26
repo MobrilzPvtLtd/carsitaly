@@ -178,24 +178,29 @@
             $select_options = [
                 'Wi-Fi'=>'Wi-Fi',
                 'pool'=>'Pool',
-                'gym'=>'gym'
+                'gym'=>'gym',
                 'spa'=>'Spa'
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple()->attributes(["$required"]) }}
+            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'room_type';
+            $field_name = 'room_types';
             $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
+            $field_placeholder = "-- Select an option --";
+            $required = "required";
+            $select_options = [
+                'single'=>'single',
+                'double'=>'double',
+                'suite'=>'suite',
+            ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2') }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -211,7 +216,7 @@
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple()->attributes(["$required"]) }}
+            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
     </div>
 
@@ -235,7 +240,7 @@
         <div class="form-group">
             <?php
             $field_name = 'images';
-            $field_image = 'image[]';
+            $field_image = 'images[]';
             $field_label = label_case($field_name);
             $field_placeholder = $field_label;
             ?>
@@ -247,12 +252,11 @@
         <div class="form-group">
             <?php
             $field_name = 'videos';
-            $field_image = 'videos[]';
             $field_label = label_case($field_name);
             $field_placeholder = $field_label;
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }}
-            {{ html()->file($field_image)->class('form-control')->multiple() }}
+            {{ html()->file($field_name)->class('form-control') }}
         </div>
     </div>
 
@@ -281,7 +285,20 @@
             {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required", "max" => 5]) }}
         </div>
     </div>
-
+    <div class="col-12 col-sm-2 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'featured';
+            $field_lable = label_case($field_name);
+            $field_placeholder = $field_lable;
+            $required = "";
+            ?>
+            <div class="checkbox" style="margin-top: 35px;">
+                {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+                <input name="{{ $field_name }}" value="1" type="checkbox" @if(old($field_name, setting($field_name))) checked="checked" @endif style="width: 30px;">
+            </div>
+        </div>
+    </div>
     {{-- <div class="col-12 col-sm-3 mb-3">
         <div class="form-group">
             <?php
@@ -311,21 +328,7 @@
             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div> --}}
-    <div class="col-12 col-sm-2 mb-3">
-        <div class="form-group">
-            <?php
-            $field_name = 'featured';
-            $field_featured = 'featured';
-            $field_lable = label_case($field_featured);
-            $field_placeholder = $field_lable;
-            $required = "";
-            ?>
-            <div class="checkbox" style="margin-top: 35px;">
-                {{ html()->label($field_lable, $field_featured)->class('form-label') }} {!! field_required($required) !!}
-                <input name="{{ $field_featured }}" value="1" type="checkbox" @if(old($field_name, setting($field_name))) checked="checked" @endif style="width: 30px;">
-            </div>
-        </div>
-    </div>
+
     {{-- <div class="col-12 col-sm-12 mb-3">
         <div class="form-group">
             <?php

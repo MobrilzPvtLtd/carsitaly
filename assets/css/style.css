@@ -3053,6 +3053,7 @@ h5 {
 .cruise-list-view h4 {
 	font-weight: bold;
 	margin-top: 15px;
+    color: #008752;
 }
 .cruise-list-view strong {
 	color: #008752;
@@ -7414,4 +7415,8 @@ h5 {
 }
 .phpdebugbar.phpdebugbar-closed {
     display: none !important;
+}
+.container.clear-padding.logo01 {
+    display: flex !important;
+    align-items: center !important;
 }

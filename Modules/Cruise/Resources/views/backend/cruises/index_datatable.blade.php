@@ -52,28 +52,28 @@
                                 #
                             </th>
                             <th>
-                                @lang("cruise::text.image")
+                                Images
                             </th>
                             <th>
-                                @lang("cruise::text.title")
+                                Cruise Name
                             </th>
-                            {{-- <th>
-                                @lang("cruise::text.slug")
-                            </th> --}}
                             <th>
                                 @lang("cruise::text.price")
                             </th>
                             <th>
-                                @lang("cruise::text.city")
+                                Package
                             </th>
                             <th>
-                                @lang("cruise::text.country")
+                                Cruise Line
                             </th>
                             <th>
-                                @lang("cruise::text.rating")
+                                Ship Name
                             </th>
                             <th>
-                                @lang("cruise::text.status")
+                                Duration
+                            </th>
+                            <th>
+                                Cabin Type
                             </th>
                             <th class="text-end">
                                 @lang("cruise::text.action")
@@ -122,36 +122,36 @@
                 name: 'id'
             },
             {
-                data: 'image',
-                name: 'image'
+                data: 'images',
+                name: 'images'
             },
             {
                 data: 'title',
                 name: 'title'
             },
-            // {
-            //     data: 'slug',
-            //     name: 'slug'
-            // },
             {
                 data: 'price',
                 name: 'price'
             },
             {
-                data: 'city',
-                name: 'city'
+                data: 'package',
+                name: 'package'
             },
             {
-                data: 'country',
-                name: 'country'
+                data: 'cruise_line',
+                name: 'cruise_line'
             },
             {
-                data: 'rating',
-                name: 'rating'
+                data: 'ship_name',
+                name: 'ship_name'
             },
             {
-                data: 'status',
-                name: 'status'
+                data: 'duration',
+                name: 'duration'
+            },
+            {
+                data: 'cabin_type',
+                name: 'cabin_type'
             },
             {
                 data: 'action',

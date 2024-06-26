@@ -54,16 +54,73 @@
             </div>
             <div class="room-complete-detail">
                 <ul class="nav nav-tabs">
-                    <li><a data-toggle="tab" href="#overview"><i class="fa fa-bolt"></i> <span>Overview</span></a></li>
-                    <li class="active"><a data-toggle="tab" href="#room-info"><i class="fa fa-info-circle"></i> <span>Rooms</span></a></li>
-                    <li><a data-toggle="tab" href="#ammenties"><i class="fa fa-bed"></i> <span>Ammenties</span></a></li>
+                    <li><a data-toggle="tab" href="#Villa_Information
+"><i class="fa fa-bolt"></i> <span>Villa Information
+</span></a></li>
+                    <li class="active"><a data-toggle="tab" href="#Location_Details"><i class="fa fa-info-circle"></i> <span>Location Details</span></a></li>
+                    <li><a data-toggle="tab" href="#Property_Details"><i class="fa fa-bed"></i> <span>Property Details</span></a></li>
+                    <li><a data-toggle="tab" href="#Amenities
+"><i class="fa fa-bed"></i> <span>Amenities
+</span></a></li>
+                    <li><a data-toggle="tab" href="#Pricing_and_Availability
+"><i class="fa fa-bed"></i> <span>Pricing and Availability
+</span></a></li>
+                    {{-- <li><a data-toggle="tab" href="#Reviews_and_Ratings
+"><i class="fa fa-bed"></i> <span>Reviews and Ratings
+</span></a></li> --}}
+                    <li><a data-toggle="tab" href="#Media
+"><i class="fa fa-bed"></i> <span>Media
+</span></a></li>
                     {{-- <li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li> --}}
                     {{-- <li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li> --}}
                 </ul>
                 <div class="tab-content">
-                    <div id="overview" class="tab-pane fade">
-                        <h4 class="tab-heading">About Grand Lilly</h4>
-                        <p>{{ $villa->description }}</p>
+                    <div id="Villa_Information" class="tab-pane fade">
+                        <h4 class="tab-heading">Villa Name: Name of the villa.</h4>
+                        <p> <b>Description:</b> Detailed description of the villa.</p>
+                        <p> <b>Category:</b> Category or type of villa (e.g., luxury, budget, beachfront).</p>
+                    </div>
+                    <div id="Location_Details" class="tab-pane fade">
+                        <h4 class="tab-heading">Address: Detailed address of the villa.</h4>
+                        <p>  <b>City:</b> City where the villa is located.</p>
+                        <p>  <b>State/Province:</b> State or province where the villa is located.</p>
+                        <p>  <b>Country:</b> Country where the villa is located.</p>
+                        <p>  <b> GPS Coordinates:</b>  Latitude and longitude for mapping purposes.
+                        </p>
+                        <p>  <b>Neighborhood Description:</b> Description of the surrounding area or neighborhood.
+                        </p>
+                    </div>
+
+                    <div id="Property_Details" class="tab-pane fade">
+                        <h4 class="tab-heading">Number of Bedrooms: Total number of bedrooms in the villa.</h4>
+                        <p> <b> Number of Bathrooms:</b> Total number of bathrooms in the villa.</p>
+                        <p> <b>Maximum Occupancy:</b> Maximum number of guests the villa can accommodate.
+                        </p>
+                        <p> <b> Square Footage:</b>  Size of the villa in square feet or meters
+                        </p>
+                        <p> <b>Floor Plan:</b></p>
+                        <img src="{{ asset('img/default_banner.jpg') }}">
+
+                    </div>
+                    <div id="Amenities" class="tab-pane fade">
+                        <h4 class="tab-heading"> Kitchen: Details about the kitchen facilities (e.g., fully equipped, partial)</h4>
+                        <p> <b> Living Room:</b> Description of the living room amenities (e.g., TV, seating capacity).</p>
+                        <p> <b>Internet:</b> Availability and type of internet connection.</p>
+                        <p> <b>Air Conditioning:</b> Availability of air conditioning</p>
+                        <p> <b>Heating:</b>  Availability of heating.</p>
+                        <p> <b> Swimming Pool:</b>  Details about the swimming pool (e.g., size, heated).</p>
+                        <p> <b>Parking:</b> Availability and type of parking..</p>
+                        <p> <b> Outdoor Space:</b> Description of outdoor areas (e.g., garden, patio).</p>
+                        <p> <b>Additional Amenities:</b> List of other amenities (e.g., gym, sauna, hot tub).</p>
+                    </div>
+                    <div id="Pricing_and_Availability" class="tab-pane fade">
+                        <h4 class="tab-heading"> Base Price: Starting price per night.</h4>
+                    </div>
+                    <div id="Media" class="tab-pane fade">
+                        <h4 class="tab-heading">Villa Images:</h4>
+                        <img src="{{ asset('img/default_banner.jpg') }}">
+                        <h4> Video Tours:</h4>
+                        <img src="{{ asset('img/default_banner.jpg') }}">
                     </div>
                     <div id="room-info" class="tab-pane fade in active">
                         <h4 class="tab-heading">Room Types</h4>
@@ -120,7 +177,7 @@
                     <div id="ammenties" class="tab-pane fade">
                         <h4 class="tab-heading">Ammenties Style 1</h4>
                         <div class="ammenties-1">
-                            @foreach (json_decode($villa->facilities) as $faci)
+                            {{-- @foreach (json_decode($villa->facilities) as $faci)
                                 <div class="col-md-4 col-sm-6">
                                     @if($faci == "wifi")
                                         <p><i class="fa fa-glass"></i> Free Drinks</p>
@@ -134,11 +191,11 @@
                                         <p><i class="fa fa-cutlery"></i>Free Meal</p>
                                     @endif
                                 </div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
                         <div class="ammenties-3">
                             <h4 class="tab-heading">Ammenties Style 2</h4>
-                            @foreach (json_decode($latest->facilities) as $facili)
+                            {{-- @foreach (json_decode($latest->facilities) as $facili)
                                 <div class="col-md-4 col-sm-6">
                                     @if($facili == "wifi")
                                         <p><i class="fa fa-wifi"></i> Free Wifi</p>
@@ -152,7 +209,7 @@
                                         <p><i class="fa fa-cutlery"></i>Free Meal</p>
                                     @endif
                                 </div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
                     </div>
                 </div>
@@ -289,7 +346,7 @@
                                 <a href="{{ route('frontend.villas.show',$similar->slug) }}">
                                     <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
                                         @php
-                                            $images = json_decode($similar->image);
+                                            $images = json_decode($similar->images);
                                         @endphp
                                         @if ($images && count($images) > 0)
                                             <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">

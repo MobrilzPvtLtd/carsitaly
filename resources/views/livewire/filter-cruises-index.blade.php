@@ -159,19 +159,23 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="cruise-list-view">
                             <div class="col-md-4 col-sm-6 clear-padding">
-                                @if($cruise->image)
+                                @if($cruise->images)
                                     @php
-                                        $images = json_decode($cruise->image);
+                                        $images = json_decode($cruise->images);
                                     @endphp
 
                                     @if($images && count($images) > 0)
+                                    <a href="{{ route('frontend.cruises.show',$cruise->slug) }}">
                                         <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                    </a>
                                     @endif
                                 @endif
                                 {{-- <img src="{{ asset('public/storage/') . '/' . $cruise->image }}" alt="cruise"> --}}
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                <h4>{{ $cruise->title }}</h4>
+                                <a href="{{ route('frontend.cruises.show',$cruise->slug) }}">
+                                    <h4>{{ $cruise->title }}</h4>
+                                </a>
                                 <p>
                                     <strong><i class="fa fa-map-marker"></i> Departs From: </strong>
                                     {{ $cruise->city }}

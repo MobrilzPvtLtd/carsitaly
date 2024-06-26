@@ -71,7 +71,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                 <li><a href="{{ route('home') }}"> HOME</a></li>
-                                <li><a href="{{ route('frontend.cars.index') }}"> TRANSFERS</a></li>
+                                <li><a href="{{ route('frontend.transfers.index') }}"> TRANSFERS</a></li>
                                 <li><a href="{{ route('frontend.hotels.index') }}"> HOTELS</a></li>
                                 <li><a href="{{ route('frontend.villas.index') }}"> VILLAS</a></li>
                                 <li><a href="{{ route('frontend.tours.index') }}"> TOURS</a></li>

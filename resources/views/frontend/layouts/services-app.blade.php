@@ -56,7 +56,6 @@
 </head>
 
 <body class="load-full-screen">
-
     <div id="loader" class="load-full-screen">
         <div class="loading-animation">
             <span><i class="fa fa-plane"></i></span>
@@ -83,7 +82,7 @@
         $serviceType = end($segments);
 
         if ($serviceType == 'cars') {
-            $cars = Modules\Car\Models\Car::get();
+            $cars = App\Models\Service::get();
             $minPrice = PHP_INT_MAX;
             $maxPrice = 0;
             foreach ($cars as $key => $value) {

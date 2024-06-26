@@ -85,11 +85,11 @@
                             <label>Rooms</label>
                             <select class="custom-select-room" name="room_no" wire:model="room_no">
                                 <option value="">No</option>
-                                @if ($uniqueRoomNumbers)
+                                {{-- @if ($uniqueRoomNumbers)
                                     @foreach ($uniqueRoomNumbers as $roomNumber)
                                         <option>{{ $roomNumber }}</option>
                                     @endforeach
-                                @endif
+                                @endif --}}
                             </select>
                         </div>
                     </div>
@@ -220,34 +220,38 @@
                         <div  class="hotel-list-view" id="switchable">
                             <div class="wrapper">
                                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                    @if($ser->image)
+                                    @if($ser->images)
                                         @php
-                                            $images = json_decode($ser->image);
+                                            $images = json_decode($ser->images);
                                         @endphp
 
                                         @if($images && count($images) > 0)
+                                        <a href="{{ route('frontend.' . $serviceType . '.show', $ser->slug) }}">
                                             <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                        </a>
                                         @endif
                                     @endif
                                 </div>
                                 <div class="col-md-6 col-sm-6 hotel-info">
                                     <div>
                                         <div class="hotel-header">
-                                            <h5>{{ $ser->title }}
-                                                <span>
-                                                    @php
-                                                        $rating = $ser->rating;
-                                                        $maxRating = 5;
-                                                    @endphp
-                                                    @for ($i = 1; $i <= $maxRating; $i++)
-                                                        @if ($i <= $rating)
-                                                            <i class="fa fa-star colored"></i>
-                                                        @else
-                                                            <i class="fa fa-star-o colored"></i>
-                                                        @endif
-                                                    @endfor
-                                                </span>
-                                            </h5>
+                                            <a href="{{ route('frontend.' . $serviceType . '.show', $ser->slug) }}">
+                                                <h5>{{ $ser->title }}
+                                                    <span>
+                                                        @php
+                                                            $rating = $ser->rating;
+                                                            $maxRating = 5;
+                                                        @endphp
+                                                        @for ($i = 1; $i <= $maxRating; $i++)
+                                                            @if ($i <= $rating)
+                                                                <i class="fa fa-star colored"></i>
+                                                            @else
+                                                                <i class="fa fa-star-o colored"></i>
+                                                            @endif
+                                                        @endfor
+                                                    </span>
+                                                </h5>
+                                            </a>
                                             <p>
                                                 <i class="fa fa-map-marker"></i>{{ $ser->city }}
                                                 <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
@@ -287,7 +291,7 @@
                                             </p>
                                         </div>
                                         <div class="hotel-desc">
-                                            <p>{{ $ser->meta_description }}</p>
+                                            <p>{{ $ser->description }}</p>
                                         </div>
                                     </div>
                                 </div>

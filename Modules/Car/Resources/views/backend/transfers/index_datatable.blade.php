@@ -52,10 +52,10 @@
                                 #
                             </th>
                             <th>
-                                @lang("car::text.image")
+                                Images
                             </th>
                             <th>
-                                @lang("car::text.title")
+                                Transfer Name
                             </th>
                             {{-- <th>
                                 @lang("car::text.slug")
@@ -64,10 +64,13 @@
                                 @lang("car::text.price")
                             </th>
                             <th>
-                                @lang("car::text.brand")
+                                Vehicle Type
                             </th>
                             <th>
-                                @lang("car::text.status")
+                                Vehicle Capacity
+                            </th>
+                            <th>
+                                Luggage Capacity
                             </th>
                             <th class="text-end">
                                 @lang("car::text.action")
@@ -116,8 +119,8 @@
                 name: 'id'
             },
             {
-                data: 'image',
-                name: 'image'
+                data: 'images',
+                name: 'images'
             },
             {
                 data: 'title',
@@ -132,12 +135,16 @@
                 name: 'price'
             },
             {
-                data: 'brand',
-                name: 'brand'
+                data: 'vehicle_type',
+                name: 'vehicle_type'
             },
             {
-                data: 'status',
-                name: 'status'
+                data: 'vehicle_capacity',
+                name: 'vehicle_capacity'
+            },
+            {
+                data: 'luggage_capacity',
+                name: 'luggage_capacity'
             },
             {
                 data: 'action',

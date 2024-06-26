@@ -326,7 +326,7 @@
                             <!-- START: CAR SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="taxi">
                                 <div class="col-md-12">
-                                    <form action="{{ route('frontend.cars.index') }}" method="GET">
+                                    <form action="{{ route('frontend.transfers.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Search Perfect Car</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Pick Up Location</label>
@@ -368,17 +368,17 @@
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Car Brnad(Optional)</label><br>
                                             <select class="selectpicker" name="brand">
-                                                @foreach (Modules\Car\Models\Car::where('status', 1)->distinct()->pluck('brand') as $brand)
+                                                {{-- @foreach (App\Models\Service::where('status', 1)->distinct()->pluck('brand') as $brand)
                                                     <option value="{{ $brand }}">{{ $brand }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Car Type(Optional)</label><br>
                                             <select class="selectpicker" name="car_type">
-                                                @foreach (Modules\Car\Models\Car::where('status', 1)->distinct()->pluck('car_type'); as $ctype)
+                                                {{-- @foreach (App\Models\Service::where('status', 1)->distinct()->pluck('car_type'); as $ctype)
                                                     <option>{{ $ctype }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>
                                         <div class="clearfix"></div>
@@ -674,7 +674,7 @@
     <!-- START: PRODUCT SECTION-->
     <section class="hotel-product home-product">
         <!-- START: PRODUCT ROW 1 -->
-        <div class="row light-row">
+        {{-- <div class="row light-row">
             <div class="col-md-6 clear-padding wow slideInLeft">
                 <div class="product-wrapper">
                     <div class="col-md-6 col-sm-6 home-product-padding tooltip-right">
@@ -780,7 +780,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- END: PRODUCT ROW 1 -->
     </section>
     <!-- END: PRODUCT SECTION -->
@@ -805,7 +805,7 @@
                         <h4>Handpicked Tour</h4>
                         <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry.</p>
-                        <a href="#">KNOW MORE</a>
+                        {{-- <a href="#">KNOW MORE</a> --}}
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 wow slideInUp">
@@ -814,7 +814,7 @@
                         <h4>Dedicated Support</h4>
                         <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry.</p>
-                        <a href="#">KNOW MORE</a>
+                        {{-- <a href="#">KNOW MORE</a> --}}
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 wow slideInRight">
@@ -823,7 +823,7 @@
                         <h4>Lowest Price</h4>
                         <p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry.</p>
-                        <a href="#">KNOW MORE</a>
+                        {{-- <a href="#">KNOW MORE</a> --}}
                     </div>
                 </div>
                 <!-- contact form starts -->

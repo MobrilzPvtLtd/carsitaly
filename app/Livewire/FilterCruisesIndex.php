@@ -139,9 +139,11 @@ class FilterCruisesIndex extends Component
 
         $uniqueLocation = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('city');
 
-        $uniqueRoomNumbers = Service::where('service_type', $serviceType)
-                ->where('status', 1)->where('room_no', '!=', null)->distinct()->pluck('room_no');
+        // $uniqueRoomNumbers = Service::where('service_type', $serviceType)
+                // ->where('status', 1)->where('room_no', '!=', null)->distinct()->pluck('room_no');
 
-        return view('livewire.filter-cruises-index', compact('cruises','uniqueLocation','serviceType','uniqueRoomNumbers'));
+        return view('livewire.filter-cruises-index', compact('cruises','uniqueLocation','serviceType',
+        // 'uniqueRoomNumbers'
+        ));
     }
 }

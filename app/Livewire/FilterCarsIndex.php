@@ -86,7 +86,7 @@ class FilterCarsIndex extends Component
         $brands = $this->filterBrands;
         $carFeatures = $this->filterCarFeatures;
 
-        $cars = Car::where('status', 1);
+        $cars = Service::where('status', 1);
 
         $cars->when($this->minPrice || $this->maxPrice, function ($query) {
             $query->where(function ($subQuery) {
@@ -164,16 +164,23 @@ class FilterCarsIndex extends Component
             });
         });
 
-        $cars = $cars->orderBy('id', 'desc')->paginate(6);
+        $cars = $cars->where('service_type', $serviceType)->orderBy('id', 'desc')->paginate(6);
 
-        $brands = Car::where('status', 1)->distinct()->pluck('brand');
-        $car_type = Car::where('status', 1)->distinct()->pluck('car_type');
-        // $car_features = Car::where('status', 1)->distinct()->pluck('car_features');
+        // $brands = Service::where('status', 1)->distinct()->pluck('brand');
+        // $car_type = Service::where('status', 1)->distinct()->pluck('car_type');
+
+
+        // $car_features = Service::where('status', 1)->distinct()->pluck('car_features');
         // $car_features_array = json_decode($car_features, true);
         // foreach ($car_features_array as $feature) {
         //     $carFeature = $feature;
         // }
 
-        return view('livewire.filter-cars-index', compact('cars','brands','serviceType','car_type'));
+        return view('livewire.filter-cars-index', compact(
+            'cars',
+            // 'brands',
+            'serviceType',
+            // 'car_type'
+        ));
     }
 }

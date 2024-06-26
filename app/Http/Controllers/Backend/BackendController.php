@@ -22,7 +22,7 @@ class BackendController extends Controller
     {
         $flight = Flight::count();
         $contact = Contact::count();
-        $cars = Car::count();
+        $cars = Service::count();
         $hotels = Service::where('service_type', 'hotels')->count();
         $tours = Service::where('service_type', 'tours')->count();
         $cruises = Service::where('service_type', 'cruises')->count();

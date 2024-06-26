@@ -1,130 +1,105 @@
 @extends('frontend.layouts.services-app')
 
-@section('title') {{$$module_name_singular->title}} - {{ __($module_title) }} @endsection
+@section('title')
+    {{ $$module_name_singular->title }} - {{ __($module_title) }}
+@endsection
 
 @section('services-content')
-	<div class="row page-title">
+    <div class="row page-title">
         <div class="container clear-padding text-center">
-            <h3>{{ $car->title }}</h3>
+            <h3>{{ $transfer->title }}</h3>
             <h5>
                 @for ($i = 1; $i < 5; $i++)
-                    @if($i <= $car->rating)
+                    @if ($i <= $transfer->rating)
                         <i class="fa fa-star"></i>
                     @else
                         <i class="fa fa-star-o"></i>
                     @endif
                 @endfor
             </h5>
-            <p><i class="fa fa-map-marker"></i> {{ $car->city }}, {{ $car->pin_code }}</p>
+            <p><i class="fa fa-map-marker"></i> {{ $transfer->city }}, {{ $transfer->pin_code }}</p>
         </div>
-	</div>
-	<!-- END: PAGE TITLE -->
+    </div>
+    <!-- END: PAGE TITLE -->
 
-	<!-- START: ROOM GALLERY -->
-	<div class="row hotel-detail">
-		<div class="container">
-			<div class="main-content col-md-8">
-				<div id="room-gallery" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<li data-target="#room-gallery" data-slide-to="0" class="active"></li>
-						<li data-target="#room-gallery" data-slide-to="1"></li>
-					</ol>
-					<div class="carousel-inner" role="listbox">
-						{{-- <div class="item active">
+    <!-- START: ROOM GALLERY -->
+    <div class="row hotel-detail">
+        <div class="container">
+            <div class="main-content col-md-8">
+                <div id="room-gallery" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#room-gallery" data-slide-to="0" class="active"></li>
+                        <li data-target="#room-gallery" data-slide-to="1"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        {{-- <div class="item active">
 							<img src="assets/images/slide2.jpg" alt="Cruise">
 						</div>
 						<div class="item">
 							<img src="assets/images/slide.jpg" alt="Cruise">
 						</div> --}}
-                        @if($car->image)
-                        @php
-                            $images = json_decode($car->image);
-                        @endphp
-                        @if ($images && count($images) > 0)
-                            @foreach ($images as $index => $image)
-                                <div class="item {{ $index == 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('public/storage/' . $image) }}" alt="car">
-                                </div>
-                            @endforeach
-                        @endif
-                    @endif
-					</div>
-					<a class="left carousel-control" href="#room-gallery" role="button" data-slide="prev">
-						<span class="fa fa-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-					<a class="right carousel-control" href="#room-gallery" role="button" data-slide="next">
-						<span class="fa fa-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
-				<div class="room-complete-detail">
-					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" href="#overview"><i class="fa fa-bolt"></i> <span>Overview</span></a></li>
-						{{-- <li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li> --}}
-						{{-- <li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li> --}}
-					</ul>
-					<div class="tab-content">
-						<div id="overview" class="tab-pane active in fade">
-							<h4 class="tab-heading">OVERVIEW</h4>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-tint"></i>{{ $car->engine_type }}</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-dashboard"></i>{{ $car->transmission }}</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-users"></i>{{ $car->seating_capacity }} People</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-taxi"></i>{{ $car->top_speed }} Doors</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-suitcase"></i>{{ $car->mileage }} KG</div>
-							<div class="car-overview col-md-2 col-sm-4 col-xs-6"><i class="fa fa-calendar"></i>{{ $car->warranty }} Year</div>
-							<div class="clearfix"></div>
-							<div class="rent-box">
-								<div class="add-ons col-md-6 col-sm-6">
-									<ul>
-										<li><input type="checkbox">Child Seat <span class="pull-right">$12/Day</span></li>
-										<li><input type="checkbox">Satelite Navigation <span class="pull-right">$49/Day</span></li>
-										<li><input type="checkbox">Music System <span class="pull-right">$99/Day</span></li>
-										<li><input type="checkbox">Child Seat <span class="pull-right">$12/Day</span></li>
-										<li><input type="checkbox">Satelite Navigation <span class="pull-right">$49/Day</span></li>
-									</ul>
-								</div>
-								<div class="rent-detail col-md-6 col-sm-6">
-									<ul>
-										<li>Daily Rent <span class="pull-right">$99</span></li>
-										<li>Rental Price <span class="pull-right">$495</span></li>
-										<li class="duration-sm"><i>5 (Days 21 - Aug 25 Aug)</i></li>
-										<li>Add Ons <span class="pull-right">$55</span></li>
-										<li class="rental-total">Grand Total<span class="pull-right">$550</span></li>
-									</ul>
-								</div>
-								<div class="clearfix"></div>
-								<div class="reserve-car text-center">
-									<a href="#">RESERVE NOW</a>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-							<h4 class="tab-heading">Brief Description of Car</h4>
-							<p>{{ $car->description }}</p>
-							<h4 class="tab-heading">Car Features</h4>
-							<ul class="check-list">
-                                @php
-                                    $carFeaturesArray = json_decode($carFeature, true);
-                                @endphp
-
-                                @foreach ($carFeaturesArray as $feature)
-                                    <li class="col-md-5 col-sm-5">{{ $feature }}</li>
+                        @if ($transfer->images)
+                            @php
+                                $images = json_decode($transfer->images);
+                            @endphp
+                            @if ($images && count($images) > 0)
+                                @foreach ($images as $index => $image)
+                                    <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('public/storage/' . $image) }}" alt="car">
+                                    </div>
                                 @endforeach
-								{{-- <li class="col-md-5 col-sm-5">GPS Navigation</li>
-								<li class="col-md-5 col-sm-5">Automatic Transmission</li>
-								<li class="col-md-5 col-sm-5">FM Radio</li>
-								<li class="col-md-5 col-sm-5">4 Doors & Panorama View</li>
-								<li class="col-md-5 col-sm-5">Hi FI Sound System</li>
-								<li class="col-md-5 col-sm-5">Mileage 12KM/Liter</li>
-								<li class="col-md-5 col-sm-5">Mileage 12KM/Liter</li>
-								<li class="col-md-5 col-sm-5">4 Doors & Panorama View</li>
-								<li class="col-md-5 col-sm-5">Hi FI Sound System</li>
-								<li class="col-md-5 col-sm-5">GPS Navigation</li>
-								<li class="col-md-5 col-sm-5">Automatic Transmission</li>
-								<li class="col-md-5 col-sm-5">FM Radio</li> --}}
-							</ul>
-						</div>
-						{{-- <div id="review" class="tab-pane fade">
+                            @endif
+                        @endif
+                    </div>
+                    <a class="left carousel-control" href="#room-gallery" role="button" data-slide="prev">
+                        <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#room-gallery" role="button" data-slide="next">
+                        <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="room-complete-detail">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#Transfer_Information
+                            "><i class="fa fa-bolt"></i><span>Transfer Information
+                                </span></a>
+                        </li>
+
+                        <li class="active"><a data-toggle="tab" href="#Vehicle_Details"><i class="fa fa-bolt"></i>
+                                <span>Vehicle Details
+                                </span></a></li>
+                        <li class="active"><a data-toggle="tab" href="#Pricing_and_Availability"><i class="fa fa-bolt"></i>
+                                <span>Pricing and Availability</span></a></li>
+
+                        {{-- <li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li> --}}
+                        {{-- <li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li> --}}
+                    </ul>
+                    <div class="tab-content">
+                        <div id="Transfer_Information" class="tab-pane active in fade">
+                            <h4 class="tab-heading">Transfer Name: Name of the transfer service.</h4>
+                            <p> <b>.Description:</b> Detailed description of the transfer service.
+                            </p>
+
+                        </div>
+                        <div id="Vehicle_Details" class="tab-pane fade ">
+                            <h4 class="tab-heading"> Vehicle Type: Type of vehicle (e.g., sedan, SUV, van).</h4>
+                            <p> <b>Vehicle Capacity:</b> Amount of luggage the vehicle can carry.
+                            </p>
+                            <p> <b>Luggage Capacity:</b> Number of passengers the vehicle can accommodate.
+                            </p>
+                            <p> <b> Vehicle Features:</b> List of features (e.g., air conditioning, Wi-Fi, child seats).
+                            </p>
+
+                        </div>
+                        <div id="Pricing_and_Availability" class="tab-pane fade ">
+                            <h4 class="tab-heading"> Base Price: Starting price for the transfer.</h4>
+
+
+                        </div>
+                        {{-- <div id="review" class="tab-pane fade">
 							<h4 class="tab-heading">CAR REVIEWS</h4>
 							<div class="review-header">
 								<div class="col-md-6 col-sm6 text-center">
@@ -270,30 +245,56 @@
 								</div>
 							</form>
 						</div> --}}
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 hotel-detail-sidebar">
-				<div class="col-md-12 sidebar-wrapper clear-padding">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 hotel-detail-sidebar">
+                <div class="col-md-12 sidebar-wrapper clear-padding">
                     <div class="contact sidebar-item">
                         <div class="sidebar-booking-box">
                             <h3 class="text-center">MAKE A BOOKING</h3>
                             <div class="booking-box-body">
                                 <form action="{{ route('booking') }}" method="POST">
                                     @csrf
-                                    <input type="hidden" value="{{ $car->id }}" name="service_id">
+                                    <input type="hidden" value="{{ $transfer->id }}" name="service_id">
                                     <input type="hidden" value="car" name="booking_type">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <label>Start</label>
+                                        <label> Pickup Location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_in" name="start_date" class="form-control" placeholder="DD/MM/YYYY" required>
+                                            <input type="text" id="check_in" name="start_date" class="form-control"
+                                                placeholder="e.g London" required>
+                                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label> Intermediate Stops</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <input type="text" id="check_in" name="start_date" class="form-control"
+                                                placeholder="e.g Super Market" required>
+                                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label> Dropoff Location</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <input type="text" id="check_in" name="start_date" class="form-control"
+                                                placeholder="e.g New York" required>
+                                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label> Pickup Date</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <input type="text" id="check_in" name="start_date" class="form-control"
+                                                placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <label>End</label>
+                                        <label> Dropoff Date</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_out" name="end_date" class="form-control" placeholder="DD/MM/YYYY" required>
+                                            <input type="text" id="check_out" name="end_date" class="form-control"
+                                                placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
                                     </div>
@@ -330,7 +331,7 @@
                                             <option>6</option>
                                         </select>
                                     </div>
-                                    <div class="room-price">
+                                    {{-- <div class="room-price">
                                         <div class="col-md-8 col-sm-8 col-xs-8">
                                             <label><input type="checkbox" name="room_type" value="single" id="single" onchange="toggleCheckbox(this)"><span>Deluxe Single Room</span></label>
                                         </div>
@@ -355,19 +356,22 @@
                                         <div class="col-md-4 col-sm-4 col-xs-4">
                                             <h5>$299/Night</h5>
                                         </div>
-                                    </div>
-                                    @if(!Auth::check())
+                                    </div> --}}
+                                    @if (!Auth::check())
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <label>Name</label>
-                                            <input type="text" id="check_in" name="name" class="form-control" placeholder="Enter Your Name">
+                                            <input type="text" id="check_in" name="name" class="form-control"
+                                                placeholder="Enter Your Name">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <label>Email</label>
-                                            <input type="text" id="check_in" name="email" class="form-control" placeholder="Enter Your Email">
+                                            <input type="text" id="check_in" name="email" class="form-control"
+                                                placeholder="Enter Your Email">
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <label>Mobile</label>
-                                            <input type="text" id="check_in" name="mobile" class="form-control" placeholder="Enter Your Mobile">
+                                            <input type="text" id="check_in" name="mobile" class="form-control"
+                                                placeholder="Enter Your Mobile">
                                         </div>
                                     @endif
                                     <div class="clearfix"></div>
@@ -383,15 +387,17 @@
                             </div>
                         </div>
                     </div>
-					<div class="contact sidebar-item">
-						<h4><i class="fa fa-phone"></i> Contact Agent</h4>
-						<div class="sidebar-item-body">
-							<h5><i class="fa fa-phone"></i> +91 {{ $car->mobile }}</h5>
-							<h5><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $car->email }}">Send Email</a></h5>
-							<h5><i class="fa fa-map-marker"></i> {{ $car->address }}, {{ $car->city }}, {{ $car->country }}, {{ $car->pin_code }}</h5>
-						</div>
-					</div>
-					{{-- <div class="review sidebar-item">
+                    <div class="contact sidebar-item">
+                        <h4><i class="fa fa-phone"></i> Contact Agent</h4>
+                        <div class="sidebar-item-body">
+                            <h5><i class="fa fa-phone"></i> +91 {{ $transfer->mobile }}</h5>
+                            <h5><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $transfer->email }}">Send Email</a>
+                            </h5>
+                            <h5><i class="fa fa-map-marker"></i> {{ $transfer->address }}, {{ $transfer->city }},
+                                {{ $transfer->country }}, {{ $transfer->pin_code }}</h5>
+                        </div>
+                    </div>
+                    {{-- <div class="review sidebar-item">
 						<h4><i class="fa fa-edit"></i> Car Reviews</h4>
 						<div class="sidebar-item-body text-center">
 							<div class="rating-box">
@@ -436,29 +442,29 @@
 							</div>
 						</div>
 					</div> --}}
-					<div class="similar-hotel sidebar-item">
-						<h4><i class="fa fa-taxi"></i> Similar Cars</h4>
-						<div class="sidebar-item-body">
+                    <div class="similar-hotel sidebar-item">
+                        <h4><i class="fa fa-taxi"></i> Similar Cars</h4>
+                        <div class="sidebar-item-body">
                             @foreach ($similar_cars as $similar)
-                            <div class="similar-hotel-box">
-                                <a href="{{ route('frontend.cars.show',$similar->slug) }}">
-                                    <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
-                                        @php
-                                            $images = json_decode($similar->image);
-                                        @endphp
-                                        @if ($images && count($images) > 0)
-                                            <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
-                                        @endif
-                                    </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-7">
-                                        <h5>{{ $similar->title }}<span><i class="fa fa-star"></i></span></h5>
-                                        <h5><i class="fa fa-certificate"></i> {{ $similar->brand }}</h5>
-										<span>${{ $similar->price }}/Day</span>
-                                    </div>
-                                </a>
-                            </div>
+                                <div class="similar-hotel-box">
+                                    <a href="{{ route('frontend.transfers.show', $similar->slug) }}">
+                                        <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+                                            @php
+                                                $images = json_decode($similar->images);
+                                            @endphp
+                                            @if ($images && count($images) > 0)
+                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-7 col-sm-7 col-xs-7">
+                                            <h5>{{ $similar->title }}<span><i class="fa fa-star"></i></span></h5>
+                                            <h5><i class="fa fa-certificate"></i> {{ $similar->brand }}</h5>
+                                            <span>${{ $similar->price }}/Day</span>
+                                        </div>
+                                    </a>
+                                </div>
                             @endforeach
-							{{-- <div class="similar-hotel-box">
+                            {{-- <div class="similar-hotel-box">
 								<a href="#">
 									<div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
 										<img src="assets/images/tour1.jpg" alt="Cruise">
@@ -470,7 +476,7 @@
 									</div>
 								</a>
 							</div> --}}
-							{{-- <div class="similar-hotel-box">
+                            {{-- <div class="similar-hotel-box">
 								<a href="#">
 									<div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
 										<img src="assets/images/tour1.jpg" alt="Cruise">
@@ -494,12 +500,12 @@
 									</div>
 								</a>
 							</div> --}}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- END: ROOM GALLERY -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: ROOM GALLERY -->
 
 @endsection

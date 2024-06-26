@@ -4,55 +4,55 @@
 
 @section('services-content')
         {{-- <div class="row modify-search modify-hotel">
-            <div class="container clear-padding">
-                <form action="{{ route('frontend.hotels.index') }}" method="GET">
-                    <div class="col-md-4">
-                        <div class="form-gp">
-                            <label>Location</label>
-                            <div class="input-group margin-bottom-sm">
-                                <input type="text" name="city" class="form-control" required placeholder="E.g. Italy">
-                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                <div class="container clear-padding">
+                    <form action="{{ route('frontend.hotels.index') }}" method="GET">
+                        <div class="col-md-4">
+                            <div class="form-gp">
+                                <label>Location</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <input type="text" name="city" class="form-control" required placeholder="E.g. Italy">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6 col-xs-6">
-                        <div class="form-gp">
-                            <label>Check In</label>
-                            <div class="input-group margin-bottom-sm">
-                                <input type="text" id="check_in" name="check_in" class="form-control" placeholder="DD/MM/YYYY">
-                                <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <div class="form-gp">
+                                <label>Check In</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <input type="text" id="check_in" name="check_in" class="form-control" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6 col-xs-6">
-                        <div class="form-gp">
-                            <label>Check Out</label>
-                            <div class="input-group margin-bottom-sm">
-                                <input type="text" id="check_out" name="check_out" class="form-control" placeholder="DD/MM/YYYY">
-                                <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <div class="form-gp">
+                                <label>Check Out</label>
+                                <div class="input-group margin-bottom-sm">
+                                    <input type="text" id="check_out" name="check_out" class="form-control" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-1 col-sm-6 col-xs-3">
-                        <div class="form-gp">
-                            <label>Rooms</label>
-                            <select class="selectpicker" name="room_no">
-                                <option>No</option>
-                                @foreach ($uniqueRoomNumbers as $roomNumbers)
-                                    <option>{{ $roomNumbers }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-1 col-sm-6 col-xs-3">
+                            <div class="form-gp">
+                                <label>Rooms</label>
+                                <select class="selectpicker" name="room_no">
+                                    <option>No</option>
+                                    @foreach ($uniqueRoomNumbers as $roomNumbers)
+                                        <option>{{ $roomNumbers }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-9">
-                        <div class="form-gp">
-                            <button type="submit" class="modify-search-button btn transition-effect">MODIFY SEARCH</button>
+                        <div class="col-md-3 col-sm-6 col-xs-9">
+                            <div class="form-gp">
+                                <button type="submit" class="modify-search-button btn transition-effect">MODIFY SEARCH</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
             <div class="container">
                 <!-- START: FILTER AREA -->
                 <div class="col-md-3 clear-padding">

@@ -27,7 +27,7 @@ Route::group(['namespace' => '\Modules\Car\Http\Controllers\Frontend', 'as' => '
      *
      * ---------------------------------------------------------------------
      */
-    $module_name = 'transfer';
+    $module_name = 'transfers';
     $controller_name = 'CarsController';
     Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
     Route::get("$module_name/{slug?}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);

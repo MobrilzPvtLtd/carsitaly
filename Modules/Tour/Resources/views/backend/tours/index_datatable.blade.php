@@ -54,29 +54,32 @@
                                 #
                             </th>
                             <th>
-                                @lang("tour::text.image")
+                                Images
                             </th>
                             <th>
-                                @lang("tour::text.title")
+                                Tour Name
                             </th>
-                            {{-- <th>
-                                @lang("tour::text.slug")
-                            </th> --}}
                             <th>
                                 @lang("tour::text.price")
                             </th>
                             <th>
-                                @lang("tour::text.city")
+                                Starting Point
                             </th>
                             <th>
-                                @lang("tour::text.mobile")
+                                Ending Point
                             </th>
                             <th>
-                                @lang("tour::text.rating")
+                                Country
                             </th>
                             <th>
-                                @lang("tour::text.status")
+                                Duration
                             </th>
+                            {{-- <th>
+                                Start Time
+                            </th>
+                            <th>
+                                End Time
+                            </th> --}}
                             <th class="text-end">
                                 @lang("tour::text.action")
                             </th>
@@ -124,37 +127,41 @@
                 name: 'id'
             },
             {
-                data: 'image',
-                name: 'image'
+                data: 'images',
+                name: 'images'
             },
             {
                 data: 'title',
                 name: 'title'
             },
-            // {
-            //     data: 'slug',
-            //     name: 'slug'
-            // },
             {
                 data: 'price',
                 name: 'price'
             },
             {
-                data: 'city',
-                name: 'city'
+                data: 'starting_point',
+                name: 'starting_point'
             },
             {
-                data: 'mobile',
-                name: 'mobile'
+                data: 'ending_point',
+                name: 'ending_point'
             },
             {
-                data: 'rating',
-                name: 'rating'
+                data: 'country',
+                name: 'country'
             },
             {
-                data: 'status',
-                name: 'status'
+                data: 'duration',
+                name: 'duration'
             },
+            // {
+            //     data: 'start_date',
+            //     name: 'start_date'
+            // },
+            // {
+            //     data: 'end_date',
+            //     name: 'end_date'
+            // },
             {
                 data: 'action',
                 name: 'action',

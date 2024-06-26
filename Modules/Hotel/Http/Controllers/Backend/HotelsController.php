@@ -130,7 +130,7 @@ class HotelsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'hotels')->select('id', 'image', 'title', 'price','city','mobile', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'hotels')->select('id', 'images', 'title', 'price','city','state', 'country', 'latitude','longitude');
 
         $data = $$module_name;
 
@@ -140,14 +140,14 @@ class HotelsController extends Controller
 
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
-            ->editColumn('image', function ($data) {
-                if ($data->image) {
-                    $images = json_decode($data->image);
+            ->editColumn('images', function ($data) {
+                if ($data->images) {
+                    $images = json_decode($data->images);
                     $html = '<a href="' . route('backend.hotels.show', $data->id) . '">';
 
                     if ($images && count($images) > 0) {
                         // foreach ($images as $image) {
-                            $html .= '<img src="' . asset('public/storage/' . $images[0]) . '" alt="cruise" width="100px">';
+                            $html .= '<img src="' . asset('public/storage/' . $images[0]) . '" alt="Hotel" width="100px">';
                         // }
                     }
 
@@ -157,15 +157,15 @@ class HotelsController extends Controller
                 }
             })
 
-            ->editColumn('status', function ($data) {
-                if ($data->status == 1){
-                    return '<span class="badge text-bg-success">Active</span>';
-                }else{
-                    return '<span class="badge text-bg-warning">Inactive</span>';
-                }
+            // ->editColumn('status', function ($data) {
+            //     if ($data->status == 1){
+            //         return '<span class="badge text-bg-success">Active</span>';
+            //     }else{
+            //         return '<span class="badge text-bg-warning">Inactive</span>';
+            //     }
 
-            })
-            ->rawColumns(['image','status', 'action'])
+            // })
+            ->rawColumns(['images','action'])
             ->orderColumns(['id'], '-:column $1')
             ->make(true);
     }
@@ -213,39 +213,34 @@ class HotelsController extends Controller
 
         $module_action = 'Store';
 
-        // $validated_request = $request->validate([
-        //     'title' => 'required|max:191|unique:'.$module_model.',title',
-        //     'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
-        // ]);
-
         // $modelData = $request->all();
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('hotel', 'public');
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('hotel', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
+        $modelData = $request->except('images');
         $imagePaths = [];
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
                 $imagePath = $file->store('hotel', 'public');
                 $imagePaths[] = $imagePath;
             }
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
+            $modelData['images'] = json_encode($imagePaths);
         }
 
         if (!empty($request->facilities)) {
             $modelData['facilities'] = json_encode($request->facilities);
         }
 
-        if (!empty($request->meals)) {
-            $modelData['meals'] = json_encode($request->meals);
+        if (!empty($request->amenities)) {
+            $modelData['amenities'] = json_encode($request->amenities);
         }
 
         $$module_name_singular = $module_model::create($modelData);
@@ -342,26 +337,21 @@ class HotelsController extends Controller
 
         $$module_name_singular = $module_model::findOrFail($id);
 
-        $oldImagePath = $$module_name_singular->image;
+        $oldImagePath = $$module_name_singular->images;
 
         $modelData = $request->all();
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('hotel', 'public');
-
-        //     if ($oldImagePath) {
-        //         Storage::disk('public')->delete($oldImagePath);
-        //     }
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
-
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('hotel', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
+        $modelData = $request->except('images');
         $imagePaths = [];
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
                 $imagePath = $file->store('hotel', 'public');
                 $imagePaths[] = $imagePath;
             }
@@ -372,10 +362,16 @@ class HotelsController extends Controller
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
+            $modelData['images'] = json_encode($imagePaths);
         }
 
+        if (!empty($request->facilities)) {
+            $modelData['facilities'] = json_encode($request->facilities);
+        }
 
+        if (!empty($request->amenities)) {
+            $modelData['amenities'] = json_encode($request->amenities);
+        }
 
         $$module_name_singular->update($modelData);
 

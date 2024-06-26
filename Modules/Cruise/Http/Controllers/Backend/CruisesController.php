@@ -128,7 +128,7 @@ class CruisesController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'cruises')->select('id', 'image', 'title', 'price','city','country', 'rating', 'status');
+        $$module_name = $module_model::where('service_type', 'cruises')->select('id', 'images', 'title', 'price','package','cruise_line','ship_name', 'duration','cabin_type');
 
         $data = $$module_name;
 
@@ -138,9 +138,9 @@ class CruisesController extends Controller
 
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
-            ->editColumn('image', function ($data) {
-                if ($data->image) {
-                    $images = json_decode($data->image);
+            ->editColumn('images', function ($data) {
+                if ($data->images) {
+                    $images = json_decode($data->images);
                     $html = '<a href="' . route('backend.cruises.show', $data->id) . '">';
 
                     if ($images && count($images) > 0) {
@@ -154,15 +154,15 @@ class CruisesController extends Controller
                     return $html;
                 }
             })
-            ->editColumn('status', function ($data) {
-                if ($data->status == 1){
-                    return '<span class="badge text-bg-success">Active</span>';
-                }else{
-                    return '<span class="badge text-bg-warning">Inactive</span>';
-                }
+            // ->editColumn('status', function ($data) {
+            //     if ($data->status == 1){
+            //         return '<span class="badge text-bg-success">Active</span>';
+            //     }else{
+            //         return '<span class="badge text-bg-warning">Inactive</span>';
+            //     }
 
-            })
-            ->rawColumns(['image','status', 'action'])
+            // })
+            ->rawColumns(['images', 'action'])
             ->orderColumns(['id'], '-:column $1')
             ->make(true);
     }
@@ -212,33 +212,40 @@ class CruisesController extends Controller
 
         $modelData = $request->all();
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('cruise', 'public');
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('cabin_images')) {
+            $imagePath = $request->file('cabin_images')->store('cruises/cabin_images', 'public');
+            $modelData = $request->except('cabin_images');
+            $modelData['cabin_images'] = $imagePath;
+        }
+
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('cruises', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
+        $modelData = $request->except('images');
         $imagePaths = [];
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $imagePath = $file->store('cruise', 'public');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $imagePath = $file->store('cruises', 'public');
                 $imagePaths[] = $imagePath;
             }
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
+            $modelData['images'] = json_encode($imagePaths);
         }
 
-        if (!empty($request->facilities)) {
-            $modelData['facilities'] = json_encode($request->facilities);
-        }
+        // if (!empty($request->facilities)) {
+        //     $modelData['facilities'] = json_encode($request->facilities);
+        // }
 
-        if (!empty($request->inclusion)) {
-            $modelData['inclusion'] = json_encode($request->inclusion);
-        }
+        // if (!empty($request->inclusion)) {
+        //     $modelData['inclusion'] = json_encode($request->inclusion);
+        // }
 
         $$module_name_singular = $module_model::create($modelData);
 
@@ -329,39 +336,29 @@ class CruisesController extends Controller
 
         $$module_name_singular = $module_model::findOrFail($id);
 
+        // $modelData = $request->all();
+
         $oldImagePath = $$module_name_singular->image;
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('cruise', 'public');
+        $imagePath = null;
+        if ($request->hasFile('cabin_images')) {
+            $imagePath = $request->file('cabin_images')->store('cruises/cabin_images', 'public');
+            $modelData = $request->except('cabin_images');
+            $modelData['cabin_images'] = $imagePath;
+        }
 
-        //     if ($oldImagePath) {
-        //         Storage::disk('public')->delete($oldImagePath);
-        //     }
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
-
-        // if ($request->start_date != null) {
-        //     $startDatesString = $request->input('start_date');
-        //     $startDatesArray = explode(', ', $startDatesString);
-        //     $modelData['start_date'] = json_encode($startDatesArray);
-        // }
-
-        // if ($request->end_date != null) {
-        //     $endDatesString = $request->input('end_date');
-        //     $endDatesArray = explode(', ', $endDatesString);
-        //     $modelData['end_date'] = json_encode($endDatesArray);
-        // }
-
-        $modelData = $request->all();
-
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('cruises', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
         $imagePaths = [];
+        $modelData = $request->except('images');
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $imagePath = $file->store('cruise', 'public');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $imagePath = $file->store('cruises', 'public');
                 $imagePaths[] = $imagePath;
             }
             if ($oldImagePath) {
@@ -370,15 +367,7 @@ class CruisesController extends Controller
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
-        }
-
-        if (!empty($request->facilities)) {
-            $modelData['facilities'] = json_encode($request->facilities);
-        }
-
-        if (!empty($request->inclusion)) {
-            $modelData['inclusion'] = json_encode($request->inclusion);
+            $modelData['images'] = json_encode($imagePaths);
         }
 
         $$module_name_singular->update($modelData);

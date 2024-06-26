@@ -54,7 +54,7 @@ class HotelsController extends Controller
         $module_action = 'List';
 
         $city = $request->input('city');
-        $room_no = $request->input('room_no');
+        // $room_no = $request->input('room_no');
 
         $$module_name = $module_model::where('service_type', 'hotels')
             ->where('status', 1);
@@ -63,19 +63,21 @@ class HotelsController extends Controller
                     $query->where('city', 'like', "%$city%");
                 });
             }
-            if (!empty($room_no)) {
-                $$module_name->where(function ($query) use ($room_no) {
-                    $query->where('room_no', 'like', "%$room_no%");
-                });
-            }
+            // if (!empty($room_no)) {
+            //     $$module_name->where(function ($query) use ($room_no) {
+            //         $query->where('room_no', 'like', "%$room_no%");
+            //     });
+            // }
         $$module_name = $$module_name->paginate();
 
-        $uniqueRoomNumbers = $module_model::where('room_no', '!=', null)->distinct()->pluck('room_no');
+        // $uniqueRoomNumbers = $module_model::where('room_type', '!=', null)->distinct()->pluck('room_type');
         $uniqueLocation = $module_model::distinct()->pluck('city');
 
         return view(
             "$module_path.$module_name.index",
-            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular','uniqueRoomNumbers','uniqueLocation')
+            compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_action', 'module_name_singular',
+            // 'uniqueRoomNumbers',
+            'uniqueLocation')
         );
     }
 
@@ -102,8 +104,7 @@ class HotelsController extends Controller
         $latest_hotel = $module_model::where('service_type', 'hotels')
         ->where('status', 1)->latest()->limit(5)->get();
 
-        $similar_hotel = $module_model::where('service_type', 'hotels')
-        ->where('status', 1)->where('similar', 1)->limit(3)->get();
+        $similar_hotel = $module_model::where('service_type', 'hotels')->limit(6)->get();
 
         return view(
             "$module_path.$module_name.show",

@@ -21,10 +21,10 @@ class CarsController extends Controller
     public function __construct()
     {
         // Page Title
-        $this->module_title = 'Cars';
+        $this->module_title = 'Transfers';
 
         // module name
-        $this->module_name = 'cars';
+        $this->module_name = 'transfers';
 
         // directory path of the module
         $this->module_path = 'car::frontend';
@@ -33,7 +33,7 @@ class CarsController extends Controller
         $this->module_icon = 'fa-regular fa-sun';
 
         // module model name, path
-        $this->module_model = "Modules\Car\Models\Car";
+        $this->module_model = "App\Models\Service";
     }
 
     /**
@@ -94,11 +94,11 @@ class CarsController extends Controller
         // $$module_name_singular = $module_model::findOrFail($slug);
         $$module_name_singular = $module_model::where('slug',$slug)->first();
 
-        $similar_cars = $module_model::where('status', 1)->latest()->limit(6)->get();
+        $similar_cars = $module_model::where('service_type', 'transfers')->latest()->limit(6)->get();
 
-        $car_features = $module_model::where('status', 1)->distinct()->pluck('car_features');
-        $car_features_array = json_decode($car_features, true);
-        foreach ($car_features_array as $feature) {
+        $vehicle_features = $module_model::where('service_type', 'transfers')->distinct()->pluck('vehicle_features');
+        $vehicle_features_array = json_decode($vehicle_features, true);
+        foreach ($vehicle_features_array as $feature) {
             $carFeature = $feature;
         }
 

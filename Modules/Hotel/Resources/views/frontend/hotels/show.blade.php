@@ -29,9 +29,9 @@
                     <li data-target="#room-gallery" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    @if($hotel->image)
+                    @if($hotel->images)
                         @php
-                            $images = json_decode($hotel->image);
+                            $images = json_decode($hotel->images);
                         @endphp
                         @if ($images && count($images) > 0)
                             @foreach ($images as $index => $image)
@@ -54,16 +54,69 @@
             </div>
             <div class="room-complete-detail">
                 <ul class="nav nav-tabs">
-                    <li><a data-toggle="tab" href="#overview"><i class="fa fa-bolt"></i> <span>Overview</span></a></li>
-                    <li class="active"><a data-toggle="tab" href="#room-info"><i class="fa fa-info-circle"></i> <span>Rooms</span></a></li>
-                    <li><a data-toggle="tab" href="#ammenties"><i class="fa fa-bed"></i> <span>Ammenties</span></a></li>
+                    <li><a data-toggle="tab" href="#Hotel_Information
+"><i class="fa fa-bolt"></i> <span>Hotel Information
+</span></a></li>
+                    <li><a data-toggle="tab" href="#Location_Details
+"><i class="fa fa-bolt"></i> <span>Location Details
+</span></a></li>
+                    <li><a data-toggle="tab" href="#Contact_Information
+"><i class="fa fa-bolt"></i> <span>Contact Information
+</span></a></li>
+                    <li class="active"><a data-toggle="tab" href="#Amenities_and_Services
+"><i class="fa fa-info-circle"></i> <span>Amenities and Services
+</span></a></li>
+                    <li><a data-toggle="tab" href="#Pricing_and_Availability
+"><i class="fa fa-bed"></i> <span>Pricing and Availability
+</span></a></li>
+                    <li><a data-toggle="tab" href="#Media"><i class="fa fa-bed"></i> <span>Media</span></a></li>
+                    <li><a data-toggle="tab" href="#Reviews_and_Ratings
+
+"><i class="fa fa-bed"></i> <span>Reviews and Ratings
+
+</span></a></li>
                     {{-- <li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li> --}}
                     {{-- <li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li> --}}
                 </ul>
                 <div class="tab-content">
-                    <div id="overview" class="tab-pane fade">
-                        <h4 class="tab-heading">About Grand Lilly</h4>
-                        <p>{{ $hotel->description }}</p>
+                    <div id="Hotel_Information" class="tab-pane fade">
+                        <h4 class="tab-heading"> Hotel Name</h4>
+                        <p>Description</p>
+                        <p><b>Category:</b> It's a budget hotel </p>
+                    </div>
+                    <div id="Location_Details" class="tab-pane fade">
+                        <h4 class="tab-heading"> Address: Full address of the hotel.</h4>
+                        <p> <b>City:</b>City where the hotel is located.</p>
+                        <p> <b>State/Province:</b> State or province.</p>
+                        <p> <b>Country:</b>country name</p>
+                        <p>  <b>Zip Code/Postal Code:</b> Postal code of the hotel’s location</p>
+                        <p>   <b>Latitude:</b> Latitude coordinate for map integration.</p>
+                        <p>  <b>Longitude:</b> Longitude coordinate for map integration</p>
+                    </div>
+                    <div id="Contact_Information" class="tab-pane fade">
+                        <h4 class="tab-heading">Phone Number: Contact number of the hotel.
+                        </h4>
+                        <p> <b> Email Address:</b> Contact email.</p>
+                        <p> <b>State/Province:</b> State or province.</p>
+                        <p> <b>Website (optional):</b> Hotel’s official website URL.</p>
+                        <p>  <b> Social Media Links:</b> Links to social media profiles.</p>
+                    </div>
+                    <div id="Amenities_and_Services" class="tab-pane fade">
+                        <h4 class="tab-heading">Amenities: List of amenities offered (e.g., Wi-Fi, pool, gym, spa).
+                        </h4>
+                        <p> <b>  Room Types:</b>  Various room types available (e.g., single, double, suite).</p>
+                        <p> <b> Facilities:</b> List of facilities (e.g., conference rooms, parking, restaurant).
+                        </p>
+                    </div>
+                    <div id="Pricing_and_Availability" class="tab-pane fade">
+                        <h4 class="tab-heading">Base Price: Starting price for rooms.
+                        </h4>
+                    </div>
+                    <div id="Media" class="tab-pane fade">
+                        <h4 class="tab-heading">Images:
+                        </h4>
+                        <img src="{{ asset('img/avatars/default-avatar.jpg') }}">
+                        <h4>Videos:</h4>
                     </div>
                     <div id="room-info" class="tab-pane fade in active">
                         <h4 class="tab-heading">Room Types</h4>
@@ -71,7 +124,7 @@
                             <div class="room-info-wrapper">
                                 <div class="col-md-4 col-sm-6 clear-padding">
                                     @php
-                                        $images = json_decode($latest->image);
+                                        $images = json_decode($latest->images);
                                     @endphp
                                     @if ($images && count($images) > 0)
                                         <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
@@ -613,7 +666,7 @@
                                 <a href="{{ route('frontend.hotels.show',$similar->slug) }}">
                                     <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
                                         @php
-                                            $images = json_decode($similar->image);
+                                            $images = json_decode($similar->images);
                                         @endphp
                                         @if ($images && count($images) > 0)
                                             <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">

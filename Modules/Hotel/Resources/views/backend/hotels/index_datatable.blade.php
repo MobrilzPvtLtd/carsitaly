@@ -52,14 +52,11 @@
                                 #
                             </th>
                             <th>
-                                @lang("hotel::text.image")
+                                Images
                             </th>
                             <th>
-                                @lang("hotel::text.title")
+                                Hotel Name
                             </th>
-                            {{-- <th>
-                                @lang("hotel::text.slug")
-                            </th> --}}
                             <th>
                                 @lang("hotel::text.price")
                             </th>
@@ -67,13 +64,16 @@
                                 @lang("hotel::text.city")
                             </th>
                             <th>
-                                @lang("hotel::text.mobile")
+                                State
                             </th>
                             <th>
-                                @lang("hotel::text.rating")
+                                Country
                             </th>
                             <th>
-                                @lang("hotel::text.status")
+                                Latitude
+                            </th>
+                            <th>
+                                Longitude
                             </th>
                             <th class="text-end">
                                 @lang("hotel::text.action")
@@ -122,8 +122,8 @@
                 name: 'id'
             },
             {
-                data: 'image',
-                name: 'image'
+                data: 'images',
+                name: 'images'
             },
             {
                 data: 'title',
@@ -142,16 +142,20 @@
                 name: 'city'
             },
             {
-                data: 'mobile',
-                name: 'mobile'
+                data: 'state',
+                name: 'state'
             },
             {
-                data: 'rating',
-                name: 'rating'
+                data: 'country',
+                name: 'country'
             },
             {
-                data: 'status',
-                name: 'status'
+                data: 'latitude',
+                name: 'latitude'
+            },
+            {
+                data: 'longitude',
+                name: 'longitude'
             },
             {
                 data: 'action',

@@ -42,7 +42,7 @@ class CarsController extends Controller
         $this->module_icon = 'fa-regular fa-sun';
 
         // module model name, path
-        $this->module_model = "Modules\Car\Models\Car";
+        $this->module_model = "App\Models\Service";
     }
 
 
@@ -62,7 +62,7 @@ class CarsController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::paginate();
+        $$module_name = $module_model::where('service_type', 'transfers')->paginate();
 
         logUserAccess($module_title.' '.$module_action);
 
@@ -127,7 +127,7 @@ class CarsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::select('id', 'image', 'title', 'price', 'brand', 'status');
+        $$module_name = $module_model::where('service_type', 'transfers')->select('id', 'images', 'title', 'price', 'vehicle_type', 'vehicle_capacity','luggage_capacity');
 
         $data = $$module_name;
 
@@ -137,9 +137,9 @@ class CarsController extends Controller
 
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
-            ->editColumn('image', function ($data) {
-                if ($data->image) {
-                    $images = json_decode($data->image);
+            ->editColumn('images', function ($data) {
+                if ($data->images) {
+                    $images = json_decode($data->images);
                     $html = '<a href="' . route('backend.transfers.show', $data->id) . '">';
 
                     if ($images && count($images) > 0) {
@@ -153,15 +153,15 @@ class CarsController extends Controller
                     return $html;
                 }
             })
-            ->editColumn('status', function ($data) {
-                if ($data->status == 1){
-                    return '<span class="badge text-bg-success">Active</span>';
-                }else{
-                    return '<span class="badge text-bg-warning">Inactive</span>';
-                }
+            // ->editColumn('status', function ($data) {
+            //     if ($data->status == 1){
+            //         return '<span class="badge text-bg-success">Active</span>';
+            //     }else{
+            //         return '<span class="badge text-bg-warning">Inactive</span>';
+            //     }
 
-            })
-            ->rawColumns(['image','status', 'action'])
+            // })
+            ->rawColumns(['images', 'action'])
             ->orderColumns(['id'], '-:column $1')
             ->make(true);
     }
@@ -211,30 +211,29 @@ class CarsController extends Controller
 
         $modelData = $request->all();
 
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('transfers', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
+        $modelData = $request->except('images');
         $imagePaths = [];
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $imagePath = $file->store('cars', 'public');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $imagePath = $file->store('transfers', 'public');
                 $imagePaths[] = $imagePath;
             }
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
+            $modelData['images'] = json_encode($imagePaths);
         }
 
-        if (!empty($request->car_features)) {
-            $modelData['car_features'] = json_encode($request->car_features);
+        if (!empty($request->vehicle_features)) {
+            $modelData['vehicle_features'] = json_encode($request->vehicle_features);
         }
-
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('car', 'public');
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
 
         $$module_name_singular = $module_model::create($modelData);
 
@@ -328,22 +327,18 @@ class CarsController extends Controller
 
         $modelData = $request->all();
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('car', 'public');
 
-        //     if ($oldImagePath) {
-        //         Storage::disk('public')->delete($oldImagePath);
-        //     }
-        //     $modelData = $request->except('image');
-        //     $modelData['image'] = $imagePath;
-        // }
-        $modelData = $request->except('image');
+        $imagePath = null;
+        if ($request->hasFile('videos')) {
+            $imagePath = $request->file('videos')->store('transfers', 'public');
+            $modelData = $request->except('videos');
+            $modelData['videos'] = $imagePath;
+        }
+        $modelData = $request->except('images');
         $imagePaths = [];
-
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $imagePath = $file->store('cars', 'public');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $imagePath = $file->store('transfers', 'public');
                 $imagePaths[] = $imagePath;
             }
             if ($oldImagePath) {
@@ -352,11 +347,11 @@ class CarsController extends Controller
         }
 
         if (!empty($imagePaths)) {
-            $modelData['image'] = json_encode($imagePaths);
+            $modelData['images'] = json_encode($imagePaths);
         }
 
-        if (!empty($request->car_features)) {
-            $modelData['car_features'] = json_encode($request->car_features);
+        if (!empty($request->vehicle_features)) {
+            $modelData['vehicle_features'] = json_encode($request->vehicle_features);
         }
 
         $$module_name_singular->update($modelData);

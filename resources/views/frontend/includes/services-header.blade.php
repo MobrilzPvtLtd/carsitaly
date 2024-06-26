@@ -41,12 +41,16 @@
 </div>
 <div class="clearfix"></div>
 <div class="row light-menu">
-    <div class="container clear-padding">
+    <div class="container clear-padding logo01">
+        <a href="{{ route('home') }}">
+            <img class="sidebar-brand-full logo001" src="{{ asset('img/logo.png') }}" alt="{{ app_name() }}" width="40%">
+            {{-- Car Italy and tours --}}
+        </a>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                 <li><a href="{{ route('home') }}"> HOME</a></li>
-                <li><a href="{{ route('frontend.cars.index') }}"> TRANSFERS</a></li>
+                <li><a href="{{ route('frontend.transfers.index') }}"> TRANSFERS</a></li>
                 <li><a href="{{ route('frontend.hotels.index') }}"> HOTELS</a></li>
                 <li><a href="{{ route('frontend.villas.index') }}"> VILLAS</a></li>
                 <li><a href="{{ route('frontend.tours.index') }}"> TOURS</a></li>

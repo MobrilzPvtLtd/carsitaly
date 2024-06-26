@@ -199,7 +199,7 @@
                                         <p>{{ $car->brand }}</p>
                                     </div>
                                     <div class="hotel-desc">
-                                        <p>{{ $car->meta_description }}</p>
+                                        <p>{{ $car->description }}</p>
                                     </div>
                                     <div class="car-detail">
                                         <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">

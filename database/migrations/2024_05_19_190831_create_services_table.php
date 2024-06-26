@@ -34,7 +34,7 @@ return new class extends Migration
             $table->longText('description_details')->nullable();
             $table->string('mobile',255)->nullable();
             $table->string('email',255)->unique()->nullable();
-            $table->string('amenities',255)->nullable();
+            $table->longText('amenities')->nullable();
             $table->string('room_types',255)->nullable();
             $table->string('facilities')->nullable();
             $table->decimal('price', 10, 2)->nullable();

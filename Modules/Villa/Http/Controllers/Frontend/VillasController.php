@@ -87,7 +87,7 @@ class VillasController extends Controller
         ->where('status', 1)->latest()->get();
 
         $similar_villa = $module_model::where('service_type', 'villas')
-        ->where('status', 1)->where('similar', 1)->get();
+        ->where('status', 1)->get();
 
         return view(
             "$module_path.$module_name.show",
