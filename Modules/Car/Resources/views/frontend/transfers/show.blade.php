@@ -62,17 +62,18 @@
                 </div>
                 <div class="room-complete-detail">
                     <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a data-toggle="tab" href="#Transfer_Information
-                            "><i class="fa fa-bolt"></i><span>Transfer Information
-                                </span></a>
+                        <li class="active"><a data-toggle="tab" href="#Transfer_Information
+                            "><i class="fa fa-bolt"></i>
+                            <span>Transfer Information </span></a>
                         </li>
-
-                        <li class="active"><a data-toggle="tab" href="#Vehicle_Details"><i class="fa fa-bolt"></i>
-                                <span>Vehicle Details
-                                </span></a></li>
-                        <li class="active"><a data-toggle="tab" href="#Pricing_and_Availability"><i class="fa fa-bolt"></i>
-                                <span>Pricing and Availability</span></a></li>
+                        <li><a data-toggle="tab" href="#Vehicle_Details
+                            "><i class="fa fa-bolt"></i>
+                            <span>Vehicle Details </span></a>
+                        </li>
+                        <li><a data-toggle="tab" href="#Pricing_and_Availability
+                            "><i class="fa fa-bolt"></i>
+                            <span>Pricing and Availability </span></a>
+                        </li>
 
                         {{-- <li><a data-toggle="tab" href="#review"><i class="fa fa-comments"></i> <span>Reviews</span></a></li> --}}
                         {{-- <li><a data-toggle="tab" href="#write-review"><i class="fa fa-edit"></i> <span>Write Review</span></a></li> --}}
@@ -82,7 +83,6 @@
                             <h4 class="tab-heading">Transfer Name: Name of the transfer service.</h4>
                             <p> <b>.Description:</b> Detailed description of the transfer service.
                             </p>
-
                         </div>
                         <div id="Vehicle_Details" class="tab-pane fade ">
                             <h4 class="tab-heading"> Vehicle Type: Type of vehicle (e.g., sedan, SUV, van).</h4>
@@ -92,12 +92,9 @@
                             </p>
                             <p> <b> Vehicle Features:</b> List of features (e.g., air conditioning, Wi-Fi, child seats).
                             </p>
-
                         </div>
                         <div id="Pricing_and_Availability" class="tab-pane fade ">
                             <h4 class="tab-heading"> Base Price: Starting price for the transfer.</h4>
-
-
                         </div>
                         {{-- <div id="review" class="tab-pane fade">
 							<h4 class="tab-heading">CAR REVIEWS</h4>
