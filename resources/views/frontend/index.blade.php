@@ -34,7 +34,7 @@
                             <li role="presentation">
                                 <a href="#taxi" aria-controls="taxi" role="tab" data-toggle="tab">
                                     <i class="fa fa-cab"></i>
-                                    <span>CAR</span>
+                                    <span>CARs</span>
                                 </a>
                             </li>
                             <li role="presentation">
