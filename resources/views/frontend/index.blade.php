@@ -672,116 +672,472 @@
     </section> --}}
 
     <!-- START: PRODUCT SECTION-->
-    <section class="hotel-product home-product">
-        <!-- START: PRODUCT ROW 1 -->
-        {{-- <div class="row light-row">
-            <div class="col-md-6 clear-padding wow slideInLeft">
-                <div class="product-wrapper">
-                    <div class="col-md-6 col-sm-6 home-product-padding tooltip-right">
-                        <h4>Apartments for rent</h4>
-                        <h5><i class="fa fa-map-marker"></i> Car Italy and tours Italy</h5>
-                        <p>Car Italy and tours Italy has 15 apartments. All rooms are en-suite and offer the following
-                            facilities</p>
-                        <div class="rating-box">
-                            <div class="pull-left">
-                                <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.0/5</span>
-                            </div>
-                            <div class="pull-right">
-                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star-half-o"></i><span>4.5/5</span>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="pricing-info">
-                            <div class="pull-left">
-                                <span>$500/Month</span>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="wow fadeIn">BOOK NOW</a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 clear-padding image-sm text-center">
-                        <img src="images-new/DSC_0835.jpg" alt="cruise">
-                        <div class="detail-link-wrapper">
-                            <div class="detail-link">
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div>
+    <section>
+        <div class="row hot-deals">
+            <div class="container clear-padding">
+                <div class="section-title text-center">
+                    <h2>HOT DEALS</h2>
+                    <h4>SAVE MORE</h4>
                 </div>
-                <div class="clearfix"></div>
-                <div class="product-wrapper">
-                    <div class="col-md-6 col-sm-6 clear-padding image-sm text-center">
-                        <img src="images-new/DSC_0850.jpg" alt="cruise">
-                        <div class="detail-link-wrapper">
-                            <div class="detail-link">
-                                <a href="#"><i class="fa fa-search"></i></a>
+                <div role="tabpanel" class="text-center">
+                    <!-- BEGIN: CATEGORY TAB -->
+                    <ul class="nav nav-tabs" role="tablist" id="hotDeal">
+                        <li role="presentation" class="active text-center">
+                            <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">
+                                <i class="fa fa-bed"></i>
+                                <span>HOTELS</SPAN>
+                            </a>
+                        </li>
+                        <li role="presentation" class="text-center">
+                            <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">
+                                <i class="fa fa-suitcase"></i>
+                                <span>TOURS</SPAN>
+                            </a>
+                        </li>
+                        <li role="presentation" class="text-center">
+                            <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
+                                <i class="fa fa-plane"></i>
+                                <span>FLIGHTS</SPAN>
+                            </a>
+                        </li>
+                        <li role="presentation" class="text-center">
+                            <a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">
+                                <i class="fa fa-taxi"></i>
+                                <span>TRANSFER</SPAN>
+                            </a>
+                        </li>
+                        <li role="presentation" class="text-center">
+                            <a href="#tab5" aria-controls="tab5" role="tab" data-toggle="tab">
+                                <i class="fa fa-ship"></i>
+                                <span>CRUISES</SPAN>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- END: CATEGORY TAB -->
+                    <div class="clearfix"></div>
+                    <!-- BEGIN: TAB PANELS -->
+                    <div class="tab-content">
+                        <!-- BEGIN: FLIGHT SEARCH -->
+                        <div role="tabpanel" class="tab-pane active fade in" id="tab1">
+                            <div class="col-md-6 hot-deal-list wow slideInLeft">
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Hotel Grand Lilly</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer2.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Royal Resort</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$399</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer3.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Hotel Grand Lilly</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>HOTEL NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>HOTEL NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>HOTEL NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>HOTEL NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 home-product-padding tooltip-left">
-                        <h4>Apartments for rent</h4>
-                        <h5><i class="fa fa-map-marker"></i> Car Italy and tours Italy</h5>
-                        <p>Air Conditioning, Furnished (fully), Kitchen Appliances Provided, Laundry Appliances Provided, On
-                            Paved Road, Security Guards Included</p>
-                        <div class="rating-box">
-                            <div class="pull-left">
-                                <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.0/5</span>
+                        <div role="tabpanel" class="tab-pane fade" id="tab2">
+                            <div class="col-md-6 hot-deal-list">
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer3.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Hotel Grand Lilly</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer2.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Royal Resort</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$399</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Hotel Grand Lilly</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="pull-right">
-                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star-half-o"></i><span>4.5/5</span>
+                            <div class="col-md-6 hot-deal-grid">
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Paris Starting From $49/Night</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Bangkok Starting From $69/Night</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Dubai Starting From $99/Night</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Italy Starting From $59/Night</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
-                        <div class="pricing-info">
-                            <div class="pull-left">
-                                <span>$500/Month</span>
+                        <div role="tabpanel" class="tab-pane" id="tab3">
+                            <div class="col-md-6 hot-deal-list wow slideInLeft">
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Jet</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i>  Asia » India
+
+                                        </p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>499</h4>
+                                        <h6>6 Hours</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer2.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Vistara</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i>  Asia » Nepal
+
+                                        </p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$199</h4>
+                                        <h6>12 Hours</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer3.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Hotel Grand Lilly</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i>  Asia » India
+
+                                        </p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="pull-right">
-                                <a href="#" class="wow fadeIn">BOOK NOW</a>
+                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>AIRLINE NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>AIRLINE NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>AIRLINE NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>AIRLINE NAME</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
+                        <div role="tabpanel" class="tab-pane" id="tab4">
+                            <div class="col-md-6 hot-deal-list wow slideInLeft">
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Car Name</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer2.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Car Name</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$399</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer3.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Car Name</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Car Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Car Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Car Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Car Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab5">
+                            <div class="col-md-6 hot-deal-list wow slideInLeft">
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Cruise Name</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer2.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Cruise Name</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$399</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="item">
+                                    <div class="col-xs-3">
+                                        <img src="assets/images/offer3.jpg" alt="Cruise">
+                                    </div>
+                                    <div class="col-md-7 col-xs-6">
+                                        <h5>Cruise Name</h5>
+                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <h4>$499</h4>
+                                        <h6>Per Night</h6>
+                                        <a href="#">BOOK</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Cruise Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Cruise Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Cruise Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 item">
+                                    <div class="wrapper">
+                                        <img src="assets/images/tour1.jpg" alt="Cruise">
+                                        <h5>Cruise Name</h5>
+                                        <a href="#">DETAILS</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="clearfix visible-sm-block"></div>
-            <div class="col-md-6 clear-padding image-lg wow slideInRight">
-                <img src="images-new/DSC_0841 (1).jpg" alt="cruise">
-                <div class="overlay">
-                    <div class="product-detail text-center">
-                        <h3>Apartments for rent</h3>
-                        <h5><i class="fa fa-map-marker"></i> Car Italy and tours Italy</h5>
-                        <p>Satellite TV, In-room safe, Stand-by generator, Air-conditioning, Swimming pool access (free of
-                            charge), Gym access (free of charge), Telephone services, Guarded car parking (free of charge),
-                            in addition to the above, have a built-in kitchenette and basic cooking equipment.</p>
-                        <div class="rating-box">
-                            <div class="pull-left">
-                                <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.0/5</span>
-                            </div>
-                            <div class="pull-right">
-                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star-half-o"></i><span>4.5/5</span>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="pricing-info">
-                            <div class="pull-left">
-                                <span>$800/Month</span>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="wow fadeIn">BOOK NOW</a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- END: PRODUCT ROW 1 -->
+        </div>
     </section>
     <!-- END: PRODUCT SECTION -->
 
