@@ -9,7 +9,7 @@
     <div class="row page-title">
         <div class="container clear-padding text-center">
             <h3>{{ $hotel->title }}</h3>
-            <h5>
+            {{-- <h5>
                 @for ($i = 1; $i < 5; $i++)
                     @if ($i <= $hotel->rating)
                         <i class="fa fa-star"></i>
@@ -18,7 +18,7 @@
                     @endif
                 @endfor
             </h5>
-            <p><i class="fa fa-map-marker"></i> {{ $hotel->city }}, {{ $hotel->pin_code }}</p>
+            <p><i class="fa fa-map-marker"></i> {{ $hotel->city }}, {{ $hotel->pin_code }}</p> --}}
         </div>
     </div>
     <div class="row hotel-detail">

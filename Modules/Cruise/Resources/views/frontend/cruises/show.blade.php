@@ -10,9 +10,9 @@
 <div class="row page-title">
     <div class="container clear-padding text-center">
         <h3>{{ $cruise->title }}</h3>
-        <h4>6 Nights/7 Days</h4>
+        {{-- <h4>6 Nights/7 Days</h4>
         <span>{{ $cruise->city }} (2)<i class="fa fa-long-arrow-right"></i>London (2)<i
-                class="fa fa-long-arrow-right"></i>Amesterdam (2)</span>
+                class="fa fa-long-arrow-right"></i>Amesterdam (2)</span> --}}
     </div>
 </div>
 <!-- END: PAGE TITLE -->

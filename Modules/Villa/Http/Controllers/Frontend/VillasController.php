@@ -86,12 +86,12 @@ class VillasController extends Controller
         $latest_villa = $module_model::where('service_type', 'villas')
         ->where('status', 1)->latest()->get();
 
-        $similar_villa = $module_model::where('service_type', 'villas')
-        ->where('status', 1)->get();
+        // $similar_villa = $module_model::where('service_type', 'villas')
+        // ->where('status', 1)->get();
 
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'latest_villa','similar_villa')
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'latest_villa')
         );
     }
 }

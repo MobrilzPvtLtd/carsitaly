@@ -8,7 +8,7 @@
     <div class="row page-title">
         <div class="container clear-padding text-center">
             <h3>{{ $transfer->title }}</h3>
-            <h5>
+            {{-- <h5>
                 @for ($i = 1; $i < 5; $i++)
                     @if ($i <= $transfer->rating)
                         <i class="fa fa-star"></i>
@@ -17,7 +17,7 @@
                     @endif
                 @endfor
             </h5>
-            <p><i class="fa fa-map-marker"></i> {{ $transfer->city }}, {{ $transfer->pin_code }}</p>
+            <p><i class="fa fa-map-marker"></i> {{ $transfer->city }}, {{ $transfer->pin_code }}</p> --}}
         </div>
     </div>
     <!-- END: PAGE TITLE -->

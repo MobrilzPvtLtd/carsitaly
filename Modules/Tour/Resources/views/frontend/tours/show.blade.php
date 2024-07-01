@@ -7,12 +7,12 @@
 	<div class="row page-title">
 		<div class="container clear-padding text-center">
 			<h3>{{ $tour->title }}</h3>
-			<h4>{{ $tour->duration }} Nights
+			{{-- <h4>{{ $tour->duration }} Nights --}}
                 {{-- /7 Days --}}
-            </h4>
-			<span>{{ $tour->city }}
+            {{-- </h4> --}}
+			{{-- <span>{{ $tour->city }} --}}
                 {{-- (2)<i class="fa fa-long-arrow-right"></i>London (2)<i class="fa fa-long-arrow-right"></i>Amesterdam (2) --}}
-            </span>
+            {{-- </span> --}}
 		</div>
 	</div>
 	<!-- END: PAGE TITLE -->
@@ -28,9 +28,9 @@
 						<li data-target="#gallery" data-slide-to="2"></li>
 					</ol>
 					<div class="carousel-inner" role="listbox">
-                        @if($tour->image)
+                        @if($tour->images)
                             @php
-                                $images = json_decode($tour->image);
+                                $images = json_decode($tour->images);
                             @endphp
                             @if ($images && count($images) > 0)
                                 @foreach ($images as $index => $image)
@@ -40,15 +40,6 @@
                                 @endforeach
                             @endif
                         @endif
-						{{-- <div class="item active">
-							<img src="assets/images/slide.jpg" alt="Cruise">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/slide2.jpg" alt="Cruise">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/slide.jpg" alt="Cruise">
-						</div> --}}
 					</div>
 					<a class="left carousel-control" href="#gallery" role="button" data-slide="prev">
 						<span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -62,20 +53,20 @@
 				<!-- END: HOLIDAY GALLRY -->
 				<div class="package-complete-detail">
 					<ul class="nav nav-tabs">
-						<li><a data-toggle="tab" href="#Tour_Information
-"><i class="fa fa-suitcase"></i> <span>Tour Information
-</span></a></li>
+						<li class="active"><a data-toggle="tab" href="#Tour_Information
+                        "><i class="fa fa-suitcase"></i> <span>Tour Information
+                        </span></a></li>
 						<li><a data-toggle="tab" href="#Location_Details"><i class="fa fa-check-square"></i> <span>Location Details</span></a></li>
-						<li class="active"><a data-toggle="tab" href="#Pricing_and_Availability"><i class="fa fa-street-view"></i> <span>Pricing and Availability</span></a></li>
-						<li class="active"><a data-toggle="tab" href="#Itinerary
-"><i class="fa fa-street-view"></i> <span>Itinerary
-</span></a></li>
-						<li class="active"><a data-toggle="tab" href="#Reviews and Ratings
-"><i class="fa fa-street-view"></i> <span>Reviews and Ratings
-</span></a></li>
-						<li class="active"><a data-toggle="tab" href="#Media
-"><i class="fa fa-street-view"></i> <span>Media
-</span></a></li>
+						<li><a data-toggle="tab" href="#Pricing_and_Availability"><i class="fa fa-street-view"></i> <span>Pricing and Availability</span></a></li>
+						<li><a data-toggle="tab" href="#Itinerary
+                        "><i class="fa fa-street-view"></i> <span>Itinerary
+                        </span></a></li>
+						{{-- <li><a data-toggle="tab" href="#Reviews and Ratings
+                        "><i class="fa fa-street-view"></i> <span>Reviews and Ratings
+                        </span></a></li> --}}
+						<li><a data-toggle="tab" href="#Media
+                        "><i class="fa fa-street-view"></i> <span>Media
+                        </span></a></li>
 						{{-- <li><a data-toggle="tab" href="#add-info"><i class="fa fa-info-circle"></i> <span>Additional Info</span></a></li> --}}
 					</ul>
 					<div class="tab-content">
@@ -114,154 +105,48 @@
 								<i class="fa fa-times-circle-o"></i> Airport fees<br>
 							</p> --}}
 						</div>
-						<div id="Tour_Information" class="tab-pane fade">
-							<h4 class="tab-heading">Tour Name: Name of the tour.
+						<div id="Tour_Information" class="tab-pane fade in active">
+							<h4 class="tab-heading">Tour Name: {{ $tour->title }}
                             </h4>
-                            <p><b>Description:</b> Detailed description of the tour, including highlights and itinerary.
-                            </p>
-							{{-- <div class="inclusion-wrapper">
-								<div class="inclusion-title">
-									<p><span><i class="fa fa-bed"></i></span>Hotel</p>
-								</div>
-								<div class="inclusion-body">
-                                    @foreach ($related_tour as $related)
-                                    <div class="similar-hotel-box">
-                                        <h4>{{ $related->city }}, {{ $related->duration }} Nights</h4>
-                                        <div class="col-md-3 col-sm-3 clear-padding">
-                                            @php
-                                                $images = json_decode($related->image);
-                                            @endphp
-                                            @if ($images && count($images) > 0)
-                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
-                                            @endif
-                                            {{-- <img src="assets/images/offer1.jpg" alt="cruise"> --}}
-                                        {{-- </div>
-                                        <div class="col-md-9 col-sm-9">
-                                            <h5>{{ $related->address }}, {{ $related->city }}
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $related->rating)
-                                                        <i class="fa fa-star colored"></i>
-                                                    @else
-                                                        <i class="fa fa-star-o colored"></i>
-                                                    @endif
-                                                @endfor
-                                            </h5>
-                                            <p>{{ $related->description }}</p>
-                                        </div>
-                                    </div>
-                                    @endforeach --}}
-									{{-- <div class="clearfix"></div>
-                                        <h4>London, 2 Nights</h4>
-                                        <div class="col-md-3 col-sm-3 clear-padding">
-                                            <img src="assets/images/offer2.jpg" alt="cruise">
-                                        </div>
-                                        <div class="col-md-9 col-sm-9">
-                                            <h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <h4>Amsterdam, 2 Nights</h4>
-                                        <div class="col-md-3 col-sm-3 clear-padding">
-                                            <img src="assets/images/offer3.jpg" alt="cruise">
-                                        </div>
-                                        <div class="col-md-9 col-sm-9">
-										<h5>Grand Lilly, London <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></h5>
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div> --}}
-									{{-- <div class="clearfix"></div>
-								</div>
-							</div> --}}
-							{{-- <div class="inclusion-wrapper">
-								<div class="inclusion-title">
-									<p><span><i class="fa fa-plane"></i></span>Transport</p>
-								</div>
-								<div class="inclusion-body">
-									<h4>Return Flight Included</h4>
-									<div class="flight-inclusion">
-										<div class="col-md-2 col-sm-2 col-xs-2 text-center">
-											<img src="assets/images/airline/airline.jpg" alt="cruise">
-										</div>
-										<div class="col-md-3 col-sm-3 col-xs-3 text-center">
-											<p>New Delhi</p>
-										</div>
-										<div class="col-md-4 col-sm-4 col-xs-4 text-center">
-											<i class="fa fa-long-arrow-right"></i>
-										</div>
-										<div class="col-md-3 col-sm-3 col-xs-3 text-center">
-											<p>Paris</p>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-									<div class="flight-inclusion">
-										<div class="col-md-2 col-sm-2 col-xs-2 text-center">
-											<img src="assets/images/airline/airline.jpg" alt="cruise">
-										</div>
-										<div class="col-md-3 col-sm-3 col-xs-3 text-center">
-											<p>Paris</p>
-										</div>
-										<div class="col-md-4 col-sm-4 col-xs-4 text-center">
-											<i class="fa fa-long-arrow-right"></i>
-										</div>
-										<div class="col-md-3 col-sm-3 col-xs-3 text-center">
-											<p>New Delhi</p>
-										</div>
-									</div>
-								</div>
-							</div> --}}
-							{{-- <div class="inclusion-wrapper">
-								<div class="inclusion-title">
-									<p><span><i class="fa fa-suitcase"></i></span>Other Inclusion</p>
-								</div>
-								<div class="inclusion-body">
-									<p class="inc">
-										<i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
-										<i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
-										<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
-										<i class="fa fa-check-circle"></i> Guided tour<br>
-										<i class="fa fa-check-circle"></i> Sighseeing<br>
-										<i class="fa fa-check-circle"></i> Airport transport<br>
-									</p>
-								</div>
-							</div> --}}
+                            <p><b>Description:</b> {{ $tour->description }}</p>
 						</div>
                         <div id="Location_Details" class="tab-pane fade">
-							<h4 class="tab-heading"> Starting Point: Location where the tour begins.
-                            </h4>
-                            <h4 class="tab-heading"> Ending Point: Location where the tour ends (if different from the starting point).
-                            </h4>
-                            <p><b>Destinations Covered:</b>  List of all major destinations or landmarks included in the tour.
-                            </p>
-                            <p><b>Duration:</b>  Total duration of the tour (e.g., 3 hours, 2 days).
-                            </p>
-                            <p><b> Start Time:</b> Scheduled start time of the tour.
-                            </p>
-                            <p><b>  End Time:</b> Scheduled end time of the tour.
-                            </p>
-
+							<h4 class="tab-heading"> Starting Point: {{ $tour->starting_point }}</h4>
+                            <h4 class="tab-heading"> Ending Point: {{ $tour->ending_point }}</h4>
+                            <p><b>Destinations Covered:</b> {{ $tour->destinations }}</p>
+                            <p><b>Duration:</b> {{ $tour->duration }}</p>
+                            <p><b> Start Time:</b> {{ $tour->start_date }}</p>
+                            <p><b> End Time:</b> {{ $tour->end_date }}</p>
 						</div>
                         <div id="Pricing_and_Availability" class="tab-pane fade">
-							<h4 class="tab-heading">  Base Price: Starting price per person.
-
-                            </h4>
-
+							<h4 class="tab-heading"> Base Price: {{ $tour->price }}</h4>
 						</div>
                         <div id="Itinerary" class="tab-pane fade">
-							<h4 class="tab-heading">  Day-by-Day Itinerary: Detailed schedule of activities for each day of the tour
-
-                            </h4>
-
-                            <p><b> Activity Details</b> Description of each activity, including duration and any special requirements</p>
-                            <p><b> Free Time:</b> on any free time or optional activities.</p>
-
+							<h4 class="tab-heading"> Day-by-Day Itinerary: {{ $tour->itinerary }}</h4>
+                            <p><b> Activity Details</b> {{ $tour->description_details }}</p>
+                            <p><b> Free Time:</b> {{ $tour->free_time }}</p>
 						</div>
                         <div id="Media" class="tab-pane fade">
-							<h4 class="tab-heading">Villa Images:</h4>
-                        <img src="{{ asset('img/default_banner.jpg') }}">
+						<h4 class="tab-heading">Tour Images:</h4>
+                        @if ($tour->images)
+                            @php
+                                $images = json_decode($tour->images);
+                            @endphp
+                            @if ($images && count($images) > 0)
+                                @foreach ($images as $index => $image)
+                                    <img src="{{ asset('public/storage/' . $image) }}" alt="Tour" width="100px">
+                                @endforeach
+                            @endif
+                        @endif
                         <h4> Video Tours:</h4>
-                        <img src="{{ asset('img/default_banner.jpg') }}">
-
+                        @if ($tour->videos)
+                            <video width="320" height="240" controls>
+                                <source src="{{ asset('public/storage/tour/' . $tour->videos) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        @endif
 						</div>
-						<div id="itinerary" class="tab-pane fade in active">
+						<div id="itinerary" class="tab-pane fade">
 							<h4 class="tab-heading">Package Itinerary</h4>
                             @php
                                 $packages = App\Models\Package::where('service_id', $tour->id)->get();
