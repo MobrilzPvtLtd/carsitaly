@@ -697,7 +697,7 @@
                         <li role="presentation" class="text-center">
                             <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
                                 <i class="fa fa-plane"></i>
-                                <span>FLIGHTS</SPAN>
+                                <span>VILLAS</SPAN>
                             </a>
                         </li>
                         <li role="presentation" class="text-center">
@@ -719,57 +719,32 @@
                     <div class="tab-content">
                         <!-- BEGIN: FLIGHT SEARCH -->
                         <div role="tabpanel" class="tab-pane active fade in" id="tab1">
-                            <div class="col-md-6 hot-deal-list wow slideInLeft">
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                            <div class="col-md-12 hot-deal-list wow slideInLeft">
+                                @foreach ($hotels as $hotel)
+                                    <div class="item">
+                                        <div class="col-xs-3">
+                                            @php
+                                                $images = json_decode($hotel->images);
+                                            @endphp
+                                            @if ($images && count($images) > 0)
+                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="{{ $hotel->title }}">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-7 col-xs-6">
+                                            <h5>{{ $hotel->title }}</h5>
+                                            <p class="location"><i class="fa fa-map-marker"></i> {{ $hotel->city }}, {{ $hotel->country }}</p>
+                                            <p class="text-sm">{{ $hotel->description }}</p>
+                                        </div>
+                                        <div class="col-md-2 col-xs-3">
+                                            <h4>${{ $hotel->price }}</h4>
+                                            <h6>Per Night</h6>
+                                            <a href="{{ route('frontend.hotels.show', $hotel->slug) }}">BOOK</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Hotel Grand Lilly</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer2.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Royal Resort</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$399</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer3.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Hotel Grand Lilly</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                            {{-- <div class="col-md-6 hot-deal-grid wow slideInRight">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">
@@ -798,60 +773,35 @@
                                         <a href="#">DETAILS</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tab2">
-                            <div class="col-md-6 hot-deal-list">
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer3.jpg" alt="Cruise">
+                            <div class="col-md-12 hot-deal-list">
+                                @foreach ($tours as $tour)
+                                    <div class="item">
+                                        <div class="col-xs-3">
+                                            @php
+                                                $images = json_decode($tour->images);
+                                            @endphp
+                                            @if ($images && count($images) > 0)
+                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="{{ $tour->title }}">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-7 col-xs-6">
+                                            <h5>{{ $tour->title }}</h5>
+                                            <p class="location"><i class="fa fa-map-marker"></i> {{ $tour->city }}, {{ $tour->country }}</p>
+                                            <p class="text-sm">{{ $tour->description }}</p>
+                                        </div>
+                                        <div class="col-md-2 col-xs-3">
+                                            <h4>${{ $tour->price }}</h4>
+                                            <h6>Per Night</h6>
+                                            <a href="{{ route('frontend.tours.show', $tour->slug) }}">BOOK</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Hotel Grand Lilly</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer2.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Royal Resort</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$399</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer1.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Hotel Grand Lilly</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid">
+                            {{-- <div class="col-md-6 hot-deal-grid">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">
@@ -880,66 +830,35 @@
                                         <a href="#">DETAILS</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div role="tabpanel" class="tab-pane" id="tab3">
-                            <div class="col-md-6 hot-deal-list">
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                            <div class="col-md-12 hot-deal-list">
+                                @foreach ($villas as $villa)
+                                    <div class="item">
+                                        <div class="col-xs-3">
+                                            @php
+                                                $images = json_decode($villa->images);
+                                            @endphp
+                                            @if ($images && count($images) > 0)
+                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="{{ $villa->title }}">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-7 col-xs-6">
+                                            <h5>{{ $villa->title }}</h5>
+                                            <p class="location"><i class="fa fa-map-marker"></i> {{ $villa->city }}, {{ $villa->country }}</p>
+                                            <p class="text-sm">{{ $villa->description }}</p>
+                                        </div>
+                                        <div class="col-md-2 col-xs-3">
+                                            <h4>${{ $villa->price }}</h4>
+                                            <h6>Per Night</h6>
+                                            <a href="{{ route('frontend.villas.show', $villa->slug) }}">BOOK</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Jet</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i>  Asia » India
-
-                                        </p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>499</h4>
-                                        <h6>6 Hours</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer2.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Vistara</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i>  Asia » Nepal
-
-                                        </p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$199</h4>
-                                        <h6>12 Hours</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer3.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Hotel Grand Lilly</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i>  Asia » India
-
-                                        </p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid">
+                            {{-- <div class="col-md-6 hot-deal-grid">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">
@@ -968,60 +887,35 @@
                                         <a href="#">DETAILS</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div role="tabpanel" class="tab-pane" id="tab4">
-                            <div class="col-md-6 hot-deal-list">
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                            <div class="col-md-12 hot-deal-list">
+                                @foreach ($transfers as $transfer)
+                                    <div class="item">
+                                        <div class="col-xs-3">
+                                            @php
+                                                $images = json_decode($transfer->images);
+                                            @endphp
+                                            @if ($images && count($images) > 0)
+                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="{{ $transfer->title }}">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-7 col-xs-6">
+                                            <h5>{{ $transfer->title }}</h5>
+                                            <p class="location"><i class="fa fa-map-marker"></i> {{ $transfer->city }}, {{ $transfer->country }}</p>
+                                            <p class="text-sm">{{ $transfer->description }}</p>
+                                        </div>
+                                        <div class="col-md-2 col-xs-3">
+                                            <h4>${{ $transfer->price }}</h4>
+                                            <h6>Per Night</h6>
+                                            <a href="{{ route('frontend.transfers.show', $transfer->slug) }}">BOOK</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Car Name</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer2.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Car Name</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$399</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer3.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Car Name</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid">
+                            {{-- <div class="col-md-6 hot-deal-grid">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">
@@ -1050,60 +944,35 @@
                                         <a href="#">DETAILS</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div role="tabpanel" class="tab-pane" id="tab5">
-                            <div class="col-md-6 hot-deal-list">
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                            <div class="col-md-12 hot-deal-list">
+                                @foreach ($cruises as $cruise)
+                                    <div class="item">
+                                        <div class="col-xs-3">
+                                            @php
+                                                $images = json_decode($cruise->images);
+                                            @endphp
+                                            @if ($images && count($images) > 0)
+                                                <img src="{{ asset('public/storage/' . $images[0]) }}" alt="{{ $cruise->title }}">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-7 col-xs-6">
+                                            <h5>{{ $cruise->title }}</h5>
+                                            <p class="location"><i class="fa fa-map-marker"></i> {{ $cruise->city }}, {{ $cruise->country }}</p>
+                                            <p class="text-sm">{{ $cruise->description }}</p>
+                                        </div>
+                                        <div class="col-md-2 col-xs-3">
+                                            <h4>${{ $cruise->price }}</h4>
+                                            <h6>Per Night</h6>
+                                            <a href="{{ route('frontend.cruises.show', $cruise->slug) }}">BOOK</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Cruise Name</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer2.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Cruise Name</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$399</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="item">
-                                    <div class="col-xs-3">
-                                        <img src="assets/images/offer3.jpg" alt="Cruise">
-                                    </div>
-                                    <div class="col-md-7 col-xs-6">
-                                        <h5>Cruise Name</h5>
-                                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
-                                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3">
-                                        <h4>$499</h4>
-                                        <h6>Per Night</h6>
-                                        <a href="#">BOOK</a>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid">
+                            {{-- <div class="col-md-6 hot-deal-grid">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">
@@ -1132,7 +1001,7 @@
                                         <a href="#">DETAILS</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

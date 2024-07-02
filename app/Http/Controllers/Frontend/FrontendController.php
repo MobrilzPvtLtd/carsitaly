@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Contact;
 use App\Models\Flight;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -23,8 +24,12 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        // $posts = Post::where('status', 1)->get();
-        return view('frontend.index');
+        $hotels = Service::where('service_type', 'hotels')->where('featured', true)->get();
+        $transfers = Service::where('service_type', 'transfers')->where('featured', true)->get();
+        $tours = Service::where('service_type', 'tours')->where('featured', true)->get();
+        $villas = Service::where('service_type', 'villas')->where('featured', true)->get();
+        $cruises = Service::where('service_type', 'cruises')->where('featured', true)->get();
+        return view('frontend.index',compact('hotels','transfers','tours','villas','cruises'));
     }
 
     public function flight(Request $request){

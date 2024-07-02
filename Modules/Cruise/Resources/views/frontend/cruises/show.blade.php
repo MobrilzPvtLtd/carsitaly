@@ -27,9 +27,9 @@
                     <li data-target="#gallery" data-slide-to="1"></li>
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    @if ($cruise->image)
+                    @if ($cruise->images)
                     @php
-                    $images = json_decode($cruise->image);
+                    $images = json_decode($cruise->images);
                     @endphp
                     @if ($images && count($images) > 0)
                     @foreach ($images as $index => $image)
@@ -39,12 +39,6 @@
                     @endforeach
                     @endif
                     @endif
-                    {{-- <div class="item active">
-                        <img src="assets/images/slide.jpg" alt="Cruise">
-                    </div>
-                    <div class="item">
-                        <img src="assets/images/slide2.jpg" alt="Cruise">
-                    </div> --}}
                 </div>
                 <a class="left carousel-control" href="#gallery" role="button" data-slide="prev">
                     <span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -59,25 +53,25 @@
             <div class="package-complete-detail">
                 <ul class="nav nav-tabs tabs001">
                     <li class="active"><a data-toggle="tab" href="#Cruise_Information
-"><i class="fa fa-ship"></i>
+                        "><i class="fa fa-ship"></i>
                             <span>Cruise Information
                             </span></a></li>
                     <li><a data-toggle="tab" href="#Itinerary_and_Destinations"><i class="fa fa-globe"></i>
                             <span>Itinerary and Destinations</span></a></li>
                     <li><a data-toggle="tab" href="#Pricing_and_Packages
-"><i class="fa fa-check-square"></i>
+                    "><i class="fa fa-check-square"></i>
                             <span>Pricing and Packages
                             </span></a></li>
                     <li><a data-toggle="tab" href="#Onboard_Services_and_Amenities
-"><i class="fa fa-map-marker"></i>
+                    "><i class="fa fa-map-marker"></i>
                             <span>Onboard Services and Amenities
                             </span></a></li>
                     <li><a data-toggle="tab" href="#Safety_and_Regulations
-"><i class="fa fa-map-marker"></i>
+                    "><i class="fa fa-map-marker"></i>
                             <span>Safety and Regulations
                             </span></a></li>
                     {{-- <li><a data-toggle="tab" href="#Reviews_and_Ratings
-"><i class="fa fa-map-marker"></i> <span>Reviews
+                    "><i class="fa fa-map-marker"></i> <span>Reviews
                                 and Ratings
                             </span></a></li> --}}
                     <li><a data-toggle="tab" href="#Cabin_and_Accommodation_Details"><i class="fa fa-map-marker"></i>
@@ -85,408 +79,252 @@
                     <li><a data-toggle="tab" href="#Media_Management"><i class="fa fa-map-marker"></i> <span>Media
                                 Management</span></a></li>
                 </ul>
-
-                <div id="Cruise_Information" class="tab-pane active in fade">
-                    <h4 class="tab-heading">Cruise Name: Name of the cruise.</h4>
-                    <p>
-                        <b>Description:</b> Detailed description of the cruise, including highlights and itinerary.
-                    </p>
-                    <p>
-                        <b>Cruise Line:</b> Name of the cruise line operating the cruise.
-                    </p>
-                    <p>
-                        <b>Ship Name:</b> Name of the ship.
-
-                    </p>
-
-                </div>
-
-
-                <div id="Itinerary_and_Destinations" class="tab-pane fade">
-                    <h4 class="tab-heading"> 132432Departure Port: Starting location of the cruise.</h4>
-                    <h4>
-                        Destination Ports: List of all major ports of call included in the cruise itinerary.
-                    </h4>
-                    <p>
-                        <b> Return Port:</b> Ending location of the cruise (if different from the departure port).
-                    </p>
-                    <p>
-                        <b>Duration:</b> Total duration of the cruise (e.g., 7 days).
-
-                    </p>
-                    <p>
-                        <b> Day-by-Day Itinerary:</b> Detailed schedule of activities and destinations for each day
-                        of the cruise.
-                        .
-
-                    </p>
-
-                </div>
-
-
-                <div id="Pricing_and_Packages" class="tab-pane fade">
-                    <h4 class="tab-heading">ase Price: Starting price per person.</h4>
-                    <p>
-                        <b> Package Options:</b> Information about different packages (e.g., all-inclusive, meal
-                        plans, drink packages).
-                    </p>
-                </div>
-
-
-                <div id="Cabin_and_Accommodation_Details" class="tab-pane fade">
-                    <h4 class="tab-heading">Cabin Type: Type of cabin (e.g., interior, oceanview, balcony, suite).</h4>
-                    <p>
-                        <b>Description:</b> Detailed description of the cabin, including amenities and features.
-                    </p>
-                    <p>
-                        <b> Cabin Images:</b>
-                    </p>
-                    <img src="{{ asset('img/default_banner.jpg') }}">
-                </div>
-
-
-
-                <div id="Onboard_Services_and_Amenities" class="tab-pane fade">
-                    <h4 class="tab-heading">Included Services: List of items or services included in the cruise price
-                        (e.g., meals,
-                        entertainment, excursions).
-                    </h4>
-                    <p>
-                        <b> Optional Services:</b> List of optional items or services available for an additional fee
-                        (e.g., spa treatments, specialty dining).
-                    </p>
-                    <p>
-                        <b> Entertainment Options:</b> Description of onboard entertainment options (e.g., shows,
-                        movies, live music).
-                    </p>
-                    <p>
-                        <b> Dining Options:</b> Information about dining options available on the ship.
-                    </p>
-
-                </div>
-
-
-                <div id="Safety_and_Regulations" class="tab-pane fade">
-                    <h4 class="tab-heading">Safety Information: Safety guidelines and emergency contacts.</h4>
-                    <p>
-                        <b>Age Restrictions:</b> Any age restrictions for passengers.
-                    </p>
-                    <p>
-                        <b> Health Requirements:</b> Any health or fitness requirements for passengers.
-
-                    </p>
-                    <p>
-                        <b>Cancellation Policy:</b> Details about the cancellation policy.
-                    </p>
-                    <p>
-                        <b> Terms and Conditions:</b> Terms and conditions for participating in the cruise.
-                    </p>
-
-                </div>
-
-
-                <div id="Media_Management" class="tab-pane fade">
-                    <h4 class="tab-heading"> Cruise Images:</h4>
-                    <img src="{{ asset('img/default_banner.jpg') }}">
-                    <h4> Video Highlights:</h4>
-                    <img src="{{ asset('img/default_banner.jpg') }}">
-
-                </div>
-
                 <div class="tab-content">
-                    {{-- <div id="ship-info" class="tab-pane fade in active"> --}}
-                        {{-- <h4 class="tab-heading">Overview</h4>
+                    <div id="Cruise_Information" class="tab-pane active in fade">
+                        <h4 class="tab-heading">Cruise Name: {{ $cruise->title }}</h4>
                         <p>
-                            {{ $cruise->description }}
+                            <b>Description:</b> {{ $cruise->description }}
                         </p>
-                        <h4 class="tab-heading">Facilities</h4> --}}
-                        {{-- <div class="ammenties-4">
-                            @php
-                            $faciArray = json_decode($faci, true);
-                            @endphp
-
-                            @foreach ($faciArray as $facility)
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-beer"></i> {{ $facility }}</p>
-                            </div>
-                            @endforeach --}}
-                            {{-- <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-cutlery"></i> Restaurant</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-glass"></i> Cafe</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-film"></i> Theatre</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-paw"></i> Pet Room</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-desktop"></i> LED in Room</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-beer"></i> Bar</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-cutlery"></i> Restaurant</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-glass"></i> Cafe</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-film"></i> Theatre</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-paw"></i> Pet Room</p>
-                            </div>
-                            <div class="col-md-4 col-sm-2">
-                                <p><i class="fa fa-desktop"></i> LED in Room</p>
-                            </div> --}}
-                            {{--
-                        </div> --}}
-                        {{-- <h4 class="tab-heading">Lorem Lpsum</h4>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing software like Aldus PageMaker including
-                            versions of Lorem Ipsum.
-                        </p> --}}
-                        {{--
+                            <b>Cruise Line:</b> {{ $cruise->cruise_line }}
+                        </p>
+                        <p>
+                            <b>Ship Name:</b> {{ $cruise->ship_name }}
+                        </p>
+                    </div>
+                    <div id="Itinerary_and_Destinations" class="tab-pane fade">
+                        <h4 class="tab-heading"> 132432Departure Port: {{ $cruise->departure }}</h4>
+                        <h4>
+                            Destination Ports: {{ $cruise->destination }}
+                        </h4>
+                        <p>
+                            <b> Return Port:</b> {{ $cruise->return }}
+                        </p>
+                        <p>
+                            <b>Duration:</b> {{ $cruise->duration }}
+                        </p>
+                        <p>
+                            <b> Day-by-Day Itinerary:</b> {{ $cruise->itinerary }}
+                        </p>
+
+                    </div>
+                    <div id="Pricing_and_Packages" class="tab-pane fade">
+                        <h4 class="tab-heading">ase Price: {{ $cruise->price }}</h4>
+                        <p>
+                            <b> Package Options:</b> {{ $cruise->package }}
+                        </p>
+                    </div>
+                    <div id="Cabin_and_Accommodation_Details" class="tab-pane fade">
+                        <h4 class="tab-heading">Cabin Type: {{ $cruise->cabin_type }}</h4>
+                        <p>
+                            <b>Description:</b> {{ $cruise->description_details }}
+                        </p>
+                        <p>
+                            <b> Cabin Images:</b>
+                        </p>
+                        <img src="{{ asset('public/storage/' . $cruise->cabin_images) }}" alt="Cruise" width="100px">
+                        {{-- <img src="{{ asset('img/default_banner.jpg') }}"> --}}
+                    </div>
+                    <div id="Onboard_Services_and_Amenities" class="tab-pane fade">
+                        <h4 class="tab-heading">Included Services: {{ $cruise->included }}
+                        </h4>
+                        <p>
+                            <b> Optional Services:</b> {{ $cruise->optional }}
+                        </p>
+                        <p>
+                            <b> Entertainment Options:</b> {{ $cruise->entertainment }}
+                        </p>
+                        <p>
+                            <b> Dining Options:</b> {{ $cruise->dining }}
+                        </p>
+                    </div>
+                    <div id="Safety_and_Regulations" class="tab-pane fade">
+                        <h4 class="tab-heading">Safety Information: {{ $cruise->safety }}</h4>
+                        <p>
+                            <b>Age Restrictions:</b> {{ $cruise->age }}
+                        </p>
+                        <p>
+                            <b> Health Requirements:</b> {{ $cruise->health }}
+                        </p>
+                        <p>
+                            <b>Cancellation Policy:</b> {{ $cruise->cancellation_policy }}
+                        </p>
+                        <p>
+                            <b> Terms and Conditions:</b> {{ $cruise->terms_and_conditions }}
+                        </p>
+                    </div>
+                    <div id="Media_Management" class="tab-pane fade">
+                        <h4 class="tab-heading"> Cruise Images:</h4>
+                        @if ($cruise->images)
+                            @php
+                                $images = json_decode($cruise->images);
+                            @endphp
+                            @if ($images && count($images) > 0)
+                                @foreach ($images as $index => $image)
+                                    <img src="{{ asset('public/storage/' . $image) }}" alt="Cruise" width="100px">
+                                @endforeach
+                            @endif
+                        @endif
+                        {{-- <img src="{{ asset('img/default_banner.jpg') }}"> --}}
+                        <h4> Video Highlights:</h4>
+                        @if ($cruise->videos)
+                            <video width="320" height="240" controls>
+                                <source src="{{ asset('public/storage/cruise/' . $cruise->videos) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        @endif
+                        {{-- <img src="{{ asset('img/default_banner.jpg') }}"> --}}
+                    </div>
+
+                    {{-- <div class="tab-content">
+                        <div id="itinerary" class="tab-pane fade">
+                            <h4 class="tab-heading">Package Itinerary</h4>
+                            @php
+                            $packages = App\Models\Package::where('service_id', $cruise->id)->get();
+                            @endphp
+                            @foreach ($packages as $package)
+                            <div class="daily-schedule">
+                                <div class="title">
+                                    <p><span>Day {{ $package->validity }}</span>{{ $package->city }}</p>
+                                </div>
+                                <div class="daily-schedule-body">
+                                    <div class="col-md-4 col-sm-4">
+                                        <img src="{{ asset('public/storage/') . '/' . $package->image }}" alt="cruise">
+                                    </div>
+                                    <div class="col-md-8 col-sm-8">
+                                        <p>{{ $package->description }}</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12 activity">
+                                        <h4>Included</h4>
+                                        @php
+                                        $includedArray = json_decode($package->inclusion);
+                                        @endphp
+
+                                        @foreach ($includedArray as $included)
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> {{ $included }}</p>
+                                        </div>
+                                        @endforeach
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <div id="cabin" class="tab-pane fade">
+                            <h4 class="tab-heading">Cabin Types</h4>
+                            <div class="inclusion-wrapper">
+                                <div class="inclusion-title">
+                                    <p><span><i class="fa fa-bed"></i></span>Balcony</p>
+                                </div>
+                                <div class="inclusion-body">
+                                    <div class="col-md-3 col-sm-3 clear-padding">
+                                        <img src="assets/images/tour1.jpg" alt="cruise">
+                                    </div>
+                                    <div class="col-md-9 col-sm-9">
+                                        <h5>Starting From $299/Person <a href="#">BOOK NOW</a></h5>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                            Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                            unknown printer took a galley of type and scrambled it to make a type specimen
+                                            book.</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12 activity">
+                                        <h4>Cabin Facilities</h4>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> LED TV</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Refrigerator</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Room Sevice</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Free WiFi</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inclusion-wrapper">
+                                <div class="inclusion-title">
+                                    <p><span><i class="fa fa-bed"></i></span>Ocean View</p>
+                                </div>
+                                <div class="inclusion-body">
+                                    <div class="col-md-3 col-sm-3 clear-padding">
+                                        <img src="assets/images/tour1.jpg" alt="cruise">
+                                    </div>
+                                    <div class="col-md-9 col-sm-9">
+                                        <h5>Starting From $399/Person <a href="#">BOOK NOW</a></h5>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                            Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                            unknown printer took a galley of type and scrambled it to make a type specimen
+                                            book.</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12 activity">
+                                        <h4>Cabin Facilities</h4>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> LED TV</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Refrigerator</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Room Sevice</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Free WiFi</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inclusion-wrapper">
+                                <div class="inclusion-title">
+                                    <p><span><i class="fa fa-bed"></i></span>Suite</p>
+                                </div>
+                                <div class="inclusion-body">
+                                    <div class="col-md-3 col-sm-3 clear-padding">
+                                        <img src="assets/images/tour1.jpg" alt="cruise">
+                                    </div>
+                                    <div class="col-md-9 col-sm-9">
+                                        <h5>Starting From $599/Person <a href="#">BOOK NOW</a></h5>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                            Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                            unknown printer took a galley of type and scrambled it to make a type specimen
+                                            book.</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12 activity">
+                                        <h4>Cabin Facilities</h4>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> LED TV</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Refrigerator</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Room Sevice</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <p><i class="fa fa-check-square"></i> Free WiFi</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="map" class="tab-pane fade">
+                            <h4 class="tab-heading">Map</h4>
+                        </div>
                     </div> --}}
-                    <div id="itinerary" class="tab-pane fade">
-                        <h4 class="tab-heading">Package Itinerary</h4>
-                        @php
-                        $packages = App\Models\Package::where('service_id', $cruise->id)->get();
-                        @endphp
-                        @foreach ($packages as $package)
-                        <div class="daily-schedule">
-                            <div class="title">
-                                <p><span>Day {{ $package->validity }}</span>{{ $package->city }}</p>
-                            </div>
-                            <div class="daily-schedule-body">
-                                <div class="col-md-4 col-sm-4">
-                                    <img src="{{ asset('public/storage/') . '/' . $package->image }}" alt="cruise">
-                                </div>
-                                <div class="col-md-8 col-sm-8">
-                                    <p>{{ $package->description }}</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-12 activity">
-                                    <h4>Included</h4>
-                                    @php
-                                    $includedArray = json_decode($package->inclusion);
-                                    @endphp
-
-                                    @foreach ($includedArray as $included)
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> {{ $included }}</p>
-                                    </div>
-                                    @endforeach
-                                    {{-- <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Free meal</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Movie show</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Rock concert</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Night show</p>
-                                    </div> --}}
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                        {{-- <div class="daily-schedule">
-                            <div class="title">
-                                <p><span>Day 2</span>At Sea</p>
-                            </div>
-                            <div class="daily-schedule-body">
-                                <div class="col-md-4 col-sm-4">
-                                    <img src="assets/images/tour1.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-8 col-sm-8">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book. It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-12 activity">
-                                    <h4>Included</h4>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Free meal</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Movie show</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Rock concert</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Night show</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="daily-schedule">
-                            <div class="title">
-                                <p><span>Day 3</span>Amsterdam</p>
-                            </div>
-                            <div class="daily-schedule-body">
-                                <div class="col-md-4 col-sm-4">
-                                    <img src="assets/images/tour1.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-8 col-sm-8">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book. It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-12 activity">
-                                    <h4>Included</h4>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Free meal</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Movie show</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Rock concert</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Night show</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div> --}}
-                    </div>
-                    <div id="cabin" class="tab-pane fade">
-                        <h4 class="tab-heading">Cabin Types</h4>
-                        <div class="inclusion-wrapper">
-                            <div class="inclusion-title">
-                                <p><span><i class="fa fa-bed"></i></span>Balcony</p>
-                            </div>
-                            <div class="inclusion-body">
-                                <div class="col-md-3 col-sm-3 clear-padding">
-                                    <img src="assets/images/tour1.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-9 col-sm-9">
-                                    <h5>Starting From $299/Person <a href="#">BOOK NOW</a></h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-12 activity">
-                                    <h4>Cabin Facilities</h4>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> LED TV</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Refrigerator</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Room Sevice</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Free WiFi</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="inclusion-wrapper">
-                            <div class="inclusion-title">
-                                <p><span><i class="fa fa-bed"></i></span>Ocean View</p>
-                            </div>
-                            <div class="inclusion-body">
-                                <div class="col-md-3 col-sm-3 clear-padding">
-                                    <img src="assets/images/tour1.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-9 col-sm-9">
-                                    <h5>Starting From $399/Person <a href="#">BOOK NOW</a></h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-12 activity">
-                                    <h4>Cabin Facilities</h4>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> LED TV</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Refrigerator</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Room Sevice</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Free WiFi</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="inclusion-wrapper">
-                            <div class="inclusion-title">
-                                <p><span><i class="fa fa-bed"></i></span>Suite</p>
-                            </div>
-                            <div class="inclusion-body">
-                                <div class="col-md-3 col-sm-3 clear-padding">
-                                    <img src="assets/images/tour1.jpg" alt="cruise">
-                                </div>
-                                <div class="col-md-9 col-sm-9">
-                                    <h5>Starting From $599/Person <a href="#">BOOK NOW</a></h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-12 activity">
-                                    <h4>Cabin Facilities</h4>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> LED TV</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Refrigerator</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Room Sevice</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <p><i class="fa fa-check-square"></i> Free WiFi</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div id="map" class="tab-pane fade">
-                        <h4 class="tab-heading">Map</h4>
-                    </div>
                 </div>
             </div>
         </div>
