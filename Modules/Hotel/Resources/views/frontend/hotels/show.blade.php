@@ -55,7 +55,7 @@
                     </a>
                 </div>
                 <div class="room-complete-detail">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs tabs001">
                         <li class="active"><a data-toggle="tab" href="#Hotel_Information
                         "><i class="fa fa-bolt"></i> <span>Hotel Information
                                 </span></a></li>

@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="star-filter filter">
-                    <h5><i class="fa fa-calendar"></i> Cruise Length</h5>
+                    <h5><i class="fa fa-calendar"></i>  Duration of the cruise</h5>
                     <ul>
                         <li><input type="checkbox"> Upto 3 Days</li>
                         <li><input type="checkbox"> 5 to 7 Days</li>
@@ -106,7 +106,40 @@
                     </ul>
                 </div> --}}
                 <div class="facilities-filter filter">
-                    <h5><i class="fa fa-list"></i> Inclusion</h5>
+                    <h5><i class="fa fa-list"></i>   Cabin Type</h5>
+                    <ul>
+                        <li><input type="checkbox" wire:model.live="cruise"> <i class=""></i> oceanview</li>
+                        <li><input type="checkbox" wire:model.live="Interior"> <i class=""></i> Interior</li>
+                        <li><input type="checkbox" wire:model.live="Suite"> <i class=""></i> Suite</li>
+                    </ul>
+                </div>
+                <div class="facilities-filter filter">
+                    <h5><i class="fa fa-list"></i>   Departure Port</h5>
+                    <ul>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                    </ul>
+                </div>
+                <div class="facilities-filter filter">
+                    <h5><i class="fa fa-list"></i>    Destination Ports</h5>
+                    <ul>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                    </ul>
+                </div>
+                <div class="facilities-filter filter">
+                    <h5><i class="fa fa-list"></i>    Return Port
+                    </h5>
+                    <ul>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                    </ul>
+                </div>
+                <div class="facilities-filter filter">
+                    <h5><i class="fa fa-list"></i>  Amenities and Features</h5>
                     <ul>
                         <li><input type="checkbox" wire:model.live="cruise"> <i class="fa fa-ship"></i> Cruise</li>
                         <li><input type="checkbox" wire:model.live="transportation"> <i class="fa fa-taxi"></i> Transportation</li>

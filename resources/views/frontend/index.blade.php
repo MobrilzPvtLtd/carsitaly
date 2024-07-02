@@ -883,7 +883,7 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="tab3">
-                            <div class="col-md-6 hot-deal-list wow slideInLeft">
+                            <div class="col-md-6 hot-deal-list">
                                 <div class="item">
                                     <div class="col-xs-3">
                                         <img src="assets/images/offer1.jpg" alt="Cruise">
@@ -939,7 +939,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                            <div class="col-md-6 hot-deal-grid">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">
@@ -971,7 +971,7 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="tab4">
-                            <div class="col-md-6 hot-deal-list wow slideInLeft">
+                            <div class="col-md-6 hot-deal-list">
                                 <div class="item">
                                     <div class="col-xs-3">
                                         <img src="assets/images/offer1.jpg" alt="Cruise">
@@ -1021,7 +1021,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                            <div class="col-md-6 hot-deal-grid">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">
@@ -1053,7 +1053,7 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="tab5">
-                            <div class="col-md-6 hot-deal-list wow slideInLeft">
+                            <div class="col-md-6 hot-deal-list">
                                 <div class="item">
                                     <div class="col-xs-3">
                                         <img src="assets/images/offer1.jpg" alt="Cruise">
@@ -1103,7 +1103,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-6 hot-deal-grid wow slideInRight">
+                            <div class="col-md-6 hot-deal-grid">
                                 <div class="col-sm-6 item">
                                     <div class="wrapper">
                                         <img src="assets/images/tour1.jpg" alt="Cruise">

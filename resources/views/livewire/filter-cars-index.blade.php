@@ -79,25 +79,30 @@
                     </div>
                 </div>
                 <div class="star-filter filter">
-                    <h5><i class="fa fa-dashboard"></i> Transmission</h5>
+                    <h5><i class="fa fa-dashboard"></i>  Vehicle Type</h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="automatic"> Automatic</li>
-                        <li><input type="checkbox" wire:model.live="mannual"> Mannual</li>
+                        <li><input type="checkbox" wire:model.live="automatic">Sedan</li>
+                        <li><input type="checkbox" wire:model.live="mannual"> SUV</li>
+                        <li><input type="checkbox" wire:model.live="any"> Van</li>
                         <li><input type="checkbox" wire:model.live="any"> Any</li>
                     </ul>
                 </div>
                 <div class="location-filter filter">
-                    <h5><i class="fa fa-certificate"></i> Car Brand</h5>
+                    <h5><i class="fa fa-certificate"></i> Luggage Capacity</h5>
                     <ul>
                         {{-- @foreach ($brands as $brand)
                             <li>
                                 <input type="checkbox" wire:model.live="filterBrands.{{ $brand }}" value="{{ $brand }}">{{ $brand }}
                             </li>
                         @endforeach --}}
+                        <li><input type="checkbox" wire:model.live="automatic">2 Bags</li>
+                        <li><input type="checkbox" wire:model.live="mannual"> 3 Bags</li>
+                        <li><input type="checkbox" wire:model.live="any"> 4 Bags</li>
+                        <li><input type="checkbox" wire:model.live="any"> 5 Bags</li>
                     </ul>
                 </div>
                 <div class="facilities-filter filter">
-                    <h5><i class="fa fa-cog"></i> Equipments</h5>
+                    <h5><i class="fa fa-cog"></i> Vehicle Features</h5>
                     <ul>
                         {{-- @php
                             $carFeaturesArray = json_decode($carFeature, true);
@@ -111,7 +116,7 @@
                         <li><input type="checkbox" wire:model.live="carAC"> Car AC</li>
                         <li><input type="checkbox" wire:model.live="musicSystem"> Music System</li>
                         <li><input type="checkbox" wire:model.live="FMRadio"> FM Radio</li>
-                        <li><input type="checkbox" wire:model.live="sateliteNavigation"> Satelite Navigation</li>
+                        <li><input type="checkbox" wire:model.live="sateliteNavigation"> Child Seat</li>
                         <li><input type="checkbox" wire:model.live="powerLock"> Power Lock</li>
                     </ul>
                 </div>

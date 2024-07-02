@@ -61,7 +61,7 @@
                     </a>
                 </div>
                 <div class="room-complete-detail">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs tabs001">
                         <li class="active"><a data-toggle="tab" href="#Transfer_Information
                             "><i class="fa fa-bolt"></i>
                             <span>Transfer Information </span></a>
