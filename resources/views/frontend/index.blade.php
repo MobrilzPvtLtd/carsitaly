@@ -696,7 +696,7 @@
                         </li>
                         <li role="presentation" class="text-center">
                             <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
-                                <i class="fa fa-plane"></i>
+                                <i class="fa fa-university"></i>
                                 <span>VILLAS</SPAN>
                             </a>
                         </li>

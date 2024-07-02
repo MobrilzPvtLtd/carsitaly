@@ -160,8 +160,8 @@
                         </ul>
                     </div>
                     <div class="facilities-filter filter">
-                        <h5><i class="fa fa-list"></i> Inclusion</h5>
-                        <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
+
+                        <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Inclusion</h5>
                         <ul>
                             <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
                             <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
@@ -317,13 +317,6 @@
                             <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
                         </ul> --}}
                     @endif
-
-
-
-                    
-
-
-
             </div>
         </div>
 
@@ -408,10 +401,39 @@
                                                     </span>
                                                 </h5>
                                             </a>
-                                            <p>
+                                            {{-- <p>
                                                 <i class="fa fa-map-marker"></i>{{ $ser->city }}
                                                 <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
-                                            </p>
+                                                <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
+                                                <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
+                                            </p> --}}
+                                            @if($ser->service_type == 'tours')
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-clock-o"></i>Start Time</p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-clock-o"></i>Total Duration</p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-map-marker"></i>Location</p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-list"></i>Amenities</p>
+                                                </div>
+                                            @else
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-bed"></i>Room Types</p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-map-marker"></i> Location</p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-list"></i>Amenities</p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                    <p><i class="fa fa-list"></i> Inclusion</p>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="hotel-facility">
                                             <p>
@@ -453,7 +475,7 @@
                                 </div>
                                 <div class="clearfix visible-sm-block"></div>
                                 <div class="col-md-2 rating-price-box text-center clear-padding">
-                                    <div class="rating-box">
+                                    {{-- <div class="rating-box">
                                         <div class="tripadvisor-rating">
                                             <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
                                         </div>
@@ -461,7 +483,8 @@
                                             <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                             <span>128 Guest Reviews.</span>
                                         </div>
-                                    </div>
+
+                                    </div> --}}
                                     <div class="room-book-box">
                                         <div class="price">
                                             <h5>${{ $ser->price }} Avg/Night</h5>

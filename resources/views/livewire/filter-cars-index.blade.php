@@ -41,16 +41,16 @@
                     </div>
                 </div>
                 <div class="col-md-1 col-sm-6 col-xs-6">
-                    <div class="form-gp">
+                    {{-- <div class="form-gp">
                         <label>Brand</label>
                         <select class="custom-select-room" wire:model="brand">
                             <option value="">select</option>
 
-                            {{-- @foreach ($brands as $brand)
+                            @foreach ($brands as $brand)
                                 <option value="{{ $brand }}">{{ $brand }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="form-gp">
@@ -205,26 +205,26 @@
                                             <p>{{ $car->description }}</p>
                                         </div>
                                         <div class="car-detail">
-                                            <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                            {{-- <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
                                                 <p><i class="fa fa-calendar"></i>{{ $car->warranty }} Year</p>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                            </div> --}}
+                                            {{-- <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
                                                 <p><i class="fa fa-road"></i>{{ $car->mileage }} KM</p>
-                                            </div>
+                                            </div> --}}
                                             <div class="clearfix"></div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-tint"></i>{{ $car->engine_type }}</p>
+                                                <p><i class="fa fa-suitcase"></i>{{ $car->engine_type }} 2 bags</p>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-users"></i>{{ $car->seating_capacity }} Person</p>
+                                                <p><i class="fa fa-users"></i>{{ $car->seating_capacity }} 4 Person</p>
                                             </div>
                                             <div class="clearfix"></div>
                                             <div class="clearfix"></div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-dashboard"></i>{{ $car->transmission }}</p>
+                                                <p><i class="fa fa-dashboard"></i>{{ $car->transmission }} Vehicle Types</p>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-cog"></i>{{ $car->top_speed }} MPL</p>
+                                                <p><i class="fa fa-cog"></i>{{ $car->top_speed }} Vehicle Features</p>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -232,12 +232,12 @@
                                 </div>
                                 <div class="clearfix visible-sm-block"></div>
                                 <div class="col-md-2 rating-price-box text-center clear-padding car-item">
-                                    <div class="rating-box">
+                                    {{-- <div class="rating-box">
                                         <div class="user-rating">
                                             <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                             <span>128 Guest Reviews.</span>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="room-book-box">
                                         <div class="price">
                                             <h5>${{ $car->price }}/Person</h5>

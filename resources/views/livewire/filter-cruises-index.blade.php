@@ -205,6 +205,7 @@
                                 @endif
                                 {{-- <img src="{{ asset('public/storage/') . '/' . $cruise->image }}" alt="cruise"> --}}
                             </div>
+
                             <div class="col-md-6 col-sm-6">
                                 <a href="{{ route('frontend.cruises.show',$cruise->slug) }}">
                                     <h4>{{ $cruise->title }}</h4>
@@ -214,9 +215,19 @@
                                     {{ $cruise->city }}
                                 </p>
                                 <p>
-                                    <strong><i class="fa fa-globe"></i> Itinerary: </strong>
+                                    <strong><i class="fa fa-globe"></i> Location: </strong>
                                     {{ $cruise->country }}
                                 </p>
+                                <p>
+                                    <strong><i class="fa fa-list"></i> Amenities:  </strong>
+                                    {{ $cruise->country }}
+                                </p>
+                                <p>
+                                    <strong><i class="fa fa-map-marker"></i>  Return Port
+                                        : </strong>
+                                    {{ $cruise->country }}
+                                </p>
+
                                 <ul class="nav nav-tabs">
                                     <li class="active">
                                         <a data-toggle="tab" href="#dateNow">
@@ -282,7 +293,7 @@
                             </div>
                             <div class="clearfix-sm"></div>
                             <div class="col-md-2 booking-box clear-padding text-center">
-                                <div class="rating-box">
+                                {{-- <div class="rating-box">
                                     @for ($i = 1; $i < 5; $i++)
                                         @if($i <= $cruise->rating)
                                             <i class="fa fa-star"></i>
@@ -291,7 +302,7 @@
                                         @endif
                                     @endfor
                                     <h5>Based On 128 Reviews</h5>
-                                </div>
+                                </div> --}}
                                 <div class="price">
                                     <h3>${{ $cruise->price }}</h3>
                                     <h5>$73/night</h5>

@@ -2402,7 +2402,7 @@ h5 {
 }
 .hotel-list-view .room-book-box {
 	padding: 5px 0px;
-	min-height: 100px;
+	min-height: 200px;
 }
 .hotel-list-view .room-book-box h5 {
 	font-size: 16px;
@@ -3102,7 +3102,7 @@ h5 {
 	line-height: 1.6;
 }
 .cruise-list-view .price {
-	min-height: 125px;
+	min-height: 250px;
 	padding: 18px 0px;
 	background: #F2676B;
 	color: #ffffff;
