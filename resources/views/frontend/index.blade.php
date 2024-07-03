@@ -32,9 +32,15 @@
                                 </a>
                             </li>
                             <li role="presentation">
+                                <a href="#transfer" aria-controls="taxi" role="tab" data-toggle="tab">
+                                    <i class="fa fa-cab"></i>
+                                    <span>TRANSFERS</span>
+                                </a>
+                            </li>
+                            <li role="presentation">
                                 <a href="#taxi" aria-controls="taxi" role="tab" data-toggle="tab">
                                     <i class="fa fa-cab"></i>
-                                    <span>CAR</span>
+                                    <span>CAR RENTAL</span>
                                 </a>
                             </li>
                             <li role="presentation">
@@ -322,6 +328,83 @@
                                 <div class="clearfix"></div>
                             </div>
                             <!-- END: HOLIDAYS -->
+                            {{-- transfer start --}}
+                            <div role="tabpanel" class="tab-pane" id="transfer">
+                                <div class="col-md-12">
+                                    <form action="{{ route('frontend.transfers.index') }}" method="GET">
+                                        <div class="col-md-12 product-search-title">Book a transfer ride</div>
+                                        <div class="col-md-6 col-sm-6 search-col-padding">
+                                            <label>Pick Up Location</label>
+                                            <div class="input-group">
+                                                <input type="text" name="city" class="form-control" required placeholder="E.g. New York">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 search-col-padding">
+                                            <label>Drop Off Location</label>
+                                            <div class="input-group">
+                                                <input type="text" name="destination-city" class="form-control"
+                                                    required placeholder="E.g. New York">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-6 col-sm-6 search-col-padding">
+                                            <label>Pick Up Date</label>
+                                            <div class="input-group">
+                                                <input type="text" id="car_start" class="form-control"
+                                                    placeholder="MM/DD/YYYY">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-calendar fa-fw"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 search-col-padding">
+                                            <label>Drop Off Date</label>
+                                            <div class="input-group">
+                                                <input type="text" id="car_end" class="form-control"
+                                                    placeholder="MM/DD/YYYY">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-calendar fa-fw"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-6 col-sm-6 search-col-padding">
+                                            <label>Car Brnad(Optional)</label><br>
+                                            <select class="selectpicker" name="brand">
+                                                {{-- @foreach (App\Models\Service::where('status', 1)->distinct()->pluck('brand') as $brand)
+                                                    <option value="{{ $brand }}">{{ $brand }}</option>
+                                                @endforeach --}}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 search-col-padding">
+                                            <label>Car Type(Optional)</label><br>
+                                            <select class="selectpicker" name="car_type">
+                                                {{-- @foreach (App\Models\Service::where('status', 1)->distinct()->pluck('car_type'); as $ctype)
+                                                    <option>{{ $ctype }}</option>
+                                                @endforeach --}}
+                                            </select>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 search-col-padding">
+                                            <button type="submit" class="search-button btn transition-effect">Search
+                                                Cars</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                                {{-- <div class="offer-box col-md-4">
+                                    <div class="item">
+                                        <img src="images-new/img2311.jpg" alt="cruise">
+                                        <h4>BMW</h4>
+                                        <h5>Starting From $399/Day</h5>
+                                        <a href="#">KNOW MORE</a>
+                                    </div>
+                                </div> --}}
+                                <div class="clearfix"></div>
+                            </div>
+                            {{-- transfer end --}}
 
                             <!-- START: CAR SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="taxi">

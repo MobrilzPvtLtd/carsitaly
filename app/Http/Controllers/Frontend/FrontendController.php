@@ -143,4 +143,9 @@ class FrontendController extends Controller
             return redirect()->back();
         }
     }
+
+    public function car_rental()
+    {
+        return view('frontend.car-rental');
+    }
 }
