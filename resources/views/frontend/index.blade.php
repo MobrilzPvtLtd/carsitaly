@@ -75,14 +75,14 @@
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Leaving From</label>
                                             <div class="input-group">
-                                                <input type="text" name="leaving_from" class="form-control" required placeholder="E.g. London">
+                                                <input type="text" name="leaving_from" id="leaving_from" class="form-control" required placeholder="E.g. London">
                                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Leaving To</label>
                                             <div class="input-group">
-                                                <input type="text" name="leaving_to" class="form-control" required placeholder="E.g. New York">
+                                                <input type="text" name="leaving_to" id="leaving_to" class="form-control" required placeholder="E.g. New York">
                                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>

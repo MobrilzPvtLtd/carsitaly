@@ -7,5 +7,6 @@
     "Cruise": true,
     "Tour": true,
     "Villa": true,
-    "Package": true
+    "Package": true,
+    "CarRental": true
 }

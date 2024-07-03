@@ -18,48 +18,48 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link href="assets/css/animate.min.css" rel="stylesheet">
-	<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
-	<link href="assets/css/owl.carousel.css" rel="stylesheet">
-	<link href="assets/css/owl-carousel-theme.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
-	<link href="assets/css/style.css" rel="stylesheet" media="screen">
-	<link href="assets/css/new.css" rel="stylesheet" media="screen">
-	<!-- LIGHT -->
-	<link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
-	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/owl.carousel.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/owl-carousel-theme.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+        <link href="{{ asset('assets/css/flexslider.css') }}" rel="stylesheet" media="screen">
+        <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" media="screen">
+        <link href="{{ asset('assets/css/new.css') }}" rel="stylesheet" media="screen">
+        <!-- LIGHT -->
+        <link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
+        <link href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
-	<!-- FONTS -->
+        <!-- FONTS -->
 
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
-    <style>
-        .notification-success {
-            background-color: #31733c;
-            color: white;
-            padding: 5px 12px 5px 15px;
-            margin: 25px;
-            border-radius: 5px;
-            position: relative;
-        }
-        .notification-error {
-            background-color: #f9676b;
-            color: white;
-            padding: 5px 12px 5px 15px;
-            margin: 25px;
-            border-radius: 5px;
-            position: relative;
-        }
-        .close-button {
-            background: transparent;
-            border: none;
-            color: inherit;
-            cursor: pointer;
-            font-size: 20px;
-            padding: 5px;
-            margin-left: 70px;
-        }
-    </style>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
+        <style>
+            .notification-success {
+                background-color: #31733c;
+                color: white;
+                padding: 5px 12px 5px 15px;
+                margin: 25px;
+                border-radius: 5px;
+                position: relative;
+            }
+            .notification-error {
+                background-color: #f9676b;
+                color: white;
+                padding: 5px 12px 5px 15px;
+                margin: 25px;
+                border-radius: 5px;
+                position: relative;
+            }
+            .close-button {
+                background: transparent;
+                border: none;
+                color: inherit;
+                cursor: pointer;
+                font-size: 20px;
+                padding: 5px;
+                margin-left: 70px;
+            }
+        </style>
     </head>
 
     <body>
@@ -123,34 +123,6 @@
             </script>
         @endif
 
-            {{-- <script>
-                var notificationArea = document.getElementById('notification-area');
-                var notificationMessage = document.createElement('div');
-                notificationMessage.classList.add('notification');
-
-                var messageText = document.createElement('span');
-                if(session('success')){
-                    messageText.textContent = '{{ session('success') }}';
-                }else{
-                    messageText.textContent = '{{ session('error') }}';
-                }
-                notificationMessage.appendChild(messageText);
-
-                var closeButton = document.createElement('button');
-                closeButton.textContent = '×';
-                closeButton.classList.add('close-button');
-                closeButton.onclick = function() {
-                    notificationArea.removeChild(notificationMessage);
-                };
-                notificationMessage.appendChild(closeButton);
-
-                notificationArea.appendChild(notificationMessage);
-
-                setTimeout(function(){
-                    notificationArea.removeChild(notificationMessage);
-                }, 10000); // 10 seconds
-            </script> --}}
-
         <script>
             function toggleCheckbox(checkbox) {
                 var checkboxes = document.getElementsByName(checkbox.name);
@@ -159,6 +131,27 @@
                 });
             }
         </script>
+
+    <script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var autocomplete;
+            var id = 'leaving_from';
+
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+                types:['geocode'],
+            });
+        });
+        $(document).ready(function(){
+            var autocomplete;
+            var id = 'leaving_to';
+
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+                types:['geocode'],
+            });
+        });
+    </script>
     </body>
 
 </html>
