@@ -4,7 +4,7 @@
 
 @section('services-content')
 
-<livewire:filter-cars-index />
+<livewire:filter-car-index />
 
 {{-- <div class="row modify-search modify-car">
     <div class="container clear-padding">
