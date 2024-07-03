@@ -127,8 +127,6 @@
                     </div>
                 </div>
 
-
-
                     @if($serviceType == 'hotels')
                     <div class="star-filter filter">
                         <h5><i class="fa fa-bed"></i> Room Types</h5>

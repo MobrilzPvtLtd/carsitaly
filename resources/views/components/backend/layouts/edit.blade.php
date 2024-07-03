@@ -20,7 +20,7 @@
 
                 @include ("$module_path.$module_name.form")
 
-                @if($data->service_type == 'cruises' || $data->service_type == 'tours')
+                {{-- @if($data->service_type == 'cruises' || $data->service_type == 'tours')
                     <div class="card">
                         <div class="card-body">
                             <x-backend.section-header>
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </div>
-                @endif
+                @endif --}}
 
                 <div class="row">
                     <div class="col-4 mt-4">

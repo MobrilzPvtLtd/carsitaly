@@ -57,7 +57,7 @@
     </div>
 
     <h4>Location Details</h4>
-    <div class="col-12 col-sm-6 mb-3">
+    <div class="col-12 col-sm-8 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'address';
@@ -66,10 +66,10 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("search-box")->attributes(['required' => 'required']) }}
         </div>
     </div>
-    <div class="col-12 col-sm-6 mb-3">
+    <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'city';
@@ -344,3 +344,18 @@
 </div>
 
 <x-library.select2 />
+
+@section('script')
+<script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var autocomplete;
+        var id = 'search-box';
+
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+            types:['geocode'],
+        });
+    });
+</script>
+@endsection

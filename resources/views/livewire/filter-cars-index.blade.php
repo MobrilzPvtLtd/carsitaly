@@ -221,7 +221,7 @@
                                             <div class="clearfix"></div>
                                             <div class="clearfix"></div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-dashboard"></i>{{ $car->transmission }} Vehicle Types</p>
+                                                <p><i class="fa fa-dashboard"></i> {{ $car->vehicle_type }}</p>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
                                                 <p><i class="fa fa-cog"></i>{{ $car->top_speed }} Vehicle Features</p>
