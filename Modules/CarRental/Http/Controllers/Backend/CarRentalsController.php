@@ -60,7 +60,7 @@ class CarRentalsController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::where('service_type', 'transfers')->paginate();
+        $$module_name = $module_model::where('service_type', 'carrentals')->paginate();
 
         logUserAccess($module_title.' '.$module_action);
 
@@ -125,7 +125,7 @@ class CarRentalsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'transfers')->select('id', 'images', 'title', 'price', 'vehicle_type', 'vehicle_capacity','luggage_capacity');
+        $$module_name = $module_model::where('service_type', 'carrentals')->select('id', 'images', 'title', 'price', 'vehicle_type', 'vehicle_capacity','luggage_capacity');
 
         $data = $$module_name;
 
@@ -138,7 +138,7 @@ class CarRentalsController extends Controller
             ->editColumn('images', function ($data) {
                 if ($data->images) {
                     $images = json_decode($data->images);
-                    $html = '<a href="' . route('backend.transfers.show', $data->id) . '">';
+                    $html = '<a href="' . route('backend.carrentals.show', $data->id) . '">';
 
                     if ($images && count($images) > 0) {
                         // foreach ($images as $image) {
@@ -211,7 +211,7 @@ class CarRentalsController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('transfers', 'public');
+            $imagePath = $request->file('videos')->store('carrentals', 'public');
             $modelData = $request->except('videos');
             $modelData['videos'] = $imagePath;
         }
@@ -220,7 +220,7 @@ class CarRentalsController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $imagePath = $file->store('transfers', 'public');
+                $imagePath = $file->store('carrentals', 'public');
                 $imagePaths[] = $imagePath;
             }
         }
@@ -328,7 +328,7 @@ class CarRentalsController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('transfers', 'public');
+            $imagePath = $request->file('videos')->store('carrentals', 'public');
             $modelData = $request->except('videos');
             $modelData['videos'] = $imagePath;
         }
@@ -336,7 +336,7 @@ class CarRentalsController extends Controller
         $imagePaths = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $imagePath = $file->store('transfers', 'public');
+                $imagePath = $file->store('carrentals', 'public');
                 $imagePaths[] = $imagePath;
             }
             if ($oldImagePath) {

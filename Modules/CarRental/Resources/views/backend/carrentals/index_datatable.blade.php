@@ -52,13 +52,28 @@
                                 #
                             </th>
                             <th>
-                                @lang("carrental::text.name")
+                                Images
                             </th>
                             <th>
-                                @lang("carrental::text.updated_at")
+                                Transfer Name
+                            </th>
+                            {{-- <th>
+                                @lang("car::text.slug")
+                            </th> --}}
+                            <th>
+                                @lang("car::text.price")
+                            </th>
+                            <th>
+                                Vehicle Type
+                            </th>
+                            <th>
+                                Vehicle Capacity
+                            </th>
+                            <th>
+                                Luggage Capacity
                             </th>
                             <th class="text-end">
-                                @lang("carrental::text.action")
+                                @lang("car::text.action")
                             </th>
                         </tr>
                     </thead>
@@ -104,12 +119,32 @@
                 name: 'id'
             },
             {
-                data: 'name',
-                name: 'name'
+                data: 'images',
+                name: 'images'
             },
             {
-                data: 'updated_at',
-                name: 'updated_at'
+                data: 'title',
+                name: 'title'
+            },
+            // {
+            //     data: 'slug',
+            //     name: 'slug'
+            // },
+            {
+                data: 'price',
+                name: 'price'
+            },
+            {
+                data: 'vehicle_type',
+                name: 'vehicle_type'
+            },
+            {
+                data: 'vehicle_capacity',
+                name: 'vehicle_capacity'
+            },
+            {
+                data: 'luggage_capacity',
+                name: 'luggage_capacity'
             },
             {
                 data: 'action',

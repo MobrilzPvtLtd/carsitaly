@@ -66,9 +66,9 @@ class CarRentalsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $id = decode_id($id);
+        // $id = decode_id($id);
 
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -79,11 +79,20 @@ class CarRentalsController extends Controller
 
         $module_action = 'Show';
 
-        $$module_name_singular = $module_model::findOrFail($id);
+        // $$module_name_singular = $module_model::findOrFail($slug);
+        $$module_name_singular = $module_model::where('slug',$slug)->first();
+
+        $similar_cars = $module_model::where('service_type', 'carrentals')->latest()->limit(6)->get();
+
+        $vehicle_features = $module_model::where('service_type', 'carrentals')->distinct()->pluck('vehicle_features');
+        $vehicle_features_array = json_decode($vehicle_features, true);
+        foreach ($vehicle_features_array as $feature) {
+            $carFeature = $feature;
+        }
 
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular",'carFeature','similar_cars')
         );
     }
 }

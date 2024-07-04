@@ -167,7 +167,7 @@ class FilterCarsIndex extends Component
         $cars = $cars->where('service_type', $serviceType)->orderBy('id', 'desc')->paginate(6);
 
         // $brands = Service::where('status', 1)->distinct()->pluck('brand');
-        // $car_type = Service::where('status', 1)->distinct()->pluck('car_type');
+        $car_type = Service::where('vehicle_type', '!=', null)->distinct()->pluck('vehicle_type');
 
 
         // $car_features = Service::where('status', 1)->distinct()->pluck('car_features');
@@ -180,7 +180,7 @@ class FilterCarsIndex extends Component
             'cars',
             // 'brands',
             'serviceType',
-            // 'car_type'
+            'car_type'
         ));
     }
 }

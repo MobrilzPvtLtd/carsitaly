@@ -66,7 +66,7 @@
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select3') }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2') }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">

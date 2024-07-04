@@ -34,14 +34,14 @@
                         <label>Car Type</label>
                         <select class="custom-select-room" wire:model="carType">
                             <option value="">select</option>
-                            {{-- @foreach ($car_type as $ctype)
+                            @foreach ($car_type as $ctype)
                                 <option>{{ $ctype }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="col-md-1 col-sm-6 col-xs-6">
-                    {{-- <div class="form-gp">
+                {{-- <div class="col-md-1 col-sm-6 col-xs-6">
+                    <div class="form-gp">
                         <label>Brand</label>
                         <select class="custom-select-room" wire:model="brand">
                             <option value="">select</option>
@@ -50,8 +50,8 @@
                                 <option value="{{ $brand }}">{{ $brand }}</option>
                             @endforeach
                         </select>
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="form-gp">
                         <button type="submit" class="modify-search-button btn transition-effect">MODIFY SEARCH</button>
@@ -177,7 +177,7 @@
                                         @endphp
 
                                         @if($images && count($images) > 0)
-                                        <a href="{{ route('frontend.transfers.show', $car->slug) }}">
+                                        <a href="{{ route('frontend.' . $serviceType . '.show', $car->slug) }}">
                                             <img src="{{ asset('public/storage/' . $images[0]) }}" alt="transfer">
                                         </a>
                                         @endif
@@ -186,7 +186,7 @@
                                 <div class="col-md-6 col-sm-6 hotel-info">
                                     <div>
                                         <div class="hotel-header">
-                                            <a href="{{ route('frontend.transfers.show', $car->slug) }}">
+                                            <a href="{{ route('frontend.' . $serviceType . '.show', $car->slug) }}">
                                                 <h5>{{ $car->title }}
                                                     <span>
                                                         @for ($i = 1; $i <= 5; $i++)
@@ -243,7 +243,7 @@
                                             <h5>${{ $car->price }}/Person</h5>
                                         </div>
                                         <div class="book">
-                                            <a href="{{ route('frontend.transfers.show', $car->slug) }}">BOOK</a>
+                                            <a href="{{ route('frontend.' . $serviceType . '.show', $car->slug) }}">BOOK</a>
                                         </div>
                                     </div>
                                 </div>
