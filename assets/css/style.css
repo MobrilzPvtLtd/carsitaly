@@ -951,7 +951,7 @@ h5 {
 	background: #0a3152 !important;
 }
 .bootstrap-select.btn-group .dropdown-menu li a:hover {
-	color: #07253F;
+	color: #f2676b;
 }
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
 	width: 100%;
