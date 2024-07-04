@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('state',255)->nullable();
             $table->string('country',255)->nullable();
             $table->string('pin_code',255)->nullable();
-            $table->string('latitude',255)->nullable();
-            $table->string('longitude',255)->nullable();
+            $table->decimal('latitude', 4, 2)->nullable();
+            $table->decimal('longitude', 4, 2)->nullable();
             $table->longText('description_details')->nullable();
             $table->string('mobile',255)->nullable();
             $table->string('email',255)->unique()->nullable();

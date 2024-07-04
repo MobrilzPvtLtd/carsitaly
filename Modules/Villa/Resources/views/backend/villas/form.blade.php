@@ -1,4 +1,6 @@
 <input type="hidden" value="villas" name="service_type">
+<input type="hidden" value="" id="latitude" name="latitude">
+<input type="hidden" value="" id="longitude" name="longitude">
 <div class="row">
     <h4>Villa Information</h4>
     <div class="col-12 col-sm-6 mb-3">
@@ -66,7 +68,7 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("search-box")->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -78,7 +80,7 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("city")->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -90,7 +92,7 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("state")->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-6 mb-3">
@@ -102,7 +104,7 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("country")->attributes(["$required"]) }}
         </div>
     </div>
     {{-- <div class="col-12 col-sm-3 mb-3">
@@ -489,3 +491,60 @@
 </div>
 
 <x-library.select2 />
+
+@section('script')
+<script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var autocomplete;
+        var id = 'search-box';
+
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+            types:['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                return;
+            }
+
+            var addressComponents = place.address_components;
+            var address = '';
+            var city = '';
+            var state = '';
+            var country = '';
+            var zipcode = '';
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+
+            for (var i = 0; i < addressComponents.length; i++) {
+                var component = addressComponents[i];
+                if (component.types.includes('street_number')) {
+                    address += component.long_name + ', ';
+                } else if (component.types.includes('route')) {
+                    address += component.long_name;
+                } else if (component.types.includes('locality')) {
+                    city = component.long_name;
+                } else if (component.types.includes('administrative_area_level_1')) {
+                    state = component.long_name;
+                } else if (component.types.includes('country')) {
+                    country = component.long_name;
+                } else if (component.types.includes('postal_code')) {
+                    zipcode = component.long_name;
+                }
+            }
+
+            $('#address').val(address);
+            $('#city').val(city);
+            $('#state').val(state);
+            $('#country').val(country);
+            $('#pin_code').val(zipcode);
+            $('#latitude').val(latitude);
+            $('#longitude').val(longitude);
+
+        });
+    });
+</script>
+@endsection

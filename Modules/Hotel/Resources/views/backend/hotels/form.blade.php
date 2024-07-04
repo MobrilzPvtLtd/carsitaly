@@ -1,4 +1,6 @@
 <input type="hidden" value="hotels" name="service_type">
+<input type="hidden" value="" id="latitude" name="latitude">
+<input type="hidden" value="" id="longitude" name="longitude">
 <div class="row">
     <h4>Hotel Information</h4>
     <div class="col-12 col-sm-6 mb-3">
@@ -14,18 +16,6 @@
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
-    {{-- <div class="col-12 col-sm-4">
-        <div class="form-group">
-            <?php
-            $field_name = 'slug';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = '';
-            ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-        </div>
-    </div> --}}
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
@@ -78,7 +68,7 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id('city')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -90,7 +80,7 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id('state')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -102,43 +92,20 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id('country')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'pin_code';
-            $field_lable = label_case($field_name);
+            $field_lable_name = 'zip_code';
+            $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-        </div>
-    </div>
-    <div class="col-12 col-sm-6 mb-3">
-        <div class="form-group">
-            <?php
-            $field_name = 'latitude';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
-            ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-        </div>
-    </div>
-    <div class="col-12 col-sm-6 mb-3">
-        <div class="form-group">
-            <?php
-            $field_name = 'longitude';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
-            ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->id('pin_code')->attributes(["$required"]) }}
         </div>
     </div>
 
@@ -183,7 +150,7 @@
             ];
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
+            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2') }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -203,7 +170,7 @@
             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2') }}
         </div>
     </div>
-    <div class="col-12 col-sm-4 mb-3">
+    {{-- <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'facilities';
@@ -218,9 +185,9 @@
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
             {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
-    </div>
+    </div> --}}
 
-    <h4>Pricing and Availability</h4>
+    <h4>Pricing</h4>
     <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
@@ -260,7 +227,7 @@
         </div>
     </div>
 
-    <h4>Reviews and Ratings</h4>
+    <h4>Ratings</h4>
     {{-- <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -355,6 +322,48 @@
 
         autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
             types:['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                return;
+            }
+
+            var addressComponents = place.address_components;
+            var address = '';
+            var city = '';
+            var state = '';
+            var country = '';
+            var zipcode = '';
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+
+            for (var i = 0; i < addressComponents.length; i++) {
+                var component = addressComponents[i];
+                if (component.types.includes('street_number')) {
+                    address += component.long_name + ', ';
+                } else if (component.types.includes('route')) {
+                    address += component.long_name;
+                } else if (component.types.includes('locality')) {
+                    city = component.long_name;
+                } else if (component.types.includes('administrative_area_level_1')) {
+                    state = component.long_name;
+                } else if (component.types.includes('country')) {
+                    country = component.long_name;
+                } else if (component.types.includes('postal_code')) {
+                    zipcode = component.long_name;
+                }
+            }
+
+            $('#address').val(address);
+            $('#city').val(city);
+            $('#state').val(state);
+            $('#country').val(country);
+            $('#pin_code').val(zipcode);
+            $('#latitude').val(latitude);
+            $('#longitude').val(longitude);
+
         });
     });
 </script>

@@ -70,10 +70,7 @@
                                 Country
                             </th>
                             <th>
-                                Latitude
-                            </th>
-                            <th>
-                                Longitude
+                                Zip Code
                             </th>
                             <th class="text-end">
                                 @lang("hotel::text.action")
@@ -150,12 +147,8 @@
                 name: 'country'
             },
             {
-                data: 'latitude',
-                name: 'latitude'
-            },
-            {
-                data: 'longitude',
-                name: 'longitude'
+                data: 'pin_code',
+                name: 'pin_code'
             },
             {
                 data: 'action',

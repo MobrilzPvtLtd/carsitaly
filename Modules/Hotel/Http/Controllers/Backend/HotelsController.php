@@ -130,7 +130,7 @@ class HotelsController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::where('service_type', 'hotels')->select('id', 'images', 'title', 'price','city','state', 'country', 'latitude','longitude');
+        $$module_name = $module_model::where('service_type', 'hotels')->select('id', 'images', 'title', 'price','city','state', 'country', 'pin_code');
 
         $data = $$module_name;
 
@@ -216,11 +216,27 @@ class HotelsController extends Controller
         // $modelData = $request->all();
 
         $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('hotel', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
+
+
         if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('hotel', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
+            // $request->validate([
+            //     'videos' => 'required|mimetypes:video/mp4,video/webm,video/ogg|max:204800',
+            // ]);
+
+            $fileNameWithExt = $request->file('videos')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('videos')->getClientOriginalExtension();
+            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('videos')->storeAs('public/videos',$fileNameToStore);
+            $modelData['videos'] = $fileNameToStore;
+            // dd($modelData['videos']);
         }
+
         $modelData = $request->except('images');
         $imagePaths = [];
 

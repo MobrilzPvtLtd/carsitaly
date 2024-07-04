@@ -5,7 +5,7 @@
         <div class="form-group">
             <?php
             $field_name = 'title';
-            $field_lable_name = 'transfer_name';
+            $field_lable_name = 'transfer_type';
             $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
             $required = "required";
@@ -110,7 +110,7 @@
         </div>
     </div>
 
-    <h4>Pricing and Availability</h4>
+    <h4>Pricing</h4>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -150,7 +150,7 @@
             {{ html()->file($field_image)->class('form-control')->multiple() }}
         </div>
     </div>
-    <h4>Reviews and Ratings</h4>
+    <h4>Ratings</h4>
     <div class="col-12 col-sm-3 mb-3">
         <div class="form-group">
             <?php

@@ -20,15 +20,5 @@
             placeholder: '-- Select an option --',
         });
     });
-    flatpickr("#start_date", {
-        mode: "multiple",
-        dateFormat: "Y-m-d",
-        minDate: "today"
-    });
-    flatpickr("#end_date", {
-        mode: "multiple",
-        dateFormat: "Y-m-d",
-        minDate: "today"
-    });
 </script>
 @endpush

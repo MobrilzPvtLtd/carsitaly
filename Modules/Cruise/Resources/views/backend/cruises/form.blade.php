@@ -64,6 +64,32 @@
     </div> --}}
 
     <h4>Itinerary and Destinations</h4>
+    <div class="col-12 col-sm-6 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'start_date';
+            $field_lable_name = 'start_date and time';
+            $field_label = label_case($field_lable_name);
+            $field_placeholder = $field_label;
+            $required = '';
+            ?>
+            {{ html()->label($field_label, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'end_date';
+            $field_lable_name = 'end_date and time';
+            $field_label = label_case($field_lable_name);
+            $field_placeholder = $field_label;
+            $required = '';
+            ?>
+            {{ html()->label($field_label, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+        </div>
+    </div>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -379,7 +405,7 @@
         </div>
     </div>
 
-    <h4>Reviews and Ratings</h4>
+    <h4>Ratings</h4>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -459,30 +485,6 @@
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'start_date';
-            $field_label = label_case($field_name);
-            $field_placeholder = $field_label;
-            $required = '';
-            ?>
-            {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-        </div>
-    </div>
-    <div class="col-12 col-sm-4 mb-3">
-        <div class="form-group">
-            <?php
-            $field_name = 'end_date';
-            $field_label = label_case($field_name);
-            $field_placeholder = $field_label;
-            $required = '';
-            ?>
-            {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-        </div>
-    </div>
-    <div class="col-12 col-sm-4 mb-3">
-        <div class="form-group">
-            <?php
             $field_name = 'status';
             $field_lable = label_case($field_name);
             $field_placeholder = "-- Select an option --";
@@ -501,7 +503,7 @@
 
 <x-library.select2 />
 
-{{-- @section('script')
+@section('script')
 <script>
     flatpickr("#start_date", {
         mode: "multiple",
@@ -514,4 +516,4 @@
         minDate: "today"
     });
 </script>
-@endsection --}}
+@endsection
