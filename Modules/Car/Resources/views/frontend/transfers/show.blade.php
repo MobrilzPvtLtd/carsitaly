@@ -266,42 +266,6 @@
                                 </a>
                             </div>
                         @endforeach
-                        {{-- <div class="similar-hotel-box">
-                            <a href="#">
-                                <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
-                                    <img src="assets/images/tour1.jpg" alt="Cruise">
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <h5>HONDA AMAZE</h5>
-                                    <h5><i class="fa fa-certificate"></i> HONDA</h5>
-                                    <span>$100/Day</span>
-                                </div>
-                            </a>
-                        </div> --}}
-                        {{-- <div class="similar-hotel-box">
-                            <a href="#">
-                                <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
-                                    <img src="assets/images/tour1.jpg" alt="Cruise">
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <h5>C-CLASS</h5>
-                                    <h5><i class="fa fa-certificate"></i> MERCEDES</h5>
-                                    <span>$50/Day</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="similar-hotel-box">
-                            <a href="#">
-                                <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
-                                    <img src="assets/images/tour1.jpg" alt="Cruise">
-                                </div>
-                                <div class="col-md-7 col-sm-7 col-xs-7">
-                                    <h5>AUDI R8</h5>
-                                    <h5><i class="fa fa-certificate"></i> AUDI</h5>
-                                    <span>$90/Day</span>
-                                </div>
-                            </a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -317,38 +281,35 @@
                                     <input type="hidden" value="hotel" name="booking_type">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Mode of travel</label>
-                                        <select class="selectpicker bs-select-hidden" name="travel" id="travel">
-                                            <option value="1">By flight</option>
-                                            <option value="2">By train</option>
-                                            <option value=3>By bus</option>
+                                        <select class="selectpicker" name="travel" id="travel">
+                                            <option value="flight">By flight</option>
+                                            <option value="train">By train</option>
+                                            <option value="bus">By bus</option>
                                         </select>
                                     </div>
                                     {{-- by flight --}}
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
-                                                placeholder="e.g I.G.I Airport" required>
+                                            <input type="text" id="arrival-location" name="start_date" class="form-control" placeholder="e.g I.G.I Airport" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Treminal</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
-                                                placeholder="e.g Treminal 2" required>
+                                            <input type="text" id="terminal" name="start_date" class="form-control" placeholder="e.g Treminal 2" required>
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Flight number</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
-                                                placeholder="e.g IX 807" required>
+                                            <input type="text" id="flight-number" name="start_date" class="form-control" placeholder="e.g IX 807" required>
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
                                             <input type="text" id="" name="start_date" class="form-control"
@@ -357,10 +318,8 @@
                                         </div>
                                     </div>
 
-
-
                                     {{-- by Train --}}
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
                                             <input type="text" id="" name="start_date" class="form-control"
@@ -368,7 +327,7 @@
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Platform</label>
                                         <div class="input-group margin-bottom-sm">
                                             <input type="text" id="" name="start_date" class="form-control"
@@ -376,7 +335,7 @@
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Train number </label>
                                         <div class="input-group margin-bottom-sm">
                                             <input type="text" id="" name="start_date" class="form-control"
@@ -384,7 +343,7 @@
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
                                             <input type="text" id="" name="start_date" class="form-control"
@@ -394,15 +353,14 @@
                                     </div>
 
                                     {{-- by Bus --}}
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
-                                                placeholder="e.g Bus stop name" required>
+                                            <input type="text" id="" name="start_date" class="form-control" placeholder="e.g Bus stop name" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Bus number</label>
                                         <div class="input-group margin-bottom-sm">
                                             <input type="text" id="" name="start_date" class="form-control"
@@ -410,15 +368,13 @@
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
-                                                placeholder="e.g Hotel" required>
+                                            <input type="text" id="" name="start_date" class="form-control" placeholder="e.g Hotel" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
-
 
                                     <div class="clearfix"></div>
                                     {{-- <div class="room-price">
@@ -514,8 +470,20 @@
     <!-- END: ROOM GALLERY -->
 
 @endsection
-<script>
-    $("#travel").click(function(){
-        alert();
-    })
+@push('after-scripts')
+<script type="module">
+    $(document).ready(function() {
+        var travelVal = $("#travel").val();
+        $('.section').hide();
+        $('.' + travelVal).show();
+        // console.log(travelVal);
+
+        $("#travel").change(function() {
+            var value = $(this).val();
+            console.log(value);
+            $('.section').hide();
+            $('.' + value).show();
+        });
+    });
 </script>
+@endpush
