@@ -142,12 +142,11 @@
         <div class="form-group">
             <?php
             $field_name = 'vedios';
-            $field_image = 'vedios[]';
             $field_label = label_case($field_name);
             $field_placeholder = $field_label;
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }}
-            {{ html()->file($field_image)->class('form-control')->multiple() }}
+            {{ html()->file($field_name)->class('form-control')->multiple() }}
         </div>
     </div>
     <h4>Ratings</h4>

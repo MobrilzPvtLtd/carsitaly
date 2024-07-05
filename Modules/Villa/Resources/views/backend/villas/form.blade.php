@@ -212,17 +212,32 @@
         <div class="form-group">
             <?php
             $field_name = 'floor_plan';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
+            $field_label = label_case($field_name);
+            $field_placeholder = $field_name;
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_name, $field_name)->class('form-label') }}
+            {{ html()->file($field_name)->class('form-control')->multiple() }}
         </div>
     </div>
 
     <h4>Amenities</h4>
-    <div class="col-12 col-sm-4 mb-3">
+    <div class="col-12 col-sm-6 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'amenities';
+            $field_lable = label_case($field_name);
+            // $field_placeholder = "-- Select options --";
+            $select_options = [
+                'air conditioning'=>'air conditioning',
+                'Wi-Fi'=>'Wi-Fi',
+                'child seats'=>'child seats',
+            ];
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label') }}
+            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
+        </div>
+    </div>
+    {{-- <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'kitchen';
@@ -329,9 +344,9 @@
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
-    </div>
+    </div> --}}
 
-    <h4>Pricing and Availability</h4>
+    <h4>Pricing</h4>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -371,7 +386,7 @@
         </div>
     </div>
 
-    <h4>Reviews and Ratings</h4>
+    <h4>Ratings</h4>
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php

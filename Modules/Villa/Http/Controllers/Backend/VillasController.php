@@ -214,12 +214,20 @@ class VillasController extends Controller
 
         $module_action = 'Store';
 
+        $floor_plan = null;
+        if ($request->hasFile('floor_plan')) {
+            $floor_plan = $request->file('floor_plan')->store('villas', 'public');
+            $modelData = $request->except('floor_plan');
+            $modelData['floor_plan'] = $floor_plan;
+        }
+
         $imagePath = null;
         if ($request->hasFile('videos')) {
             $imagePath = $request->file('videos')->store('villas', 'public');
             $modelData = $request->except('videos');
             $modelData['videos'] = $imagePath;
         }
+
         $modelData = $request->except('images');
         $imagePaths = [];
 
