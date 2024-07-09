@@ -12,7 +12,63 @@
 @endsection
 
 @section('content')
-    <div class="card">
+    {{-- <div class="card">
+        <div class="card-body">
+            <h4>Categories Create</h4>
+            <hr>
+            <div class="row mt-4">
+                <div class="col">
+                    {{ html()->form('POST', route("backend.$module_name.store"))->class('form')->acceptsFiles()->open() }}
+
+                    <div class="row mb-3">
+                        <div class="col-6 col-sm-4">
+                            <div class="form-group">
+                                <?php
+                                $field_name = 'name';
+                                $field_lable = label_case($field_name);
+                                $field_placeholder = $field_lable;
+                                $required = 'required';
+                                ?>
+                                {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+                                {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <div class="form-group">
+                                <?php
+                                $field_name = 'status';
+                                $field_lable = label_case($field_name);
+                                $field_placeholder = '-- Select an option --';
+                                $required = 'required';
+                                $select_options = [
+                                    '1' => 'Active',
+                                    '0' => 'Inactive',
+                                    '2' => 'Draft',
+                                ];
+                                ?>
+                                {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
+                                {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-select')->attributes(["$required"]) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <x-backend.buttons.create>Create</x-backend.buttons.create>
+                        </div>
+                        <div class="col-6">
+                            <div class="float-end">
+                                <x-backend.buttons.cancel />
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ html()->form()->close() }}
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    <div class="card mt-3">
         <div class="card-body">
 
             <x-backend.section-header>
@@ -59,7 +115,7 @@
                                         @lang('category::text.name')
                                     </th>
                                     <th>
-                                        @lang('category::text.updated_at')
+                                        @lang('category::text.status')
                                     </th>
                                     <th class="text-end">
                                         @lang('category::text.action')
@@ -113,8 +169,8 @@
                     name: 'name'
                 },
                 {
-                    data: 'updated_at',
-                    name: 'updated_at'
+                    data: 'status',
+                    name: 'status'
                 },
                 {
                     data: 'action',

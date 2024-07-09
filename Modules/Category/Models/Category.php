@@ -26,18 +26,18 @@ class Category extends BaseModel
     /**
      * Caegories has Many posts.
      */
-    public function posts()
-    {
-        return $this->hasMany('Modules\Post\Models\Post');
-    }
+    // public function posts()
+    // {
+    //     return $this->hasMany('Modules\Post\Models\Post');
+    // }
 
     /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    protected static function newFactory()
-    {
-        return \Modules\Category\database\factories\CategoryFactory::new();
-    }
+    // protected static function newFactory()
+    // {
+    //     return \Modules\Category\database\factories\CategoryFactory::new();
+    // }
 }

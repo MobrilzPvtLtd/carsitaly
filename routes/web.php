@@ -81,6 +81,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
      */
     Route::get('/', 'BackendController@index')->name('home');
     Route::get('dashboard', 'BackendController@index')->name('dashboard');
+    Route::get('category-amenities', 'BackendController@categoryAmenities')->name('categoryAmenities');
     Route::get('contact-message', 'BackendController@contactMessage')->name('contact-message');
     Route::get('bookings', 'BackendController@bookings')->name('bookings');
     Route::get('flight-enquiry', 'BackendController@flightEnquiry')->name('flight-enquiry');

@@ -134,7 +134,7 @@
 
     <script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function(){
             var autocomplete;
             var id = 'leaving_from';
@@ -151,7 +151,52 @@
                 types:['geocode'],
             });
         });
+        $(document).ready(function(){
+            var autocomplete;
+            var id = 'destination-city';
+
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+                types:['geocode'],
+            });
+        });
+        $(document).ready(function(){
+            var autocomplete;
+            var id = 'pack-departure-city';
+
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+                types:['geocode'],
+            });
+        });
+        $(document).ready(function(){
+            var autocomplete;
+            var id = 'pack-destination-city';
+
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+                types:['geocode'],
+            });
+        });
+    </script> --}}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var autocompleteOptions = {
+                types: ['geocode']
+            };
+
+            var autocompleteLeavingFrom = new google.maps.places.Autocomplete(document.getElementById('leaving_from'), autocompleteOptions);
+            var autocompleteLeavingTo = new google.maps.places.Autocomplete(document.getElementById('leaving_to'), autocompleteOptions);
+            var autocompleteDestinationCity = new google.maps.places.Autocomplete(document.getElementById('hotelLocation'), autocompleteOptions);
+            var autocompletePackDepartureCity = new google.maps.places.Autocomplete(document.getElementById('tourFromLocation'), autocompleteOptions);
+            var autocompletePackDestinationCity = new google.maps.places.Autocomplete(document.getElementById('tourToLocation'), autocompleteOptions);
+            var autocompletePackDestinationCity = new google.maps.places.Autocomplete(document.getElementById('transfersPickLocation'), autocompleteOptions);
+            var autocompletePackDestinationCity = new google.maps.places.Autocomplete(document.getElementById('transfersDropLocation'), autocompleteOptions);
+            var autocompletePackDestinationCity = new google.maps.places.Autocomplete(document.getElementById('carrentalPickLocation'), autocompleteOptions);
+            var autocompletePackDestinationCity = new google.maps.places.Autocomplete(document.getElementById('carrentalDropLocation'), autocompleteOptions);
+            var autocompletePackDestinationCity = new google.maps.places.Autocomplete(document.getElementById('cruisesFromLocation'), autocompleteOptions);
+            var autocompletePackDestinationCity = new google.maps.places.Autocomplete(document.getElementById('cruisesToLocation'), autocompleteOptions);
+        });
     </script>
+
     </body>
 
 </html>

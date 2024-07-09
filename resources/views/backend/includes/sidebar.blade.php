@@ -53,6 +53,14 @@ $total_enquiries = $total_flight + $total_contact + $total_bookings;
         @endcan --}}
 
         @can('view_services')
+            @can('view_hotels')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('backend.categoryAmenities') }}">
+                        <i class="nav-icon fa-solid fa-binoculars"></i>&nbsp;Category/Amenities
+                    </a>
+                </li>
+            @endcan
+
             <li class="nav-group" aria-expanded="true">
                 <a class="nav-link nav-group-toggle" href="#">
                     <i class="nav-icon fa-solid fa-wrench"></i>&nbsp;@lang('Services')

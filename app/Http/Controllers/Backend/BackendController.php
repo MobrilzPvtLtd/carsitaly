@@ -31,6 +31,10 @@ class BackendController extends Controller
         $booking = Booking::count();
         return view('backend.index',compact('flight','contact','cars','hotels','tours','cruises','villas','users','booking'));
     }
+    public function categoryAmenities()
+    {
+        return view('backend.category-amenities');
+    }
 
     public function contactMessage()
     {

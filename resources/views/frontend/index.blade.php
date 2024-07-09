@@ -169,8 +169,7 @@
                                         <div class="col-md-12 col-sm-12 search-col-padding">
                                             <label>I Want To Go</label>
                                             <div class="input-group">
-                                                <input type="text" name="destination-city" class="form-control"
-                                                    required placeholder="E.g. New York">
+                                                <input type="text" name="destination-city" class="form-control" required placeholder="E.g. New York" id="hotelLocation">
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
@@ -255,17 +254,14 @@
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>From</label>
                                             <div class="input-group">
-                                                <input type="text" name="pack-departure-city" class="form-control"
-                                                    required placeholder="E.g. New York">
-                                                <span class="input-group-addon"><i
-                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                                <input type="text" name="pack-departure-city" class="form-control" required placeholder="E.g. New York" id="tourFromLocation">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>I Want To Go</label>
                                             <div class="input-group">
-                                                <input type="text" name="pack-destination-city" class="form-control"
-                                                    required placeholder="E.g. New York">
+                                                <input type="text" name="pack-destination-city" class="form-control" required placeholder="E.g. New York" id="tourToLocation">
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
@@ -336,18 +332,15 @@
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Pick Up Location</label>
                                             <div class="input-group">
-                                                <input type="text" name="city" class="form-control" required placeholder="E.g. New York">
-                                                <span class="input-group-addon"><i
-                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                                <input type="text" name="city" class="form-control" required placeholder="E.g. New York" id="transfersPickLocation">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Drop Off Location</label>
                                             <div class="input-group">
-                                                <input type="text" name="destination-city" class="form-control"
-                                                    required placeholder="E.g. New York">
-                                                <span class="input-group-addon"><i
-                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                                <input type="text" name="destination-city" class="form-control" required placeholder="E.g. New York" id="transfersDropLocation">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -409,23 +402,20 @@
                             <!-- START: CAR SEARCH -->
                             <div role="tabpanel" class="tab-pane" id="taxi">
                                 <div class="col-md-12">
-                                    <form action="{{ route('frontend.transfers.index') }}" method="GET">
+                                    <form action="{{ route('frontend.carrentals.index') }}" method="GET">
                                         <div class="col-md-12 product-search-title">Search Perfect Car</div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Pick Up Location</label>
                                             <div class="input-group">
-                                                <input type="text" name="city" class="form-control" required placeholder="E.g. New York">
-                                                <span class="input-group-addon"><i
-                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                                <input type="text" name="carrentalPickLocation" class="form-control" required placeholder="E.g. New York" id="carrentalPickLocation">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>Drop Off Location</label>
                                             <div class="input-group">
-                                                <input type="text" name="destination-city" class="form-control"
-                                                    required placeholder="E.g. New York">
-                                                <span class="input-group-addon"><i
-                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                                <input type="text" name="destination-city" class="form-control" required placeholder="E.g. New York" id="carrentalDropLocation">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -492,17 +482,14 @@
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>From</label>
                                             <div class="input-group">
-                                                <input type="text" name="pack-departure-city" class="form-control"
-                                                    required placeholder="E.g. New York">
-                                                <span class="input-group-addon"><i
-                                                        class="fa fa-map-marker fa-fw"></i></span>
+                                                <input type="text" name="pack-departure-city" class="form-control" required placeholder="E.g. New York" id="cruisesFromLocation">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 search-col-padding">
                                             <label>I Want To Go</label>
                                             <div class="input-group">
-                                                <input type="text" name="pack-destination-city" class="form-control"
-                                                    required placeholder="E.g. New York">
+                                                <input type="text" name="pack-destination-city" class="form-control" required placeholder="E.g. New York" id="cruisesToLocation">
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-map-marker fa-fw"></i></span>
                                             </div>

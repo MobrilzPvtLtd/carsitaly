@@ -18,16 +18,16 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->text('description')->nullable();
+            // $table->text('description')->nullable();
 
-            $table->string('group_name')->nullable();
-            $table->string('image')->nullable();
+            // $table->string('group_name')->nullable();
+            // $table->string('image')->nullable();
 
-            $table->string('meta_title')->nullable();
-            $table->text('meta_description')->nullable();
-            $table->text('meta_keyword')->nullable();
+            // $table->string('meta_title')->nullable();
+            // $table->text('meta_description')->nullable();
+            // $table->text('meta_keyword')->nullable();
 
-            $table->integer('order')->nullable();
+            // $table->integer('order')->nullable();
             $table->string('status')->default('Active');
 
             $table->integer('created_by')->unsigned()->nullable();
