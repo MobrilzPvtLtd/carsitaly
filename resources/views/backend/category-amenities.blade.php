@@ -17,7 +17,7 @@
         <div class="col-xl-3 col-md-6">
             <div class="card radius-10 p-2">
                 <div class="card-body">
-                    <a href="{{ route('backend.categories.index') }}">
+                    <a href="{{ route('backend.amenities.index') }}">
                         <h5 class="text-muted text-center">Amenities/Features</h5>
                     </a>
                 </div>

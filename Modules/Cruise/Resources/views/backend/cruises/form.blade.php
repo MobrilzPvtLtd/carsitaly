@@ -227,29 +227,24 @@
     </div>
 
     <h4>Onboard Services and Amenities</h4>
-    <div class="col-12 col-sm-6 mb-3">
+    <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'included';
             $field_lable_name = 'included_services';
             $field_lable = label_case($field_lable_name);
-            $select_options = [
-                'meals'=>'meals',
-                'entertainment'=>'entertainment',
-                'excursions'=>'excursions',
-            ];
+            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name', 'id')->toArray();
             ?>
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }}
-            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
+            {{ html()->select($field_name, $amenities)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-6 mb-3">
+    {{-- <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'optional';
             $field_lable_name = 'optional_services';
             $field_lable = label_case($field_lable_name);
-            // $field_placeholder = "-- Select options --";
             $select_options = [
                 'spa treatments'=>'spa treatments',
                 'specialty dining'=>'specialty dining',
@@ -258,8 +253,8 @@
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }}
             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
-    </div>
-    <div class="col-12 col-sm-6 mb-3">
+    </div> --}}
+    <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'entertainment';
@@ -275,7 +270,7 @@
             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-6 mb-3">
+    <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'dining';

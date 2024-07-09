@@ -27,7 +27,7 @@
         </div>
     </div>
     <h4>Location Details</h4>
-    <div class="col-12 col-sm-3 mb-3">
+    <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'starting_point';
@@ -36,10 +36,10 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("starting_point")->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-3 mb-3">
+    <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'ending_point';
@@ -48,10 +48,10 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("ending_point")->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-3 mb-3">
+    <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'destinations';
@@ -73,7 +73,7 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("country")->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-3 mb-3">
@@ -252,6 +252,9 @@
 
 <x-library.select2 />
 
+@section('script')
+<script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
 <script>
     flatpickr("#start_date", {
         // mode: "multiple",
@@ -264,3 +267,17 @@
         minDate: "today"
     });
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var autocompleteOptions = {
+            types: ['geocode']
+        };
+
+        var autocompleteStarting_point = new google.maps.places.Autocomplete(document.getElementById('starting_point'), autocompleteOptions);
+        var autocompleteEnding_point = new google.maps.places.Autocomplete(document.getElementById('ending_point'), autocompleteOptions);
+
+    });
+</script>
+
+@endsection

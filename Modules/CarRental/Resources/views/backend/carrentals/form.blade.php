@@ -99,14 +99,10 @@
             $field_name = 'vehicle_features';
             $field_lable = label_case($field_name);
             // $field_placeholder = "-- Select options --";
-            $select_options = [
-                'air conditioning'=>'air conditioning',
-                'Wi-Fi'=>'Wi-Fi',
-                'child seats'=>'child seats',
-            ];
+            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name', 'id')->toArray();
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
+            {{ html()->select($field_name.'[]', $amenities)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
     </div>
 

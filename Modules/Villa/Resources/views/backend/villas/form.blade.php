@@ -23,14 +23,10 @@
             $field_lable = label_case($field_name);
             $field_placeholder = "-- Select an option --";
             $required = "required";
-            $select_options = [
-                'luxury'=>'Luxury',
-                'budget'=>'Budget',
-                'boutique'=>'Boutique'
-            ];
+            $amenities = \Modules\Category\Models\Category::where('status',1)->pluck('name', 'id')->toArray();
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
+            {{ html()->select($field_name, $amenities)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-12 mb-3">
@@ -227,14 +223,10 @@
             $field_name = 'amenities';
             $field_lable = label_case($field_name);
             // $field_placeholder = "-- Select options --";
-            $select_options = [
-                'air conditioning'=>'air conditioning',
-                'Wi-Fi'=>'Wi-Fi',
-                'child seats'=>'child seats',
-            ];
+            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name', 'id')->toArray();
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name.'[]', $select_options)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
+            {{ html()->select($field_name.'[]', $amenities)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
     </div>
     {{-- <div class="col-12 col-sm-4 mb-3">
