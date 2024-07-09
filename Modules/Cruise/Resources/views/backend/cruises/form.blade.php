@@ -233,7 +233,7 @@
             $field_name = 'included';
             $field_lable_name = 'included_services';
             $field_lable = label_case($field_lable_name);
-            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name', 'id')->toArray();
+            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name','name')->toArray();
             ?>
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }}
             {{ html()->select($field_name, $amenities)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}

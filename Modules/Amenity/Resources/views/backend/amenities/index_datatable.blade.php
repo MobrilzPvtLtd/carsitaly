@@ -55,6 +55,9 @@
                                 @lang("amenity::text.name")
                             </th>
                             <th>
+                                Icon
+                            </th>
+                            <th>
                                 @lang("amenity::text.status")
                             </th>
                             <th class="text-end">
@@ -106,6 +109,10 @@
             {
                 data: 'name',
                 name: 'name'
+            },
+            {
+                data: 'icon',
+                name: 'icon'
             },
             {
                 data: 'status',

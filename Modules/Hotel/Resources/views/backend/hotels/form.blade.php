@@ -138,12 +138,10 @@
             <?php
             $field_name = 'amenities';
             $field_lable = label_case($field_name);
-            $field_placeholder = "-- Select an option --";
-
-            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name', 'id')->toArray();
+            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name','name')->toArray();
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }}
-            {{ html()->select($field_name, $amenities)->placeholder($field_placeholder)->class('form-control select2') }}
+            {{ html()->select($field_name.'[]', $amenities)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">

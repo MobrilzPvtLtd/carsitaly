@@ -126,8 +126,21 @@
                         <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                     </div>
                 </div>
+                @if($serviceType != 'tours')
+                    <div class="location-filter filter">
+                        <h5><i class="fa fa-map-marker"></i> Location</h5>
+                        <ul>
+                            @foreach ($uniqueLocation as $location)
+                                <li>
+                                    <input type="checkbox" wire:model.live="filterLocation.{{ $location }}" value="{{ $location }}">
+                                    {{ $location }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                    @if($serviceType == 'hotels')
+                @if($serviceType == 'hotels')
                     <div class="star-filter filter">
                         <h5><i class="fa fa-bed"></i> Room Types</h5>
                         <ul>
@@ -136,132 +149,44 @@
                                 <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> suite</li>
                         </ul>
                     </div>
-                    <div class="location-filter filter">
-                        <h5><i class="fa fa-map-marker"></i> Location</h5>
-                        <ul>
-                            @foreach ($uniqueLocation as $location)
-                                <li>
-                                    <input type="checkbox" wire:model.live="filterLocation.{{ $location }}" value="{{ $location }}">
-                                    {{ $location }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="facilities-filter filter">
-                        <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
-                        <ul>
-                            <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                            <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                            <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                            <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                        </ul>
-                    </div>
-                    <div class="facilities-filter filter">
+                @endif
 
-                        <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Inclusion</h5>
-                        <ul>
-                            <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                            <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                            <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                            <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                        </ul>
-
-                    </div>
-                    @else
-                        {{-- <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
-                        <ul>
-                            <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                            <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                            <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                            <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                        </ul> --}}
-                    @endif
-
-
-                    @if($serviceType == 'villas')
+                @if($serviceType == 'villas')
                     <div class="star-filter filter">
                         <h5><i class="fa fa-bed"></i> Bedrooms</h5>
                         <ul>
-                            <li><input type="checkbox" wire:model.live="single"> <i class=""></i> 4 Bedrooms</li>
-                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> 5 Bedrooms</li>
-                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> 6 Bedrooms</li>
-                        </ul>
-                    </div>
-                    <div class="star-filter filter">
-                        <h5><i class="fa fa-bed"></i> Bathrooms</h5>
-                        <ul>
-                            <li><input type="checkbox" wire:model.live="single"> <i class=""></i> 4 Bathrooms</li>
-                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> 5 Bathrooms</li>
-                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> 6 Bathrooms</li>
+                            @foreach (App\Models\Service::where('service_type', 'villas')->get() as $bedrooms)
+                                <li>
+                                    <input type="checkbox" wire:model.live="filterLocation.{{ $bedrooms }}" value="{{ $bedrooms->number_of_bedrooms }}">
+                                    {{ $bedrooms->number_of_bedrooms }} Bedrooms
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="star-filter filter">
                         <h5><i class="fa fa-bed"></i> Maximum Occupancy</h5>
                         <ul>
-                            <li><input type="checkbox" wire:model.live="single"> <i class=""></i> 4 People</li>
-                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> 5  People</li>
-                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> 6  People</li>
-                        </ul>
-                    </div>
-
-                    <div class="location-filter filter">
-                        <h5><i class="fa fa-map-marker"></i> Location</h5>
-                        <ul>
-                            @foreach ($uniqueLocation as $location)
+                            @foreach (App\Models\Service::where('service_type', 'villas')->get() as $bedrooms)
                                 <li>
-                                    <input type="checkbox" wire:model.live="filterLocation.{{ $location }}" value="{{ $location }}">
-                                    {{ $location }}
+                                    <input type="checkbox" wire:model.live="filterLocation.{{ $bedrooms }}" value="{{ $bedrooms->maximum_occupancy }}">
+                                    {{ $bedrooms->maximum_occupancy }} People
                                 </li>
                             @endforeach
                         </ul>
                     </div>
-                    <div class="facilities-filter filter">
-                        <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
-                        <ul>
-                            <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                            <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                            <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                            <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                        </ul>
-                    </div>
-                    {{-- <div class="facilities-filter filter">
-                        <h5><i class="fa fa-list"></i> Inclusion</h5>
-                        <ul>
-                            <li><input type="checkbox" wire:model.live="flight"> <i class="fa fa-plane"></i> Flight</li>
-                            <li><input type="checkbox" wire:model.live="car"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" wire:model.live="sightseeing"> <i class="fa fa-eye"></i> Sightseeing</li>
-                            <li><input type="checkbox" wire:model.live="meals"> <i class="fa fa-cutlery"></i> Meals</li>
-                            <li><input type="checkbox" wire:model.live="drinks"> <i class="fa fa-glass"></i> Drinks</li>
-                        </ul>
+                @endif
 
-                    </div> --}}
-                    @else
-                        {{-- <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
-                        <ul>
-                            <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                            <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                            <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                            <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                        </ul> --}}
-                    @endif
-
-
-
-
-
-                    @if($serviceType == 'tours')
+                @if($serviceType == 'tours')
                     <div class="star-filter filter">
                         <h5><i class="fa fa-bed"></i>  Total Duration of the tour
                         </h5>
                         <ul>
-                            <li><input type="checkbox" wire:model.live="single"> <i class=""></i> 4 Hours</li>
-                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> 5 Hours</li>
-                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> 6 Hours</li>
+                            @foreach (App\Models\Service::where('service_type', 'tours')->get() as $duration)
+                                <li>
+                                    <input type="checkbox" wire:model.live="filterLocation.{{ $duration }}" value="{{ $duration->duration }}">
+                                    {{ $duration->duration }} Hours
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="star-filter filter">
@@ -272,49 +197,18 @@
                                 <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> 6:00</li>
                         </ul>
                     </div>
-
-                    <div class="location-filter filter">
-                        <h5><i class="fa fa-map-marker"></i> Location</h5>
-                        <ul>
-                            @foreach ($uniqueLocation as $location)
-                                <li>
-                                    <input type="checkbox" wire:model.live="filterLocation.{{ $location }}" value="{{ $location }}">
-                                    {{ $location }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="facilities-filter filter">
-                        <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
-                        <ul>
-                            <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                            <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                            <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                            <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                        </ul>
-                    </div>
-                    {{-- <div class="facilities-filter filter">
-                        <h5><i class="fa fa-list"></i> Inclusion</h5>
-                        <ul>
-                            <li><input type="checkbox" wire:model.live="flight"> <i class="fa fa-plane"></i> Flight</li>
-                            <li><input type="checkbox" wire:model.live="car"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" wire:model.live="sightseeing"> <i class="fa fa-eye"></i> Sightseeing</li>
-                            <li><input type="checkbox" wire:model.live="meals"> <i class="fa fa-cutlery"></i> Meals</li>
-                            <li><input type="checkbox" wire:model.live="drinks"> <i class="fa fa-glass"></i> Drinks</li>
-                        </ul>
-
-                    </div> --}}
-                    @else
-                        {{-- <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
-                        <ul>
-                            <li><input type="checkbox" name="wifi" wire:model.live="wifi" value="wifi"> <i class="fa fa-wifi"></i> Wifi</li>
-                            <li><input type="checkbox" name="bed" wire:model.live="bed" value="bed"> <i class="fa fa-bed"></i> Bedroom</li>
-                            <li><input type="checkbox" name="taxi" wire:model.live="taxi" value="taxi"> <i class="fa fa-taxi"></i> Transportation</li>
-                            <li><input type="checkbox" name="beer" wire:model.live="beer" value="beer"> <i class="fa fa-beer"></i> Bar</li>
-                            <li><input type="checkbox" name="cutlery" wire:model.live="cutlery" value="cutlery"> <i class="fa fa-cutlery"></i> Restaurant</li>
-                        </ul> --}}
-                    @endif
+                @endif
+                <div class="facilities-filter filter">
+                    <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
+                    <ul>
+                        @foreach (Modules\Amenity\Models\Amenity::get() as $amenity)
+                            <li>
+                                <input type="checkbox" wire:model.live="filterLocation.{{ $amenity }}" value="{{ $amenity->name }}"><img src="{{ asset('public/storage/' . $amenity->icon) }}" alt="hotel" width="18px" style="filter: invert(1);"> &nbsp;
+                                {{ $amenity->name }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -420,17 +314,19 @@
                                                 </div>
                                             @else
                                                 <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-bed"></i>Room Types</p>
+                                                    <p><i class="fa fa-bed"></i>{{ $ser->room_types }}</p>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-map-marker"></i> Location</p>
+                                                    <p><i class="fa fa-map-marker"></i> {{ $ser->city }}</p>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-list"></i>Amenities</p>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
+                                                    @foreach (json_decode($ser->amenities) as $amenities)
+                                                        <p><i class="fa fa-list"></i>{{ $amenities }}</p>
+                                                    @endforeach
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                {{-- <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
                                                     <p><i class="fa fa-list"></i> Inclusion</p>
-                                                </div>
+                                                </div> --}}
                                             @endif
                                         </div>
                                         <div class="hotel-facility">

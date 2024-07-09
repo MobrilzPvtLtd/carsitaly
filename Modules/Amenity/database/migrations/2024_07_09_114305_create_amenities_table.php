@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('slug')->nullable();
+            $table->string('icon',255)->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
 

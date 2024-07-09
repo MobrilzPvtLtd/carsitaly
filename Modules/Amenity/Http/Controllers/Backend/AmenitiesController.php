@@ -125,7 +125,7 @@ class AmenitiesController extends Controller
 
         $page_heading = label_case($module_title);
 
-        $$module_name = $module_model::select('id', 'name','status');
+        $$module_name = $module_model::select('id', 'name','icon','status');
 
         $data = $$module_name;
 
@@ -135,20 +135,17 @@ class AmenitiesController extends Controller
 
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
-            // ->editColumn('images', function ($data) {
-            //     if ($data->images) {
-            //         $images = json_decode($data->images);
-            //         $html = '<a href="' . route('backend.transfers.show', $data->id) . '">';
+            ->editColumn('icon', function ($data) {
+                if ($data->icon) {
+                    $html = '<a href="' . route('backend.transfers.show', $data->id) . '">';
 
-            //         if ($images && count($images) > 0) {
-            //             // foreach ($images as $image) {
-            //                 $html .= '<img src="' . asset('public/storage/' . $images[0]) . '" alt="cruise" width="100px">';
-            //             // }
-            //         }
-            //         $html .= '</a>';
-            //         return $html;
-            //     }
-            // })
+                    if ($data->icon) {
+                        $html .= '<img src="' . asset('public/storage/' . $data->icon) . '" alt="cruise" width="100px">';
+                    }
+                    $html .= '</a>';
+                    return $html;
+                }
+            })
             ->editColumn('status', function ($data) {
                 if ($data->status == 1){
                     return '<span class="badge text-bg-success">Active</span>';
@@ -156,7 +153,7 @@ class AmenitiesController extends Controller
                     return '<span class="badge text-bg-warning">Inactive</span>';
                 }
             })
-            ->rawColumns(['status', 'action'])
+            ->rawColumns(['status','icon', 'action'])
             ->orderColumns(['id'], '-:column $1')
             ->make(true);
     }
@@ -205,6 +202,13 @@ class AmenitiesController extends Controller
         $module_action = 'Store';
 
         $modelData = $request->all();
+
+        $iconPath = null;
+        if ($request->hasFile('icon')) {
+            $iconPath = $request->file('icon')->store('amenity', 'public');
+            $modelData = $request->except('icon');
+            $modelData['icon'] = $iconPath;
+        }
 
         $$module_name_singular = $module_model::create($modelData);
 
@@ -294,9 +298,20 @@ class AmenitiesController extends Controller
 
         $$module_name_singular = $module_model::findOrFail($id);
 
-        $oldImagePath = $$module_name_singular->image;
+        $oldIconPath = $$module_name_singular->icon;
 
         $modelData = $request->all();
+
+        $iconPath = null;
+        if ($request->hasFile('icon')) {
+            $iconPath = $request->file('icon')->store('amenity', 'public');
+            $modelData = $request->except('icon');
+            $modelData['icon'] = $iconPath;
+
+            if ($oldIconPath) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+        }
 
         $$module_name_singular->update($modelData);
 
