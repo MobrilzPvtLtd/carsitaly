@@ -189,8 +189,8 @@
             <!-- START: HOTEL LIST VIEW -->
             @if(count($cruises) > 0)
                 @foreach ($cruises as $cruise)
-                    <div class="col-md-12 col-sm-12">
-                        <div class="cruise-list-view">
+                    <div class="col-md-12 col-sm-12 h001">
+                        <div class="cruise-list-view h002">
                             <div class="col-md-4 col-sm-6 clear-padding">
                                 @if($cruise->images)
                                     @php
@@ -292,7 +292,7 @@
                                 </div>
                             </div>
                             <div class="clearfix-sm"></div>
-                            <div class="col-md-2 booking-box clear-padding text-center">
+                            <div class="col-md-2 booking-box clear-padding text-center h003">
                                 {{-- <div class="rating-box">
                                     @for ($i = 1; $i < 5; $i++)
                                         @if($i <= $cruise->rating)
