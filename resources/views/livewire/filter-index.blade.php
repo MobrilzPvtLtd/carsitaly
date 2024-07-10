@@ -162,7 +162,7 @@
                         </ul>
                     </div>
                     <div class="star-filter filter">
-                        <h5><i class="fa fa-bed"></i> Maximum Occupancy</h5>
+                        <h5><i class="fa fa-users"></i> Maximum Occupancy</h5>
                         <ul>
                             @foreach (App\Models\Service::where('service_type', 'villas')->get() as $bedrooms)
                                 <li>
@@ -176,7 +176,7 @@
 
                 @if($serviceType == 'tours')
                     <div class="star-filter filter">
-                        <h5><i class="fa fa-bed"></i>  Total Duration of the tour
+                        <h5><i class="fa fa-clock-o"></i>  Total Duration of the tour
                         </h5>
                         <ul>
                             @foreach (App\Models\Service::where('service_type', 'tours')->get() as $duration)
@@ -188,11 +188,19 @@
                         </ul>
                     </div>
                     <div class="star-filter filter">
-                        <h5><i class="fa fa-bed"></i>  Start Time</h5>
+                        <h5><i class="fa fa-clock-o"></i>  Start Time</h5>
                         <ul>
                             <li><input type="checkbox" wire:model.live="single"> <i class=""></i> 4:00</li>
                                 <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> 5:00</li>
                                 <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> 6:00</li>
+                        </ul>
+                    </div>
+                    <div class="star-filter filter">
+                        <h5><i class="fa fa-map-marker"></i>Pickup Point</h5>
+                        <ul>
+                            <li><input type="checkbox" wire:model.live="single"> <i class=""></i> Gurgaon</li>
+                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> Noida</li>
+                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> Delhi</li>
                         </ul>
                     </div>
                 @endif
@@ -312,7 +320,7 @@
                                                 </div>
                                             @else
                                                 <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-bed"></i>{{ $ser->room_types }}</p>
+                                                    <p><i class="fa fa-users"></i>{{ $ser->room_types }}</p>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
                                                     <p><i class="fa fa-map-marker"></i> {{ $ser->city }}</p>

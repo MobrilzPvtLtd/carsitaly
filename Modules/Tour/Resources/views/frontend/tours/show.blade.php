@@ -279,6 +279,48 @@
 							</p>
 						</div> --}}
 					</div>
+                    <div class="similar-hotel sidebar-item">
+						<h4><i class="fa fa-bed"></i> Similar Tours</h4>
+						<div class="sidebar-item-body">
+							<div class="similar-hotel-box">
+								<a href="#">
+									<div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+										<img src="assets/images/offer1.jpg" alt="Cruise">
+									</div>
+									<div class="col-md-7 col-sm-7 col-xs-7">
+										<h5>Royal Resort 3<span><i class="fa fa-star"></i></span></h5>
+										<h5><i class="fa fa-map-marker"></i> Mall Road, Shimla</h5>
+										<span>$100/Night</span>
+									</div>
+								</a>
+							</div>
+							<div class="similar-hotel-box">
+								<a href="#">
+									<div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+										<img src="assets/images/offer2.jpg" alt="Cruise">
+									</div>
+									<div class="col-md-7 col-sm-7 col-xs-7">
+										<h5>Royal Resort 5<span><i class="fa fa-star"></i></span></h5>
+										<h5><i class="fa fa-map-marker"></i> Mall Road, Shimla</h5>
+										<span>$100/Night</span>
+									</div>
+								</a>
+							</div>
+							<div class="similar-hotel-box">
+								<a href="#">
+									<div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+										<img src="assets/images/offer3.jpg" alt="Cruise">
+									</div>
+									<div class="col-md-7 col-sm-7 col-xs-7">
+										<h5>Royal Resort 4<span><i class="fa fa-star"></i></span></h5>
+										<h5><i class="fa fa-map-marker"></i> Mall Road, Shimla</h5>
+										<span>$100/Night</span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+                    
 				</div>
 			</div>
 			<div class="col-md-4 package-detail-sidebar">
@@ -310,20 +352,20 @@
                                 @csrf
                                 <input type="hidden" value="{{ $tour->id }}" name="service_id">
                                 <input type="hidden" value="tour" name="booking_type">
-								<div class="col-md-12 col-sm-12 col-xs-12">
+								{{-- <div class="col-md-12 col-sm-12 col-xs-12">
 									<label>Start</label>
 									<div class="input-group margin-bottom-sm">
 										<input type="text" id="check_in" name="start_date" class="form-control" placeholder="DD/MM/YYYY" required>
 										<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 									</div>
-								</div>
-                                <div class="col-md-12 col-sm-12 col-xs-12">
+								</div> --}}
+                                {{-- <div class="col-md-12 col-sm-12 col-xs-12">
 									<label>End</label>
 									<div class="input-group margin-bottom-sm">
 										<input type="text" id="check_out" name="end_date" class="form-control" placeholder="DD/MM/YYYY" required>
 										<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 									</div>
-								</div>
+								</div> --}}
 								{{-- <div class="col-md-12 col-sm-12 col-xs-12">
 									<label>Duration</label>
 									<select class="selectpicker" name="rooms">
@@ -357,7 +399,7 @@
 										<option>6</option>
 									</select>
 								</div>
-								<div class="room-price">
+								{{-- <div class="room-price">
 									<div class="col-md-8 col-sm-8 col-xs-8">
 										<label><input type="checkbox" name="room_type" value="single" id="single" onchange="toggleCheckbox(this)"><span>Deluxe Single Room</span></label>
 									</div>
@@ -382,7 +424,7 @@
 									<div class="col-md-4 col-sm-4 col-xs-4">
 										<h5>$299/Night</h5>
 									</div>
-								</div>
+								</div> --}}
                                 @if(!Auth::check())
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Name</label>

@@ -66,6 +66,30 @@
                     </div>
                 </div>
             </div>
+            <div class="similar-hotel sidebar-item">
+                <h4><i class="fa fa-taxi"></i> Similar Cars</h4>
+                <div class="sidebar-item-body">
+                    @foreach ($similar_cars as $similar)
+                        <div class="similar-hotel-box">
+                            <a href="{{ route('frontend.transfers.show', $similar->slug) }}">
+                                <div class="col-md-5 col-sm-5 col-xs-5 clear-padding">
+                                    @php
+                                        $images = json_decode($similar->images);
+                                    @endphp
+                                    @if ($images && count($images) > 0)
+                                        <img src="{{ asset('public/storage/' . $images[0]) }}" alt="cruise">
+                                    @endif
+                                </div>
+                                <div class="col-md-7 col-sm-7 col-xs-7">
+                                    <h5>{{ $similar->title }}<span><i class="fa fa-star"></i></span></h5>
+                                    <h5><i class="fa fa-certificate"></i> {{ $similar->brand }}</h5>
+                                    <span>${{ $similar->price }}/Day</span>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
         <div class="col-md-4 package-detail-sidebar">
             <div class="contact sidebar-item">
