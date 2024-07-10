@@ -57,7 +57,7 @@
                         <div class="form-gp">
                             <label>Location</label>
                             <div class="input-group margin-bottom-sm">
-                                <input type="text" wire:model="city" name="city" class="form-control" required placeholder="E.g. Italy">
+                                <input type="text" wire:model="city" name="city" class="form-control" required placeholder="E.g. Italy" id="city">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                             </div>
                         </div>
@@ -83,13 +83,11 @@
                     <div class="col-md-1 col-sm-6 col-xs-3">
                         <div class="form-gp">
                             <label>Rooms</label>
-                            <select class="custom-select-room" name="room_no" wire:model="room_no">
+                            <select class="custom-select-room" name="room_types" wire:model="room_types">
                                 <option value="">No</option>
-                                {{-- @if ($uniqueRoomNumbers)
-                                    @foreach ($uniqueRoomNumbers as $roomNumber)
-                                        <option>{{ $roomNumber }}</option>
-                                    @endforeach
-                                @endif --}}
+                                <option value="single">Single</option>
+                                <option value="double">Double</option>
+                                <option value="suite">Suite</option>
                             </select>
                         </div>
                     </div>
@@ -145,8 +143,8 @@
                         <h5><i class="fa fa-bed"></i> Room Types</h5>
                         <ul>
                             <li><input type="checkbox" wire:model.live="single"> <i class=""></i> Single</li>
-                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> Double</li>
-                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> suite</li>
+                                <li><input type="checkbox" wire:model.live="double"> <i class=""></i> Double</li>
+                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> Suite</li>
                         </ul>
                     </div>
                 @endif
@@ -201,9 +199,9 @@
                 <div class="facilities-filter filter">
                     <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
                     <ul>
-                        @foreach (Modules\Amenity\Models\Amenity::get() as $amenity)
+                        @foreach ($uniqueAmenities as $amenity)
                             <li>
-                                <input type="checkbox" wire:model.live="filterLocation.{{ $amenity }}" value="{{ $amenity->name }}"><img src="{{ asset('public/storage/' . $amenity->icon) }}" alt="hotel" width="18px" style="filter: invert(1);"> &nbsp;
+                                <input type="checkbox" wire:model.live="filterAmenities.{{ $amenity->name }}" value="{{ $amenity->name }}"><img src="{{ asset('public/storage/' . $amenity->icon) }}" alt="hotel" width="18px" style="filter: invert(1);"> &nbsp;
                                 {{ $amenity->name }}
                             </li>
                         @endforeach
@@ -320,16 +318,17 @@
                                                     <p><i class="fa fa-map-marker"></i> {{ $ser->city }}</p>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
-                                                    @foreach (json_decode($ser->amenities) as $amenities)
-                                                        <p><i class="fa fa-list"></i>{{ $amenities }}</p>
+                                                    @foreach (json_decode($ser->amenities) as $amenityName)
+                                                        @php
+                                                            $amenityDetails = $uniqueAmenities[$amenityName];
+                                                        @endphp
+
+                                                        <img src="{{ asset('public/storage/' . $amenityDetails->icon) }}" alt="hotel" width="50px" style="min-height: 50px !important;">{{ $amenityDetails->name }}
                                                     @endforeach
                                                 </div>
-                                                {{-- <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-list"></i> Inclusion</p>
-                                                </div> --}}
                                             @endif
                                         </div>
-                                        <div class="hotel-facility">
+                                        {{-- <div class="hotel-facility">
                                             <p>
                                                 @if($ser->facilities > 0)
                                                     @foreach (json_decode($ser->facilities) as $facility)
@@ -361,7 +360,7 @@
                                                     @endforeach
                                                 @endif
                                             </p>
-                                        </div>
+                                        </div> --}}
                                         <div class="hotel-desc">
                                             <p>{{ $ser->description }}</p>
                                         </div>
@@ -377,7 +376,6 @@
                                             <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                             <span>128 Guest Reviews.</span>
                                         </div>
-
                                     </div> --}}
                                     <div class="room-book-box">
                                         <div class="price">

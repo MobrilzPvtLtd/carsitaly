@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Modules\Amenity\Models\Amenity;
 
 class FilterIndex extends Component
 {
@@ -17,6 +18,7 @@ class FilterIndex extends Component
 
     public $searchTerm;
     public $filterLocation = [];
+    public $filterAmenities = [];
 
     public $star5 = '';
     public $star4 = '';
@@ -30,6 +32,10 @@ class FilterIndex extends Component
     public $beer = '';
     public $cutlery = '';
 
+    public $single = '';
+    public $double = '';
+    public $suite = '';
+
     public $flight = '';
     public $car = '';
     public $sightseeing = '';
@@ -42,11 +48,12 @@ class FilterIndex extends Component
     public $selectedSort;
 
     public $formLocation;
-    public $fRoom_no;
     public $city;
     public $check_in;
     public $check_out;
-    public $room_no;
+
+    public $room_types;
+    // public $filterAmenities;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -61,7 +68,7 @@ class FilterIndex extends Component
     public function applyFilter()
     {
         $this->formLocation = $this->city;
-        $this->fRoom_no = $this->room_no;
+        $this->filterAmenities = $this->filterAmenities;
     }
 
     public function updateSearchPrice($val)
@@ -80,13 +87,23 @@ class FilterIndex extends Component
 
     public function render()
     {
-        // dd($this->fRoom_no);
         $title = '%'.$this->searchTerm.'%';
         $serviceType = $this->serviceType;
         $location = $this->filterLocation;
+        $amenitiesArr = $this->filterAmenities;
+        // $room_types = $this->room_types;
 
         $services = Service::where('service_type', $serviceType)->where('status', 1);
 
+        // location searchBar filter
+        $services->when($this->formLocation, function ($query) {
+            $query->where('city', 'like', "%$this->formLocation%");
+            if ($this->room_types) {
+                $query->where('room_types', $this->room_types);
+            }
+        });
+
+        // price range filter
         $services->when($this->minPrice || $this->maxPrice, function ($query) {
             $query->where(function ($subQuery) {
                 if ($this->minPrice || $this->maxPrice) {
@@ -95,6 +112,7 @@ class FilterIndex extends Component
             });
         });
 
+        // ASC DESC filter
         if ($this->selectedSort == 'lowest_price') {
             $services->orderBy('price', 'ASC');
         } elseif ($this->selectedSort == 'highest_price') {
@@ -113,94 +131,72 @@ class FilterIndex extends Component
             $services->orderBy('id', 'DESC');
         }
 
+        // Title filter
         if($title) {
             $services->where('title', 'like', "%$title%");
         }
 
-        $services->when($this->formLocation, function ($query) {
-            $query->where('city', 'like', "%$this->formLocation%");
-
-            if ($this->fRoom_no) {
-                $query->where('room_no', $this->fRoom_no);
-            }
-        });
-
+        // location filter
         $selectedLocations = array_keys(array_filter($location));
-
         if (!empty($selectedLocations)) {
             $services->whereIn('city', $selectedLocations);
         }
 
-        $services->when($this->star5 || $this->star4 || $this->star3 || $this->star2 || $this->star1,function ($query) {
+        // amenities filter
+        $selectedAmenities = array_keys(array_filter($amenitiesArr));
+
+        if (!empty($selectedAmenities)) {
+            $services->where(function ($query) use ($selectedAmenities) {
+                foreach ($selectedAmenities as $amenity) {
+                    $query->orWhereJsonContains('amenities', $amenity);
+                }
+            });
+        }
+
+        // Room Types filter
+        $services->when($this->suite || $this->double || $this->single,function ($query) {
             $query->where(function ($subQuery) {
-                if ($this->star5) {
-                    $subQuery->orWhere('rating', 5);
+                if ($this->suite) {
+                    $subQuery->orWhere('room_types', 'like', '%suite%');
                 }
-                if ($this->star4) {
-                    $subQuery->orWhere('rating', 4);
+                if ($this->double) {
+                    $subQuery->orWhere('room_types', 'like', '%double%');
                 }
-                if ($this->star3) {
-                    $subQuery->orWhere('rating', 3);
-                }
-                if ($this->star2) {
-                    $subQuery->orWhere('rating', 2);
-                }
-                if ($this->star1) {
-                    $subQuery->orWhere('rating', 1);
-                }
-            });
-        });
-
-        $services->when($this->wifi || $this->bed || $this->taxi || $this->beer || $this->cutlery, function ($query) {
-            return $query->where(function ($subQuery) {
-                if ($this->wifi) {
-                    $subQuery->orWhere('facilities', 'like', '%wifi%');
-                }
-                if ($this->bed) {
-                    $subQuery->orWhere('facilities', 'like', '%bed%');
-                }
-                if ($this->taxi) {
-                    $subQuery->orWhere('facilities', 'like', '%taxi%');
-                }
-                if ($this->beer) {
-                    $subQuery->orWhere('facilities', 'like', '%beer%');
-                }
-                if ($this->cutlery) {
-                    $subQuery->orWhere('facilities', 'like', '%cutlery%');
-                }
-            });
-        });
-
-        $services->when($this->flight || $this->car || $this->sightseeing || $this->meals || $this->drinks, function ($query) {
-            return $query->where(function ($subQuery) {
-                if ($this->flight) {
-                    $subQuery->orWhere('facilities', 'like', '%flight%');
-                }
-                if ($this->car) {
-                    $subQuery->orWhere('facilities', 'like', '%car%');
-                }
-                if ($this->sightseeing) {
-                    $subQuery->orWhere('facilities', 'like', '%sightseeing%');
-                }
-                if ($this->meals) {
-                    $subQuery->orWhere('facilities', 'like', '%meals%');
-                }
-                if ($this->drinks) {
-                    $subQuery->orWhere('facilities', 'like', '%drinks%');
+                if ($this->single) {
+                    $subQuery->orWhere('room_types', 'like', '%single%');
                 }
             });
         });
 
         $services = $services->orderBy('id', 'desc')->paginate(6);
-
         // dd($services);
+
         $uniqueLocation = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('city');
 
-        // $uniqueRoomNumbers = Service::where('service_type', $serviceType)
-        //         ->where('status', 1)->where('room_no', '!=', null)->distinct()->pluck('room_no');
+        // Amenities show //
+        $amenities = Service::where('service_type', $serviceType)->where('status', 1)->distinct()
+                    ->pluck('amenities')->toArray();
+
+        $uniqueAmenities = [];
+
+        foreach ($amenities as $amenityList) {
+            $amenityArray = json_decode($amenityList);
+
+            if ($amenityArray) {
+                foreach ($amenityArray as $amenityName) {
+                    if (!isset($uniqueAmenities[$amenityName])) {
+                        $amenityDetails = Amenity::where('name', $amenityName)->where('status', 1)->first();
+
+                        if ($amenityDetails) {
+                            $uniqueAmenities[$amenityName] = $amenityDetails;
+                        }
+                    }
+                }
+            }
+        }
 
         return view('livewire.filter-index', compact('services','uniqueLocation','serviceType',
-        // 'uniqueRoomNumbers'
+        'uniqueAmenities'
         ));
     }
 }

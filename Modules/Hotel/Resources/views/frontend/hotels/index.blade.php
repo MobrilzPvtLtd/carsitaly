@@ -267,3 +267,17 @@
     <livewire:filter-index />
 
 @endsection
+@push ('after-scripts')
+    <script type="module" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
+    <script type="module">
+        $(document).ready(function(){
+            var autocomplete;
+            var id = 'city';
+
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+                types:['geocode'],
+            });
+        });
+    </script>
+@endpush
