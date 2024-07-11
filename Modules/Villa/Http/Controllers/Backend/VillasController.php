@@ -221,12 +221,12 @@ class VillasController extends Controller
             $modelData['floor_plan'] = $floor_plan;
         }
 
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('villas', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('villas', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
 
         $modelData = $request->except('images');
         $imagePaths = [];
@@ -240,6 +240,18 @@ class VillasController extends Controller
 
         if (!empty($imagePaths)) {
             $modelData['images'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
+
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
         }
 
         $$module_name_singular = $module_model::create($modelData);
@@ -334,12 +346,6 @@ class VillasController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('villas', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
         $modelData = $request->except('images');
         $imagePaths = [];
 
@@ -355,6 +361,25 @@ class VillasController extends Controller
 
         if (!empty($imagePaths)) {
             $modelData['images'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
+
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
+        }
+
+        $floor_plan = null;
+        if ($request->hasFile('floor_plan')) {
+            $floor_plan = $request->file('floor_plan')->store('villas', 'public');
+            $modelData = $request->except('floor_plan');
+            $modelData['floor_plan'] = $floor_plan;
         }
 
         $$module_name_singular->update($modelData);

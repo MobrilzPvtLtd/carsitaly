@@ -112,6 +112,20 @@
     @stack('after-scripts')
 
     @include('frontend.includes.script')
+
+    <script type="module" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var autocompleteOptions = {
+                types: ['geocode']
+            };
+
+            var autocompleteStartingPoint = new google.maps.places.Autocomplete(document.getElementById('starting_point'), autocompleteOptions);
+            var autocompleteEndingPoint = new google.maps.places.Autocomplete(document.getElementById('ending_point'), autocompleteOptions);
+            // var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('city'), autocompleteOptions);
+        });
+    </script>
 </body>
 
 </html>

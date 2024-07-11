@@ -7,7 +7,7 @@
                         <div class="form-gp">
                             <label>Starting From</label>
                             <div class="input-group margin-bottom-sm">
-                                <input type="text" name="departure_city" class="form-control" required placeholder="E.g. London">
+                                <input type="text" wire:model="starting_point" name="starting_point" class="form-control" required placeholder="E.g. London" id="starting_point">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                             </div>
                         </div>
@@ -16,7 +16,7 @@
                         <div class="form-gp">
                             <label>Going To</label>
                             <div class="input-group margin-bottom-sm">
-                                <input type="text" name="destination_city" class="form-control" required placeholder="E.g. Paris">
+                                <input type="text" wire:model="ending_point" name="ending_point" class="form-control" placeholder="E.g. Paris" id="ending_point">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                             </div>
                         </div>
@@ -82,13 +82,23 @@
                     </div>
                     <div class="col-md-1 col-sm-6 col-xs-3">
                         <div class="form-gp">
-                            <label>Rooms</label>
-                            <select class="custom-select-room" name="room_types" wire:model="room_types">
-                                <option value="">No</option>
-                                <option value="single">Single</option>
-                                <option value="double">Double</option>
-                                <option value="suite">Suite</option>
-                            </select>
+                            @if($serviceType == 'hotels')
+                                <label>Rooms</label>
+                                <select class="custom-select-room" name="room_types" wire:model="room_types">
+                                    <option value="">No</option>
+                                    <option value="single">Single</option>
+                                    <option value="double">Double</option>
+                                    <option value="suite">Suite</option>
+                                </select>
+                            @elseif($serviceType == 'villas')
+                                <label>Occupancy</label>
+                                <select class="custom-select-room" name="occupancy_no" wire:model="occupancy_no">
+                                    <option value="">No</option>
+                                    @foreach ($uniqueOccupancy as $occupancy)
+                                        <option value="{{ $occupancy }}">{{ $occupancy }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-9">
@@ -153,10 +163,10 @@
                     <div class="star-filter filter">
                         <h5><i class="fa fa-bed"></i> Bedrooms</h5>
                         <ul>
-                            @foreach (App\Models\Service::where('service_type', 'villas')->get() as $bedrooms)
+                            @foreach ($uniqueBedrooms as $bedrooms)
                                 <li>
-                                    <input type="checkbox" wire:model.live="filterLocation.{{ $bedrooms }}" value="{{ $bedrooms->number_of_bedrooms }}">
-                                    {{ $bedrooms->number_of_bedrooms }} Bedrooms
+                                    <input type="checkbox" wire:model.live="filterBedrooms.{{ $bedrooms }}" value="{{ $bedrooms }}">
+                                    {{ $bedrooms }} Bedrooms
                                 </li>
                             @endforeach
                         </ul>
@@ -164,10 +174,10 @@
                     <div class="star-filter filter">
                         <h5><i class="fa fa-users"></i> Maximum Occupancy</h5>
                         <ul>
-                            @foreach (App\Models\Service::where('service_type', 'villas')->get() as $bedrooms)
+                            @foreach ($uniqueOccupancy as $occupancy)
                                 <li>
-                                    <input type="checkbox" wire:model.live="filterLocation.{{ $bedrooms }}" value="{{ $bedrooms->maximum_occupancy }}">
-                                    {{ $bedrooms->maximum_occupancy }} People
+                                    <input type="checkbox" wire:model.live="filterOccupancy.{{ $occupancy }}" value="{{ $occupancy }}">
+                                    {{ $occupancy }} People
                                 </li>
                             @endforeach
                         </ul>
@@ -179,10 +189,10 @@
                         <h5><i class="fa fa-clock-o"></i>  Total Duration of the tour
                         </h5>
                         <ul>
-                            @foreach (App\Models\Service::where('service_type', 'tours')->get() as $duration)
+                            @foreach ($uniqueDuration as $duration)
                                 <li>
-                                    <input type="checkbox" wire:model.live="filterLocation.{{ $duration }}" value="{{ $duration->duration }}">
-                                    {{ $duration->duration }} Hours
+                                    <input type="checkbox" wire:model.live="filterDuration.{{ $duration }}" value="{{ $duration }}">
+                                    {{ $duration }} Hours
                                 </li>
                             @endforeach
                         </ul>
@@ -190,20 +200,32 @@
                     <div class="star-filter filter">
                         <h5><i class="fa fa-clock-o"></i>  Start Time</h5>
                         <ul>
-                            <li><input type="checkbox" wire:model.live="single"> <i class=""></i> 4:00</li>
-                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> 5:00</li>
-                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> 6:00</li>
+                            @foreach ($uniqueStartTime as $time)
+                                <?php $startTime = Carbon\Carbon::parse($time); ?>
+                                <li>
+                                    <input type="checkbox" wire:model.live="filterStartTime.{{ $startTime }}" value="{{ $startTime->format('H:i:s') }}">
+                                    {{ $startTime->format('H:i:s') }} Hours
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="star-filter filter">
                         <h5><i class="fa fa-map-marker"></i>Pickup Point</h5>
                         <ul>
-                            <li><input type="checkbox" wire:model.live="single"> <i class=""></i> Gurgaon</li>
-                                <li><input type="checkbox" wire:model.live="Double"> <i class=""></i> Noida</li>
-                                <li><input type="checkbox" wire:model.live="suite"> <i class=""></i> Delhi</li>
+                            @foreach ($uniqueStartingPoint as $startingPoint)
+                                @php
+                                    $parts = explode(",", $startingPoint);
+                                    $city = $parts[0];
+                                @endphp
+                                <li>
+                                    <input type="checkbox" wire:model.live="filterStartingPoint.{{ $startingPoint }}" value="{{ $city }}">
+                                    {{ $city }}
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 @endif
+
                 <div class="facilities-filter filter">
                     <h5><i class="fa fa-list"></i> {{ ucfirst(strtolower($serviceType)) }}  Amenities</h5>
                     <ul>
@@ -306,26 +328,36 @@
                                                 <i class="fa fa-phone"></i>(+91) {{ $ser->mobile }}
                                             </p> --}}
                                             @if($ser->service_type == 'tours')
+                                                <?php $startDate = Carbon\Carbon::parse($ser->start_date); ?>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-clock-o"></i>Start Time</p>
+                                                    <p><i class="fa fa-clock-o"></i>{{ $startDate->format('H:i:s') }}</p>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-clock-o"></i>Total Duration</p>
+                                                    <p><i class="fa fa-clock-o"></i>{{ $ser->duration }} Hours</p>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-map-marker"></i>Location</p>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
+                                                    <p><i class="fa fa-map-marker"></i>{{ $ser->starting_point }}</p>
                                                 </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                {{-- <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
                                                     <p><i class="fa fa-list"></i>Amenities</p>
-                                                </div>
+                                                </div> --}}
                                             @else
-                                                <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                    <p><i class="fa fa-users"></i>{{ $ser->room_types }}</p>
-                                                </div>
+                                                @if($ser->service_type == 'hotels')
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                        <p><i class="fa fa-users"></i>{{ $ser->room_types }}</p>
+                                                    </div>
+                                                @elseif($ser->service_type == 'villas')
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                        <p><i class="fa fa-users"></i>{{ $ser->maximum_occupancy }} People</p>
+                                                    </div>
+                                                @endif
+
                                                 <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
                                                     <p><i class="fa fa-map-marker"></i> {{ $ser->city }}</p>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
+                                            @endif
+                                            <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
+                                                @if($ser->amenities)
                                                     @foreach (json_decode($ser->amenities) as $amenityName)
                                                         @php
                                                             $amenityDetails = $uniqueAmenities[$amenityName];
@@ -333,8 +365,24 @@
 
                                                         <img src="{{ asset('public/storage/' . $amenityDetails->icon) }}" alt="hotel" width="50px" style="min-height: 50px !important;">{{ $amenityDetails->name }}
                                                     @endforeach
+                                                @endif
+                                            </div>
+                                            {{-- <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
+                                                @if($ser->amenities)
+                                                    @foreach (json_decode($ser->amenities) as $amenityName)
+                                                        @php
+                                                            $amenityDetails = $uniqueAmenities[$amenityName];
+                                                        @endphp
+
+                                                        <img src="{{ asset('public/storage/' . $amenityDetails->icon) }}" alt="hotel" width="50px" style="min-height: 50px !important;">{{ $amenityDetails->name }}
+                                                    @endforeach
+                                                @endif
+                                            </div> --}}
+                                            <div class="col-md-12 col-sm-12 col-xs-12 clear-padding">
+                                                <div class="hotel-desc">
+                                                    <p>{{ $ser->description }}</p>
                                                 </div>
-                                            @endif
+                                            </div>
                                         </div>
                                         {{-- <div class="hotel-facility">
                                             <p>
@@ -369,9 +417,6 @@
                                                 @endif
                                             </p>
                                         </div> --}}
-                                        <div class="hotel-desc">
-                                            <p>{{ $ser->description }}</p>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="clearfix visible-sm-block"></div>

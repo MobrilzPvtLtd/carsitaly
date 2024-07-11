@@ -366,11 +366,12 @@
         <div class="form-group">
             <?php
             $field_name = 'videos';
-            $field_label = label_case($field_name);
+            $field_lable_name = "videos only youtube link.";
+            $field_label = label_case($field_lable_name);
             $field_placeholder = $field_label;
             ?>
-            {{ html()->label($field_label, $field_name)->class('form-label') }}
-            {{ html()->file($field_name)->class('form-control') }}
+            {{ html()->label($field_label, $field_lable_name)->class('form-label') }}
+            {{ html()->text($field_name)->class('form-control') }}
         </div>
     </div>
 

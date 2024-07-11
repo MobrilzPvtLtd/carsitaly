@@ -68,9 +68,9 @@
                         <li><a data-toggle="tab" href="#Amenities_and_Services
                         "><i class="fa fa-info-circle"></i> <span>Amenities and Services
                                 </span></a></li>
-                        <li><a data-toggle="tab" href="#Pricing_and_Availability
+                        {{-- <li><a data-toggle="tab" href="#Pricing_and_Availability
                         "><i class="fa fa-bed"></i> <span>Pricing and Availability
-                                </span></a></li>
+                                </span></a></li> --}}
                         <li><a data-toggle="tab" href="#Media"><i class="fa fa-bed"></i> <span>Media</span></a></li>
                         {{-- <li><a data-toggle="tab" href="#Reviews_and_Ratings
                         "><i class="fa fa-bed"></i> <span>Reviews and Ratings
@@ -90,8 +90,8 @@
                             <p> <b>State/Province:</b> {{ $hotel->state }}</p>
                             <p> <b>Country:</b>{{ $hotel->country }}</p>
                             <p> <b>Zip Code/Postal Code:</b> {{ $hotel->pin_code }}</p>
-                            <p> <b>Latitude:</b> Latitude coordinate for map integration.</p>
-                            <p> <b>Longitude:</b> Longitude coordinate for map integration</p>
+                            <p> <b>Latitude:</b> {{ $hotel->latitude }}</p>
+                            <p> <b>Longitude:</b> {{ $hotel->longitude }}</p>
                         </div>
                         <div id="Contact_Information" class="tab-pane fade">
                             <h4 class="tab-heading">Phone Number: {{ $hotel->mobile }}
@@ -118,10 +118,10 @@
                             @endif
                             </p>
                         </div>
-                        <div id="Pricing_and_Availability" class="tab-pane fade">
+                        {{-- <div id="Pricing_and_Availability" class="tab-pane fade">
                             <h4 class="tab-heading">Base Price: {{ $hotel->price }}
                             </h4>
-                        </div>
+                        </div> --}}
                         <div id="Media" class="tab-pane fade">
                             <h4 class="tab-heading">Images:</h4>
                             @if ($hotel->images)
@@ -136,11 +136,7 @@
                             @endif
                             <h4>Videos:</h4>
                             @if ($hotel->videos)
-                                <video width="320" height="240" controls>
-                                    <source src="{{ asset('public/storage/hotel/' . $hotel->videos) }}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                {{-- <img src="{{ asset('public/storage/hotel/' . $hotel->videos) }}" alt="Hotel" width="100px"> --}}
+                                <iframe width="540" height="280" src="https://www.youtube.com/embed/{{ $hotel->videos }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             @endif
                         </div>
                         {{-- <div id="room-info" class="tab-pane fade in active">
@@ -380,6 +376,7 @@
                     </div>
                 </div>
 
+                <hr>
                 <div class="similar-hotel sidebar-item">
                     <h4><i class="fa fa-bed"></i> Similar Hotel</h4>
                     <div class="sidebar-item-body">
@@ -429,7 +426,6 @@
                     </div> --}}
                     </div>
                 </div>
-
             </div>
             <div class="col-md-4 hotel-detail-sidebar">
                 <div class="col-md-12 sidebar-wrapper clear-padding">

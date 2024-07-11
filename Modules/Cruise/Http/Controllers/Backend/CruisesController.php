@@ -219,12 +219,12 @@ class CruisesController extends Controller
             $modelData['cabin_images'] = $imagePath;
         }
 
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('cruises', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('cruises', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
         $modelData = $request->except('images');
         $imagePaths = [];
 
@@ -243,9 +243,17 @@ class CruisesController extends Controller
         //     $modelData['facilities'] = json_encode($request->facilities);
         // }
 
-        // if (!empty($request->inclusion)) {
-        //     $modelData['inclusion'] = json_encode($request->inclusion);
-        // }
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
+
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
+        }
 
         $$module_name_singular = $module_model::create($modelData);
 
@@ -347,12 +355,12 @@ class CruisesController extends Controller
             $modelData['cabin_images'] = $imagePath;
         }
 
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('cruises', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('cruises', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
         $imagePaths = [];
         $modelData = $request->except('images');
 
@@ -370,8 +378,19 @@ class CruisesController extends Controller
             $modelData['images'] = json_encode($imagePaths);
         }
 
-        $$module_name_singular->update($modelData);
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
 
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
+        }
+
+        $$module_name_singular->update($modelData);
 
         if($request->package_id){
             $package = Package::where('id', $request->package_id)->first();

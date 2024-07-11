@@ -1,6 +1,10 @@
 <input type="hidden" value="hotels" name="service_type">
-<input type="hidden" value="" id="latitude" name="latitude">
-<input type="hidden" value="" id="longitude" name="longitude">
+<?php
+$field_latitude_name = 'latitude';
+$field_longitude_name = 'longitude';
+?>
+{{ html()->hidden($field_latitude_name)->id('latitude') }}
+{{ html()->hidden($field_longitude_name)->id('longitude') }}
 <div class="row">
     <h4>Hotel Information</h4>
     <div class="col-12 col-sm-6 mb-3">
@@ -24,7 +28,7 @@
             $field_placeholder = "-- Select an option --";
             $required = "required";
 
-            $categories = \Modules\Category\Models\Category::where('status',1)->pluck('name', 'id')->toArray();
+            $categories = \Modules\Category\Models\Category::where('status',1)->pluck('name', 'name')->toArray();
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->select($field_name, $categories)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
@@ -210,11 +214,12 @@
         <div class="form-group">
             <?php
             $field_name = 'videos';
-            $field_label = label_case($field_name);
+            $field_lable_name = "videos only youtube link.";
+            $field_label = label_case($field_lable_name);
             $field_placeholder = $field_label;
             ?>
-            {{ html()->label($field_label, $field_name)->class('form-label') }}
-            {{ html()->file($field_name)->class('form-control') }}
+            {{ html()->label($field_label, $field_lable_name)->class('form-label') }}
+            {{ html()->text($field_name)->class('form-control') }}
         </div>
     </div>
 

@@ -57,7 +57,7 @@
                         "><i class="fa fa-suitcase"></i> <span>Tour Information
                         </span></a></li>
 						<li><a data-toggle="tab" href="#Location_Details"><i class="fa fa-check-square"></i> <span>Location Details</span></a></li>
-						<li><a data-toggle="tab" href="#Pricing_and_Availability"><i class="fa fa-street-view"></i> <span>Pricing and Availability</span></a></li>
+						{{-- <li><a data-toggle="tab" href="#Pricing_and_Availability"><i class="fa fa-street-view"></i> <span>Pricing and Availability</span></a></li> --}}
 						<li><a data-toggle="tab" href="#Itinerary
                         "><i class="fa fa-street-view"></i> <span>Itinerary
                         </span></a></li>
@@ -76,15 +76,15 @@
 								{{ $tour->description }}
 							</p>
 							<h4 class="tab-heading">Inclusion</h4>
-							<p class="inc">
-                                {{-- @php
+							{{-- <p class="inc">
+                                @php
                                     $tourincArray = json_decode($tourinc, true);
-                                @endphp --}}
+                                @endphp
 
-                                {{-- @foreach ($tourincArray as $tinc)
+                                @foreach ($tourincArray as $tinc)
                                     <i class="fa fa-check-circle"></i> {{ $tinc }}<br>
-                                @endforeach --}}
-								{{-- <i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
+                                @endforeach
+								<i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
                                     <i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
                                     <i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
                                     <i class="fa fa-check-circle"></i> Guided tour<br>
@@ -93,8 +93,8 @@
                                     <i class="fa fa-check-circle"></i> Buffet breakfast<br>
                                     <i class="fa fa-check-circle"></i> Return Economy economy class airfare<br>
                                     <i class="fa fa-check-circle"></i> Welcome drinks at hotel<br>
-								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br> --}}
-							</p>
+								<i class="fa fa-check-circle"></i> Stay in 3 star hotel<br>
+							</p> --}}
 							{{-- <h4 class="tab-heading">Exclusion</h4>
 							    <p class="inc">
 								<i class="fa fa-times-circle-o"></i> Travel insurance<br>
@@ -115,16 +115,22 @@
                             <h4 class="tab-heading"> Ending Point: {{ $tour->ending_point }}</h4>
                             <p><b>Destinations Covered:</b> {{ $tour->destinations }}</p>
                             <p><b>Duration:</b> {{ $tour->duration }}</p>
-                            <p><b> Start Time:</b> {{ $tour->start_date }}</p>
-                            <p><b> End Time:</b> {{ $tour->end_date }}</p>
+
+                            <?php
+                                $startTime = Carbon\Carbon::parse($tour->start_date);
+                                $endTime = Carbon\Carbon::parse($tour->end_date);
+                            ?>
+
+                            <p><b>Start Date And Time:</b> {{ $startTime->format('d-M-Y, H:i:s') }}</p>
+                            <p><b>End Date And Time:</b> {{ $endTime->format('d-M-Y, H:i:s') }}</p>
 						</div>
-                        <div id="Pricing_and_Availability" class="tab-pane fade">
+                        {{-- <div id="Pricing_and_Availability" class="tab-pane fade">
 							<h4 class="tab-heading"> Base Price: {{ $tour->price }}</h4>
-						</div>
+						</div> --}}
                         <div id="Itinerary" class="tab-pane fade">
 							<h4 class="tab-heading"> Day-by-Day Itinerary: {{ $tour->itinerary }}</h4>
                             <p><b> Activity Details</b> {{ $tour->description_details }}</p>
-                            <p><b> Free Time:</b> {{ $tour->free_time }}</p>
+                            {{-- <p><b> Free Time:</b> {{ $tour->free_time }}</p> --}}
 						</div>
                         <div id="Media" class="tab-pane fade">
 						<h4 class="tab-heading">Tour Images:</h4>
@@ -140,10 +146,7 @@
                         @endif
                         <h4> Video Tours:</h4>
                         @if ($tour->videos)
-                            <video width="320" height="240" controls>
-                                <source src="{{ asset('public/storage/tour/' . $tour->videos) }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                            <iframe width="540" height="280" src="https://www.youtube.com/embed/{{ $tour->videos }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         @endif
 						</div>
 						<div id="itinerary" class="tab-pane fade">
@@ -279,6 +282,8 @@
 							</p>
 						</div> --}}
 					</div>
+
+                    <hr>
                     <div class="similar-hotel sidebar-item">
 						<h4><i class="fa fa-bed"></i> Similar Tours</h4>
 						<div class="sidebar-item-body">
@@ -320,7 +325,7 @@
 							</div>
 						</div>
 					</div>
-                    
+
 				</div>
 			</div>
 			<div class="col-md-4 package-detail-sidebar">

@@ -209,12 +209,12 @@ class CarRentalsController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('carrentals', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('carrentals', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
         $modelData = $request->except('images');
         $imagePaths = [];
 
@@ -231,6 +231,18 @@ class CarRentalsController extends Controller
 
         if (!empty($request->vehicle_features)) {
             $modelData['vehicle_features'] = json_encode($request->vehicle_features);
+        }
+
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
+
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
         }
 
         $$module_name_singular = $module_model::create($modelData);
@@ -325,13 +337,12 @@ class CarRentalsController extends Controller
 
         $modelData = $request->all();
 
-
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('carrentals', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('carrentals', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
         $modelData = $request->except('images');
         $imagePaths = [];
         if ($request->hasFile('images')) {
@@ -350,6 +361,18 @@ class CarRentalsController extends Controller
 
         if (!empty($request->vehicle_features)) {
             $modelData['vehicle_features'] = json_encode($request->vehicle_features);
+        }
+
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
+
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
         }
 
         $$module_name_singular->update($modelData);

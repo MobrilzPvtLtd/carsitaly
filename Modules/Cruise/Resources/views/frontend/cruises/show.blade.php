@@ -168,10 +168,7 @@
                         {{-- <img src="{{ asset('img/default_banner.jpg') }}"> --}}
                         <h4> Video Highlights:</h4>
                         @if ($cruise->videos)
-                            <video width="320" height="240" controls>
-                                <source src="{{ asset('public/storage/cruise/' . $cruise->videos) }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                            <iframe width="540" height="280" src="https://www.youtube.com/embed/{{ $cruise->videos }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         @endif
                         {{-- <img src="{{ asset('img/default_banner.jpg') }}"> --}}
                     </div>

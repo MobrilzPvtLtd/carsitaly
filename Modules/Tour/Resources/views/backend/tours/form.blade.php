@@ -88,7 +88,7 @@
             {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-3 mb-3">
+    {{-- <div class="col-12 col-sm-3 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'start_date';
@@ -100,18 +100,45 @@
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
             {{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
-    </div>
+    </div> --}}
     <div class="col-12 col-sm-3 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'end_date';
-            $field_lable_name = 'end_date and time';
-            $field_lable = label_case($field_lable_name);
-            $field_placeholder = $field_lable;
-            $required = "";
+            $field_name = 'start_datetime';
+            $field_label_name = 'Start Date and Time';
+            $field_label = label_case($field_label_name);
+            $field_placeholder = $field_label;
+            // $required = "required";
             ?>
-            {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->input('datetime-local', $field_name)->placeholder($field_placeholder)->class('form-control')->attributes([$required => $required]) }}
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-3 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'end_datetime';
+            $field_lable_name = 'End Date and Time';
+            $field_label = label_case($field_label_name);
+            $field_placeholder = $field_label;
+            // $required = "required";
+            ?>
+            {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
+            {{ html()->input('datetime-local', $field_name)->placeholder($field_placeholder)->class('form-control')->attributes([$required => $required]) }}
+        </div>
+    </div>
+
+    <h4>Amenities</h4>
+    <div class="col-12 col-sm-4 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = 'amenities';
+            $field_lable = label_case($field_name);
+            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name','name')->toArray();
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label') }}
+            {{ html()->select($field_name.'[]', $amenities)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
         </div>
     </div>
 
@@ -213,11 +240,12 @@
         <div class="form-group">
             <?php
             $field_name = 'videos';
-            $field_label = label_case($field_name);
+            $field_lable_name = "videos only youtube link.";
+            $field_label = label_case($field_lable_name);
             $field_placeholder = $field_label;
             ?>
-            {{ html()->label($field_label, $field_name)->class('form-label') }}
-            {{ html()->file($field_name)->class('form-control')->multiple() }}
+            {{ html()->label($field_label, $field_lable_name)->class('form-label') }}
+            {{ html()->text($field_name)->class('form-control') }}
         </div>
     </div>
 

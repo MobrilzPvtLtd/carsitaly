@@ -216,12 +216,12 @@ class ToursController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('tours', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('tours', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
         $modelData = $request->except('images');
         $imagePaths = [];
 
@@ -236,6 +236,29 @@ class ToursController extends Controller
             $modelData['images'] = json_encode($imagePaths);
         }
 
+        if (!empty($request->start_datetime)) {
+            $modelData['start_date'] = $request->start_datetime;
+        }
+
+        if (!empty($request->end_datetime)) {
+            $modelData['end_date'] = $request->end_datetime;
+        }
+
+        if (!empty($request->amenities)) {
+            $modelData['amenities'] = json_encode($request->amenities);
+        }
+
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
+
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
+        }
         $$module_name_singular = $module_model::create($modelData);
 
         flash(icon()."New '".Str::singular($module_title)."' Added")->success()->important();
@@ -329,12 +352,12 @@ class ToursController extends Controller
 
         $modelData = $request->all();
 
-        $imagePath = null;
-        if ($request->hasFile('videos')) {
-            $imagePath = $request->file('videos')->store('tours', 'public');
-            $modelData = $request->except('videos');
-            $modelData['videos'] = $imagePath;
-        }
+        // $imagePath = null;
+        // if ($request->hasFile('videos')) {
+        //     $imagePath = $request->file('videos')->store('tours', 'public');
+        //     $modelData = $request->except('videos');
+        //     $modelData['videos'] = $imagePath;
+        // }
         $modelData = $request->except('images');
         $imagePaths = [];
 
@@ -350,6 +373,31 @@ class ToursController extends Controller
 
         if (!empty($imagePaths)) {
             $modelData['images'] = json_encode($imagePaths);
+        }
+
+        if (!empty($request->start_datetime)) {
+            // $startTime = Carbon::parse($request->start_datetime);
+            $modelData['start_date'] = Carbon::parse($request->start_datetime);
+        }
+
+        if (!empty($request->end_datetime)) {
+            $modelData['end_date'] = Carbon::parse($request->end_datetime);
+        }
+
+        if (!empty($request->amenities)) {
+            $modelData['amenities'] = json_encode($request->amenities);
+        }
+
+        if (!empty($request->videos)) {
+            $videos = explode("=", $request->videos);
+
+            if (count($videos) > 1) {
+                $modelData['videos'] = $videos[1];
+            } else {
+                $modelData['videos'] = $request->videos;
+            }
+        } else {
+            $modelData['videos'] = null;
         }
 
         $$module_name_singular->update($modelData);

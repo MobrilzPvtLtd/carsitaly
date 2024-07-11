@@ -134,49 +134,6 @@
 
     <script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
 
-    {{-- <script type="text/javascript">
-        $(document).ready(function(){
-            var autocomplete;
-            var id = 'leaving_from';
-
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
-                types:['geocode'],
-            });
-        });
-        $(document).ready(function(){
-            var autocomplete;
-            var id = 'leaving_to';
-
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
-                types:['geocode'],
-            });
-        });
-        $(document).ready(function(){
-            var autocomplete;
-            var id = 'destination-city';
-
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
-                types:['geocode'],
-            });
-        });
-        $(document).ready(function(){
-            var autocomplete;
-            var id = 'pack-departure-city';
-
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
-                types:['geocode'],
-            });
-        });
-        $(document).ready(function(){
-            var autocomplete;
-            var id = 'pack-destination-city';
-
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
-                types:['geocode'],
-            });
-        });
-    </script> --}}
-
     <script type="text/javascript">
         $(document).ready(function(){
             var autocompleteOptions = {
