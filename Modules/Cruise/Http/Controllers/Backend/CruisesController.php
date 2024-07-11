@@ -348,13 +348,6 @@ class CruisesController extends Controller
 
         $oldImagePath = $$module_name_singular->image;
 
-        $imagePath = null;
-        if ($request->hasFile('cabin_images')) {
-            $imagePath = $request->file('cabin_images')->store('cruises/cabin_images', 'public');
-            $modelData = $request->except('cabin_images');
-            $modelData['cabin_images'] = $imagePath;
-        }
-
         // $imagePath = null;
         // if ($request->hasFile('videos')) {
         //     $imagePath = $request->file('videos')->store('cruises', 'public');
@@ -378,6 +371,10 @@ class CruisesController extends Controller
             $modelData['images'] = json_encode($imagePaths);
         }
 
+        if (!empty($request->amenities)) {
+            $modelData['amenities'] = json_encode($request->amenities);
+        }
+
         if (!empty($request->videos)) {
             $videos = explode("=", $request->videos);
 
@@ -388,6 +385,13 @@ class CruisesController extends Controller
             }
         } else {
             $modelData['videos'] = null;
+        }
+
+        $imagePath = null;
+        if ($request->hasFile('cabin_images')) {
+            $imagePath = $request->file('cabin_images')->store('cruises', 'public');
+            $modelData = $request->except('cabin_images');
+            $modelData['cabin_images'] = $imagePath;
         }
 
         $$module_name_singular->update($modelData);

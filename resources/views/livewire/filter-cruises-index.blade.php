@@ -6,7 +6,7 @@
                     <div class="form-gp">
                         <label>Starting From</label>
                         <div class="input-group margin-bottom-sm">
-                            <input type="text" wire:model="city" name="departure_city" class="form-control" required placeholder="E.g. London">
+                            <input type="text" wire:model="departure_city" name="departure_city" class="form-control" required placeholder="E.g. London" id="departure_city">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                         </div>
                     </div>
@@ -15,7 +15,7 @@
                     <div class="form-gp">
                         <label>Going To</label>
                         <div class="input-group margin-bottom-sm">
-                            <input type="text" name="destination_city" class="form-control" required placeholder="E.g. Paris">
+                            <input type="text" wire:model="destination_city" name="destination_city" class="form-control" placeholder="E.g. Paris" id="destination_city">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                         </div>
                     </div>
@@ -23,24 +23,29 @@
                 <div class="col-md-2 col-sm-6 col-xs-6">
                     <div class="form-gp">
                         <label>Month Of Travel</label>
-                        <select class="selectpicker">
-                            <option>Any</option>
-                            <option>July</option>
-                            <option>August</option>
-                            <option>September</option>
-                            <option>October</option>
-                            <option>December</option>
+                        <select class="custom-select-room" wire:model="startDate">
+                            <option value="">Any</option>
+                            @foreach ($uniqueStartDate as $startDate)
+                                @foreach (collect(explode(', ', $startDate))->map(function($start_month) {
+                                    return \Carbon\Carbon::parse($start_month)->format('F');
+                                })->unique()->sort() as $month)
+                                    <option value="{{ $startDate }}">{{ $month }}</option>
+                                @endforeach
+                            @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 col-xs-6">
+                <div class="col-md-1 col-sm-6 col-xs-3">
                     <div class="form-gp">
                         <label>Budget</label>
-                        <select class="selectpicker">
-                            <option>All</option>
-                            <option>Upto $500</option>
+                        <select class="custom-select-room" wire:model="budgetPrice">
+                            <option value="">All</option>
+                            @foreach ($uniquePrice as $price)
+                                <option value="{{ $price }}">$ {{ $price }}</option>
+                            @endforeach
+                            {{-- <option>Upto $500</option>
                             <option>Above $1000+</option>
-                            <option>Upto $5000</option>
+                            <option>Upto $5000</option> --}}
                         </select>
                     </div>
                 </div>
@@ -72,80 +77,88 @@
                     </div>
                 </div>
                 <div class="star-filter filter">
-                    <h5><i class="fa fa-calendar"></i>  Duration of the cruise</h5>
+                    <h5><i class="fa fa-calendar"></i> Duration of the cruise</h5>
                     <ul>
-                        <li><input type="checkbox"> Upto 3 Days</li>
+                        @foreach ($uniqueDuration as $duration)
+                            <li>
+                                <input type="checkbox" wire:model.live="filterDuration.{{ $duration }}" value="{{ $duration }}">
+                                {{ $duration }} Days
+                            </li>
+                        @endforeach
+                        {{-- <li><input type="checkbox"> Upto 3 Days</li>
                         <li><input type="checkbox"> 5 to 7 Days</li>
                         <li><input type="checkbox"> 9 to 11 Days</li>
                         <li><input type="checkbox"> 12 to 14 Days</li>
                         <li><input type="checkbox"> Above 14 Days</li>
-                        <li><input type="checkbox"> Any</li>
+                        <li><input type="checkbox"> Any</li> --}}
                     </ul>
                 </div>
-                <div class="location-filter filter">
-                    <h5><i class="fa fa-globe"></i> Location</h5>
-                    <ul>
-                        @foreach ($uniqueLocation as $location)
-                            <li>
-                                <input type="checkbox" wire:model.live="filterLocation.{{ $location }}" value="{{ $location }}">
-                                {{ $location }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                {{-- <div class="filter">
-                    <h5><i class="fa fa-anchor"></i> Departure Port</h5>
-                    <ul>
-                        <li><input type="checkbox"> Boston</li>
-                        <li><input type="checkbox"> Charleston</li>
-                        <li><input type="checkbox"> Fairbanks</li>
-                        <li><input type="checkbox"> Houston</li>
-                        <li><input type="checkbox"> Goa</li>
-                        <li><input type="checkbox"> Kerla</li>
-                        <li><input type="checkbox"> All</li>
-                    </ul>
-                </div> --}}
                 <div class="facilities-filter filter">
                     <h5><i class="fa fa-list"></i>   Cabin Type</h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="cruise"> <i class=""></i> oceanview</li>
-                        <li><input type="checkbox" wire:model.live="Interior"> <i class=""></i> Interior</li>
-                        <li><input type="checkbox" wire:model.live="Suite"> <i class=""></i> Suite</li>
+                        @foreach ($uniqueCabinType as $cabinType)
+                            <li>
+                                <input type="checkbox" wire:model.live="filterCabinType.{{ $cabinType }}" value="{{ $cabinType }}">
+                                {{ $cabinType }}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="facilities-filter filter">
                     <h5><i class="fa fa-list"></i>   Departure Port</h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        @foreach ($uniqueDeparture as $departure)
+                            @php
+                                $parts = explode(",", $departure);
+                                $city = $parts[0];
+                            @endphp
+                            <li>
+                                <input type="checkbox" wire:model.live="filterDeparture.{{ $departure }}" value="{{ $city }}">
+                                {{ $city }}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="facilities-filter filter">
-                    <h5><i class="fa fa-list"></i>    Destination Ports</h5>
+                    <h5><i class="fa fa-list"></i>Destination Ports</h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        @foreach ($uniqueDestination as $destination)
+                            @php
+                                $parts = explode(",", $destination);
+                                $city = $parts[0];
+                            @endphp
+                            <li>
+                                <input type="checkbox" wire:model.live="filterDestination.{{ $destination }}" value="{{ $city }}">
+                                {{ $city }}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="facilities-filter filter">
-                    <h5><i class="fa fa-list"></i>    Return Port
+                    <h5><i class="fa fa-list"></i> Return Port
                     </h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
-                        <li><input type="checkbox" wire:model.live="Port Name"> <i class=""></i> Port Name</li>
+                        @foreach ($uniqueReturn as $return)
+                            @php
+                                $parts = explode(",", $return);
+                                $city = $parts[0];
+                            @endphp
+                            <li>
+                                <input type="checkbox" wire:model.live="filterReturn.{{ $return }}" value="{{ $city }}">
+                                {{ $city }}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="facilities-filter filter">
-                    <h5><i class="fa fa-list"></i>  Amenities and Features</h5>
+                    <h5><i class="fa fa-list"></i> Amenities and Features</h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="cruise"> <i class="fa fa-ship"></i> Cruise</li>
-                        <li><input type="checkbox" wire:model.live="transportation"> <i class="fa fa-taxi"></i> Transportation</li>
-                        <li><input type="checkbox" wire:model.live="sighseeing"> <i class="fa fa-eye"></i> Sightseeing</li>
-                        <li><input type="checkbox" wire:model.live="meals"> <i class="fa fa-cutlery"></i> Meals</li>
-                        <li><input type="checkbox" wire:model.live="drinks"> <i class="fa fa-glass"></i> Drinks</li>
+                        @foreach ($uniqueAmenities as $amenity)
+                            <li>
+                                <input type="checkbox" wire:model.live="filterAmenities.{{ $amenity->name }}" value="{{ $amenity->name }}"><img src="{{ asset('public/storage/' . $amenity->icon) }}" alt="hotel" width="18px" style="filter: invert(1);"> &nbsp;
+                                {{ $amenity->name }}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -212,20 +225,28 @@
                                 </a>
                                 <p>
                                     <strong><i class="fa fa-map-marker"></i> Departs From: </strong>
-                                    {{ $cruise->city }}
+                                    {{ $cruise->departure }}
                                 </p>
                                 <p>
-                                    <strong><i class="fa fa-globe"></i> Location: </strong>
-                                    {{ $cruise->country }}
+                                    <strong><i class="fa fa-globe"></i> Destination : </strong>
+                                    {{ $cruise->destination }}
+                                </p>
+                                <p>
+                                    <strong><i class="fa fa-map-marker"></i> Return Port : </strong>
+                                    {{ $cruise->return }}
                                 </p>
                                 <p>
                                     <strong><i class="fa fa-list"></i> Amenities:  </strong>
-                                    {{ $cruise->country }}
-                                </p>
-                                <p>
-                                    <strong><i class="fa fa-map-marker"></i>  Return Port
-                                        : </strong>
-                                    {{ $cruise->country }}
+                                    @if($cruise->amenities)
+                                        @foreach (json_decode($cruise->amenities) as $amenityName)
+                                            @php
+                                                $amenityDetails = $uniqueAmenities[$amenityName];
+                                            @endphp
+
+                                            <img src="{{ asset('public/storage/' . $amenityDetails->icon) }}" alt="hotel" width="50px" style="min-height: 50px !important;">{{ $amenityDetails->name }}
+                                        @endforeach
+                                    @endif
+                                    {{-- {{ $cruise->included }} --}}
                                 </p>
 
                                 <ul class="nav nav-tabs">

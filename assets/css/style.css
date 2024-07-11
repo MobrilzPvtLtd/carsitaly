@@ -927,8 +927,8 @@ h5 {
     background: #ffffff;
     border: 1px solid #BEC4C8;
     border-radius: 0;
-    height: 40px;
-    width: 70px;
+    height: 45px;
+    /* width: 70px; */
     cursor: pointer;
 }
 .custom-select-room option {
@@ -3055,7 +3055,7 @@ h5 {
 .cruise-list-view h4 {
 	font-weight: bold;
 	margin-top: 15px;
-    color: #07253F;
+    color: #339d72;
 }
 .cruise-list-view strong {
 	color: #07253F;

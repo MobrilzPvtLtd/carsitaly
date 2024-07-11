@@ -100,7 +100,7 @@
             $required = "required";
             ?>
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("departure")->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -113,7 +113,7 @@
             $required = "required";
             ?>
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("destination")->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -126,7 +126,7 @@
             $required = "required";
             ?>
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->id("return")->attributes(["$required"]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -141,17 +141,17 @@
             {{ html()->number($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
         </div>
     </div>
-    <div class="col-12 col-sm-6 mb-3">
+    <div class="col-12 col-sm-8 mb-3">
         <div class="form-group">
             <?php
             $field_name = 'itinerary';
             $field_lable_name = 'day-by-Day Itinerary';
             $field_lable = label_case($field_lable_name);
             $field_placeholder = $field_lable;
-            $required = "";
+            $required = '';
             ?>
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+            {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->rows(4)->attributes(["$required"]) }}
         </div>
     </div>
 
@@ -230,6 +230,17 @@
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
+            $field_name = 'amenities';
+            $field_lable = label_case($field_name);
+            $amenities = \Modules\Amenity\Models\Amenity::where('status',1)->pluck('name','name')->toArray();
+            ?>
+            {{ html()->label($field_lable, $field_name)->class('form-label') }}
+            {{ html()->select($field_name.'[]', $amenities)->placeholder($field_placeholder)->class('form-control select3')->multiple() }}
+        </div>
+    </div>
+    {{-- <div class="col-12 col-sm-4 mb-3">
+        <div class="form-group">
+            <?php
             $field_name = 'included';
             $field_lable_name = 'included_services';
             $field_lable = label_case($field_lable_name);
@@ -238,7 +249,7 @@
             {{ html()->label($field_lable, $field_lable_name)->class('form-label') }}
             {{ html()->select($field_name, $amenities)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
         </div>
-    </div>
+    </div> --}}
     {{-- <div class="col-12 col-sm-6 mb-3">
         <div class="form-group">
             <?php
@@ -512,4 +523,73 @@
         minDate: "today"
     });
 </script>
+
+{{-- <script src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var autocomplete;
+        var id = 'search-box';
+
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{
+            types:['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                return;
+            }
+
+            var addressComponents = place.address_components;
+            var address = '';
+            var city = '';
+            var state = '';
+            var country = '';
+            var zipcode = '';
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+
+            for (var i = 0; i < addressComponents.length; i++) {
+                var component = addressComponents[i];
+                if (component.types.includes('street_number')) {
+                    address += component.long_name + ', ';
+                } else if (component.types.includes('route')) {
+                    address += component.long_name;
+                } else if (component.types.includes('locality')) {
+                    city = component.long_name;
+                } else if (component.types.includes('administrative_area_level_1')) {
+                    state = component.long_name;
+                } else if (component.types.includes('country')) {
+                    country = component.long_name;
+                } else if (component.types.includes('postal_code')) {
+                    zipcode = component.long_name;
+                }
+            }
+
+            $('#address').val(address);
+            $('#city').val(city);
+            $('#state').val(state);
+            $('#country').val(country);
+            $('#pin_code').val(zipcode);
+            $('#latitude').val(latitude);
+            $('#longitude').val(longitude);
+
+        });
+    });
+</script> --}}
+
+<script type="module" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&libraries=drawing,geometry,places"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var autocompleteOptions = {
+                types: ['geocode']
+            };
+
+            var autocompleteDeparture = new google.maps.places.Autocomplete(document.getElementById('departure'), autocompleteOptions);
+            var autocompleteDestination = new google.maps.places.Autocomplete(document.getElementById('destination'), autocompleteOptions);
+            var autocompleteReturn = new google.maps.places.Autocomplete(document.getElementById('return'), autocompleteOptions);
+        });
+    </script>
 @endsection

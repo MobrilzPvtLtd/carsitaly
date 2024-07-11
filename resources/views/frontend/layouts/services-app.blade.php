@@ -123,7 +123,9 @@
 
             var autocompleteStartingPoint = new google.maps.places.Autocomplete(document.getElementById('starting_point'), autocompleteOptions);
             var autocompleteEndingPoint = new google.maps.places.Autocomplete(document.getElementById('ending_point'), autocompleteOptions);
-            // var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('city'), autocompleteOptions);
+            var autocompleteDepartureCity = new google.maps.places.Autocomplete(document.getElementById('departure_city'), autocompleteOptions);
+            var autocompleteDestinationCity = new google.maps.places.Autocomplete(document.getElementById('destination_city'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('city'), autocompleteOptions);
         });
     </script>
 </body>

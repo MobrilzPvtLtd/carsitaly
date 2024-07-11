@@ -44,6 +44,8 @@ class FilterIndex extends Component
     public $occupancy_no;
     public $starting_point;
     public $ending_point;
+    public $budgetPrice;
+    public $startTime;
 
 
     protected $paginationTheme = 'bootstrap';
@@ -61,6 +63,8 @@ class FilterIndex extends Component
         $this->formLocation = $this->city;
         $this->fromPoint = $this->starting_point;
         $this->toPoint = $this->ending_point;
+        $this->budgetPrice = $this->budgetPrice;
+        $this->startTime = $this->startTime;
         // dd($this->toPoint);
     }
 
@@ -112,6 +116,12 @@ class FilterIndex extends Component
             }
             if ($this->toPoint) {
                 $query->where('ending_point', 'like', "%$this->toPoint%");
+            }
+            if ($this->budgetPrice) {
+                $query->where('price', $this->budgetPrice);
+            }
+            if ($this->startTime) {
+                $query->where('start_time', $this->startTime);
             }
         });
 
@@ -248,8 +258,12 @@ class FilterIndex extends Component
         $uniqueStartingPoint = Service::where('service_type', $serviceType)->where('status', 1)
         ->distinct()->pluck('starting_point');
 
+        $uniquePrice = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('price');
+
+        $uniqueStartTime = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('start_date');
+
         return view('livewire.filter-index', compact('services','uniqueLocation','serviceType',
-        'uniqueAmenities','uniqueOccupancy','uniqueBedrooms','uniqueDuration','uniqueStartTime','uniqueStartingPoint'
+        'uniqueAmenities','uniqueOccupancy','uniqueBedrooms','uniqueDuration','uniqueStartTime','uniqueStartingPoint','uniquePrice','uniqueStartTime'
         ));
     }
 }
