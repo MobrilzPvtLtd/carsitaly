@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Modules\Amenity\Models\Amenity;
 use Modules\Car\Models\Car;
 
 class FilterCarsIndex extends Component
@@ -16,12 +17,10 @@ class FilterCarsIndex extends Component
     public $minPrice = '';
     public $maxPrice = '';
 
-    public $filterBrands = [];
-    public $filterCarFeatures = [];
-
-    public $automatic = '';
-    public $mannual = '';
-    public $any = '';
+    public $searchTerm;
+    public $filterAmenities = [];
+    public $filterLuggageCapacity = [];
+    public $filterVehicleType = [];
 
     public $powerLock = '';
     public $sateliteNavigation = '';
@@ -34,16 +33,9 @@ class FilterCarsIndex extends Component
     public $sort_rating = '';
     public $selectedSort = '';
 
-    public $formLocation = '';
-    public $from_brand = '';
     public $formCarType = '';
-    public $formReturn = '';
-    public $formPickUp = '';
-    public $brand = '';
-    public $city = '';
     public $carType = '';
-    public $check_in = '';
-    public $check_out = '';
+    public $budgetPrice;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -57,12 +49,8 @@ class FilterCarsIndex extends Component
 
     public function applyFilter()
     {
-        // dd($this->check_in);
-        $this->formLocation = $this->city;
-        $this->from_brand = $this->brand;
+        $this->budgetPrice = $this->budgetPrice;
         $this->formCarType = $this->carType;
-        $this->formReturn = $this->check_in;
-        $this->formPickUp = $this->check_out;
     }
 
     public function updateSearchPrice($val)
@@ -82,9 +70,11 @@ class FilterCarsIndex extends Component
     public function render()
     {
         // dd($this->fRoom_no);
+        $title = '%'.$this->searchTerm.'%';
         $serviceType = $this->serviceType;
-        $brands = $this->filterBrands;
-        $carFeatures = $this->filterCarFeatures;
+        $amenitiesArr = $this->filterAmenities;
+        $filterLuggageCapacity = $this->filterLuggageCapacity;
+        $filterVehicleType = $this->filterVehicleType;
 
         $cars = Service::where('status', 1);
 
@@ -114,73 +104,75 @@ class FilterCarsIndex extends Component
             $cars->orderBy('id', 'DESC');
         }
 
-        $cars->when($this->formLocation, function ($query) {
-            $query->where('city', 'like', "%$this->formLocation%");
-
-            if ($this->from_brand) {
-                $query->where('brand', $this->from_brand);
-            }
-            if ($this->formCarType) {
-                $query->where('car_type', $this->formCarType);
-            }
-        });
-
-        $selectedBrands = array_keys(array_filter($brands));
-        if (!empty($selectedBrands)) {
-            $cars->whereIn('brand', $selectedBrands);
+        // Title filter
+        if($title) {
+            $cars->where('title', 'like', "%$title%");
         }
 
-        $cars->when($this->powerLock || $this->sateliteNavigation || $this->FMRadio || $this->musicSystem || $this->carAC, function ($query) {
-            return $query->where(function ($subQuery) {
-                if ($this->powerLock) {
-                    $subQuery->orWhere('car_features', 'like', '%powerLock%');
-                }
-                if ($this->sateliteNavigation) {
-                    $subQuery->orWhere('car_features', 'like', '%sateliteNavigation%');
-                }
-                if ($this->FMRadio) {
-                    $subQuery->orWhere('car_features', 'like', '%FMRadio%');
-                }
-                if ($this->musicSystem) {
-                    $subQuery->orWhere('car_features', 'like', '%musicSystem%');
-                }
-                if ($this->carAC) {
-                    $subQuery->orWhere('car_features', 'like', '%carAC%');
-                }
-            });
-        });
+        if ($this->formCarType) {
+            $cars->where('vehicle_type', $this->formCarType);
+        }
 
-        $cars->when($this->automatic || $this->mannual || $this->any, function ($query) {
-            return $query->where(function ($subQuery) {
-                if ($this->automatic) {
-                    $subQuery->orWhere('transmission', 'like', '%automatic%');
-                }
-                if ($this->mannual) {
-                    $subQuery->orWhere('transmission', 'like', '%mannual%');
-                }
-                if ($this->any) {
-                    $subQuery->orWhere('transmission', 'like', '%any%');
+        if ($this->budgetPrice) {
+            $cars->where('price', $this->budgetPrice);
+        }
+
+        // Vehicle Type filter
+        $selectedFilterVehicleType = array_keys(array_filter($filterVehicleType));
+
+        if (!empty($selectedFilterVehicleType)) {
+            $cars->whereIn('vehicle_type', $selectedFilterVehicleType);
+        }
+
+        // Luggage Capacity filter
+        $selectedFilterLuggageCapacity = array_keys(array_filter($filterLuggageCapacity));
+
+        if (!empty($selectedFilterLuggageCapacity)) {
+            $cars->whereIn('luggage_capacity', $selectedFilterLuggageCapacity);
+        }
+
+        // vehicle features filter
+        $selectedAmenities = array_keys(array_filter($amenitiesArr));
+
+        if (!empty($selectedAmenities)) {
+            $cars->where(function ($query) use ($selectedAmenities) {
+                foreach ($selectedAmenities as $amenity) {
+                    $query->orWhereJsonContains('vehicle_features', $amenity);
                 }
             });
-        });
+        }
 
         $cars = $cars->where('service_type', $serviceType)->orderBy('id', 'desc')->paginate(6);
 
-        // $brands = Service::where('status', 1)->distinct()->pluck('brand');
-        $car_type = Service::where('vehicle_type', '!=', null)->distinct()->pluck('vehicle_type');
+        $uniqueVehicleType = Service::where('service_type', $serviceType)->where('vehicle_type', '!=', null)->distinct()->pluck('vehicle_type');
+
+        $uniqueLuggageCapacity = Service::where('service_type', $serviceType)->where('vehicle_type', '!=', null)->distinct()->pluck('luggage_capacity');
+
+        $amenities = Service::where('service_type', $serviceType)->where('status', 1)->distinct()
+                    ->pluck('vehicle_features')->toArray();
+
+        $uniqueAmenities = [];
+
+        foreach ($amenities as $amenityList) {
+            $amenityArray = json_decode($amenityList);
+
+            if ($amenityArray) {
+                foreach ($amenityArray as $amenityName) {
+                    if (!isset($uniqueAmenities[$amenityName])) {
+                        $amenityDetails = Amenity::where('name', $amenityName)->where('status', 1)->first();
+
+                        if ($amenityDetails) {
+                            $uniqueAmenities[$amenityName] = $amenityDetails;
+                        }
+                    }
+                }
+            }
+        }
+
+        $uniquePrice = Service::where('service_type', $serviceType)->where('status', 1)->distinct()->pluck('price');
 
 
-        // $car_features = Service::where('status', 1)->distinct()->pluck('car_features');
-        // $car_features_array = json_decode($car_features, true);
-        // foreach ($car_features_array as $feature) {
-        //     $carFeature = $feature;
-        // }
-
-        return view('livewire.filter-cars-index', compact(
-            'cars',
-            // 'brands',
-            'serviceType',
-            'car_type'
+        return view('livewire.filter-cars-index', compact('cars','uniqueAmenities','serviceType','uniqueVehicleType','uniqueLuggageCapacity','uniquePrice'
         ));
     }
 }

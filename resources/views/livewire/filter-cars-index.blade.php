@@ -2,16 +2,18 @@
     <div class="modify-search modify-car">
         <div class="container clear-padding">
             <form wire:submit.prevent="applyFilter">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-gp">
-                        <label>Pick Up Location</label>
+                        <label>{{ ucfirst(strtolower($serviceType)) }} Name</label>
                         <div class="input-group margin-bottom-sm">
-                            <input type="text" wire:model="city" name="city" class="form-control" required placeholder="E.g. London">
+                            <input wire:model.live="searchTerm" type="text" id="search-bar" name="title" class="form-control" placeholder="E.g. Italy">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                            {{-- <input type="text" wire:model="city" name="city" class="form-control" required placeholder="E.g. London" id="city">
+                            <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span> --}}
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 col-xs-6">
+                {{-- <div class="col-md-2 col-sm-6 col-xs-6">
                     <div class="form-gp">
                         <label>Pick Up Date</label>
                         <div class="input-group margin-bottom-sm">
@@ -28,30 +30,31 @@
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-1 col-sm-6 col-xs-6">
+                </div> --}}
+                <div class="col-md-2 col-sm-6 col-xs-6">
                     <div class="form-gp">
-                        <label>Car Type</label>
-                        <select class="custom-select-room" wire:model="carType">
+                        <label>Transfers Type</label>
+                        <select class="custom-select-room" wire:model="carType" style="width: 150px;">
                             <option value="">select</option>
-                            @foreach ($car_type as $ctype)
+                            @foreach ($uniqueVehicleType as $ctype)
                                 <option>{{ $ctype }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                {{-- <div class="col-md-1 col-sm-6 col-xs-6">
+                <div class="col-md-2">
                     <div class="form-gp">
-                        <label>Brand</label>
-                        <select class="custom-select-room" wire:model="brand">
-                            <option value="">select</option>
-
-                            @foreach ($brands as $brand)
-                                <option value="{{ $brand }}">{{ $brand }}</option>
-                            @endforeach
-                        </select>
+                        <label>Budget</label>
+                        <div class="input-group margin-bottom-sm">
+                            <select class="custom-select-room" wire:model="budgetPrice" style="width: 150px;">
+                                <option value="">All</option>
+                                @foreach ($uniquePrice as $price)
+                                    <option value="{{ $price }}">$ {{ $price }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div> --}}
+                </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="form-gp">
                         <button type="submit" class="modify-search-button btn transition-effect">MODIFY SEARCH</button>
@@ -81,43 +84,34 @@
                 <div class="star-filter filter">
                     <h5><i class="fa fa-dashboard"></i>  Vehicle Type</h5>
                     <ul>
-                        <li><input type="checkbox" wire:model.live="automatic">Sedan</li>
-                        <li><input type="checkbox" wire:model.live="mannual"> SUV</li>
-                        <li><input type="checkbox" wire:model.live="any"> Van</li>
-                        <li><input type="checkbox" wire:model.live="any"> Any</li>
+                        @foreach ($uniqueVehicleType as $vehicle_type)
+                            <li>
+                                <input type="checkbox" wire:model.live="filterVehicleType.{{ $vehicle_type }}" value="{{ $vehicle_type }}">
+                                {{ $vehicle_type }}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="location-filter filter">
                     <h5><i class="fa fa-certificate"></i> Luggage Capacity</h5>
                     <ul>
-                        {{-- @foreach ($brands as $brand)
+                        @foreach ($uniqueLuggageCapacity as $capacity)
                             <li>
-                                <input type="checkbox" wire:model.live="filterBrands.{{ $brand }}" value="{{ $brand }}">{{ $brand }}
+                                <input type="checkbox" wire:model.live="filterLuggageCapacity.{{ $capacity }}" value="{{ $capacity }}">
+                                {{ $capacity }} Bags
                             </li>
-                        @endforeach --}}
-                        <li><input type="checkbox" wire:model.live="automatic">2 Bags</li>
-                        <li><input type="checkbox" wire:model.live="mannual"> 3 Bags</li>
-                        <li><input type="checkbox" wire:model.live="any"> 4 Bags</li>
-                        <li><input type="checkbox" wire:model.live="any"> 5 Bags</li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="facilities-filter filter">
                     <h5><i class="fa fa-cog"></i> Vehicle Features</h5>
                     <ul>
-                        {{-- @php
-                            $carFeaturesArray = json_decode($carFeature, true);
-                        @endphp
-
-                        @foreach ($carFeaturesArray as $feature)
+                        @foreach ($uniqueAmenities as $amenity)
                             <li>
-                                <input type="checkbox" wire:model.live="filterCarFeatures.{{ $feature }}" value="{{ $feature }}">{{ $feature }}
+                                <input type="checkbox" wire:model.live="filterAmenities.{{ $amenity->name }}" value="{{ $amenity->name }}"><img src="{{ asset('public/storage/' . $amenity->icon) }}" alt="hotel" width="18px" style="filter: invert(1);"> &nbsp;
+                                {{ $amenity->name }}
                             </li>
-                        @endforeach --}}
-                        <li><input type="checkbox" wire:model.live="carAC"> Car AC</li>
-                        <li><input type="checkbox" wire:model.live="musicSystem"> Music System</li>
-                        <li><input type="checkbox" wire:model.live="FMRadio"> FM Radio</li>
-                        <li><input type="checkbox" wire:model.live="sateliteNavigation"> Child Seat</li>
-                        <li><input type="checkbox" wire:model.live="powerLock"> Power Lock</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -201,9 +195,7 @@
                                             </a>
                                             {{-- <p>{{ $car->brand }} <span>({{ $car->car_type }})</span></p> --}}
                                         </div>
-                                        <div class="hotel-desc">
-                                            <p>{{ $car->description }}</p>
-                                        </div>
+
                                         <div class="car-detail">
                                             {{-- <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
                                                 <p><i class="fa fa-calendar"></i>{{ $car->warranty }} Year</p>
@@ -212,21 +204,36 @@
                                                 <p><i class="fa fa-road"></i>{{ $car->mileage }} KM</p>
                                             </div> --}}
                                             <div class="clearfix"></div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-suitcase"></i>{{ $car->engine_type }} 2 bags</p>
+                                            <div class="col-md-12 col-sm-6 col-xs-6 clear-padding">
+                                                <p><i class="fa fa-suitcase"></i> <strong>Luggage Capacity: </strong>{{ $car->luggage_capacity }} bags</p>
                                             </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-users"></i>{{ $car->seating_capacity }} 4 Person</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="clearfix"></div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-dashboard"></i> {{ $car->vehicle_type }}</p>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
-                                                <p><i class="fa fa-cog"></i>{{ $car->top_speed }} Vehicle Features</p>
+                                            <div class="col-md-12 col-sm-6 col-xs-6 clear-padding">
+                                                <p><i class="fa fa-users"></i><strong>Vehicle Capacity: </strong>{{ $car->vehicle_capacity }} Person</p>
                                             </div>
                                             <div class="clearfix"></div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 clear-padding">
+                                                <p><i class="fa fa-dashboard"></i> <strong>Vehicle Type :</strong> {{ $car->vehicle_type }}</p>
+                                            </div>
+                                            <div class="col-md-12 col-sm-6 col-xs-6 clear-padding">
+                                                <p>
+                                                    <i class="fa fa-cog"></i> <strong>Vehicle Features :</strong>
+                                                @if($car->vehicle_features)
+                                                    @foreach (json_decode($car->vehicle_features) as $amenityName)
+                                                        @php
+                                                            $amenityDetails = $uniqueAmenities[$amenityName];
+                                                        @endphp
+
+                                                        <img src="{{ asset('public/storage/' . $amenityDetails->icon) }}" alt="hotel" width="50px" style="min-height: 50px !important;">{{ $amenityDetails->name }}
+                                                    @endforeach
+                                                @endif
+                                                </p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="hotel-desc">
+                                            <p>{{ $car->description }}</p>
                                         </div>
                                     </div>
                                 </div>

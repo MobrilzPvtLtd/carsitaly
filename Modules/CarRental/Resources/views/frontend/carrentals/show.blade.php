@@ -7,7 +7,7 @@
 @section('services-content')
 <div class="row page-title">
     <div class="container clear-padding text-center">
-        <h3>WONDERFUL EUROPE</h3>
+        <h3>{{ $carrental->title }}</h3>
     </div>
 </div>
 
@@ -21,12 +21,18 @@
                     <li data-target="#gallery" data-slide-to="1"></li>
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="assets/images/slide.jpg" alt="Cruise">
-                    </div>
-                    <div class="item">
-                        <img src="assets/images/slide2.jpg" alt="Cruise">
-                    </div>
+                    @if ($carrental->images)
+                        @php
+                            $images = json_decode($carrental->images);
+                        @endphp
+                        @if ($images && count($images) > 0)
+                            @foreach ($images as $index => $image)
+                                <div class="item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('public/storage/' . $image) }}" alt="car">
+                                </div>
+                            @endforeach
+                        @endif
+                    @endif
                 </div>
                 <a class="left carousel-control" href="#gallery" role="button" data-slide="prev">
                     <span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -47,25 +53,30 @@
                 </ul>
                 <div class="tab-content">
                     <div id="Vehicle-info" class="tab-pane fade in active">
-                        <h4 class="tab-heading">VEHICLE NAME: NAME OF THE VEHICLE SERVICE.</h4>
+                        <h4 class="tab-heading">VEHICLE NAME: {{ $carrental->title }}</h4>
                         <p>
-                            <b>Description:</b> Detailed description of the Vehicle service.
+                            <b>Description:</b> {{ $carrental->description }}
                         </p>
 
 
                     </div>
                     <div id="itinerary" class="tab-pane fade">
-                        <h4 class="tab-heading"> Vehicle Type: Type of vehicle (e.g., sedan, SUV, van).</h4>
-                        <p> <b>Vehicle Capacity:</b> Amount of luggage the vehicle can carry.
                         </p>
-                        <p> <b>Luggage Capacity:</b> Number of passengers the vehicle can accommodate.
+                        <h4 class="tab-heading"> Vehicle Type: {{ $carrental->vehicle_type }}</h4>
+                        <p> <b>Vehicle Capacity:</b> {{ $carrental->vehicle_capacity }} </p>
+                        <p> <b>Luggage Capacity:</b> {{ $carrental->luggage_capacity }}</p>
+                        <p> <b> Vehicle Features:</b>
+                            @if ($carrental->vehicle_features > 0)
+                                @foreach (json_decode($carrental->vehicle_features) as $amenities)
+                                    {{ ucfirst(strtolower($amenities)) }},
+                                @endforeach
+                            @endif
                         </p>
-                        <p> <b> Vehicle Features:</b> List of features (e.g., air conditioning, Wi-Fi, child seats).
-                        </p>
-
                     </div>
                 </div>
             </div>
+
+            <hr>
             <div class="similar-hotel sidebar-item">
                 <h4><i class="fa fa-taxi"></i> Similar Cars</h4>
                 <div class="sidebar-item-body">
@@ -254,9 +265,9 @@
                     <h4><i class="fa fa-phone"></i> Need Assistance</h4>
                     <div class="assitance-body text-center">
                         <h5>Need Help? Call us or drop a message. Our agents will be in touch shortly.</h5>
-                        <h2>+91 1234567890</h2>
+                        <h2>+91 {{ $carrental->mobile }}</h2>
                         <h3>Or</h3>
-                        <a href="mailto:info@yourdomain.com"><i class="fa fa-envelope-o"></i> Email Us</a>
+                        <a href="mailto:{{ $carrental->email }}"><i class="fa fa-envelope-o"></i> Email Us</a>
                     </div>
                 </div>
 
