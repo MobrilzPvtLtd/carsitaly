@@ -3106,22 +3106,34 @@ h5 {
 .cruise-list-view .price {
 	min-height: 250px;
 	padding: 18px 0px;
-	background: #F2676B;
-	color: #ffffff;
+	background: #ffffff;
+	color: #0a3152;
 }
 .cruise-list-view .price h3 {
 	margin-top: 0px;
 	font-weight: bold;
 }
 .cruise-list-view .price a {
-	color: #ffffff;
+	/* color: #ffffff;
 	font-weight: bold;
-	font-size: 13px;
+	font-size: 13px; */
+    background: #f2676b;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px 8px;
+    display: inline-block;
+    margin-top: 5px;
+    border: 2px solid transparent;
 }
+
 .cruise-list-view .price a:hover {
-	text-decoration: underline;
+	/* text-decoration: underline; */
+    color: #ffffff;
+	border: 2px solid #ffffff;
+	background: #07253F;
 }
 .cruise-list-view:hover .price {
+	color: #ffffff;
 	background: #07253F;
 }
 @media (max-width: 991px) {

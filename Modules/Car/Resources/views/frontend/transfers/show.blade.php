@@ -295,28 +295,28 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="arrival-location" name="start_date" class="form-control" placeholder="e.g I.G.I Airport" required>
+                                            <input type="text" id="arrival-location" name="pickup_location" class="form-control" placeholder="e.g I.G.I Airport" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Treminal</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="terminal" name="start_date" class="form-control" placeholder="e.g Treminal 2" required>
+                                            <input type="text" id="terminal" name="terminal" class="form-control" placeholder="e.g Treminal 2" required>
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Flight number</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="flight-number" name="start_date" class="form-control" placeholder="e.g IX 807" required>
+                                            <input type="text" id="flight-number" name="flight_number" class="form-control" placeholder="e.g IX 807" required>
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
+                                            <input type="text" id="drop_location" name="drop_location" class="form-control"
                                                 placeholder="e.g Hotel" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
@@ -326,7 +326,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
+                                            <input type="text" id="arrival" name="pickup_location" class="form-control"
                                                 placeholder="e.g Station name" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
@@ -334,7 +334,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Platform</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
+                                            <input type="text" id="" name="platform" class="form-control"
                                                 placeholder="e.g Platform 2" required>
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
@@ -342,7 +342,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Train number </label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
+                                            <input type="text" id="" name="train_number" class="form-control"
                                                 placeholder="e.g 223807" required>
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
@@ -350,7 +350,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
+                                            <input type="text" id="end" name="drop_location" class="form-control"
                                                 placeholder="e.g Hotel" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
@@ -360,14 +360,14 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control" placeholder="e.g Bus stop name" required>
+                                            <input type="text" id="start_bus" name="pickup_location" class="form-control" placeholder="e.g Bus stop name" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Bus number</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control"
+                                            <input type="text" id="" name="bus_number" class="form-control"
                                                 placeholder="e.g 223807" required>
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
@@ -375,7 +375,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="start_date" class="form-control" placeholder="e.g Hotel" required>
+                                            <input type="text" id="end_bus" name="drop_location" class="form-control" placeholder="e.g Hotel" required>
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>

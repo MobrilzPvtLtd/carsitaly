@@ -126,6 +126,14 @@
             var autocompleteDepartureCity = new google.maps.places.Autocomplete(document.getElementById('departure_city'), autocompleteOptions);
             var autocompleteDestinationCity = new google.maps.places.Autocomplete(document.getElementById('destination_city'), autocompleteOptions);
             var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('city'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('arrival-location'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('end_date'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('arrival'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('end'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('start_bus'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('end_bus'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('location_ren'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('drop_rent'), autocompleteOptions);
         });
     </script>
 </body>

@@ -326,7 +326,7 @@
                                 </div> --}}
                                 <div class="price">
                                     <h3>${{ $cruise->price }}</h3>
-                                    <h5>$73/night</h5>
+                                    {{-- <h5>$73/night</h5> --}}
                                     <a href="{{ route('frontend.cruises.show',$cruise->slug) }}">VIEW DETAILS</a>
                                 </div>
                             </div>

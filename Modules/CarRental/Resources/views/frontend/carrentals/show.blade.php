@@ -114,7 +114,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Pickup Location</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="check_in" name="start_date" class="form-control"
+                                    <input type="text" id="location_ren" name="pickup_location" class="form-control"
                                         placeholder="e.g London" required>
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
@@ -122,7 +122,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Intermediate Stops</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="check_in" name="start_date" class="form-control"
+                                    <input type="text" id="" name="intermediate_stop" class="form-control"
                                         placeholder="e.g Super Market" required>
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
@@ -130,7 +130,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Dropoff Location</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="check_in" name="start_date" class="form-control"
+                                    <input type="text" id="drop_rent" name="end_date" class="form-control"
                                         placeholder="e.g New York" required>
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
@@ -138,7 +138,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Pickup Date</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="check_in" name="start_date" class="form-control"
+                                    <input type="text" id="" name="pickup_date" class="form-control"
                                         placeholder="DD/MM/YYYY" required>
                                     <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                 </div>
@@ -146,7 +146,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Dropoff Date</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="check_out" name="end_date" class="form-control"
+                                    <input type="text" id="" name="drop_date" class="form-control"
                                         placeholder="DD/MM/YYYY" required>
                                     <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                 </div>

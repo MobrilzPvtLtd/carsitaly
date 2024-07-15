@@ -446,7 +446,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Check-in Date</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_in" name="start_date" class="form-control"
+                                            <input type="text" id="check_in" name="checkin_date" class="form-control"
                                                 placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
@@ -454,7 +454,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Check-out Date</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_out" name="end_date" class="form-control"
+                                            <input type="text" id="check_out" name="checkin_date" class="form-control"
                                                 placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
