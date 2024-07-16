@@ -107,7 +107,7 @@
                 <div class="sidebar-booking-box">
                     <h3 class="text-center">MAKE A BOOKING</h3>
                     <div class="booking-box-body">
-                        <form action="http://localhost/booking" method="POST">
+                        <form action="{{ route('booking') }}" method="POST">
                             @csrf
                             <input type="hidden" value="13" name="service_id">
                             <input type="hidden" value="car" name="booking_type">

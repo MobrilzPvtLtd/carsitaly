@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('intermediate_stop', 255)->nullable();
             $table->string('drop_location', 255)->nullable();
             $table->string('terminal', 255)->nullable();
+            $table->string('travel_type', 255)->nullable();
             $table->string('travel_number', 255)->nullable();
             $table->string('platform', 255)->nullable();
             $table->dateTime('start_date')->nullable();
@@ -31,7 +32,6 @@ return new class extends Migration
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
-
             $table->timestamps();
             $table->softDeletes();
         });

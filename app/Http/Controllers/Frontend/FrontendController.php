@@ -110,37 +110,94 @@ class FrontendController extends Controller
     }
 
     public function booking(Request $request){
-        try{
-            $users = User::where('email',$request->email)->first();
-            if($users){
-                $user = User::where('email',$request->email)->first();
-            }elseif(!auth()->user()){
-                $user = new User();
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->mobile = $request->mobile;
-                $user->password = Hash::make("12345678");
-                $user->status = 1;
-                $user->save();
-                Auth::login($user);
-            }
 
-            $booking = new Booking();
-            $booking->user_id = auth()->user() ? auth()->user()->id : $user->id;
-            $booking->service_id = $request->service_id;
-            $booking->booking_type = $request->booking_type;
-            $booking->start_date = $request->start_date;
-            $booking->end_date = $request->end_date;
-            $booking->adult = $request->adult;
-            $booking->child = $request->child;
-            $booking->room_type = $request->room_type;
-            $booking->status = 1;
-            $booking->save();
-            session()->flash('success', ucfirst(strtolower($request->booking_type)) . ' ' . 'booking successful');
-            return redirect()->back();
-        }catch(\Exception $e){
-            session()->flash('error', $e->getMessage());
-            return redirect()->back();
+        $booking = new Booking();
+        $booking->service_id = $request->service_id;
+        $booking->booking_type = $request->booking_type;
+        $booking->travel_type = $request->travel_type;
+
+        // Initialize fields with null
+        $booking->pickup_location = null;
+        $booking->drop_location = null;
+        $booking->travel_number = null;
+        $booking->terminal = null;
+        $booking->platform = null;
+        $booking->bus_number = null;
+
+        switch ($request->travel_type) {
+            case 'flight':
+                $booking->pickup_location = $request->input('pickup_location');
+                $booking->terminal = $request->input('terminal');
+                $booking->travel_number = $request->input('travel_number');
+                $booking->drop_location = $request->input('drop_location');
+                break;
+
+            case 'train':
+                $booking->pickup_location = $request->input('pickup_location');
+                $booking->platform = $request->input('platform');
+                $booking->travel_number = $request->input('travel_number');
+                $booking->drop_location = $request->input('drop_location');
+                break;
+
+            case 'bus':
+                $booking->pickup_location = $request->input('pickup_location');
+                $booking->bus_number = $request->input('bus_number');
+                $booking->drop_location = $request->input('drop_location');
+                break;
         }
+
+        // Additional fields
+        $booking->start_date = $request->start_date;
+        $booking->end_date = $request->end_date;
+        $booking->adult = $request->adult;
+        $booking->child = $request->child;
+        $booking->status = 1;
+
+        dd($booking);
+
+        $booking->save();
+
+
+
+        // try{
+            // $users = User::where('email',$request->email)->first();
+            // if($users){
+            //     $user = User::where('email',$request->email)->first();
+            // }elseif(!auth()->user()){
+            //     $user = new User();
+            //     $user->name = $request->name;
+            //     $user->email = $request->email;
+            //     $user->mobile = $request->mobile;
+            //     $user->password = Hash::make("12345678");
+            //     $user->status = 1;
+            //     $user->save();
+            //     Auth::login($user);
+            // }
+
+            // $booking = new Booking();
+            // // $booking->user_id = auth()->user() ? auth()->user()->id : $user->id;
+            // $booking->service_id = $request->service_id;
+            // $booking->booking_type = $request->booking_type;
+            // $booking->pickup_location = $request->pickup_location;
+            // $booking->intermediate_stop = $request->intermediate_stop;
+            // $booking->drop_location = $request->drop_location;
+            // $booking->terminal = $request->terminal;
+            // $booking->travel_type = $request->travel_type;
+            // $booking->travel_number = $request->travel_number;
+            // $booking->platform = $request->platform;
+            // $booking->start_date = $request->start_date;
+            // $booking->end_date = $request->end_date;
+            // $booking->adult = $request->adult;
+            // $booking->child = $request->child;
+            // $booking->status = 1;
+            // dd($booking);
+
+            // $booking->save();
+            // session()->flash('success', ucfirst(strtolower($request->booking_type)) . ' ' . 'booking successful');
+            // return redirect()->back();
+        // }catch(\Exception $e){
+        //     session()->flash('error', $e->getMessage());
+        //     return redirect()->back();
+        // }
     }
 }
