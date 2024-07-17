@@ -442,11 +442,11 @@
                                 <form action="{{ route('booking') }}" method="POST">
                                     @csrf
                                     <input type="hidden" value="{{ $hotel->id }}" name="service_id">
-                                    <input type="hidden" value="hotel" name="booking_type">
+                                    <input type="hidden" value="hotels" name="booking_type">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Check-in Date</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_in" name="checkin_date" class="form-control"
+                                            <input type="text" id="check_in" name="pickup_date" class="form-control"
                                                 placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
@@ -454,22 +454,22 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Check-out Date</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="check_out" name="checkin_date" class="form-control"
+                                            <input type="text" id="check_out" name="drop_date" class="form-control"
                                                 placeholder="DD/MM/YYYY" required>
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         </div>
                                     </div>
                                     {{-- <div class="col-md-12 col-sm-12 col-xs-12">
-									<label>Duration</label>
-									<select class="selectpicker" name="rooms">
-										<option>3 Days</option>
-										<option>5 Days</option>
-										<option>1 Week</option>
-										<option>10 Days</option>
-										<option>2 Week</option>
-										<option>15+ Days</option>
-									</select>
-								</div> --}}
+                                        <label>Duration</label>
+                                        <select class="selectpicker" name="rooms">
+                                            <option>3 Days</option>
+                                            <option>5 Days</option>
+                                            <option>1 Week</option>
+                                            <option>10 Days</option>
+                                            <option>2 Week</option>
+                                            <option>15+ Days</option>
+                                        </select>
+                                    </div> --}}
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <label>Adult</label>
                                         <select class="selectpicker" name="adult">

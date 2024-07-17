@@ -4,7 +4,11 @@
             <form wire:submit.prevent="applyFilter">
                 <div class="col-md-4">
                     <div class="form-gp">
+                        @if ($serviceType == "carrentals")
+                        <label>Car Rental Name</label>
+                        @else
                         <label>{{ ucfirst(strtolower($serviceType)) }} Name</label>
+                        @endif
                         <div class="input-group margin-bottom-sm">
                             <input wire:model.live="searchTerm" type="text" id="search-bar" name="title" class="form-control" placeholder="E.g. Italy">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>

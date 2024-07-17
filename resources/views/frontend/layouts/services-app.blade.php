@@ -53,6 +53,8 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
 
+    @yield('style')
+
 </head>
 
 <body class="load-full-screen">
@@ -126,14 +128,16 @@
             var autocompleteDepartureCity = new google.maps.places.Autocomplete(document.getElementById('departure_city'), autocompleteOptions);
             var autocompleteDestinationCity = new google.maps.places.Autocomplete(document.getElementById('destination_city'), autocompleteOptions);
             var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('city'), autocompleteOptions);
-            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('arrival-flight'), autocompleteOptions);
-            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('dropLocationFlight'), autocompleteOptions);
-            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('arrivalTrain'), autocompleteOptions);
-            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('drop_location_train'), autocompleteOptions);
-            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('pickup_location_bus'), autocompleteOptions);
-            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('drop_location_bus'), autocompleteOptions);
-            // var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('location_ren'), autocompleteOptions);
-            // var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('drop_rent'), autocompleteOptions);
+            var autocompleteArrivalFlight = new google.maps.places.Autocomplete(document.getElementById('arrival-flight'), autocompleteOptions);
+            var autocompleteDropLocationFlight = new google.maps.places.Autocomplete(document.getElementById('dropLocationFlight'), autocompleteOptions);
+            var autocompleteArrivalTrain = new google.maps.places.Autocomplete(document.getElementById('arrivalTrain'), autocompleteOptions);
+            var autocompleteDrop_location_train = new google.maps.places.Autocomplete(document.getElementById('drop_location_train'), autocompleteOptions);
+            var autocompletePickup_location_bus = new google.maps.places.Autocomplete(document.getElementById('pickup_location_bus'), autocompleteOptions);
+            var autocompleteDrop_location_bus = new google.maps.places.Autocomplete(document.getElementById('drop_location_bus'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('pickup_location'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('intermediate_stop'), autocompleteOptions);
+            var autocompleteCity = new google.maps.places.Autocomplete(document.getElementById('drop_location'), autocompleteOptions);
+
         });
     </script>
 </body>

@@ -109,12 +109,12 @@
                     <div class="booking-box-body">
                         <form action="{{ route('booking') }}" method="POST">
                             @csrf
-                            <input type="hidden" value="13" name="service_id">
-                            <input type="hidden" value="car" name="booking_type">
+                            <input type="hidden" value="{{ $carrental->id }}" name="service_id">
+                            <input type="hidden" value="carrentals" name="booking_type">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Pickup Location</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="location_ren" name="pickup_location" class="form-control"
+                                    <input type="text" id="pickup_location" name="pickup_location" class="form-control"
                                         placeholder="e.g London" required>
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
@@ -122,7 +122,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Intermediate Stops</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="" name="intermediate_stop" class="form-control"
+                                    <input type="text" id="intermediate_stop" name="intermediate_stop" class="form-control"
                                         placeholder="e.g Super Market" required>
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
@@ -130,7 +130,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Dropoff Location</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="drop_rent" name="end_date" class="form-control"
+                                    <input type="text" id="drop_location" name="drop_location" class="form-control"
                                         placeholder="e.g New York" required>
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
@@ -138,7 +138,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Pickup Date</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="" name="pickup_date" class="form-control"
+                                    <input type="text" id="check_in" name="pickup_date" class="form-control"
                                         placeholder="DD/MM/YYYY" required>
                                     <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                 </div>
@@ -146,7 +146,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <label> Dropoff Date</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <input type="text" id="" name="drop_date" class="form-control"
+                                    <input type="text" id="check_out" name="drop_date" class="form-control"
                                         placeholder="DD/MM/YYYY" required>
                                     <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                 </div>
@@ -210,23 +210,23 @@
                                     <h5>$299/Night</h5>
                                 </div>
                             </div> --}}
-                            {{-- @if (!Auth::check())
+                            @if (!Auth::check())
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <label>Name</label>
-                                    <input type="text" id="check_in" name="name" class="form-control"
+                                    <input type="text" name="name" class="form-control"
                                         placeholder="Enter Your Name">
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <label>Email</label>
-                                    <input type="text" id="check_in" name="email" class="form-control"
+                                    <input type="text" name="email" class="form-control"
                                         placeholder="Enter Your Email">
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <label>Mobile</label>
-                                    <input type="text" id="check_in" name="mobile" class="form-control"
+                                    <input type="text" name="mobile" class="form-control"
                                         placeholder="Enter Your Mobile">
                                 </div>
-                            @endif --}}
+                            @endif
                             <div class="clearfix"></div>
                             <div class="grand-total text-center">
                                 <div class="col-md-6 col-sm-6 col-xs-6">

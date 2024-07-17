@@ -300,7 +300,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="arrival-flight" name="pickup_location" class="form-control" placeholder="e.g I.G.I Airport">
+                                            <input type="text" id="arrival-flight" name="pickup_location_flight" class="form-control" placeholder="e.g I.G.I Airport">
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
@@ -314,14 +314,14 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Flight number</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="flight-number" name="travel_number" class="form-control" placeholder="e.g IX 807">
+                                            <input type="text" id="flight-number" name="flight_number" class="form-control" placeholder="e.g IX 807">
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 flight section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="dropLocationFlight" name="drop_location" class="form-control" placeholder="e.g Hotel">
+                                            <input type="text" id="dropLocationFlight" name="drop_location_flight" class="form-control" placeholder="e.g Hotel">
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
@@ -330,7 +330,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="arrivalTrain" name="pickup_location" class="form-control" placeholder="e.g Station name">
+                                            <input type="text" id="arrivalTrain" name="pickup_location_train" class="form-control" placeholder="e.g Station name">
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
@@ -345,14 +345,14 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Train number </label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="" name="travel_number" class="form-control" placeholder="e.g 223807">
+                                            <input type="text" id="" name="train_number" class="form-control" placeholder="e.g 223807">
                                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 train section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="drop_location_train" name="drop_location" class="form-control"
+                                            <input type="text" id="drop_location_train" name="drop_location_train" class="form-control"
                                                 placeholder="e.g Hotel">
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
@@ -362,7 +362,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Arrival location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="pickup_location_bus" name="pickup_location" class="form-control" placeholder="e.g Bus stop name">
+                                            <input type="text" id="pickup_location_bus" name="pickup_location_bus" class="form-control" placeholder="e.g Bus stop name">
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
@@ -377,7 +377,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 bus section">
                                         <label> Drop-off location</label>
                                         <div class="input-group margin-bottom-sm">
-                                            <input type="text" id="drop_location_bus" name="drop_location" class="form-control" placeholder="e.g Hotel">
+                                            <input type="text" id="drop_location_bus" name="drop_location_bus" class="form-control" placeholder="e.g Hotel">
                                             <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
                                         </div>
                                     </div>
@@ -397,6 +397,23 @@
                                             <h5>$299/Night</h5>
                                         </div>
                                     </div> --}}
+
+                                    @if(!Auth::check())
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <label>Name</label>
+                                            <input type="text" name="name" class="form-control" placeholder="Enter Your Name">
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <label>Email</label>
+                                            <input type="text" name="email" class="form-control" placeholder="Enter Your Email">
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <label>Mobile</label>
+                                            <input type="text" name="mobile" class="form-control" placeholder="Enter Your Mobile">
+                                        </div>
+                                    @endif
+
                                     <div class="clearfix"></div>
                                     <div class="grand-total text-center">
                                         <div class="col-md-6 col-sm-6 col-xs-6">
@@ -488,19 +505,5 @@
             $('.' + value).show();
         });
     });
-
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     const travelTypeSelect = document.getElementById('travel');
-    //     const sections = document.querySelectorAll('.section');
-
-    //     function updateSections() {
-    //         sections.forEach(section => section.style.display = 'none');
-    //         const selectedType = travelTypeSelect.value;
-    //         document.querySelectorAll(`.${selectedType}`).forEach(section => section.style.display = 'block');
-    //     }
-
-    //     travelTypeSelect.addEventListener('change', updateSections);
-    //     updateSections(); // Initial call to set the correct sections on page load
-    // });
 </script>
 @endpush
