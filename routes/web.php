@@ -9,7 +9,13 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\LanguageController;
 use App\Livewire\Privacy;
 use App\Livewire\Terms;
+use Illuminate\Routing\Route as RoutingRoute;
+use Illuminate\Routing\RouteGroup;
+use Illuminate\Routing\Router;
+use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Routing\Attribute\Route as AttributeRoute;
+use Symfony\Component\Routing\Router as RoutingRouter;
 
 /*
 *
@@ -26,6 +32,10 @@ require __DIR__.'/auth.php';
 *
 * --------------------------------------------------------------------
 */
+
+// Route::get('mail-text', function () {
+//     return view('emails.booking-mail');
+// });
 
 // home route
 Route::get('home', [FrontendController::class, 'index'])->name('home');

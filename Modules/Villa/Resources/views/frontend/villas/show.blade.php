@@ -101,15 +101,21 @@
 
                     </div>
                     <div id="Amenities" class="tab-pane fade">
-                        <h4 class="tab-heading"> Kitchen: {{ $villa->kitchen }}</h4>
-                        <p> <b> Living Room:</b> {{ $villa->living_room }}</p>
-                        <p> <b>Internet:</b> {{ $villa->internet }}</p>
-                        <p> <b>Air Conditioning:</b> {{ $villa->air_conditioning }}</p>
-                        <p> <b>Heating:</b> {{ $villa->heating }}</p>
-                        <p> <b> Swimming Pool:</b> {{ $villa->swimming_pool }}</p>
-                        <p> <b>Parking:</b> {{ $villa->parking }}</p>
-                        <p> <b> Outdoor Space:</b> {{ $villa->outdoor_space }}</p>
-                        <p> <b>Additional Amenities:</b> {{ $villa->additional_amenities }}</p>
+                        {{-- <h4 class="tab-heading"> Kitchen: {{ $villa->kitchen }}</h4> --}}
+                        {{-- <p> <b> Living Room:</b> {{ $villa->living_room }}</p> --}}
+                        {{-- <p> <b>Internet:</b> {{ $villa->internet }}</p> --}}
+                        {{-- <p> <b>Air Conditioning:</b> {{ $villa->air_conditioning }}</p> --}}
+                        {{-- <p> <b>Heating:</b> {{ $villa->heating }}</p> --}}
+                        {{-- <p> <b> Swimming Pool:</b> {{ $villa->swimming_pool }}</p> --}}
+                        {{-- <p> <b>Parking:</b> {{ $villa->parking }}</p> --}}
+                        {{-- <p> <b> Outdoor Space:</b> {{ $villa->outdoor_space }}</p> --}}
+                        <p> <b>Amenities:</b>
+                            @if ($villa->amenities > 0)
+                                @foreach (json_decode($villa->amenities) as $amenities)
+                                    {{ ucfirst(strtolower($amenities)) }},
+                                @endforeach
+                            @endif
+                        </p>
                     </div>
                     {{-- <div id="Pricing_and_Availability" class="tab-pane fade">
                         <h4 class="tab-heading"> Base Price: {{ $villa->price }}</h4>

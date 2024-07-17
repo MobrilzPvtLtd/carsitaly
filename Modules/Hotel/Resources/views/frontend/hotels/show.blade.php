@@ -110,13 +110,13 @@
                                 @endif
                             </h4>
                             <p> <b> Room Types:</b> {{ $hotel->room_types }}</p>
-                            <p> <b> Facilities:</b>
+                            {{-- <p> <b> Facilities:</b>
                             @if ($hotel->facilities > 0)
                                 @foreach (json_decode($hotel->facilities) as $facilities)
                                     {{ ucfirst(strtolower($facilities)) }},
                                 @endforeach
                             @endif
-                            </p>
+                            </p> --}}
                         </div>
                         {{-- <div id="Pricing_and_Availability" class="tab-pane fade">
                             <h4 class="tab-heading">Base Price: {{ $hotel->price }}

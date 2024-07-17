@@ -240,7 +240,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 sidebar-wrapper clear-padding">
+            {{-- <div class="col-md-12 sidebar-wrapper clear-padding">
                 <div class="package-summary sidebar-item">
                     <h4><i class="fa fa-bookmark"></i> Package Summary</h4>
                     <div class="package-summary-body">
@@ -271,7 +271,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

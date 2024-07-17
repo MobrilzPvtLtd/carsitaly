@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BookingMail;
 use App\Models\Booking;
 use Auth;
 use App\Models\Contact;
@@ -13,6 +14,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Modules\Post\Models\Post;
 
 class FrontendController extends Controller
@@ -157,19 +159,73 @@ class FrontendController extends Controller
                     break;
             }
 
-            $booking->pickup_location = $request->input('pickup_location') ?? null;
-            $booking->intermediate_stop = $request->input('intermediate_stop') ?? null;
-            $booking->drop_location = $request->input('drop_location') ?? null;
+            if(!$request->travel_type){
+                $booking->pickup_location = $request->input('pickup_location');
+                $booking->drop_location = $request->input('drop_location');
+            }
 
             $startDate = Carbon::parse($request->pickup_date)->format('Y-m-d');
             $endDate = Carbon::parse($request->drop_date)->format('Y-m-d');
 
+            $booking->intermediate_stop = $request->input('intermediate_stop');
             $booking->start_date = $startDate;
             $booking->end_date = $endDate;
-            $booking->adult = $request->adult ?? null;
-            $booking->child = $request->child ?? null;
+            $booking->adult = $request->adult;
+            $booking->child = $request->child;
             $booking->status = 1;
             $booking->save();
+
+            $service = Service::where('id', $request->service_id)->first();
+            $admin = User::where('id', 1)->first();
+            $authUserEmail = auth()->user() ? auth()->user()->email : $user->email;
+
+            $data = [
+                'admin_name' => $admin->name,
+                'name' => auth()->user() ? auth()->user()->name : $user->name,
+                'email' => auth()->user() ? auth()->user()->email : $user->email,
+                'mobile' => auth()->user() ? auth()->user()->mobile : $user->mobile,
+                'pickup_location' => $booking->pickup_location,
+                'intermediate_stop' => $booking->intermediate_stop,
+                'travel_number' => $booking->travel_number,
+                'drop_location' => $booking->drop_location,
+                'travel_type' => $booking->travel_type,
+                'start_date' => $booking->start_date,
+                'end_date' => $booking->end_date,
+                'adult' => $booking->adult,
+                'child' => $booking->child,
+                'booking_type' => $booking->booking_type,
+                'title' => $service->title,
+                'vehicle_type' => $service->vehicle_type,
+                'vehicle_capacity' => $service->vehicle_capacity,
+                'luggage_capacity' => $service->luggage_capacity,
+                'vehicle_features' => json_decode($service->vehicle_features),
+                'amenities' => json_decode($service->amenities),
+                'room_types' => $service->room_types,
+                'address' => $service->address,
+                'city' => $service->city,
+                'state' => $service->state,
+                'country' => $service->country,
+                'pin_code' => $service->pin_code,
+                'number_of_bedrooms' => $service->number_of_bedrooms,
+                'number_of_bathrooms' => $service->number_of_bathrooms,
+                'maximum_occupancy' => $service->maximum_occupancy,
+                'square_footage' => $service->square_footage,
+            ];
+
+            if ($request->travel_type == 'flight') {
+                $data['terminal'] = $booking->terminal;
+            } elseif ($request->travel_type == 'train') {
+                $data['platform'] = $booking->platform;
+            }
+
+            if ($authUserEmail) {
+                Mail::to($authUserEmail)->send(new BookingMail($data));
+            }
+
+            if ($admin->email) {
+                Mail::to($admin->email)->send(new BookingMail($data));
+            }
+
             // session()->flash('success', ucfirst(strtolower($request->booking_type)) . ' ' . 'booking successful');
             return redirect()->route('thank-you');
         // }catch(\Exception $e){
