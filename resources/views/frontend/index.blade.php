@@ -1129,7 +1129,7 @@
                     </div>
                     <form action="{{ route('contact-submit') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="source" value="homeForm">
+                        <input type="hidden" name="source" value="Home Form">
                         <div class="col-md-6 col-sm-6">
                             <input type="text" name="name" required class="form-control" placeholder="Your Name">
                         </div>

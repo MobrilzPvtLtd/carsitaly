@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\BookingMail;
+use App\Mail\ContactMail;
+use App\Mail\FlightMail;
 use App\Models\Booking;
 use Auth;
 use App\Models\Contact;
@@ -70,6 +72,33 @@ class FrontendController extends Controller
             $flight->child_count = $request->child_count;
             $flight->class = $request->class;
             $flight->save();
+
+            $admin = User::where('id', 1)->first();
+            $authUserEmail = auth()->user() ? auth()->user()->email : $user->email;
+
+            $data = [
+                'admin_name' => $admin->name,
+                'name' => auth()->user() ? auth()->user()->name : $user->name,
+                'email' => auth()->user() ? auth()->user()->email : $user->email,
+                'mobile' => auth()->user() ? auth()->user()->mobile : $user->mobile,
+                'trip_type' => $flight->trip_type,
+                'leaving_from' => $flight->leaving_from,
+                'leaving_to' => $flight->leaving_to,
+                'departure_date' => $flight->departure_date,
+                'return_date' => $flight->return_date,
+                'adult_count' => $flight->adult_count,
+                'child_count' => $flight->child_count,
+                'class' => $flight->class,
+            ];
+
+            if ($authUserEmail) {
+                Mail::to($authUserEmail)->send(new FlightMail($data));
+            }
+
+            if ($admin->email) {
+                Mail::to($admin->email)->send(new FlightMail($data));
+            }
+
             // session()->flash('success', 'Flight booking successful');
             return redirect()->route('thank-you');
         }catch(\Exception $e){
@@ -97,6 +126,27 @@ class FrontendController extends Controller
             $contact->message_title = $request->message_title;
             $contact->source = $request->source;
             $contact->save();
+
+            $admin = User::where('id', 1)->first();
+
+            $data = [
+                'admin_name' => $admin->name,
+                'name' => $contact->name,
+                'email' => $contact->email,
+                'mobile' => $contact->mobile,
+                'message' => $contact->message,
+                'message_title' => $contact->message_title,
+                'source' => $contact->source,
+            ];
+
+            if ($contact->email) {
+                Mail::to($contact->email)->send(new ContactMail($data));
+            }
+
+            if ($admin->email) {
+                Mail::to($admin->email)->send(new ContactMail($data));
+            }
+
             // session()->flash('success', 'Data saved successful');
             return redirect()->route('thank-you');
         }catch(\Exception $e){

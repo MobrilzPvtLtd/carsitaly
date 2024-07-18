@@ -46,7 +46,7 @@
 				</div>
 				<form action="{{ route('contact-submit') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="source" value="contactForm">
+                    <input type="hidden" name="source" value="Contact Form">
 					<div class="col-md-6 col-sm-6">
 						<input type="text" name="name" required class="form-control" placeholder="Your Name">
 					</div>
