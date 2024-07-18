@@ -259,8 +259,9 @@
         <div class="col-md-4 hotel-detail-sidebar">
             <div class="col-md-12 sidebar-wrapper clear-padding">
                 <div class="map sidebar-item">
-                    <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
-                    <iframe class="hotel-map" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJG1usnet4BTkRzQqb_Ys-JOg&amp;key=AIzaSyB6hgZM-ruUqTPVUjXGUR-vv7WRqc4MXjY"></iframe>
+                    <h5><i class="fa fa-map-marker"></i> {{ $villa->address }}, {{ $villa->city }}, {{ $villa->country }}, {{ $villa->pin_code }}</h5>
+                    {{-- <iframe class="hotel-map" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJG1usnet4BTkRzQqb_Ys-JOg&amp;key=AIzaSyB6hgZM-ruUqTPVUjXGUR-vv7WRqc4MXjY"></iframe> --}}
+                    <div id="map-canvas" style="height: 300px; width: 100%;"></div>
                 </div>
                 <div class="contact sidebar-item">
                     <div class="sidebar-booking-box">
@@ -386,3 +387,28 @@
 </div>
 
 @endsection
+@push('after-scripts')
+    <script>
+
+        function initMap() {
+            var latitude = parseFloat("{{ $villa->latitude }}");
+            var longitude = parseFloat("{{ $villa->longitude }}");
+
+            const myLatLng = { lat: latitude, lng: longitude };
+            const map = new google.maps.Map(document.getElementById("map-canvas"), {
+                zoom: 8,
+                center: myLatLng,
+            });
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "Hello World!",
+            });
+        }
+
+        window.initMap = initMap;
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&callback=initMap" async defer></script>
+@endpush
