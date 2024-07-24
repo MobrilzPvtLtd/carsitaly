@@ -40,25 +40,50 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<div class="row light-menu">
-    <div class="container clear-padding logo01">
-        <a href="{{ route('home') }}">
-            <img class="sidebar-brand-full logo001" src="{{ asset('img/logo.png') }}" alt="{{ app_name() }}" width="40%">
-            {{-- Car Italy and tours --}}
-        </a>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                <li><a href="{{ route('home') }}"> HOME</a></li>
-                <li><a href="{{ route('frontend.transfers.index') }}"> TRANSFERS</a></li>
-                <li><a href="{{ route('frontend.carrentals.index') }}"> CAR RENTAL</a></li>
-                <li><a href="{{ route('frontend.hotels.index') }}"> HOTELS</a></li>
-                <li><a href="{{ route('frontend.villas.index') }}"> VILLAS</a></li>
-                <li><a href="{{ route('frontend.tours.index') }}"> TOURS</a></li>
-                <li><a href="{{ route('frontend.cruises.index') }}"> CRUISE</a></li>
-                <li><a href="{{ route('contact') }}"> CONTACT</a></li>
-                </li>
-            </ul>
+<div class="row transparent-menu">
+    <div class="container clear-padding">
+        <!-- BEGIN: HEADER -->
+        <div class="navbar-wrapper">
+            <div class="navbar navbar-default" role="navigation">
+                <!-- BEGIN: NAV-CONTAINER -->
+                <div class="nav-container">
+                    <div class="navbar-header">
+                        <!-- BEGIN: TOGGLE BUTTON (RESPONSIVE)-->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar" style="background-color: #888;"></span>
+                            <span class="icon-bar" style="background-color: #888;"></span>
+                            <span class="icon-bar" style="background-color: #888;"></span>
+                        </button>
+
+                        <!-- BEGIN: LOGO -->
+                        <a href="{{ route('home') }}">
+                            <img class="sidebar-brand-full" src="{{ asset('img/logo.png') }}" alt="{{ app_name() }}" width="50%">
+                        </a>
+                    </div>
+
+                    <!-- BEGIN: NAVIGATION -->
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                            <li><a href="{{ route('home') }}"> HOME</a></li>
+                            <li><a href="{{ route('frontend.transfers.index') }}"> TRANSFERS</a></li>
+                            <li><a href="{{ route('frontend.carrentals.index') }}"> CAR RENTAL</a></li>
+                            <li><a href="{{ route('frontend.hotels.index') }}"> HOTELS</a></li>
+                            <li><a href="{{ route('frontend.villas.index') }}"> VILLAS</a></li>
+                            <li><a href="{{ route('frontend.tours.index') }}"> TOURS</a></li>
+                            <li><a href="{{ route('frontend.cruises.index') }}"> CRUISE</a></li>
+                            <li><a href="{{ route('contact') }}"> CONTACT</a></li>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END: NAVIGATION -->
+                </div>
+                <!--END: NAV-CONTAINER -->
+            </div>
         </div>
+        <!-- END: HEADER -->
     </div>
 </div>
+

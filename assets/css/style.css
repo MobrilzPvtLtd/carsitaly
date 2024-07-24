@@ -3669,7 +3669,7 @@ h5 {
 		padding: 20px 0px;
 	}
 	.room-complete-detail .nav-tabs li a span {
-		display: none;
+		display: contents;
 	}
 }
 
