@@ -75,42 +75,44 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-gp">
-                            <label>Budget</label>
-                            <div class="input-group margin-bottom-sm">
-                                <select class="custom-select-room" wire:model="budgetPrice">
-                                    <option value="">All</option>
-                                    @foreach ($uniquePrice as $price)
-                                        <option value="{{ $price }}">$ {{ $price }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-gp">
-                            @if($serviceType == 'hotels')
-                                <label>Rooms</label>
+                    <div class="a0001">
+                        <div class="col-md-2">
+                            <div class="form-gp">
+                                <label>Budget</label>
                                 <div class="input-group margin-bottom-sm">
-                                    <select class="custom-select-room" name="room_types" wire:model="room_types">
-                                        <option value="">No</option>
-                                        <option value="single">Single</option>
-                                        <option value="double">Double</option>
-                                        <option value="suite">Suite</option>
-                                    </select>
-                                </div>
-                            @elseif($serviceType == 'villas')
-                                <div class="input-group margin-bottom-sm">
-                                    <label>Occupancy</label>
-                                    <select class="custom-select-room" name="occupancy_no" wire:model="occupancy_no">
-                                        <option value="">No</option>
-                                        @foreach ($uniqueOccupancy as $occupancy)
-                                            <option value="{{ $occupancy }}">{{ $occupancy }} People</option>
+                                    <select class="custom-select-room" wire:model="budgetPrice">
+                                        <option value="">All</option>
+                                        @foreach ($uniquePrice as $price)
+                                            <option value="{{ $price }}">$ {{ $price }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            @endif
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-gp">
+                                @if($serviceType == 'hotels')
+                                    <label>Rooms</label>
+                                    <div class="input-group margin-bottom-sm">
+                                        <select class="custom-select-room" name="room_types" wire:model="room_types">
+                                            <option value="">No</option>
+                                            <option value="single">Single</option>
+                                            <option value="double">Double</option>
+                                            <option value="suite">Suite</option>
+                                        </select>
+                                    </div>
+                                @elseif($serviceType == 'villas')
+                                    <div class="input-group margin-bottom-sm a002">
+                                        <label>Occupancy</label>
+                                        <select class="custom-select-room" name="occupancy_no" wire:model="occupancy_no">
+                                            <option value="">No</option>
+                                            @foreach ($uniqueOccupancy as $occupancy)
+                                                <option value="{{ $occupancy }}">{{ $occupancy }} People</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     {{-- <div class="col-md-2 col-sm-6 col-xs-6">

@@ -9,14 +9,14 @@
                         support@email.com</a>
                 </div>
                 <div class="col-md-5 col-sm-6 clear-padding search-box">
-                    <div class="col-md-6 col-xs-5 clear-padding">
-                        {{-- <form>
+                    {{-- <div class="col-md-6 col-xs-5 clear-padding">
+                         <form>
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control" required placeholder="Search">
                                 <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
                             </div>
-                        </form> --}}
-                    </div>
+                        </form>
+                    </div> --}}
                     <div class="col-md-6 col-xs-7 clear-padding user-logged">
                         @if (Auth::check())
                             <a @if(Auth::user()->hasRole('user')) href="#" @else href="{{ route('backend.dashboard') }}" @endif class="transition-effect">
